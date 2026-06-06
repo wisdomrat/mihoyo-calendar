@@ -5,12 +5,13 @@
     "nameEn": "Amber",
     "game": "genshin",
     "birthday": "08-10",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%AE%89%E6%9F%8F&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "弓",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.334Z"
+    "updatedAt": "2026-06-06T08:27:01.810Z"
   },
   {
     "id": "barbara-genshin",
@@ -18,12 +19,13 @@
     "nameEn": "Barbara",
     "game": "genshin",
     "birthday": "07-05",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8A%AD%E8%8A%AD%E6%8B%89&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "水",
     "weapon": "法器",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "beidou-genshin",
@@ -31,12 +33,13 @@
     "nameEn": "Beidou",
     "game": "genshin",
     "birthday": "02-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8C%97%E6%96%97&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "双手剑",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "bennett-genshin",
@@ -44,12 +47,13 @@
     "nameEn": "Bennett",
     "game": "genshin",
     "birthday": "02-29",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%8F%AD%E5%B0%BC%E7%89%B9&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "单手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "chongyun-genshin",
@@ -57,12 +61,13 @@
     "nameEn": "Chongyun",
     "game": "genshin",
     "birthday": "09-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%87%8D%E4%BA%91&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "双手剑",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "diluc-genshin",
@@ -70,12 +75,13 @@
     "nameEn": "Diluc",
     "game": "genshin",
     "birthday": "04-30",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%BF%AA%E5%8D%A2%E5%85%8B&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "双手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "diona-genshin",
@@ -83,12 +89,13 @@
     "nameEn": "Diona",
     "game": "genshin",
     "birthday": "01-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%BF%AA%E5%A5%A5%E5%A8%9C&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "弓",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "fischl-genshin",
@@ -96,12 +103,13 @@
     "nameEn": "Fischl",
     "game": "genshin",
     "birthday": "05-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8F%B2%E8%B0%A2%E5%B0%94&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "弓",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "ganyu-genshin",
@@ -109,12 +117,13 @@
     "nameEn": "Ganyu",
     "game": "genshin",
     "birthday": "12-02",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%94%98%E9%9B%A8&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "weapon": "弓",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "hu-tao-genshin",
@@ -122,12 +131,13 @@
     "nameEn": "Hu Tao",
     "game": "genshin",
     "birthday": "07-15",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%83%A1%E6%A1%83&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "长柄武器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "jean-genshin",
@@ -135,12 +145,13 @@
     "nameEn": "Jean",
     "game": "genshin",
     "birthday": "03-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%90%B4&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "weapon": "单手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "kaeya-genshin",
@@ -148,12 +159,13 @@
     "nameEn": "Kaeya",
     "game": "genshin",
     "birthday": "11-30",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%87%AF%E4%BA%9A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "单手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "keqing-genshin",
@@ -161,12 +173,13 @@
     "nameEn": "Keqing",
     "game": "genshin",
     "birthday": "11-20",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%88%BB%E6%99%B4&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "weapon": "单手剑",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "klee-genshin",
@@ -174,12 +187,13 @@
     "nameEn": "Klee",
     "game": "genshin",
     "birthday": "07-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8F%AF%E8%8E%89&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "法器",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "lisa-genshin",
@@ -187,12 +201,13 @@
     "nameEn": "Lisa",
     "game": "genshin",
     "birthday": "06-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%BD%E8%8E%8E&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "法器",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "mona-genshin",
@@ -200,12 +215,13 @@
     "nameEn": "Mona",
     "game": "genshin",
     "birthday": "08-31",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8E%AB%E5%A8%9C&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "法器",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.811Z"
   },
   {
     "id": "ningguang-genshin",
@@ -213,12 +229,13 @@
     "nameEn": "Ningguang",
     "game": "genshin",
     "birthday": "08-26",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%87%9D%E5%85%89&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "岩",
     "weapon": "法器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "noelle-genshin",
@@ -226,12 +243,13 @@
     "nameEn": "Noelle",
     "game": "genshin",
     "birthday": "03-21",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%AF%BA%E8%89%BE%E5%B0%94&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "岩",
     "weapon": "双手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "qiqi-genshin",
@@ -239,12 +257,13 @@
     "nameEn": "Qiqi",
     "game": "genshin",
     "birthday": "03-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%83%E4%B8%83&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "weapon": "单手剑",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "razor-genshin",
@@ -252,12 +271,13 @@
     "nameEn": "Razor",
     "game": "genshin",
     "birthday": "09-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9B%B7%E6%B3%BD&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "双手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sucrose-genshin",
@@ -265,12 +285,13 @@
     "nameEn": "Sucrose",
     "game": "genshin",
     "birthday": "11-26",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%A0%82%E7%B3%96&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "weapon": "法器",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "tartaglia-genshin",
@@ -278,12 +299,13 @@
     "nameEn": "Tartaglia",
     "game": "genshin",
     "birthday": "07-20",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%BE%BE%E8%BE%BE%E5%88%A9%E4%BA%9A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "弓",
     "region": "至冬",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "venti-genshin",
@@ -291,12 +313,13 @@
     "nameEn": "Venti",
     "game": "genshin",
     "birthday": "06-16",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%B8%A9%E8%BF%AA&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "weapon": "弓",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "xiangling-genshin",
@@ -304,12 +327,13 @@
     "nameEn": "Xiangling",
     "game": "genshin",
     "birthday": "11-02",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%A6%99%E8%8F%B1&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "长柄武器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "xiao-genshin",
@@ -317,12 +341,13 @@
     "nameEn": "Xiao",
     "game": "genshin",
     "birthday": "04-17",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%AD%88&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "weapon": "长柄武器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "xingqiu-genshin",
@@ -330,12 +355,13 @@
     "nameEn": "Xingqiu",
     "game": "genshin",
     "birthday": "10-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%A1%8C%E7%A7%8B&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "水",
     "weapon": "单手剑",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "xinyan-genshin",
@@ -343,12 +369,13 @@
     "nameEn": "Xinyan",
     "game": "genshin",
     "birthday": "10-16",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%BE%9B%E7%84%B1&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "双手剑",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "zhongli-genshin",
@@ -356,12 +383,13 @@
     "nameEn": "Zhongli",
     "game": "genshin",
     "birthday": "12-31",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%92%9F%E7%A6%BB&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "岩",
     "weapon": "长柄武器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "albedo-genshin",
@@ -369,12 +397,13 @@
     "nameEn": "Albedo",
     "game": "genshin",
     "birthday": "09-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%98%BF%E8%B4%9D%E5%A4%9A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "岩",
     "weapon": "单手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "rosaria-genshin",
@@ -382,12 +411,13 @@
     "nameEn": "Rosaria",
     "game": "genshin",
     "birthday": "01-24",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%BD%97%E8%8E%8E%E8%8E%89%E4%BA%9A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "长柄武器",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "eula-genshin",
@@ -395,12 +425,13 @@
     "nameEn": "Eula",
     "game": "genshin",
     "birthday": "10-25",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BC%98%E8%8F%88&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "weapon": "双手剑",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yanfei-genshin",
@@ -408,12 +439,13 @@
     "nameEn": "Yanfei",
     "game": "genshin",
     "birthday": "07-28",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%83%9F%E7%BB%AF&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "法器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "kamisato-ayaka-genshin",
@@ -421,12 +453,13 @@
     "nameEn": "Kamisato Ayaka",
     "game": "genshin",
     "birthday": "09-28",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%A5%9E%E9%87%8C%E7%BB%AB%E5%8D%8E&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "weapon": "单手剑",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yoimiya-genshin",
@@ -434,12 +467,13 @@
     "nameEn": "Yoimiya",
     "game": "genshin",
     "birthday": "06-21",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%AE%B5%E5%AE%AB&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "弓",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sayu-genshin",
@@ -447,12 +481,13 @@
     "nameEn": "Sayu",
     "game": "genshin",
     "birthday": "10-19",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%97%A9%E6%9F%9A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "weapon": "双手剑",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "raiden-shogun-genshin",
@@ -460,12 +495,13 @@
     "nameEn": "Raiden Shogun",
     "game": "genshin",
     "birthday": "06-26",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9B%B7%E7%94%B5%E5%B0%86%E5%86%9B&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "weapon": "长柄武器",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sangonomiya-kokomi-genshin",
@@ -473,12 +509,13 @@
     "nameEn": "Sangonomiya Kokomi",
     "game": "genshin",
     "birthday": "02-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%8F%8A%E7%91%9A%E5%AE%AB%E5%BF%83%E6%B5%B7&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "法器",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "thoma-genshin",
@@ -486,12 +523,13 @@
     "nameEn": "Thoma",
     "game": "genshin",
     "birthday": "01-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%89%98%E9%A9%AC&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "长柄武器",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "arataki-itto-genshin",
@@ -499,12 +537,13 @@
     "nameEn": "Arataki Itto",
     "game": "genshin",
     "birthday": "06-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8D%92%E6%B3%B7%E4%B8%80%E6%96%97&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "岩",
     "weapon": "双手剑",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "gorou-genshin",
@@ -512,12 +551,13 @@
     "nameEn": "Gorou",
     "game": "genshin",
     "birthday": "05-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BA%94%E9%83%8E&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "岩",
     "weapon": "弓",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yun-jin-genshin",
@@ -525,12 +565,13 @@
     "nameEn": "Yun Jin",
     "game": "genshin",
     "birthday": "05-21",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BA%91%E5%A0%87&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "岩",
     "weapon": "长柄武器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "shenhe-genshin",
@@ -538,12 +579,13 @@
     "nameEn": "Shenhe",
     "game": "genshin",
     "birthday": "03-10",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%94%B3%E9%B9%A4&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "weapon": "长柄武器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yae-miko-genshin",
@@ -551,12 +593,13 @@
     "nameEn": "Yae Miko",
     "game": "genshin",
     "birthday": "06-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%85%AB%E9%87%8D%E7%A5%9E%E5%AD%90&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "weapon": "法器",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "kamisato-ayato-genshin",
@@ -564,12 +607,13 @@
     "nameEn": "Kamisato Ayato",
     "game": "genshin",
     "birthday": "03-26",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%A5%9E%E9%87%8C%E7%BB%AB%E4%BA%BA&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "单手剑",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yelan-genshin",
@@ -577,12 +621,13 @@
     "nameEn": "Yelan",
     "game": "genshin",
     "birthday": "04-20",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%9C%E5%85%B0&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "弓",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "kuki-shinobu-genshin",
@@ -590,12 +635,13 @@
     "nameEn": "Kuki Shinobu",
     "game": "genshin",
     "birthday": "07-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B9%85%E5%B2%90%E5%BF%8D&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "单手剑",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "shikanoin-heizou-genshin",
@@ -603,12 +649,13 @@
     "nameEn": "Shikanoin Heizou",
     "game": "genshin",
     "birthday": "07-24",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%B9%BF%E9%87%8E%E9%99%A2%E5%B9%B3%E8%97%8F&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "weapon": "法器",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "collei-genshin",
@@ -616,12 +663,13 @@
     "nameEn": "Collei",
     "game": "genshin",
     "birthday": "05-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9F%AF%E8%8E%B1&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "草",
     "weapon": "弓",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "tighnari-genshin",
@@ -629,12 +677,13 @@
     "nameEn": "Tighnari",
     "game": "genshin",
     "birthday": "12-29",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%8F%90%E7%BA%B3%E9%87%8C&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "草",
     "weapon": "弓",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "dori-genshin",
@@ -642,12 +691,13 @@
     "nameEn": "Dori",
     "game": "genshin",
     "birthday": "12-21",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%9A%E8%8E%89&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "双手剑",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "cyno-genshin",
@@ -655,12 +705,13 @@
     "nameEn": "Cyno",
     "game": "genshin",
     "birthday": "06-23",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%B5%9B%E8%AF%BA&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "weapon": "长柄武器",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "candace-genshin",
@@ -668,12 +719,13 @@
     "nameEn": "Candace",
     "game": "genshin",
     "birthday": "05-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%9D%8E%E8%92%82%E4%B8%9D&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "水",
     "weapon": "长柄武器",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "nilou-genshin",
@@ -681,12 +733,13 @@
     "nameEn": "Nilou",
     "game": "genshin",
     "birthday": "12-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A6%AE%E9%9C%B2&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "单手剑",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "nahida-genshin",
@@ -694,12 +747,13 @@
     "nameEn": "Nahida",
     "game": "genshin",
     "birthday": "10-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%BA%B3%E8%A5%BF%E5%A6%B2&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "草",
     "weapon": "法器",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "layla-genshin",
@@ -707,12 +761,13 @@
     "nameEn": "Layla",
     "game": "genshin",
     "birthday": "12-19",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8E%B1%E4%BE%9D%E6%8B%89&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "单手剑",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "wanderer-genshin",
@@ -720,12 +775,13 @@
     "nameEn": "Wanderer",
     "game": "genshin",
     "birthday": "01-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%B5%81%E6%B5%AA%E8%80%85&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "weapon": "法器",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "faruzan-genshin",
@@ -733,12 +789,13 @@
     "nameEn": "Faruzan",
     "game": "genshin",
     "birthday": "08-20",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%8F%90%E9%9C%B2%E7%8F%8A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "weapon": "弓",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yaoyao-genshin",
@@ -746,12 +803,13 @@
     "nameEn": "Yaoyao",
     "game": "genshin",
     "birthday": "03-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%91%B6%E7%91%B6&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "草",
     "weapon": "长柄武器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "alhaitham-genshin",
@@ -759,12 +817,13 @@
     "nameEn": "Alhaitham",
     "game": "genshin",
     "birthday": "02-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%89%BE%E5%B0%94%E6%B5%B7%E6%A3%AE&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "草",
     "weapon": "单手剑",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "dehya-genshin",
@@ -772,12 +831,13 @@
     "nameEn": "Dehya",
     "game": "genshin",
     "birthday": "04-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%BF%AA%E5%B8%8C%E9%9B%85&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "双手剑",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "mika-genshin",
@@ -785,12 +845,13 @@
     "nameEn": "Mika",
     "game": "genshin",
     "birthday": "08-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%B1%B3%E5%8D%A1&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "长柄武器",
     "region": "蒙德",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "kaveh-genshin",
@@ -798,12 +859,13 @@
     "nameEn": "Kaveh",
     "game": "genshin",
     "birthday": "07-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8D%A1%E7%BB%B4&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "草",
     "weapon": "双手剑",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "baizhu-genshin",
@@ -811,12 +873,13 @@
     "nameEn": "Baizhu",
     "game": "genshin",
     "birthday": "04-25",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%99%BD%E6%9C%AF&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "草",
     "weapon": "法器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "lynette-genshin",
@@ -824,12 +887,13 @@
     "nameEn": "Lynette",
     "game": "genshin",
     "birthday": "02-02",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%90%B3%E5%A6%AE%E7%89%B9&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "weapon": "单手剑",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "lyney-genshin",
@@ -837,12 +901,13 @@
     "nameEn": "Lyney",
     "game": "genshin",
     "birthday": "02-02",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9E%97%E5%B0%BC&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "弓",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "freminet-genshin",
@@ -850,12 +915,13 @@
     "nameEn": "Freminet",
     "game": "genshin",
     "birthday": "09-24",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8F%B2%E7%B1%B3%E5%B0%BC&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "双手剑",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "neuvillette-genshin",
@@ -863,12 +929,13 @@
     "nameEn": "Neuvillette",
     "game": "genshin",
     "birthday": "12-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%82%A3%E7%BB%B4%E8%8E%B1%E7%89%B9&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "法器",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "wriothesley-genshin",
@@ -876,12 +943,13 @@
     "nameEn": "Wriothesley",
     "game": "genshin",
     "birthday": "11-23",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8E%B1%E6%AC%A7%E6%96%AF%E5%88%A9&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "weapon": "法器",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "furina-genshin",
@@ -889,12 +957,13 @@
     "nameEn": "Furina",
     "game": "genshin",
     "birthday": "10-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8A%99%E5%AE%81%E5%A8%9C&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "单手剑",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "charlotte-genshin",
@@ -902,12 +971,13 @@
     "nameEn": "Charlotte",
     "game": "genshin",
     "birthday": "04-10",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%8F%E6%B4%9B%E8%92%82&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "weapon": "法器",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "navia-genshin",
@@ -915,12 +985,13 @@
     "nameEn": "Navia",
     "game": "genshin",
     "birthday": "08-16",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A8%9C%E7%BB%B4%E5%A8%85&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "岩",
     "weapon": "双手剑",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "chevreuse-genshin",
@@ -928,12 +999,13 @@
     "nameEn": "Chevreuse",
     "game": "genshin",
     "birthday": "01-10",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%8F%E6%B2%83%E8%95%BE&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "长柄武器",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "xianyun-genshin",
@@ -941,12 +1013,13 @@
     "nameEn": "Xianyun",
     "game": "genshin",
     "birthday": "04-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%97%B2%E4%BA%91&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "weapon": "法器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "gaming-genshin",
@@ -954,12 +1027,13 @@
     "nameEn": "Gaming",
     "game": "genshin",
     "birthday": "12-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%98%89%E6%98%8E&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "weapon": "双手剑",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "chiori-genshin",
@@ -967,12 +1041,13 @@
     "nameEn": "Chiori",
     "game": "genshin",
     "birthday": "08-17",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8D%83%E7%BB%87&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "岩",
     "weapon": "单手剑",
     "region": "稻妻",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "arlecchino-genshin",
@@ -980,12 +1055,13 @@
     "nameEn": "Arlecchino",
     "game": "genshin",
     "birthday": "08-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%98%BF%E8%95%BE%E5%A5%87%E8%AF%BA&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "长柄武器",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sigewinne-genshin",
@@ -993,12 +1069,13 @@
     "nameEn": "Sigewinne",
     "game": "genshin",
     "birthday": "03-30",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%8C%E6%A0%BC%E9%9B%AF&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "弓",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sethos-genshin",
@@ -1006,12 +1083,13 @@
     "nameEn": "Sethos",
     "game": "genshin",
     "birthday": "11-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%B5%9B%E7%B4%A2%E6%96%AF&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "弓",
     "region": "须弥",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "clorinde-genshin",
@@ -1019,12 +1097,13 @@
     "nameEn": "Clorinde",
     "game": "genshin",
     "birthday": "09-20",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%85%8B%E6%B4%9B%E7%90%B3%E5%BE%B7&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "weapon": "单手剑",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "emilie-genshin",
@@ -1032,12 +1111,13 @@
     "nameEn": "Emilie",
     "game": "genshin",
     "birthday": "09-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%89%BE%E6%A2%85%E8%8E%89%E5%9F%83&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "草",
     "weapon": "长柄武器",
     "region": "枫丹",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "mualani-genshin",
@@ -1045,12 +1125,13 @@
     "nameEn": "Mualani",
     "game": "genshin",
     "birthday": "08-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%8E%9B%E6%8B%89%E5%A6%AE&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "水",
     "weapon": "法器",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "kachina-genshin",
@@ -1058,12 +1139,13 @@
     "nameEn": "Kachina",
     "game": "genshin",
     "birthday": "04-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8D%A1%E9%BD%90%E5%A8%9C&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "岩",
     "weapon": "长柄武器",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "kinich-genshin",
@@ -1071,12 +1153,13 @@
     "nameEn": "Kinich",
     "game": "genshin",
     "birthday": "11-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%9F%BA%E5%B0%BC%E5%A5%87&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "草",
     "weapon": "双手剑",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "xilonen-genshin",
@@ -1084,12 +1167,13 @@
     "nameEn": "Xilonen",
     "game": "genshin",
     "birthday": "03-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%8C%E8%AF%BA%E5%AE%81&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "岩",
     "weapon": "单手剑",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "chasca-genshin",
@@ -1097,12 +1181,13 @@
     "nameEn": "Chasca",
     "game": "genshin",
     "birthday": "12-10",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%81%B0%E6%96%AF%E5%8D%A1&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "weapon": "弓",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "ororon-genshin",
@@ -1110,12 +1195,13 @@
     "nameEn": "Ororon",
     "game": "genshin",
     "birthday": "10-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%AC%A7%E6%B4%9B%E4%BC%A6&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "weapon": "弓",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "mavuika-genshin",
@@ -1123,12 +1209,13 @@
     "nameEn": "Mavuika",
     "game": "genshin",
     "birthday": "08-28",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%8E%9B%E8%96%87%E5%8D%A1&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "weapon": "双手剑",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "citlali-genshin",
@@ -1136,12 +1223,13 @@
     "nameEn": "Citlali",
     "game": "genshin",
     "birthday": "05-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8C%9C%E7%89%B9%E8%8F%88%E8%8E%89&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "weapon": "法器",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "lan-yan-genshin",
@@ -1149,12 +1237,13 @@
     "nameEn": "Lan Yan",
     "game": "genshin",
     "birthday": "01-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%93%9D%E7%A0%9A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "weapon": "法器",
     "region": "璃月",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "ifa-genshin",
@@ -1162,12 +1251,13 @@
     "nameEn": "Ifa",
     "game": "genshin",
     "birthday": "03-23",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BC%8A%E6%B3%95&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "weapon": "法器",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "varesa-genshin",
@@ -1175,12 +1265,13 @@
     "nameEn": "Varesa",
     "game": "genshin",
     "birthday": "11-15",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%93%A6%E9%9B%B7%E8%8E%8E&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "weapon": "法器",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "iansan-genshin",
@@ -1188,12 +1279,13 @@
     "nameEn": "Iansan",
     "game": "genshin",
     "birthday": "08-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BC%8A%E5%AE%89%E7%8F%8A&background=4a90e2&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "weapon": "长柄武器",
     "region": "纳塔",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "march-7th-hsr",
@@ -1201,10 +1293,11 @@
     "nameEn": "March 7th",
     "game": "hsr",
     "birthday": "03-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%89%E6%9C%88%E4%B8%83&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "dan-heng-hsr",
@@ -1212,10 +1305,11 @@
     "nameEn": "Dan Heng",
     "game": "hsr",
     "birthday": "12-25",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%B9%E6%81%92&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "himeko-hsr",
@@ -1223,10 +1317,11 @@
     "nameEn": "Himeko",
     "game": "hsr",
     "birthday": "06-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A7%AC%E5%AD%90&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "bronya-hsr",
@@ -1234,10 +1329,11 @@
     "nameEn": "Bronya",
     "game": "hsr",
     "birthday": "08-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%83%E6%B4%9B%E5%A6%AE%E5%A8%85&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "welt-hsr",
@@ -1245,10 +1341,11 @@
     "nameEn": "Welt",
     "game": "hsr",
     "birthday": "04-30",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%93%A6%E5%B0%94%E7%89%B9&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "clara-hsr",
@@ -1256,10 +1353,11 @@
     "nameEn": "Clara",
     "game": "hsr",
     "birthday": "10-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%85%8B%E6%8B%89%E6%8B%89&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "seele-hsr",
@@ -1267,10 +1365,11 @@
     "nameEn": "Seele",
     "game": "hsr",
     "birthday": "10-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%8C%E5%84%BF&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "gepard-hsr",
@@ -1278,10 +1377,11 @@
     "nameEn": "Gepard",
     "game": "hsr",
     "birthday": "09-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9D%B0%E5%B8%95%E5%BE%B7&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "asta-hsr",
@@ -1289,10 +1389,11 @@
     "nameEn": "Asta",
     "game": "hsr",
     "birthday": "05-21",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%89%BE%E4%B8%9D%E5%A6%B2&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "arlan-hsr",
@@ -1300,10 +1401,11 @@
     "nameEn": "Arlan",
     "game": "hsr",
     "birthday": "04-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%98%BF%E5%85%B0&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "pela-hsr",
@@ -1311,10 +1413,11 @@
     "nameEn": "Pela",
     "game": "hsr",
     "birthday": "01-25",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BD%A9%E6%8B%89&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "serval-hsr",
@@ -1322,10 +1425,11 @@
     "nameEn": "Serval",
     "game": "hsr",
     "birthday": "08-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%8C%E9%9C%B2%E7%93%A6&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "natasha-hsr",
@@ -1333,10 +1437,11 @@
     "nameEn": "Natasha",
     "game": "hsr",
     "birthday": "12-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A8%9C%E5%A1%94%E8%8E%8E&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sampo-hsr",
@@ -1344,10 +1449,11 @@
     "nameEn": "Sampo",
     "game": "hsr",
     "birthday": "06-02",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%A1%91%E5%8D%9A&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "hook-hsr",
@@ -1355,10 +1461,11 @@
     "nameEn": "Hook",
     "game": "hsr",
     "birthday": "04-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%99%8E%E5%85%8B&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "qingque-hsr",
@@ -1366,10 +1473,11 @@
     "nameEn": "Qingque",
     "game": "hsr",
     "birthday": "08-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9D%92%E9%9B%80&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "tingyun-hsr",
@@ -1377,10 +1485,11 @@
     "nameEn": "Tingyun",
     "game": "hsr",
     "birthday": "04-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%81%9C%E4%BA%91&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sushang-hsr",
@@ -1388,10 +1497,11 @@
     "nameEn": "Sushang",
     "game": "hsr",
     "birthday": "02-20",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%B4%A0%E8%A3%B3&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "bailu-hsr",
@@ -1399,10 +1509,11 @@
     "nameEn": "Bailu",
     "game": "hsr",
     "birthday": "03-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%99%BD%E9%9C%B2&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "jing-yuan-hsr",
@@ -1410,10 +1521,11 @@
     "nameEn": "Jing Yuan",
     "game": "hsr",
     "birthday": "02-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%99%AF%E5%85%83&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yanqing-hsr",
@@ -1421,10 +1533,11 @@
     "nameEn": "Yanqing",
     "game": "hsr",
     "birthday": "09-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%BD%A6%E5%8D%BF&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "fu-xuan-hsr",
@@ -1432,10 +1545,11 @@
     "nameEn": "Fu Xuan",
     "game": "hsr",
     "birthday": "02-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%AC%A6%E7%8E%84&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "silver-wolf-hsr",
@@ -1443,10 +1557,11 @@
     "nameEn": "Silver Wolf",
     "game": "hsr",
     "birthday": "08-12",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%93%B6%E7%8B%BC&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "luocha-hsr",
@@ -1454,10 +1569,11 @@
     "nameEn": "Luocha",
     "game": "hsr",
     "birthday": "12-25",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%BD%97%E5%88%B9&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "blade-hsr",
@@ -1465,10 +1581,11 @@
     "nameEn": "Blade",
     "game": "hsr",
     "birthday": "12-31",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%88%83&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "kafka-hsr",
@@ -1476,10 +1593,11 @@
     "nameEn": "Kafka",
     "game": "hsr",
     "birthday": "08-25",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8D%A1%E8%8A%99%E5%8D%A1&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "luka-hsr",
@@ -1487,10 +1605,11 @@
     "nameEn": "Luka",
     "game": "hsr",
     "birthday": "05-19",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8D%A2%E5%8D%A1&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yukong-hsr",
@@ -1498,10 +1617,11 @@
     "nameEn": "Yukong",
     "game": "hsr",
     "birthday": "08-15",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%A9%AD%E7%A9%BA&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "dan-heng--imbibitor-lunae-hsr",
@@ -1509,10 +1629,11 @@
     "nameEn": "Dan Heng • Imbibitor Lunae",
     "game": "hsr",
     "birthday": "12-25",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%B9%E6%81%92%C2%B7%E9%A5%AE%E6%9C%88&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "jingliu-hsr",
@@ -1520,10 +1641,11 @@
     "nameEn": "Jingliu",
     "game": "hsr",
     "birthday": "10-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%95%9C%E6%B5%81&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "topaz-hsr",
@@ -1531,10 +1653,11 @@
     "nameEn": "Topaz",
     "game": "hsr",
     "birthday": "08-29",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%89%98%E5%B8%95&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "guinaifen-hsr",
@@ -1542,10 +1665,11 @@
     "nameEn": "Guinaifen",
     "game": "hsr",
     "birthday": "07-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%A1%82%E4%B9%83%E8%8A%AC&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "huohuo-hsr",
@@ -1553,10 +1677,11 @@
     "nameEn": "Huohuo",
     "game": "hsr",
     "birthday": "12-12",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%97%BF%E8%97%BF&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "argenti-hsr",
@@ -1564,10 +1689,11 @@
     "nameEn": "Argenti",
     "game": "hsr",
     "birthday": "01-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%93%B6%E6%9E%9D&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "hanya-hsr",
@@ -1575,10 +1701,11 @@
     "nameEn": "Hanya",
     "game": "hsr",
     "birthday": "07-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%AF%92%E9%B8%A6&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "ruan-mei-hsr",
@@ -1586,10 +1713,11 @@
     "nameEn": "Ruan Mei",
     "game": "hsr",
     "birthday": "03-19",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%98%AE%C2%B7%E6%A2%85&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "dr-ratio-hsr",
@@ -1597,10 +1725,11 @@
     "nameEn": "Dr. Ratio",
     "game": "hsr",
     "birthday": "04-26",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%9C%9F%E7%90%86%E5%8C%BB%E7%94%9F&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "black-swan-hsr",
@@ -1608,10 +1737,11 @@
     "nameEn": "Black Swan",
     "game": "hsr",
     "birthday": "09-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%BB%91%E5%A4%A9%E9%B9%85&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "misha-hsr",
@@ -1619,10 +1749,11 @@
     "nameEn": "Misha",
     "game": "hsr",
     "birthday": "04-04",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%B1%B3%E6%B2%99&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sparkle-hsr",
@@ -1630,10 +1761,11 @@
     "nameEn": "Sparkle",
     "game": "hsr",
     "birthday": "02-29",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8A%B1%E7%81%AB&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "acheron-hsr",
@@ -1641,10 +1773,11 @@
     "nameEn": "Acheron",
     "game": "hsr",
     "birthday": "06-21",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%BB%84%E6%B3%89&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "gallagher-hsr",
@@ -1652,10 +1785,11 @@
     "nameEn": "Gallagher",
     "game": "hsr",
     "birthday": "06-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8A%A0%E6%8B%89%E8%B5%AB&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "aventurine-hsr",
@@ -1663,10 +1797,11 @@
     "nameEn": "Aventurine",
     "game": "hsr",
     "birthday": "11-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%A0%82%E9%87%91&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "robin-hsr",
@@ -1674,10 +1809,11 @@
     "nameEn": "Robin",
     "game": "hsr",
     "birthday": "05-04",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%9F%A5%E6%9B%B4%E9%B8%9F&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "boothill-hsr",
@@ -1685,10 +1821,11 @@
     "nameEn": "Boothill",
     "game": "hsr",
     "birthday": "03-16",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%B3%A2%E6%8F%90%E6%AC%A7&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "firefly-hsr",
@@ -1696,10 +1833,11 @@
     "nameEn": "Firefly",
     "game": "hsr",
     "birthday": "06-12",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%B5%81%E8%90%A4&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "jade-hsr",
@@ -1707,10 +1845,11 @@
     "nameEn": "Jade",
     "game": "hsr",
     "birthday": "01-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%BF%A1%E7%BF%A0&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yunli-hsr",
@@ -1718,10 +1857,11 @@
     "nameEn": "Yunli",
     "game": "hsr",
     "birthday": "05-17",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BA%91%E7%92%83&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "jiaoqiu-hsr",
@@ -1729,10 +1869,11 @@
     "nameEn": "Jiaoqiu",
     "game": "hsr",
     "birthday": "08-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%A4%92%E4%B8%98&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "feixiao-hsr",
@@ -1740,10 +1881,11 @@
     "nameEn": "Feixiao",
     "game": "hsr",
     "birthday": "06-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%A3%9E%E9%9C%84&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "lingsha-hsr",
@@ -1751,10 +1893,11 @@
     "nameEn": "Lingsha",
     "game": "hsr",
     "birthday": "08-24",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%81%B5%E7%A0%82&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "moze-hsr",
@@ -1762,10 +1905,11 @@
     "nameEn": "Moze",
     "game": "hsr",
     "birthday": "04-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%B2%8A%E6%B3%BD&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "rappa-hsr",
@@ -1773,10 +1917,11 @@
     "nameEn": "Rappa",
     "game": "hsr",
     "birthday": "07-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B9%B1%E7%A0%B4&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "fugue-hsr",
@@ -1784,10 +1929,11 @@
     "nameEn": "Fugue",
     "game": "hsr",
     "birthday": "04-15",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%BF%98%E5%BD%92%E4%BA%BA&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "火",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "sunday-hsr",
@@ -1795,10 +1941,11 @@
     "nameEn": "Sunday",
     "game": "hsr",
     "birthday": "06-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%98%9F%E6%9C%9F%E6%97%A5&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "the-herta-hsr",
@@ -1806,10 +1953,11 @@
     "nameEn": "The Herta",
     "game": "hsr",
     "birthday": "12-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%A7%E9%BB%91%E5%A1%94&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "冰",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "aglaea-hsr",
@@ -1817,10 +1965,11 @@
     "nameEn": "Aglaea",
     "game": "hsr",
     "birthday": "01-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%98%BF%E6%A0%BC%E8%8E%B1%E9%9B%85&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "雷",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "tribbie-hsr",
@@ -1828,10 +1977,11 @@
     "nameEn": "Tribbie",
     "game": "hsr",
     "birthday": "12-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%BC%87%E5%AE%9D&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "mydei-hsr",
@@ -1839,10 +1989,11 @@
     "nameEn": "Mydei",
     "game": "hsr",
     "birthday": "04-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%87%E6%95%8C&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "虚数",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "castorice-hsr",
@@ -1850,10 +2001,11 @@
     "nameEn": "Castorice",
     "game": "hsr",
     "birthday": "11-30",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%81%90%E8%9D%B6&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "anaxa-hsr",
@@ -1861,10 +2013,11 @@
     "nameEn": "Anaxa",
     "game": "hsr",
     "birthday": "09-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%82%A3%E5%88%BB%E5%A4%8F&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "cipher-hsr",
@@ -1872,10 +2025,11 @@
     "nameEn": "Cipher",
     "game": "hsr",
     "birthday": "06-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%B5%9B%E9%A3%9E%E5%84%BF&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "量子",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "hyacine-hsr",
@@ -1883,10 +2037,11 @@
     "nameEn": "Hyacine",
     "game": "hsr",
     "birthday": "05-05",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%A3%8E%E5%A0%87&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "风",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "phainon-hsr",
@@ -1894,10 +2049,11 @@
     "nameEn": "Phainon",
     "game": "hsr",
     "birthday": "12-31",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%99%BD%E5%8E%84&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "element": "物理",
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "anby-zzz",
@@ -1905,9 +2061,10 @@
     "nameEn": "Anby",
     "game": "zzz",
     "birthday": "05-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%AE%89%E6%AF%94&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "billy-zzz",
@@ -1915,9 +2072,10 @@
     "nameEn": "Billy",
     "game": "zzz",
     "birthday": "10-28",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%AF%94%E5%88%A9&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "nicole-zzz",
@@ -1925,9 +2083,10 @@
     "nameEn": "Nicole",
     "game": "zzz",
     "birthday": "07-30",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A6%AE%E5%8F%AF&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "nekomata-zzz",
@@ -1935,9 +2094,10 @@
     "nameEn": "Nekomata",
     "game": "zzz",
     "birthday": "04-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%8C%AB%E5%8F%88&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "koleda-zzz",
@@ -1945,9 +2105,10 @@
     "nameEn": "Koleda",
     "game": "zzz",
     "birthday": "09-23",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%8F%82%E8%95%BE%E5%A6%B2&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "anton-zzz",
@@ -1955,9 +2116,10 @@
     "nameEn": "Anton",
     "game": "zzz",
     "birthday": "03-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%AE%89%E4%B8%9C&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "ben-zzz",
@@ -1965,9 +2127,10 @@
     "nameEn": "Ben",
     "game": "zzz",
     "birthday": "07-16",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9C%AC&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "grace-zzz",
@@ -1975,9 +2138,10 @@
     "nameEn": "Grace",
     "game": "zzz",
     "birthday": "01-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%A0%BC%E8%8E%89%E4%B8%9D&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "soukaku-zzz",
@@ -1985,9 +2149,10 @@
     "nameEn": "Soukaku",
     "game": "zzz",
     "birthday": "04-17",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8B%8D%E8%A7%92&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "soldier-11-zzz",
@@ -1995,9 +2160,10 @@
     "nameEn": "Soldier 11",
     "game": "zzz",
     "birthday": "08-15",
+    "avatar": "https://ui-avatars.com/api/?name=11%E5%8F%B7&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "rina-zzz",
@@ -2005,9 +2171,10 @@
     "nameEn": "Rina",
     "game": "zzz",
     "birthday": "09-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%BD%E5%A8%9C&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "ellen-zzz",
@@ -2015,9 +2182,10 @@
     "nameEn": "Ellen",
     "game": "zzz",
     "birthday": "01-17",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%89%BE%E8%8E%B2&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "zhu-yuan-zzz",
@@ -2025,9 +2193,10 @@
     "nameEn": "Zhu Yuan",
     "game": "zzz",
     "birthday": "06-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9C%B1%E9%B8%A2&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "lycaon-zzz",
@@ -2035,9 +2204,10 @@
     "nameEn": "Lycaon",
     "game": "zzz",
     "birthday": "12-04",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8E%B1%E5%8D%A1%E6%81%A9&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "corin-zzz",
@@ -2045,9 +2215,10 @@
     "nameEn": "Corin",
     "game": "zzz",
     "birthday": "02-14",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8F%AF%E7%90%B3&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "lucy-zzz",
@@ -2055,9 +2226,10 @@
     "nameEn": "Lucy",
     "game": "zzz",
     "birthday": "08-06",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9C%B2%E8%A5%BF&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "piper-zzz",
@@ -2065,9 +2237,10 @@
     "nameEn": "Piper",
     "game": "zzz",
     "birthday": "08-17",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%B4%BE%E6%B4%BE&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "qingyi-zzz",
@@ -2075,9 +2248,10 @@
     "nameEn": "Qingyi",
     "game": "zzz",
     "birthday": "03-21",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9D%92%E8%A1%A3&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "seth-zzz",
@@ -2085,9 +2259,10 @@
     "nameEn": "Seth",
     "game": "zzz",
     "birthday": "05-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%B5%9B%E6%96%AF&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "jane-zzz",
@@ -2095,9 +2270,10 @@
     "nameEn": "Jane",
     "game": "zzz",
     "birthday": "01-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%AE%80&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "burnice-zzz",
@@ -2105,9 +2281,10 @@
     "nameEn": "Burnice",
     "game": "zzz",
     "birthday": "04-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9F%8F%E5%A6%AE%E6%80%9D&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "caesar-zzz",
@@ -2115,9 +2292,10 @@
     "nameEn": "Caesar",
     "game": "zzz",
     "birthday": "07-04",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%87%AF%E6%92%92&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "lighter-zzz",
@@ -2125,9 +2303,10 @@
     "nameEn": "Lighter",
     "game": "zzz",
     "birthday": "10-05",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8E%B1%E7%89%B9&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "miyabi-zzz",
@@ -2135,9 +2314,10 @@
     "nameEn": "Miyabi",
     "game": "zzz",
     "birthday": "04-03",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%98%9F%E8%A7%81%E9%9B%85&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "harumasa-zzz",
@@ -2145,9 +2325,10 @@
     "nameEn": "Harumasa",
     "game": "zzz",
     "birthday": "09-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%B5%85%E7%BE%BD%E6%82%A0%E7%9C%9F&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "astra-yao-zzz",
@@ -2155,9 +2336,10 @@
     "nameEn": "Astra Yao",
     "game": "zzz",
     "birthday": "05-04",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%80%80%E5%98%89%E9%9F%B3&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "evelyn-zzz",
@@ -2165,9 +2347,10 @@
     "nameEn": "Evelyn",
     "game": "zzz",
     "birthday": "08-24",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BC%8A%E8%8A%99%E7%90%B3&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "hugo-zzz",
@@ -2175,9 +2358,10 @@
     "nameEn": "Hugo",
     "game": "zzz",
     "birthday": "12-24",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9B%A8%E6%9E%9C&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "vivian-zzz",
@@ -2185,9 +2369,10 @@
     "nameEn": "Vivian",
     "game": "zzz",
     "birthday": "01-20",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%96%87%E8%96%87%E5%AE%89&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "trigger-zzz",
@@ -2195,9 +2380,10 @@
     "nameEn": "Trigger",
     "game": "zzz",
     "birthday": "05-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9B%B6%E5%8F%B7%C2%B7%E5%AE%89%E6%AF%94&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "pulchra-zzz",
@@ -2205,9 +2391,10 @@
     "nameEn": "Pulchra",
     "game": "zzz",
     "birthday": "07-16",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%B3%A2%E5%8F%AF%E5%A8%9C&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "ju-fufu-zzz",
@@ -2215,9 +2402,10 @@
     "nameEn": "Ju Fufu",
     "game": "zzz",
     "birthday": "02-08",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%A9%98%E7%A6%8F%E7%A6%8F&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "yi-xuan-zzz",
@@ -2225,9 +2413,10 @@
     "nameEn": "Yi Xuan",
     "game": "zzz",
     "birthday": "03-26",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BB%AA%E7%8E%84&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "pan-yinhu-zzz",
@@ -2235,9 +2424,10 @@
     "nameEn": "Pan Yinhu",
     "game": "zzz",
     "birthday": "08-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%BD%98%E5%BC%95%E5%A3%B6&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 4,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   },
   {
     "id": "taiyin-zzz",
@@ -2245,8 +2435,568 @@
     "nameEn": "Taiyin",
     "game": "zzz",
     "birthday": "10-10",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BA%91%E5%B2%BF%E5%B1%B1%C2%B7%E6%B3%B0%E9%9F%B3&background=ff6b6b&color=fff&size=128&font-size=0.5&bold=true",
     "rarity": 5,
     "source": "manual",
-    "updatedAt": "2026-06-06T06:09:44.336Z"
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "kiana-kaslana-honkai3",
+    "name": "琪亚娜·卡斯兰娜",
+    "nameEn": "Kiana Kaslana",
+    "game": "honkai3",
+    "birthday": "12-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%90%AA%E4%BA%9A%E5%A8%9C%C2%B7%E5%8D%A1%E6%96%AF%E5%85%B0%E5%A8%9C&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "双枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "raiden-mei-honkai3",
+    "name": "雷电芽衣",
+    "nameEn": "Raiden Mei",
+    "game": "honkai3",
+    "birthday": "04-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9B%B7%E7%94%B5%E8%8A%BD%E8%A1%A3&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "太刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "bronya-zaychik-honkai3",
+    "name": "布洛妮娅·扎伊切克",
+    "nameEn": "Bronya Zaychik",
+    "game": "honkai3",
+    "birthday": "08-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%83%E6%B4%9B%E5%A6%AE%E5%A8%85%C2%B7%E6%89%8E%E4%BC%8A%E5%88%87%E5%85%8B&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "重炮",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "murata-himeko-honkai3",
+    "name": "无量塔姬子",
+    "nameEn": "Murata Himeko",
+    "game": "honkai3",
+    "birthday": "06-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%97%A0%E9%87%8F%E5%A1%94%E5%A7%AC%E5%AD%90&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "大剑",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "theresa-apocalypse-honkai3",
+    "name": "德丽莎·阿波卡利斯",
+    "nameEn": "Theresa Apocalypse",
+    "game": "honkai3",
+    "birthday": "03-28",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%BE%B7%E4%B8%BD%E8%8E%8E%C2%B7%E9%98%BF%E6%B3%A2%E5%8D%A1%E5%88%A9%E6%96%AF&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "十字架",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "yae-sakura-honkai3",
+    "name": "八重樱",
+    "nameEn": "Yae Sakura",
+    "game": "honkai3",
+    "birthday": "07-22",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%85%AB%E9%87%8D%E6%A8%B1&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "太刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "kallen-kaslana-honkai3",
+    "name": "卡莲·卡斯兰娜",
+    "nameEn": "Kallen Kaslana",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%8D%A1%E8%8E%B2%C2%B7%E5%8D%A1%E6%96%AF%E5%85%B0%E5%A8%9C&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "双枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "fu-hua-honkai3",
+    "name": "符华",
+    "nameEn": "Fu Hua",
+    "game": "honkai3",
+    "birthday": "02-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%AC%A6%E5%8D%8E&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "拳套",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "rita-rossweisse-honkai3",
+    "name": "丽塔·洛丝薇瑟",
+    "nameEn": "Rita Rossweisse",
+    "game": "honkai3",
+    "birthday": "03-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%B8%BD%E5%A1%94%C2%B7%E6%B4%9B%E4%B8%9D%E8%96%87%E7%91%9F&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "镰刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "durandal-honkai3",
+    "name": "幽兰黛尔",
+    "nameEn": "Durandal",
+    "game": "honkai3",
+    "birthday": "01-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B9%BD%E5%85%B0%E9%BB%9B%E5%B0%94&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "骑枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "seele-vollerei-honkai3",
+    "name": "希儿·芙乐艾",
+    "nameEn": "Seele Vollerei",
+    "game": "honkai3",
+    "birthday": "10-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%8C%E5%84%BF%C2%B7%E8%8A%99%E4%B9%90%E8%89%BE&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "量子",
+    "weapon": "镰刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "rozaliya-olenyeva-honkai3",
+    "name": "萝莎莉娅·阿琳",
+    "nameEn": "Rozaliya Olenyeva",
+    "game": "honkai3",
+    "birthday": "06-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%90%9D%E8%8E%8E%E8%8E%89%E5%A8%85%C2%B7%E9%98%BF%E7%90%B3&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "大剑",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "liliya-olenyeva-honkai3",
+    "name": "莉莉娅·阿琳",
+    "nameEn": "Liliya Olenyeva",
+    "game": "honkai3",
+    "birthday": "06-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8E%89%E8%8E%89%E5%A8%85%C2%B7%E9%98%BF%E7%90%B3&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "大剑",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "asuka-honkai3",
+    "name": "椎名真由理",
+    "nameEn": "Asuka",
+    "game": "honkai3",
+    "birthday": "12-04",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%A4%8E%E5%90%8D%E7%9C%9F%E7%94%B1%E7%90%86&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "骑枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "asuka-shikinami-langley-honkai3",
+    "name": "明日香",
+    "nameEn": "Asuka Shikinami Langley",
+    "game": "honkai3",
+    "birthday": "12-04",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%98%8E%E6%97%A5%E9%A6%99&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "骑枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "fischl-honkai3",
+    "name": "菲谢尔·断罪之皇女",
+    "nameEn": "Fischl",
+    "game": "honkai3",
+    "birthday": "05-27",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8F%B2%E8%B0%A2%E5%B0%94%C2%B7%E6%96%AD%E7%BD%AA%E4%B9%8B%E7%9A%87%E5%A5%B3&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "弓箭",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-the-void-honkai3",
+    "name": "空之律者",
+    "nameEn": "Herrscher of the Void",
+    "game": "honkai3",
+    "birthday": "12-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%A9%BA%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "双枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-reason-honkai3",
+    "name": "理之律者",
+    "nameEn": "Herrscher of Reason",
+    "game": "honkai3",
+    "birthday": "08-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%90%86%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "重炮",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-thunder-honkai3",
+    "name": "雷之律者",
+    "nameEn": "Herrscher of Thunder",
+    "game": "honkai3",
+    "birthday": "04-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E9%9B%B7%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "太刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-sentience-honkai3",
+    "name": "识之律者",
+    "nameEn": "Herrscher of Sentience",
+    "game": "honkai3",
+    "birthday": "02-09",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%AF%86%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "拳套",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-flamescion-honkai3",
+    "name": "薪炎之律者",
+    "nameEn": "Herrscher of Flamescion",
+    "game": "honkai3",
+    "birthday": "12-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%96%AA%E7%82%8E%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "大剑",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "infinite-ouroboros-honkai3",
+    "name": "无限·噬界之蛇",
+    "nameEn": "Infinite Ouroboros",
+    "game": "honkai3",
+    "birthday": "04-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%97%A0%E9%99%90%C2%B7%E5%99%AC%E7%95%8C%E4%B9%8B%E8%9B%87&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "十字架",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "silverwing-n-ex-honkai3",
+    "name": "次生银翼",
+    "nameEn": "Silverwing N-EX",
+    "game": "honkai3",
+    "birthday": "08-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%AC%A1%E7%94%9F%E9%93%B6%E7%BF%BC&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "重炮",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "palatinus-equinox-honkai3",
+    "name": "天元骑英",
+    "nameEn": "Palatinus Equinox",
+    "game": "honkai3",
+    "birthday": "01-01",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%A9%E5%85%83%E9%AA%91%E8%8B%B1&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "骑枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-human-ego-honkai3",
+    "name": "人律·爱莉希雅",
+    "nameEn": "Herrscher of Human Ego",
+    "game": "honkai3",
+    "birthday": "11-11",
+    "avatar": "https://ui-avatars.com/api/?name=%E4%BA%BA%E5%BE%8B%C2%B7%E7%88%B1%E8%8E%89%E5%B8%8C%E9%9B%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "弓箭",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-finality-honkai3",
+    "name": "终焉之律者",
+    "nameEn": "Herrscher of Finality",
+    "game": "honkai3",
+    "birthday": "12-07",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%BB%88%E7%84%89%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "双枪",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-origin-honkai3",
+    "name": "始源之律者",
+    "nameEn": "Herrscher of Origin",
+    "game": "honkai3",
+    "birthday": "04-13",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A7%8B%E6%BA%90%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "太刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-truth-honkai3",
+    "name": "真理之律者",
+    "nameEn": "Herrscher of Truth",
+    "game": "honkai3",
+    "birthday": "08-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%9C%9F%E7%90%86%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "重炮",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "herrscher-of-rebirth-honkai3",
+    "name": "死生之律者",
+    "nameEn": "Herrscher of Rebirth",
+    "game": "honkai3",
+    "birthday": "10-18",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%AD%BB%E7%94%9F%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "镰刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "lunar-vow-crimson-love-honkai3",
+    "name": "月下誓约·予爱以心",
+    "nameEn": "Lunar Vow: Crimson Love",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9C%88%E4%B8%8B%E8%AA%93%E7%BA%A6%C2%B7%E4%BA%88%E7%88%B1%E4%BB%A5%E5%BF%83&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "十字架",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "lunar-vow-honkai3",
+    "name": "大月下",
+    "nameEn": "Lunar Vow",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%A7%E6%9C%88%E4%B8%8B&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "十字架",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "spathodea-honkai3",
+    "name": "羽兔",
+    "nameEn": "Spathodea",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%BE%BD%E5%85%94&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "镰刀",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "prometheus-honkai3",
+    "name": "普罗米修斯",
+    "nameEn": "Prometheus",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%99%AE%E7%BD%97%E7%B1%B3%E4%BF%AE%E6%96%AF&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "拳套",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "susannah-honkai3",
+    "name": "苏莎娜",
+    "nameEn": "Susannah",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%8B%8F%E8%8E%8E%E5%A8%9C&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 4,
+    "element": "物理",
+    "weapon": "环刃",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "shigure-kira-honkai3",
+    "name": "时雨绮罗",
+    "nameEn": "Shigure Kira",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%97%B6%E9%9B%A8%E7%BB%AE%E7%BD%97&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "十字架",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "misteln-honkai3",
+    "name": "米丝忒琳",
+    "nameEn": "Misteln",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%B1%B3%E4%B8%9D%E5%BF%92%E7%90%B3&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "梭镖",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "senadina-honkai3",
+    "name": "希娜狄雅",
+    "nameEn": "Senadina",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%8C%E5%A8%9C%E7%8B%84%E9%9B%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "链刃",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "helia-honkai3",
+    "name": "赫丽娅",
+    "nameEn": "Helia",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%B5%AB%E4%B8%BD%E5%A8%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "速射弩",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "coralie-honkai3",
+    "name": "科拉莉",
+    "nameEn": "Coralie",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%A7%91%E6%8B%89%E8%8E%89&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "火箭锤",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "thelema-honkai3",
+    "name": "瑟莉姆",
+    "nameEn": "Thelema",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%91%9F%E8%8E%89%E5%A7%86&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "链刃",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "lantern-honkai3",
+    "name": "灯",
+    "nameEn": "Lantern",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E7%81%AF&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "火",
+    "weapon": "速射弩",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "songque-honkai3",
+    "name": "松雀",
+    "nameEn": "Songque",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E6%9D%BE%E9%9B%80&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "物理",
+    "weapon": "拳套",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
+  },
+  {
+    "id": "vita-honkai3",
+    "name": "薇塔",
+    "nameEn": "Vita",
+    "game": "honkai3",
+    "birthday": "未实装",
+    "avatar": "https://ui-avatars.com/api/?name=%E8%96%87%E5%A1%94&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "rarity": 5,
+    "element": "雷",
+    "weapon": "链刃",
+    "source": "manual",
+    "updatedAt": "2026-06-06T08:27:01.812Z"
   }
 ]
