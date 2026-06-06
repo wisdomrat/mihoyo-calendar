@@ -764,30 +764,115 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
   .app-header {
-    padding: 12px 16px;
+    padding: 10px 12px;
+  }
+  
+  .header-title h1 {
+    font-size: 18px;
+  }
+  
+  .header-subtitle {
+    font-size: 12px;
   }
   
   .header-controls {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 10px;
   }
   
   .control-group {
     width: 100%;
     flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .control-label {
+    font-size: 11px;
+  }
+  
+  .game-filters {
+    gap: 4px;
+  }
+  
+  .game-filter {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .display-modes {
+    gap: 2px;
+  }
+  
+  .display-mode-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .header-actions {
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  
+  .action-btn {
+    padding: 6px 10px;
+    font-size: 12px;
   }
   
   .app-main {
-    padding: 12px;
+    padding: 8px;
   }
   
   .calendar-header {
-    padding: 12px 16px;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  
+  .calendar-title {
+    font-size: 16px;
+  }
+  
+  .nav-btn {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  
+  .today-btn {
+    min-width: 45px;
+  }
+  
+  .view-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+  
+  .month-view {
+    padding: 8px 4px;
+  }
+  
+  .weekday-header {
+    gap: 2px;
+  }
+  
+  .weekday-label {
+    padding: 4px 2px;
+    font-size: 12px;
+  }
+  
+  .days-grid {
+    gap: 2px;
   }
   
   .day-cell {
-    min-height: 60px;
-    padding: 4px;
+    min-height: 50px;
+    padding: 2px;
+    border-radius: 4px;
+  }
+  
+  .day-number {
+    font-size: 11px;
+    margin-bottom: 2px;
   }
   
   .day-cell.card-mode {
@@ -795,26 +880,140 @@ body {
   }
   
   .day-character {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .day-character-avatar {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .day-character-initial {
+    font-size: 10px;
   }
   
   .more-characters {
-    width: 24px;
-    height: 24px;
-    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+  
+  /* Card mode on mobile */
+  .day-character-card {
+    padding: 2px 3px;
+    font-size: 9px;
+  }
+  
+  .card-avatar-wrapper {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .card-name {
+    font-size: 9px;
+  }
+  
+  /* Week view */
+  .week-view {
+    padding: 8px 4px;
   }
   
   .week-view-grid {
     grid-template-columns: 1fr;
+    gap: 4px;
   }
   
   .week-view-header {
     display: none;
   }
   
-  .display-modes {
-    order: -1;
+  .week-view-cell {
+    min-height: auto;
+    padding: 8px;
+  }
+  
+  .week-character-card {
+    padding: 6px;
+  }
+  
+  .week-character-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .week-character-name {
+    font-size: 13px;
+  }
+  
+  .week-character-game {
+    font-size: 11px;
+  }
+  
+  /* Modal */
+  .modal-content {
+    max-width: 95vw;
+    margin: 10px;
+    border-radius: 12px;
+  }
+  
+  .modal-header {
+    height: 120px;
+  }
+  
+  .modal-avatar {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .modal-avatar-placeholder {
+    width: 90px;
+    height: 90px;
+    font-size: 36px;
+  }
+  
+  .modal-body {
+    padding: 16px;
+  }
+  
+  .modal-name {
+    font-size: 20px;
+  }
+  
+  .modal-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .modal-info-item {
+    padding: 8px;
+  }
+  
+  .modal-info-value {
+    font-size: 14px;
+  }
+  
+  /* Add character modal */
+  .add-character-modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 8px 16px;
+    font-size: 13px;
   }
 }
 

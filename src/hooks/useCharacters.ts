@@ -2,14 +2,47 @@ import { useState, useEffect, useCallback } from 'react';
 import type { Character } from '../types';
 import charactersData from '../data/characters.json';
 
-const STORAGE_KEY = 'mihoyo-calendar-characters-v3';
+const STORAGE_KEY = 'mihoyo-calendar-characters-v4';
 const LAST_SYNC_KEY = 'mihoyo-calendar-last-sync';
 const DISPLAY_MODE_KEY = 'mihoyo-calendar-display-mode';
 
-// Use imported JSON data as base
 const ALL_CHARACTERS: Character[] = charactersData as Character[];
 
 export type DisplayMode = 'avatar' | 'card' | 'compact';
+
+// Create unique key from name and game
+function getCharKey(name: string, game: string): string {
+  return `${name}-${game}`;
+}
+
+// Deduplicate characters using name+game as key
+function deduplicate(chars: Character[]): Character[] {
+  const map = new Map<string, Character>();
+  for (const char of chars) {
+    const key = getCharKey(char.name, char.game);
+    const existing = map.get(key);
+    if (!existing) {
+      map.set(key, char);
+    } else {
+      // Merge: prefer the one with more data
+      const hasAvatar = (c: Character) => c.avatar && !c.avatar.includes('ui-avatars.com');
+      const score = (c: Character) => {
+        let s = 0;
+        if (hasAvatar(c)) s += 3;
+        if (c.birthday && c.birthday !== '??-??') s += 2;
+        if (c.element) s += 1;
+        if (c.weapon) s += 1;
+        if (c.region) s += 1;
+        return s;
+      };
+      if (score(char) > score(existing)) {
+        // Keep existing id if it's manual, otherwise use new id
+        map.set(key, { ...char, id: existing.source === 'manual' ? existing.id : char.id });
+      }
+    }
+  }
+  return Array.from(map.values());
+}
 
 export function useCharacters() {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -29,33 +62,22 @@ export function useCharacters() {
       setDisplayMode(savedMode);
     }
     
+    let initialData: Character[];
+    
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        // If local data has fewer characters than built-in, merge them
-        if (parsed.length < ALL_CHARACTERS.length) {
-          console.log(`Merging character data: local ${parsed.length} + builtin ${ALL_CHARACTERS.length}`);
-          // Keep local additions, add missing builtin characters
-          const localIds = new Set(parsed.map((c: Character) => c.id));
-          const merged = [...parsed];
-          for (const char of ALL_CHARACTERS) {
-            if (!localIds.has(char.id)) {
-              merged.push(char);
-            }
-          }
-          setCharacters(merged);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
-        } else {
-          setCharacters(parsed);
-        }
+        // Merge with builtin data and deduplicate
+        initialData = deduplicate([...parsed, ...ALL_CHARACTERS]);
       } catch {
-        setCharacters(ALL_CHARACTERS);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(ALL_CHARACTERS));
+        initialData = deduplicate(ALL_CHARACTERS);
       }
     } else {
-      setCharacters(ALL_CHARACTERS);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(ALL_CHARACTERS));
+      initialData = deduplicate(ALL_CHARACTERS);
     }
+    
+    setCharacters(initialData);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
     
     if (lastSyncTime) {
       setLastSync(lastSyncTime);
@@ -71,42 +93,44 @@ export function useCharacters() {
 
   const fetchFromWiki = useCallback(async () => {
     setLoading(true);
-    setSyncProgress('正在检查Wiki数据...');
+    setSyncProgress('正在检查远程数据...');
     
     try {
-      // Try to fetch from public/data/characters.json first (updated by GitHub Actions)
+      // Try to fetch from remote
       setSyncProgress('正在获取远程数据...');
-      const response = await fetch('/data/characters.json');
+      
+      // Add cache-busting parameter
+      const cacheBuster = `?t=${Date.now()}`;
+      const response = await fetch(`/data/characters.json${cacheBuster}`, {
+        method: 'GET',
+        cache: 'no-cache',
+      });
       
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data) && data.length > 0) {
-          setSyncProgress(`获取到 ${data.length} 个角色，正在合并...`);
+          setSyncProgress(`获取到 ${data.length} 个角色，正在合并去重...`);
           
-          // Merge strategy: keep local characters that don't exist in remote
-          const remoteIds = new Set(data.map((c: Character) => c.id));
-          const localOnly = characters.filter(c => !remoteIds.has(c.id));
-          
-          const merged = [...data, ...localOnly];
+          // Merge and deduplicate
+          const merged = deduplicate([...characters, ...data]);
           
           setCharacters(merged);
           const now = new Date().toISOString();
           localStorage.setItem(LAST_SYNC_KEY, now);
           setLastSync(now);
-          setSyncProgress('同步完成！');
+          setSyncProgress(`同步完成！共 ${merged.length} 个角色`);
           
-          // Clear progress after 3 seconds
           setTimeout(() => setSyncProgress(''), 3000);
           setLoading(false);
           return;
         }
       }
       
-      setSyncProgress('无法获取远程数据，使用本地数据');
+      setSyncProgress('远程数据为空或不可用');
       setTimeout(() => setSyncProgress(''), 3000);
     } catch (error) {
-      console.error('Failed to fetch character data:', error);
-      setSyncProgress('同步失败：网络错误');
+      console.error('Failed to fetch:', error);
+      setSyncProgress('同步失败：' + (error instanceof Error ? error.message : '网络错误'));
       setTimeout(() => setSyncProgress(''), 3000);
     } finally {
       setLoading(false);
@@ -116,21 +140,22 @@ export function useCharacters() {
   const addCharacter = useCallback((characterData: Omit<Character, 'id' | 'updatedAt' | 'source'>) => {
     const newCharacter: Character = {
       ...characterData,
-      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: `manual-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
       source: 'manual',
       updatedAt: new Date().toISOString(),
     };
-    setCharacters(prev => [...prev, newCharacter]);
+    setCharacters(prev => deduplicate([...prev, newCharacter]));
   }, []);
 
   const editCharacter = useCallback((id: string, updates: Partial<Omit<Character, 'id' | 'updatedAt'>>) => {
-    setCharacters(prev => 
-      prev.map(char => 
+    setCharacters(prev => {
+      const updated = prev.map(char => 
         char.id === id 
           ? { ...char, ...updates, updatedAt: new Date().toISOString() }
           : char
-      )
-    );
+      );
+      return deduplicate(updated);
+    });
   }, []);
 
   const removeCharacter = useCallback((id: string) => {
