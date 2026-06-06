@@ -1,8 +1,7 @@
 import { useState, useRef } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 import type { Character, ViewMode } from '../../types';
-import type { DisplayMode } from '../../hooks/useCharacters';
+import type { DisplayMode, WeekStart } from '../../hooks/useCharacters';
 import MonthView from './MonthView';
 import WeekView from './WeekView';
 
@@ -11,6 +10,7 @@ interface CalendarProps {
   view: ViewMode;
   currentDate: Date;
   displayMode: DisplayMode;
+  weekStart: WeekStart;
   onDateChange: (date: Date) => void;
   onViewChange: (view: ViewMode) => void;
   onCharacterClick: (character: Character) => void;
@@ -21,6 +21,7 @@ const Calendar = ({
   view,
   currentDate,
   displayMode,
+  weekStart,
   onDateChange,
   onViewChange,
   onCharacterClick,
@@ -50,7 +51,6 @@ const Calendar = ({
 
   const handleTitleClick = () => {
     setShowDatePicker(true);
-    // Focus the input after a short delay to allow rendering
     setTimeout(() => {
       monthInputRef.current?.focus();
       monthInputRef.current?.showPicker?.();
@@ -58,13 +58,17 @@ const Calendar = ({
   };
 
   const handleDateSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value; // Format: "2024-01"
+    const value = e.target.value;
     if (value) {
       const [year, month] = value.split('-').map(Number);
       onDateChange(new Date(year, month - 1, 1));
     }
     setShowDatePicker(false);
   };
+
+  const weekdayLabels = weekStart === 1
+    ? ['一', '二', '三', '四', '五', '六', '日']
+    : ['日', '一', '二', '三', '四', '五', '六'];
 
   return (
     <div className="calendar-container">
@@ -80,7 +84,7 @@ const Calendar = ({
             onClick={handleTitleClick}
             title="点击选择年月"
           >
-            {format(currentDate, 'yyyy年 M月', { locale: zhCN })}
+            {format(currentDate, 'yyyy年 M月')}
           </h2>
           {showDatePicker && (
             <div className="date-picker-popup">
@@ -116,6 +120,8 @@ const Calendar = ({
           currentDate={currentDate}
           characters={characters}
           displayMode={displayMode}
+          weekStart={weekStart}
+          weekdayLabels={weekdayLabels}
           onCharacterClick={onCharacterClick}
         />
       ) : (
@@ -123,6 +129,8 @@ const Calendar = ({
           currentDate={currentDate}
           characters={characters}
           displayMode={displayMode}
+          weekStart={weekStart}
+          weekdayLabels={weekdayLabels}
           onCharacterClick={onCharacterClick}
         />
       )}

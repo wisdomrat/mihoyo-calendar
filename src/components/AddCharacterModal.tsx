@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { Character } from '../types';
 
 interface AddCharacterModalProps {
@@ -15,23 +15,47 @@ const GAMES = [
   { id: 'honkai3', name: '崩坏3', color: '#ff8cc8' },
 ];
 
+const emptyForm = {
+  name: '',
+  nameEn: '',
+  game: 'genshin',
+  birthday: '01-01',
+  avatar: '',
+  rarity: 4,
+  element: '',
+  weapon: '',
+  region: '',
+};
+
 const AddCharacterModal = ({ isOpen, editingCharacter, onClose, onSave }: AddCharacterModalProps) => {
-  const [formData, setFormData] = useState({
-    name: editingCharacter?.name || '',
-    nameEn: editingCharacter?.nameEn || '',
-    game: editingCharacter?.game || 'genshin',
-    birthday: editingCharacter?.birthday || '01-01',
-    avatar: editingCharacter?.avatar || '',
-    rarity: editingCharacter?.rarity || 4,
-    element: editingCharacter?.element || '',
-    weapon: editingCharacter?.weapon || '',
-    region: editingCharacter?.region || '',
-  });
-  
-  const [previewUrl, setPreviewUrl] = useState(editingCharacter?.avatar || '');
+  const [formData, setFormData] = useState(emptyForm);
+  const [previewUrl, setPreviewUrl] = useState('');
   const [activeTab, setActiveTab] = useState<'form' | 'json'>('form');
   const [jsonInput, setJsonInput] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Reset form when modal opens/closes or editing character changes
+  useEffect(() => {
+    if (isOpen && editingCharacter) {
+      setFormData({
+        name: editingCharacter.name || '',
+        nameEn: editingCharacter.nameEn || '',
+        game: editingCharacter.game || 'genshin',
+        birthday: editingCharacter.birthday || '01-01',
+        avatar: editingCharacter.avatar || '',
+        rarity: editingCharacter.rarity || 4,
+        element: editingCharacter.element || '',
+        weapon: editingCharacter.weapon || '',
+        region: editingCharacter.region || '',
+      });
+      setPreviewUrl(editingCharacter.avatar || '');
+      setActiveTab('form');
+    } else if (isOpen && !editingCharacter) {
+      setFormData(emptyForm);
+      setPreviewUrl('');
+      setActiveTab('form');
+    }
+  }, [isOpen, editingCharacter?.id]);
 
   if (!isOpen) return null;
 
@@ -262,18 +286,7 @@ const AddCharacterModal = ({ isOpen, editingCharacter, onClose, onSave }: AddCha
               <textarea
                 value={jsonInput}
                 onChange={e => setJsonInput(e.target.value)}
-                placeholder={`支持单条或数组格式：
-{
-  "name": "角色名",
-  "nameEn": "Name",
-  "game": "genshin",
-  "birthday": "01-01",
-  "avatar": "https://...",
-  "rarity": 5,
-  "element": "火",
-  "weapon": "单手剑",
-  "region": "蒙德"
-}`}
+                placeholder={`支持单条或数组格式：\n{\n  "name": "角色名",\n  "nameEn": "Name",\n  "game": "genshin",\n  "birthday": "01-01",\n  "avatar": "https://...",\n  "rarity": 5,\n  "element": "火",\n  "weapon": "单手剑",\n  "region": "蒙德"\n}`}
                 rows={12}
               />
               <div className="form-actions">

@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, isLeapYear } from 'date-fns';
 import type { Character } from '../../types';
 import type { DisplayMode } from '../../hooks/useCharacters';
 
@@ -20,11 +20,16 @@ const DayCell = ({
   onCharacterClick 
 }: DayCellProps) => {
   const dayNumber = format(date, 'd');
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const isFeb29 = month === 2 && day === 29;
+  const isFakeFeb29 = isFeb29 && !isLeapYear(date);
 
   if (displayMode === 'compact') {
     return (
       <div 
-        className={`day-cell compact ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''}`}
+        className={`day-cell compact ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${isFakeFeb29 ? 'fake-feb29' : ''}`}
+        title={isFakeFeb29 ? `${date.getFullYear()}年不是闰年，2月没有29日` : undefined}
       >
         <div className="day-number">{dayNumber}</div>
         {characters.length > 0 && (
@@ -53,9 +58,13 @@ const DayCell = ({
   if (displayMode === 'card') {
     return (
       <div 
-        className={`day-cell card-mode ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''}`}
+        className={`day-cell card-mode ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${isFakeFeb29 ? 'fake-feb29' : ''}`}
+        title={isFakeFeb29 ? `${date.getFullYear()}年不是闰年，2月没有29日` : undefined}
       >
         <div className="day-number">{dayNumber}</div>
+        {isFakeFeb29 && (
+          <div className="feb29-notice">无29日</div>
+        )}
         <div className="day-characters card">
           {characters.map(character => (
             <div
@@ -97,9 +106,13 @@ const DayCell = ({
   // Default avatar mode
   return (
     <div 
-      className={`day-cell ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${characters.length > 0 ? 'has-characters' : ''}`}
+      className={`day-cell ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${characters.length > 0 ? 'has-characters' : ''} ${isFakeFeb29 ? 'fake-feb29' : ''}`}
+      title={isFakeFeb29 ? `${date.getFullYear()}年不是闰年，2月没有29日` : undefined}
     >
       <div className="day-number">{dayNumber}</div>
+      {isFakeFeb29 && (
+        <div className="feb29-notice">无</div>
+      )}
       <div className="day-characters">
         {characters.slice(0, 3).map(character => (
           <div

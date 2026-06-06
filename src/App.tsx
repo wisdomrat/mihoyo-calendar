@@ -104,12 +104,17 @@ function App() {
     lastSync,
     selectedGames,
     displayMode,
+    weekStart,
+    filters,
+    filterOptions,
     fetchFromWiki,
     addCharacter,
     editCharacter,
     exportData,
     toggleGame,
     setDisplayMode,
+    setWeekStart,
+    updateFilters,
   } = useCharacters();
 
   const handleSaveCharacter = (data: Parameters<typeof addCharacter>[0]) => {
@@ -138,6 +143,11 @@ function App() {
         lastSync={lastSync}
         displayMode={displayMode}
         onDisplayModeChange={setDisplayMode}
+        weekStart={weekStart}
+        onWeekStartChange={setWeekStart}
+        filters={filters}
+        filterOptions={filterOptions}
+        onFiltersChange={updateFilters}
         onAddCharacter={() => {
           setEditingCharacter(null);
           setShowAddModal(true);
@@ -151,6 +161,7 @@ function App() {
           view={view}
           currentDate={currentDate}
           displayMode={displayMode}
+          weekStart={weekStart}
           onDateChange={setCurrentDate}
           onViewChange={setView}
           onCharacterClick={setSelectedCharacter}

@@ -1,23 +1,22 @@
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 import type { Character } from '../../types';
-import type { DisplayMode } from '../../hooks/useCharacters';
+import type { DisplayMode, WeekStart } from '../../hooks/useCharacters';
 import DayCell from './DayCell';
 
 interface MonthViewProps {
   currentDate: Date;
   characters: Character[];
   displayMode: DisplayMode;
+  weekStart: WeekStart;
+  weekdayLabels: string[];
   onCharacterClick: (character: Character) => void;
 }
 
-const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六'];
-
-const MonthView = ({ currentDate, characters, displayMode, onCharacterClick }: MonthViewProps) => {
+const MonthView = ({ currentDate, characters, displayMode, weekStart, weekdayLabels, onCharacterClick }: MonthViewProps) => {
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
-  const calendarStart = startOfWeek(monthStart, { locale: zhCN });
-  const calendarEnd = endOfWeek(monthEnd, { locale: zhCN });
+  const calendarStart = startOfWeek(monthStart, { weekStartsOn: weekStart });
+  const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: weekStart });
   
   const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
   const today = new Date();
@@ -25,7 +24,7 @@ const MonthView = ({ currentDate, characters, displayMode, onCharacterClick }: M
   return (
     <div className="month-view">
       <div className="weekday-header">
-        {WEEKDAYS.map(day => (
+        {weekdayLabels.map(day => (
           <div key={day} className="weekday-label">{day}</div>
         ))}
       </div>

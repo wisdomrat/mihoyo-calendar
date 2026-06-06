@@ -5,10 +5,24 @@ import charactersData from '../data/characters.json';
 const STORAGE_KEY = 'mihoyo-calendar-characters-v4';
 const LAST_SYNC_KEY = 'mihoyo-calendar-last-sync';
 const DISPLAY_MODE_KEY = 'mihoyo-calendar-display-mode';
+const WEEK_START_KEY = 'mihoyo-calendar-week-start';
+const FILTERS_KEY = 'mihoyo-calendar-filters-v2';
 
 const ALL_CHARACTERS: Character[] = charactersData as Character[];
 
 export type DisplayMode = 'avatar' | 'card' | 'compact';
+export type WeekStart = 0 | 1; // 0 = Sunday, 1 = Monday
+
+export interface FilterOptions {
+  elements: string[];
+  rarities: number[];
+  weapons: string[];
+  regions: string[];
+}
+
+export interface FilterState extends FilterOptions {
+  showMissingInfo: boolean;
+}
 
 // Create unique key from name and game
 function getCharKey(name: string, game: string): string {
@@ -24,7 +38,6 @@ function deduplicate(chars: Character[]): Character[] {
     if (!existing) {
       map.set(key, char);
     } else {
-      // Merge: prefer the one with more data
       const hasAvatar = (c: Character) => c.avatar && !c.avatar.includes('ui-avatars.com');
       const score = (c: Character) => {
         let s = 0;
@@ -36,12 +49,21 @@ function deduplicate(chars: Character[]): Character[] {
         return s;
       };
       if (score(char) > score(existing)) {
-        // Keep existing id if it's manual, otherwise use new id
         map.set(key, { ...char, id: existing.source === 'manual' ? existing.id : char.id });
       }
     }
   }
   return Array.from(map.values());
+}
+
+// Normalize empty values
+function normalizeChar(char: Character): Character {
+  return {
+    ...char,
+    element: char.element?.trim() || '',
+    weapon: char.weapon?.trim() || '',
+    region: char.region?.trim() || '',
+  };
 }
 
 export function useCharacters() {
@@ -51,15 +73,40 @@ export function useCharacters() {
   const [lastSync, setLastSync] = useState<string | null>(null);
   const [selectedGames, setSelectedGames] = useState<string[]>(['genshin', 'hsr', 'zzz', 'honkai3']);
   const [displayMode, setDisplayMode] = useState<DisplayMode>('avatar');
+  const [weekStart, setWeekStart] = useState<WeekStart>(0);
+  const [filters, setFilters] = useState<FilterState>({
+    elements: [],
+    rarities: [],
+    weapons: [],
+    regions: [],
+    showMissingInfo: true,
+  });
 
   // Load data on mount
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     const lastSyncTime = localStorage.getItem(LAST_SYNC_KEY);
     const savedMode = localStorage.getItem(DISPLAY_MODE_KEY) as DisplayMode | null;
+    const savedWeekStart = localStorage.getItem(WEEK_START_KEY);
+    const savedFilters = localStorage.getItem(FILTERS_KEY);
     
     if (savedMode && ['avatar', 'card', 'compact'].includes(savedMode)) {
       setDisplayMode(savedMode);
+    }
+    if (savedWeekStart && (savedWeekStart === '0' || savedWeekStart === '1')) {
+      setWeekStart(parseInt(savedWeekStart) as WeekStart);
+    }
+    if (savedFilters) {
+      try {
+        const parsed = JSON.parse(savedFilters);
+        setFilters({
+          elements: parsed.elements || [],
+          rarities: parsed.rarities || [],
+          weapons: parsed.weapons || [],
+          regions: parsed.regions || [],
+          showMissingInfo: parsed.showMissingInfo !== false,
+        });
+      } catch {}
     }
     
     let initialData: Character[];
@@ -67,13 +114,12 @@ export function useCharacters() {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        // Merge with builtin data and deduplicate
-        initialData = deduplicate([...parsed, ...ALL_CHARACTERS]);
+        initialData = deduplicate([...parsed, ...ALL_CHARACTERS]).map(normalizeChar);
       } catch {
-        initialData = deduplicate(ALL_CHARACTERS);
+        initialData = deduplicate(ALL_CHARACTERS).map(normalizeChar);
       }
     } else {
-      initialData = deduplicate(ALL_CHARACTERS);
+      initialData = deduplicate(ALL_CHARACTERS).map(normalizeChar);
     }
     
     setCharacters(initialData);
@@ -91,50 +137,63 @@ export function useCharacters() {
     }
   }, [characters]);
 
+  // Save filters
+  useEffect(() => {
+    localStorage.setItem(FILTERS_KEY, JSON.stringify(filters));
+  }, [filters]);
+
   const fetchFromWiki = useCallback(async () => {
     setLoading(true);
     setSyncProgress('正在检查远程数据...');
     
-    try {
-      // Try to fetch from remote
-      setSyncProgress('正在获取远程数据...');
-      
-      // Add cache-busting parameter
-      const cacheBuster = `?t=${Date.now()}`;
-      const response = await fetch(`/data/characters.json${cacheBuster}`, {
-        method: 'GET',
-        cache: 'no-cache',
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        if (Array.isArray(data) && data.length > 0) {
-          setSyncProgress(`获取到 ${data.length} 个角色，正在合并去重...`);
-          
-          // Merge and deduplicate
-          const merged = deduplicate([...characters, ...data]);
-          
-          setCharacters(merged);
-          const now = new Date().toISOString();
-          localStorage.setItem(LAST_SYNC_KEY, now);
-          setLastSync(now);
-          setSyncProgress(`同步完成！共 ${merged.length} 个角色`);
-          
-          setTimeout(() => setSyncProgress(''), 3000);
-          setLoading(false);
-          return;
+    const urls = [
+      '/data/characters.json',
+      `${import.meta.env.BASE_URL || '/'}data/characters.json`,
+      './data/characters.json',
+      '/mihoyo-calendar/data/characters.json',
+    ];
+    
+    let success = false;
+    
+    for (const baseUrl of urls) {
+      try {
+        setSyncProgress(`正在尝试获取: ${baseUrl}...`);
+        const cacheBuster = `?t=${Date.now()}`;
+        const response = await fetch(`${baseUrl}${cacheBuster}`, {
+          method: 'GET',
+          cache: 'no-cache',
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setSyncProgress(`获取到 ${data.length} 个角色，正在合并去重...`);
+            
+            const merged = deduplicate([...characters, ...data.map(normalizeChar)]);
+            
+            setCharacters(merged);
+            const now = new Date().toISOString();
+            localStorage.setItem(LAST_SYNC_KEY, now);
+            setLastSync(now);
+            setSyncProgress(`同步完成！共 ${merged.length} 个角色`);
+            
+            setTimeout(() => setSyncProgress(''), 3000);
+            success = true;
+            setLoading(false);
+            return;
+          }
         }
+      } catch (error) {
+        console.warn(`Failed to fetch from ${baseUrl}:`, error);
       }
-      
-      setSyncProgress('远程数据为空或不可用');
-      setTimeout(() => setSyncProgress(''), 3000);
-    } catch (error) {
-      console.error('Failed to fetch:', error);
-      setSyncProgress('同步失败：' + (error instanceof Error ? error.message : '网络错误'));
-      setTimeout(() => setSyncProgress(''), 3000);
-    } finally {
-      setLoading(false);
     }
+    
+    if (!success) {
+      setSyncProgress('远程数据为空或不可用，已使用本地数据');
+      setTimeout(() => setSyncProgress(''), 3000);
+    }
+    
+    setLoading(false);
   }, [characters]);
 
   const addCharacter = useCallback((characterData: Omit<Character, 'id' | 'updatedAt' | 'source'>) => {
@@ -144,14 +203,14 @@ export function useCharacters() {
       source: 'manual',
       updatedAt: new Date().toISOString(),
     };
-    setCharacters(prev => deduplicate([...prev, newCharacter]));
+    setCharacters(prev => deduplicate([...prev, normalizeChar(newCharacter)]));
   }, []);
 
   const editCharacter = useCallback((id: string, updates: Partial<Omit<Character, 'id' | 'updatedAt'>>) => {
     setCharacters(prev => {
       const updated = prev.map(char => 
         char.id === id 
-          ? { ...char, ...updates, updatedAt: new Date().toISOString() }
+          ? normalizeChar({ ...char, ...updates, updatedAt: new Date().toISOString() })
           : char
       );
       return deduplicate(updated);
@@ -188,7 +247,37 @@ export function useCharacters() {
     localStorage.setItem(DISPLAY_MODE_KEY, mode);
   }, []);
 
-  const filteredCharacters = characters.filter(c => selectedGames.includes(c.game));
+  const setWeekStartDay = useCallback((start: WeekStart) => {
+    setWeekStart(start);
+    localStorage.setItem(WEEK_START_KEY, String(start));
+  }, []);
+
+  const updateFilters = useCallback((newFilters: Partial<FilterState>) => {
+    setFilters(prev => ({ ...prev, ...newFilters }));
+  }, []);
+
+  // Apply all filters
+  const filteredCharacters = characters.filter(c => {
+    if (!selectedGames.includes(c.game)) return false;
+    
+    const hasMissingInfo = !c.element || !c.weapon || !c.region;
+    if (hasMissingInfo && !filters.showMissingInfo) return false;
+    
+    if (filters.elements.length > 0 && (!c.element || !filters.elements.includes(c.element))) return false;
+    if (filters.rarities.length > 0 && (!c.rarity || !filters.rarities.includes(c.rarity))) return false;
+    if (filters.weapons.length > 0 && (!c.weapon || !filters.weapons.includes(c.weapon))) return false;
+    if (filters.regions.length > 0 && (!c.region || !filters.regions.includes(c.region))) return false;
+    
+    return true;
+  });
+
+  // Get unique filter options
+  const filterOptions = {
+    elements: Array.from(new Set(characters.map(c => c.element).filter((v): v is string => !!v))).sort(),
+    rarities: Array.from(new Set(characters.map(c => c.rarity).filter((v): v is number => !!v))).sort((a, b) => a - b),
+    weapons: Array.from(new Set(characters.map(c => c.weapon).filter((v): v is string => !!v))).sort(),
+    regions: Array.from(new Set(characters.map(c => c.region).filter((v): v is string => !!v))).sort(),
+  };
 
   return {
     characters: filteredCharacters,
@@ -198,6 +287,9 @@ export function useCharacters() {
     lastSync,
     selectedGames,
     displayMode,
+    weekStart,
+    filters,
+    filterOptions,
     fetchFromWiki,
     addCharacter,
     editCharacter,
@@ -205,5 +297,7 @@ export function useCharacters() {
     exportData,
     toggleGame,
     setDisplayMode: setMode,
+    setWeekStart: setWeekStartDay,
+    updateFilters,
   };
 }

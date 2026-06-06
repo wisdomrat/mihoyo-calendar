@@ -1,19 +1,20 @@
 import { startOfWeek, endOfWeek, eachDayOfInterval, format, isSameDay } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 import type { Character } from '../../types';
-import type { DisplayMode } from '../../hooks/useCharacters';
+import type { DisplayMode, WeekStart } from '../../hooks/useCharacters';
 
 interface WeekViewProps {
   currentDate: Date;
   characters: Character[];
   displayMode: DisplayMode;
+  weekStart: WeekStart;
+  weekdayLabels: string[];
   onCharacterClick: (character: Character) => void;
 }
 
-const WeekView = ({ currentDate, characters, displayMode, onCharacterClick }: WeekViewProps) => {
-  const weekStart = startOfWeek(currentDate, { locale: zhCN });
-  const weekEnd = endOfWeek(currentDate, { locale: zhCN });
-  const days = eachDayOfInterval({ start: weekStart, end: weekEnd });
+const WeekView = ({ currentDate, characters, displayMode, weekStart, weekdayLabels, onCharacterClick }: WeekViewProps) => {
+  const weekStartDate = startOfWeek(currentDate, { weekStartsOn: weekStart });
+  const weekEndDate = endOfWeek(currentDate, { weekStartsOn: weekStart });
+  const days = eachDayOfInterval({ start: weekStartDate, end: weekEndDate });
   const today = new Date();
 
   return (
@@ -24,7 +25,7 @@ const WeekView = ({ currentDate, characters, displayMode, onCharacterClick }: We
             key={day.toISOString()} 
             className={`week-view-day-header ${isSameDay(day, today) ? 'today' : ''}`}
           >
-            <div className="week-view-weekday">{format(day, 'EEE', { locale: zhCN })}</div>
+            <div className="week-view-weekday">{weekdayLabels[day.getDay() === 0 ? 6 : day.getDay() - 1]}日</div>
             <div className="week-view-date">{format(day, 'M/d')}</div>
           </div>
         ))}
