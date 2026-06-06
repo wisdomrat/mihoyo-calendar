@@ -86,7 +86,7 @@ const DayCell = ({
                   <span className="card-initial">{character.name[0]}</span>
                 )}
               </div>
-              <span className="card-name">{character.name}</span>
+              <span className="card-name" title={character.name}>{character.name}</span>
             </div>
           ))}
         </div>

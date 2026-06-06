@@ -695,6 +695,7 @@ body {
   min-height: auto;
   aspect-ratio: auto;
   padding: 6px;
+  overflow: visible;
 }
 
 .day-characters.card {
@@ -749,9 +750,15 @@ body {
 .card-name {
   font-weight: 500;
   color: #333;
-  white-space: nowrap;
+  font-size: 11px;
+  line-height: 1.3;
+  max-width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 /* Responsive */
