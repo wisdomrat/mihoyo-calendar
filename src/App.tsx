@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import Calendar from './components/Calendar/Calendar';
 import Header from './components/Header';
+import AddCharacterModal from './components/AddCharacterModal';
 import { useCharacters } from './hooks/useCharacters';
 import type { Character, ViewMode } from './types';
 import { formatBirthday, getGameColor, getGameName } from './utils/calendar';
 
-function CharacterModal({ character, onClose }: { character: Character | null; onClose: () => void }) {
+function CharacterModal({ character, onClose, onEdit }: { 
+  character: Character | null; 
+  onClose: () => void;
+  onEdit: (char: Character) => void;
+}) {
   if (!character) return null;
 
   return (
@@ -73,8 +78,11 @@ function CharacterModal({ character, onClose }: { character: Character | null; o
             )}
           </div>
           
-          <div className="modal-source">
-            数据来源: {character.source === 'wiki' ? 'Wiki API' : '手动添加'}
+          <div className="modal-actions">
+            <button className="btn-edit" onClick={() => onEdit(character)}>编辑</button>
+            <div className="modal-source">
+              来源: {character.source === 'wiki' ? 'Wiki API' : '手动添加'}
+            </div>
           </div>
         </div>
       </div>
@@ -86,17 +94,38 @@ function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState<ViewMode>('month');
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const [editingCharacter, setEditingCharacter] = useState<Character | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
   
   const {
     characters,
     loading,
+    syncProgress,
     lastSync,
     selectedGames,
     displayMode,
     fetchFromWiki,
+    addCharacter,
+    editCharacter,
+    exportData,
     toggleGame,
     setDisplayMode,
   } = useCharacters();
+
+  const handleSaveCharacter = (data: Parameters<typeof addCharacter>[0]) => {
+    if (editingCharacter) {
+      editCharacter(editingCharacter.id, data);
+      setEditingCharacter(null);
+    } else {
+      addCharacter(data);
+    }
+  };
+
+  const handleEdit = (character: Character) => {
+    setSelectedCharacter(null);
+    setEditingCharacter(character);
+    setShowAddModal(true);
+  };
 
   return (
     <div className="app">
@@ -105,9 +134,15 @@ function App() {
         onToggleGame={toggleGame}
         onSync={fetchFromWiki}
         isSyncing={loading}
+        syncProgress={syncProgress}
         lastSync={lastSync}
         displayMode={displayMode}
         onDisplayModeChange={setDisplayMode}
+        onAddCharacter={() => {
+          setEditingCharacter(null);
+          setShowAddModal(true);
+        }}
+        onExport={exportData}
       />
       
       <main className="app-main">
@@ -125,6 +160,17 @@ function App() {
       <CharacterModal
         character={selectedCharacter}
         onClose={() => setSelectedCharacter(null)}
+        onEdit={handleEdit}
+      />
+      
+      <AddCharacterModal
+        isOpen={showAddModal}
+        editingCharacter={editingCharacter}
+        onClose={() => {
+          setShowAddModal(false);
+          setEditingCharacter(null);
+        }}
+        onSave={handleSaveCharacter}
       />
     </div>
   );

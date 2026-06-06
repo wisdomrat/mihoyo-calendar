@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import type { Character } from '../types';
 import charactersData from '../data/characters.json';
 
-const STORAGE_KEY = 'mihoyo-calendar-characters-v2';
+const STORAGE_KEY = 'mihoyo-calendar-characters-v3';
 const LAST_SYNC_KEY = 'mihoyo-calendar-last-sync';
 const DISPLAY_MODE_KEY = 'mihoyo-calendar-display-mode';
 
-// Use imported JSON data (234 characters) instead of hardcoded 6
+// Use imported JSON data as base
 const ALL_CHARACTERS: Character[] = charactersData as Character[];
 
 export type DisplayMode = 'avatar' | 'card' | 'compact';
@@ -14,6 +14,7 @@ export type DisplayMode = 'avatar' | 'card' | 'compact';
 export function useCharacters() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
+  const [syncProgress, setSyncProgress] = useState('');
   const [lastSync, setLastSync] = useState<string | null>(null);
   const [selectedGames, setSelectedGames] = useState<string[]>(['genshin', 'hsr', 'zzz', 'honkai3']);
   const [displayMode, setDisplayMode] = useState<DisplayMode>('avatar');
@@ -31,11 +32,19 @@ export function useCharacters() {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        // If local data has fewer characters than built-in, use built-in
+        // If local data has fewer characters than built-in, merge them
         if (parsed.length < ALL_CHARACTERS.length) {
-          console.log(`Updating character data: ${parsed.length} → ${ALL_CHARACTERS.length}`);
-          setCharacters(ALL_CHARACTERS);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(ALL_CHARACTERS));
+          console.log(`Merging character data: local ${parsed.length} + builtin ${ALL_CHARACTERS.length}`);
+          // Keep local additions, add missing builtin characters
+          const localIds = new Set(parsed.map((c: Character) => c.id));
+          const merged = [...parsed];
+          for (const char of ALL_CHARACTERS) {
+            if (!localIds.has(char.id)) {
+              merged.push(char);
+            }
+          }
+          setCharacters(merged);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
         } else {
           setCharacters(parsed);
         }
@@ -62,32 +71,84 @@ export function useCharacters() {
 
   const fetchFromWiki = useCallback(async () => {
     setLoading(true);
+    setSyncProgress('正在检查Wiki数据...');
+    
     try {
-      // Try to fetch from public/data/characters.json first
+      // Try to fetch from public/data/characters.json first (updated by GitHub Actions)
+      setSyncProgress('正在获取远程数据...');
       const response = await fetch('/data/characters.json');
+      
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data) && data.length > 0) {
-          // Only update if fetched data has more characters
-          if (data.length >= characters.length) {
-            setCharacters(data);
-            const now = new Date().toISOString();
-            localStorage.setItem(LAST_SYNC_KEY, now);
-            setLastSync(now);
-          }
+          setSyncProgress(`获取到 ${data.length} 个角色，正在合并...`);
+          
+          // Merge strategy: keep local characters that don't exist in remote
+          const remoteIds = new Set(data.map((c: Character) => c.id));
+          const localOnly = characters.filter(c => !remoteIds.has(c.id));
+          
+          const merged = [...data, ...localOnly];
+          
+          setCharacters(merged);
+          const now = new Date().toISOString();
+          localStorage.setItem(LAST_SYNC_KEY, now);
+          setLastSync(now);
+          setSyncProgress('同步完成！');
+          
+          // Clear progress after 3 seconds
+          setTimeout(() => setSyncProgress(''), 3000);
           setLoading(false);
           return;
         }
       }
       
-      // If no external data found, use current characters
-      console.log('No external data found, using local data');
+      setSyncProgress('无法获取远程数据，使用本地数据');
+      setTimeout(() => setSyncProgress(''), 3000);
     } catch (error) {
       console.error('Failed to fetch character data:', error);
+      setSyncProgress('同步失败：网络错误');
+      setTimeout(() => setSyncProgress(''), 3000);
     } finally {
       setLoading(false);
     }
-  }, [characters.length]);
+  }, [characters]);
+
+  const addCharacter = useCallback((characterData: Omit<Character, 'id' | 'updatedAt' | 'source'>) => {
+    const newCharacter: Character = {
+      ...characterData,
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      source: 'manual',
+      updatedAt: new Date().toISOString(),
+    };
+    setCharacters(prev => [...prev, newCharacter]);
+  }, []);
+
+  const editCharacter = useCallback((id: string, updates: Partial<Omit<Character, 'id' | 'updatedAt'>>) => {
+    setCharacters(prev => 
+      prev.map(char => 
+        char.id === id 
+          ? { ...char, ...updates, updatedAt: new Date().toISOString() }
+          : char
+      )
+    );
+  }, []);
+
+  const removeCharacter = useCallback((id: string) => {
+    setCharacters(prev => prev.filter(c => c.id !== id));
+  }, []);
+
+  const exportData = useCallback(() => {
+    const dataStr = JSON.stringify(characters, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mihoyo-characters-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [characters]);
 
   const toggleGame = useCallback((gameId: string) => {
     setSelectedGames(prev => 
@@ -108,10 +169,15 @@ export function useCharacters() {
     characters: filteredCharacters,
     allCharacters: characters,
     loading,
+    syncProgress,
     lastSync,
     selectedGames,
     displayMode,
     fetchFromWiki,
+    addCharacter,
+    editCharacter,
+    removeCharacter,
+    exportData,
     toggleGame,
     setDisplayMode: setMode,
   };
