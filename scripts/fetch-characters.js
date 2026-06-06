@@ -243,6 +243,51 @@ const KNOWN_CHARACTERS = {
     { name: '潘引壶', nameEn: 'Pan Yinhu', birthday: '08-13', rarity: 4 },
     { name: '云岿山·泰音', nameEn: 'Taiyin', birthday: '10-10', rarity: 5 },
   ],
+  honkai3: [
+    { name: '琪亚娜·卡斯兰娜', nameEn: 'Kiana Kaslana', birthday: '12-07', rarity: 5, element: '物理', weapon: '双枪' },
+    { name: '雷电芽衣', nameEn: 'Raiden Mei', birthday: '04-13', rarity: 5, element: '雷', weapon: '太刀' },
+    { name: '布洛妮娅·扎伊切克', nameEn: 'Bronya Zaychik', birthday: '08-18', rarity: 5, element: '冰', weapon: '重炮' },
+    { name: '无量塔姬子', nameEn: 'Murata Himeko', birthday: '06-11', rarity: 5, element: '火', weapon: '大剑' },
+    { name: '德丽莎·阿波卡利斯', nameEn: 'Theresa Apocalypse', birthday: '03-28', rarity: 5, element: '雷', weapon: '十字架' },
+    { name: '八重樱', nameEn: 'Yae Sakura', birthday: '07-22', rarity: 5, element: '冰', weapon: '太刀' },
+    { name: '卡莲·卡斯兰娜', nameEn: 'Kallen Kaslana', birthday: '未实装', rarity: 5, element: '冰', weapon: '双枪' },
+    { name: '符华', nameEn: 'Fu Hua', birthday: '02-09', rarity: 5, element: '火', weapon: '拳套' },
+    { name: '丽塔·洛丝薇瑟', nameEn: 'Rita Rossweisse', birthday: '03-01', rarity: 5, element: '冰', weapon: '镰刀' },
+    { name: '幽兰黛尔', nameEn: 'Durandal', birthday: '01-01', rarity: 5, element: '物理', weapon: '骑枪' },
+    { name: '希儿·芙乐艾', nameEn: 'Seele Vollerei', birthday: '10-18', rarity: 5, element: '量子', weapon: '镰刀' },
+    { name: '萝莎莉娅·阿琳', nameEn: 'Rozaliya Olenyeva', birthday: '06-01', rarity: 5, element: '物理', weapon: '大剑' },
+    { name: '莉莉娅·阿琳', nameEn: 'Liliya Olenyeva', birthday: '06-01', rarity: 5, element: '冰', weapon: '大剑' },
+    { name: '椎名真由理', nameEn: 'Asuka', birthday: '12-04', rarity: 5, element: '火', weapon: '骑枪' },
+    { name: '明日香', nameEn: 'Asuka Shikinami Langley', birthday: '12-04', rarity: 5, element: '火', weapon: '骑枪' },
+    { name: '菲谢尔·断罪之皇女', nameEn: 'Fischl', birthday: '05-27', rarity: 5, element: '雷', weapon: '弓箭' },
+    { name: '空之律者', nameEn: 'Herrscher of the Void', birthday: '12-07', rarity: 5, element: '物理', weapon: '双枪' },
+    { name: '理之律者', nameEn: 'Herrscher of Reason', birthday: '08-18', rarity: 5, element: '冰', weapon: '重炮' },
+    { name: '雷之律者', nameEn: 'Herrscher of Thunder', birthday: '04-13', rarity: 5, element: '雷', weapon: '太刀' },
+    { name: '识之律者', nameEn: 'Herrscher of Sentience', birthday: '02-09', rarity: 5, element: '物理', weapon: '拳套' },
+    { name: '薪炎之律者', nameEn: 'Herrscher of Flamescion', birthday: '12-07', rarity: 5, element: '火', weapon: '大剑' },
+    { name: '无限·噬界之蛇', nameEn: 'Infinite Ouroboros', birthday: '04-13', rarity: 5, element: '雷', weapon: '十字架' },
+    { name: '次生银翼', nameEn: 'Silverwing N-EX', birthday: '08-18', rarity: 5, element: '冰', weapon: '重炮' },
+    { name: '天元骑英', nameEn: 'Palatinus Equinox', birthday: '01-01', rarity: 5, element: '物理', weapon: '骑枪' },
+    { name: '人律·爱莉希雅', nameEn: 'Herrscher of Human Ego', birthday: '11-11', rarity: 5, element: '冰', weapon: '弓箭' },
+    { name: '终焉之律者', nameEn: 'Herrscher of Finality', birthday: '12-07', rarity: 5, element: '火', weapon: '双枪' },
+    { name: '始源之律者', nameEn: 'Herrscher of Origin', birthday: '04-13', rarity: 5, element: '雷', weapon: '太刀' },
+    { name: '真理之律者', nameEn: 'Herrscher of Truth', birthday: '08-18', rarity: 5, element: '冰', weapon: '重炮' },
+    { name: '死生之律者', nameEn: 'Herrscher of Rebirth', birthday: '10-18', rarity: 5, element: '物理', weapon: '镰刀' },
+    { name: '月下誓约·予爱以心', nameEn: 'Lunar Vow: Crimson Love', birthday: '未实装', rarity: 5, element: '雷', weapon: '十字架' },
+    { name: '大月下', nameEn: 'Lunar Vow', birthday: '未实装', rarity: 5, element: '雷', weapon: '十字架' },
+    { name: '羽兔', nameEn: 'Spathodea', birthday: '未实装', rarity: 5, element: '物理', weapon: '镰刀' },
+    { name: '普罗米修斯', nameEn: 'Prometheus', birthday: '未实装', rarity: 5, element: '火', weapon: '拳套' },
+    { name: '苏莎娜', nameEn: 'Susannah', birthday: '未实装', rarity: 4, element: '物理', weapon: '环刃' },
+    { name: '时雨绮罗', nameEn: 'Shigure Kira', birthday: '未实装', rarity: 5, element: '冰', weapon: '十字架' },
+    { name: '米丝忒琳', nameEn: 'Misteln', birthday: '未实装', rarity: 5, element: '物理', weapon: '梭镖' },
+    { name: '希娜狄雅', nameEn: 'Senadina', birthday: '未实装', rarity: 5, element: '雷', weapon: '链刃' },
+    { name: '赫丽娅', nameEn: 'Helia', birthday: '未实装', rarity: 5, element: '火', weapon: '速射弩' },
+    { name: '科拉莉', nameEn: 'Coralie', birthday: '未实装', rarity: 5, element: '火', weapon: '火箭锤' },
+    { name: '瑟莉姆', nameEn: 'Thelema', birthday: '未实装', rarity: 5, element: '冰', weapon: '链刃' },
+    { name: '灯', nameEn: 'Lantern', birthday: '未实装', rarity: 5, element: '火', weapon: '速射弩' },
+    { name: '松雀', nameEn: 'Songque', birthday: '未实装', rarity: 5, element: '物理', weapon: '拳套' },
+    { name: '薇塔', nameEn: 'Vita', birthday: '未实装', rarity: 5, element: '雷', weapon: '链刃' },
+  ],
 };
 
 async function sleep(ms) {
@@ -379,17 +424,33 @@ async function fetchBwikiCharacters(gameId, config) {
   }
 }
 
+// Avatar URL generators per game
+const GAME_AVATAR_COLORS = {
+  genshin: '4a90e2',
+  hsr: '6b5ce7',
+  zzz: 'ff6b6b',
+  honkai3: 'ff8cc8',
+};
+
+function generateAvatarUrl(name, gameId) {
+  const color = GAME_AVATAR_COLORS[gameId] || '999999';
+  // Use ui-avatars.com to generate a nice initial-based avatar
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${color}&color=fff&size=128&font-size=0.5&bold=true`;
+}
+
 function getDefaultCharacters() {
   const characters = [];
   
   for (const [gameId, chars] of Object.entries(KNOWN_CHARACTERS)) {
     for (const char of chars) {
+      const id = `${char.nameEn.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}-${gameId}`;
       characters.push({
-        id: `${char.nameEn.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}-${gameId}`,
+        id,
         name: char.name,
         nameEn: char.nameEn,
         game: gameId,
         birthday: char.birthday,
+        avatar: generateAvatarUrl(char.name, gameId),
         rarity: char.rarity,
         element: char.element,
         weapon: char.weapon,

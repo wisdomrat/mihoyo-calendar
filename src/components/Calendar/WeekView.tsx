@@ -1,15 +1,16 @@
 import { startOfWeek, endOfWeek, eachDayOfInterval, format, isSameDay } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import type { Character } from '../../types';
-import { getCharactersByDate } from '../../utils/calendar';
+import type { DisplayMode } from '../../hooks/useCharacters';
 
 interface WeekViewProps {
   currentDate: Date;
   characters: Character[];
+  displayMode: DisplayMode;
   onCharacterClick: (character: Character) => void;
 }
 
-const WeekView: React.FC<WeekViewProps> = ({ currentDate, characters, onCharacterClick }) => {
+const WeekView = ({ currentDate, characters, displayMode, onCharacterClick }: WeekViewProps) => {
   const weekStart = startOfWeek(currentDate, { locale: zhCN });
   const weekEnd = endOfWeek(currentDate, { locale: zhCN });
   const days = eachDayOfInterval({ start: weekStart, end: weekEnd });
@@ -30,7 +31,11 @@ const WeekView: React.FC<WeekViewProps> = ({ currentDate, characters, onCharacte
       </div>
       <div className="week-view-grid">
         {days.map(day => {
-          const dayCharacters = getCharactersByDate(characters, day);
+          const dayCharacters = characters.filter(c => {
+            const [month, dayNum] = c.birthday.split('-');
+            return parseInt(month) === day.getMonth() + 1 && parseInt(dayNum) === day.getDate();
+          });
+          
           return (
             <div 
               key={day.toISOString()} 
@@ -48,20 +53,19 @@ const WeekView: React.FC<WeekViewProps> = ({ currentDate, characters, onCharacte
                           borderLeftColor: getGameColor(character.game),
                         }}
                       >
-                        {character.avatar ? (
+                        {displayMode !== 'compact' && character.avatar ? (
                           <img 
                             src={character.avatar} 
                             alt={character.name}
                             className="week-character-avatar"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
+                            loading="lazy"
                           />
-                        ) : (
+                        ) : displayMode !== 'compact' ? (
                           <div className="week-character-avatar-placeholder">
                             {character.name[0]}
                           </div>
-                        )}
+                        ) : null}
+                        
                         <div className="week-character-info">
                           <div className="week-character-name">{character.name}</div>
                           <div className="week-character-game">{getGameName(character.game)}</div>

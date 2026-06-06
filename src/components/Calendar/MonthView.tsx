@@ -1,19 +1,19 @@
-import React from 'react';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import type { Character } from '../../types';
-import { getCharactersByDate } from '../../utils/calendar';
+import type { DisplayMode } from '../../hooks/useCharacters';
 import DayCell from './DayCell';
 
 interface MonthViewProps {
   currentDate: Date;
   characters: Character[];
+  displayMode: DisplayMode;
   onCharacterClick: (character: Character) => void;
 }
 
 const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六'];
 
-const MonthView: React.FC<MonthViewProps> = ({ currentDate, characters, onCharacterClick }) => {
+const MonthView = ({ currentDate, characters, displayMode, onCharacterClick }: MonthViewProps) => {
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
   const calendarStart = startOfWeek(monthStart, { locale: zhCN });
@@ -31,7 +31,11 @@ const MonthView: React.FC<MonthViewProps> = ({ currentDate, characters, onCharac
       </div>
       <div className="days-grid">
         {days.map(day => {
-          const dayCharacters = getCharactersByDate(characters, day);
+          const dayCharacters = characters.filter(c => {
+            const [month, dayNum] = c.birthday.split('-');
+            return parseInt(month) === day.getMonth() + 1 && parseInt(dayNum) === day.getDate();
+          });
+          
           return (
             <DayCell
               key={day.toISOString()}
@@ -39,6 +43,7 @@ const MonthView: React.FC<MonthViewProps> = ({ currentDate, characters, onCharac
               isCurrentMonth={isSameMonth(day, currentDate)}
               isToday={isSameDay(day, today)}
               characters={dayCharacters}
+              displayMode={displayMode}
               onCharacterClick={onCharacterClick}
             />
           );

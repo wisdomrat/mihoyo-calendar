@@ -48,6 +48,41 @@ body {
   gap: 12px;
 }
 
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-label {
+  font-size: 12px;
+  color: #999;
+  font-weight: 500;
+}
+
+.display-modes {
+  display: flex;
+  gap: 4px;
+  background: #f5f5f5;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.display-mode-btn {
+  padding: 5px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.display-mode-btn.active {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
 .game-filters {
   display: flex;
   gap: 8px;
@@ -165,10 +200,42 @@ body {
   min-width: 60px;
 }
 
+.calendar-title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .calendar-title {
   font-size: 20px;
   font-weight: 600;
   color: #333;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.calendar-title.clickable:hover {
+  background: #f0f0f0;
+}
+
+.date-picker-popup {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  margin-top: 8px;
+}
+
+.month-picker {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
 }
 
 .view-switcher {
@@ -591,6 +658,102 @@ body {
   color: #999;
 }
 
+/* Compact Mode */
+.day-cell.compact {
+  min-height: 60px;
+  padding: 4px;
+}
+
+.day-characters.compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.day-character-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.day-character-dot:hover {
+  transform: scale(1.5);
+}
+
+.more-dots {
+  font-size: 10px;
+  color: #999;
+  line-height: 8px;
+}
+
+/* Card Mode */
+.day-cell.card-mode {
+  min-height: auto;
+  aspect-ratio: auto;
+  padding: 6px;
+}
+
+.day-characters.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day-character-card {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: #fafafa;
+  border: 1px solid transparent;
+  border-left: 3px solid;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 11px;
+}
+
+.day-character-card:hover {
+  background: #f0f0f0;
+  transform: translateX(2px);
+}
+
+.card-avatar-wrapper {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e0e0;
+}
+
+.card-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-initial {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+}
+
+.card-name {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .app-header {
@@ -600,6 +763,11 @@ body {
   .header-controls {
     flex-direction: column;
     align-items: flex-start;
+  }
+  
+  .control-group {
+    width: 100%;
+    flex-wrap: wrap;
   }
   
   .app-main {
@@ -613,6 +781,10 @@ body {
   .day-cell {
     min-height: 60px;
     padding: 4px;
+  }
+  
+  .day-cell.card-mode {
+    min-height: auto;
   }
   
   .day-character {
@@ -632,5 +804,9 @@ body {
   
   .week-view-header {
     display: none;
+  }
+  
+  .display-modes {
+    order: -1;
   }
 }

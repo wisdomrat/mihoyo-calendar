@@ -92,8 +92,10 @@ function App() {
     loading,
     lastSync,
     selectedGames,
+    displayMode,
     fetchFromWiki,
     toggleGame,
+    setDisplayMode,
   } = useCharacters();
 
   return (
@@ -104,6 +106,8 @@ function App() {
         onSync={fetchFromWiki}
         isSyncing={loading}
         lastSync={lastSync}
+        displayMode={displayMode}
+        onDisplayModeChange={setDisplayMode}
       />
       
       <main className="app-main">
@@ -111,6 +115,7 @@ function App() {
           characters={characters}
           view={view}
           currentDate={currentDate}
+          displayMode={displayMode}
           onDateChange={setCurrentDate}
           onViewChange={setView}
           onCharacterClick={setSelectedCharacter}
