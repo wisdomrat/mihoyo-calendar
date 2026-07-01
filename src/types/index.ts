@@ -12,6 +12,7 @@ export interface Character {
   game: string;
   birthday: string; // MM-DD format
   avatar?: string;
+  portrait?: string;
   rarity?: number;
   element?: string;
   weapon?: string;

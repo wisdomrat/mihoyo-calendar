@@ -3,14 +3,15 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://wisdomrats.github.io/mihoyo-calendar",
+  "homepage": "https://wisdomrat.github.io/mihoyo-calendar",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "fetch-characters": "node scripts/fetch-characters.js"
+    "fetch-characters": "node scripts/fetch-characters.js",
+    "test": "node --experimental-strip-types --test"
   },
   "dependencies": {
     "date-fns": "^4.4.0",

@@ -26,6 +26,43 @@ const emptyForm = {
   weapon: '',
   region: '',
 };
+type ImportedCharacter = Record<string, unknown>;
+
+type CharacterDraft = Omit<Character, 'id' | 'updatedAt' | 'source'>;
+
+function asImportedCharacter(value: unknown): ImportedCharacter {
+  return value && typeof value === 'object' && !Array.isArray(value) ? value as ImportedCharacter : {};
+}
+
+function stringField(value: unknown): string {
+  return typeof value === 'string' ? value : '';
+}
+
+function numberField(value: unknown, fallback: number): number {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (typeof value === 'string' && value.trim()) {
+    const parsed = Number(value);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  return fallback;
+}
+
+function toCharacterDraft(value: unknown): CharacterDraft {
+  const char = asImportedCharacter(value);
+  const name = stringField(char.name) || stringField(char.nameCn);
+  return {
+    name,
+    nameEn: stringField(char.nameEn) || name,
+    game: stringField(char.game) || 'genshin',
+    birthday: stringField(char.birthday) || '01-01',
+    avatar: stringField(char.avatar),
+    portrait: stringField(char.portrait) || undefined,
+    rarity: numberField(char.rarity, 4),
+    element: stringField(char.element),
+    weapon: stringField(char.weapon),
+    region: stringField(char.region),
+  };
+}
 
 const AddCharacterModal = ({ isOpen, editingCharacter, onClose, onSave }: AddCharacterModalProps) => {
   const [formData, setFormData] = useState(emptyForm);
@@ -55,7 +92,7 @@ const AddCharacterModal = ({ isOpen, editingCharacter, onClose, onSave }: AddCha
       setPreviewUrl('');
       setActiveTab('form');
     }
-  }, [isOpen, editingCharacter?.id]);
+  }, [isOpen, editingCharacter]);
 
   if (!isOpen) return null;
 
@@ -91,38 +128,16 @@ const AddCharacterModal = ({ isOpen, editingCharacter, onClose, onSave }: AddCha
 
   const handleJsonImport = () => {
     try {
-      const data = JSON.parse(jsonInput);
+      const data: unknown = JSON.parse(jsonInput);
       if (Array.isArray(data)) {
-        data.forEach((char: any) => {
-          onSave({
-            name: char.name || char.nameCn || '',
-            nameEn: char.nameEn || char.name || '',
-            game: char.game || 'genshin',
-            birthday: char.birthday || '01-01',
-            avatar: char.avatar || '',
-            rarity: char.rarity || 4,
-            element: char.element || '',
-            weapon: char.weapon || '',
-            region: char.region || '',
-          });
-        });
+        data.forEach(char => onSave(toCharacterDraft(char)));
       } else {
-        onSave({
-          name: data.name || data.nameCn || '',
-          nameEn: data.nameEn || data.name || '',
-          game: data.game || 'genshin',
-          birthday: data.birthday || '01-01',
-          avatar: data.avatar || '',
-          rarity: data.rarity || 4,
-          element: data.element || '',
-          weapon: data.weapon || '',
-          region: data.region || '',
-        });
+        onSave(toCharacterDraft(data));
       }
       setJsonInput('');
       onClose();
     } catch {
-      alert('JSON格式错误，请检查');
+      alert('JSON\u683c\u5f0f\u9519\u8bef\uff0c\u8bf7\u68c0\u67e5');
     }
   };
 
