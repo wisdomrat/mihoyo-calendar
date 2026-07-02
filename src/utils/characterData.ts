@@ -19,6 +19,16 @@ const EMPTY_FILTERS: FilterOptions = {
   regions: [],
 };
 
+const CHARACTER_ALIAS_GROUPS: Record<string, string[][]> = {
+  hsr: [
+    ['\u6258\u5e15', '\u6258\u5e15&\u8d26\u8d26', 'Topaz', 'Topaz & Numby'],
+  ],
+  zzz: [
+    ['\u661f\u89c1\u96c5', '\u661f\u898b\u96c5', '\u96c5', 'Miyabi', 'Hoshimi Miyabi'],
+    ['\u6d45\u7fbd\u60a0\u771f', '\u60a0\u771f', 'Harumasa', 'Asaba Harumasa'],
+  ],
+};
+
 function normalizeKeyPart(value: string | undefined): string {
   return String(value || '')
     .toLowerCase()
@@ -26,8 +36,36 @@ function normalizeKeyPart(value: string | undefined): string {
     .trim();
 }
 
-function characterKey(character: Character): string {
-  return `${character.game}:${normalizeKeyPart(character.name)}`;
+function uniqueStrings(values: string[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+
+  for (const rawValue of values) {
+    const value = rawValue.trim();
+    if (!value || seen.has(value)) continue;
+    seen.add(value);
+    result.push(value);
+  }
+
+  return result;
+}
+
+function aliasPartsFor(game: string, parts: string[]): string[] {
+  const expanded = [...parts];
+
+  for (const group of CHARACTER_ALIAS_GROUPS[game] || []) {
+    const normalizedGroup = group.map(value => normalizeKeyPart(value));
+    if (normalizedGroup.some(part => parts.includes(part))) expanded.push(...normalizedGroup);
+  }
+
+  return uniqueStrings(expanded);
+}
+
+function characterKeys(character: Character): string[] {
+  const parts = uniqueStrings([character.name, character.nameEn].map(value => normalizeKeyPart(value)).filter(Boolean));
+  const aliases = aliasPartsFor(character.game, parts);
+
+  return uniqueStrings(aliases.map(value => `${character.game}:${value}`));
 }
 
 function hasRealAvatar(character: Character): boolean {
@@ -83,6 +121,16 @@ function mergeCharacter(existing: Character, incoming: Character, preferIncoming
   return normalizeCharacter(next);
 }
 
+function setCharacterForKeys(map: Map<string, Character>, character: Character, extraKeys: string[] = []): Character {
+  const normalized = normalizeCharacter(character);
+
+  for (const key of uniqueStrings([...extraKeys, ...characterKeys(normalized)])) {
+    map.set(key, normalized);
+  }
+
+  return normalized;
+}
+
 export function mergeCharacterCollections(
   baseCharacters: Character[],
   incomingCharacters: Character[],
@@ -92,30 +140,30 @@ export function mergeCharacterCollections(
   const map = new Map<string, Character>();
 
   for (const rawCharacter of baseCharacters) {
-    const character = normalizeCharacter(rawCharacter);
-    map.set(characterKey(character), character);
+    setCharacterForKeys(map, rawCharacter);
   }
 
   for (const rawCharacter of incomingCharacters) {
     const incoming = normalizeCharacter(rawCharacter);
-    const key = characterKey(incoming);
-    const existing = map.get(key);
+    const incomingKeys = characterKeys(incoming);
+    const existing = incomingKeys.map(key => map.get(key)).find((character): character is Character => Boolean(character));
 
     if (!existing) {
-      map.set(key, incoming);
+      setCharacterForKeys(map, incoming);
       continue;
     }
 
+    const sharedKeys = [...characterKeys(existing), ...incomingKeys];
     const shouldReplace = completenessScore(incoming) > completenessScore(existing);
     if (shouldReplace && !preferIncoming) {
-      map.set(key, normalizeCharacter({ ...incoming, id: existing.source === 'manual' ? existing.id : incoming.id }));
+      setCharacterForKeys(map, { ...incoming, id: existing.source === 'manual' ? existing.id : incoming.id }, sharedKeys);
       continue;
     }
 
-    map.set(key, mergeCharacter(existing, incoming, preferIncoming));
+    setCharacterForKeys(map, mergeCharacter(existing, incoming, preferIncoming), sharedKeys);
   }
 
-  return Array.from(map.values());
+  return Array.from(new Set(map.values()));
 }
 
 export function createEmptyFilterOptions(): FilterOptions {

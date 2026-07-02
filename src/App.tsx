@@ -1,10 +1,20 @@
-import { useState, type CSSProperties } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import Calendar from './components/Calendar/Calendar';
 import Header from './components/Header';
+import FilterSidebar from './components/FilterSidebar';
+import FilterBottomSheet from './components/FilterBottomSheet';
 import AddCharacterModal from './components/AddCharacterModal';
 import { useCharacters } from './hooks/useCharacters';
 import type { Character, ViewMode } from './types';
-import { formatBirthday, getGameColor, getGameName } from './utils/calendar';
+import { formatBirthday, getGameColor, getGameName, GAMES } from './utils/calendar';
+import { getPortraitModalLayout, type PortraitDimensions } from './utils/portraitLayout';
+import {
+  createClearedGameFilters,
+  getActiveFilterCount,
+  resolveActiveFilterGame,
+} from './utils/filterUi';
+
+const GAME_IDS = Object.keys(GAMES);
 
 function CharacterModal({ character, onClose, onEdit, portraitBackgroundEnabled }: {
   character: Character | null;
@@ -12,21 +22,65 @@ function CharacterModal({ character, onClose, onEdit, portraitBackgroundEnabled 
   onEdit: (char: Character) => void;
   portraitBackgroundEnabled: boolean;
 }) {
+  const [portraitDimensions, setPortraitDimensions] = useState<PortraitDimensions | null>(null);
+  const [isArtworkOnly, setIsArtworkOnly] = useState(false);
+
+  useEffect(() => {
+    if (!character?.portrait || !portraitBackgroundEnabled) {
+      setPortraitDimensions(null);
+      return;
+    }
+
+    let cancelled = false;
+    const image = new Image();
+    image.onload = () => {
+      if (!cancelled) {
+        setPortraitDimensions({ width: image.naturalWidth, height: image.naturalHeight });
+      }
+    };
+    image.onerror = () => {
+      if (!cancelled) setPortraitDimensions(null);
+    };
+    image.src = character.portrait;
+
+    return () => {
+      cancelled = true;
+    };
+  }, [character?.portrait, portraitBackgroundEnabled]);
+
+  useEffect(() => {
+    setIsArtworkOnly(false);
+  }, [character?.id, portraitBackgroundEnabled]);
+
   if (!character) return null;
 
   const usePortraitBackground = portraitBackgroundEnabled && Boolean(character.portrait);
+  const portraitLayout = getPortraitModalLayout(portraitDimensions, isArtworkOnly ? 'artwork' : 'detail');
+  const artworkOnlyClassName = isArtworkOnly ? 'portrait-artwork-only' : '';
+  const portraitClassName = usePortraitBackground ? `with-portrait-bg game-${character.game} ${portraitLayout.className} ${artworkOnlyClassName}` : '';
   const modalStyle = usePortraitBackground
-    ? ({ '--portrait-bg': `url(${character.portrait})` } as CSSProperties)
+    ? ({ '--portrait-bg': `url(${character.portrait})`, ...portraitLayout.style } as CSSProperties)
     : undefined;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
-        className={`modal-content ${usePortraitBackground ? 'with-portrait-bg' : ''}`}
+        className={`modal-content ${portraitClassName}`}
         onClick={e => e.stopPropagation()}
         style={modalStyle}
       >
         <button className="modal-close" onClick={onClose}>×</button>
+        {usePortraitBackground && (
+          <button
+            className="modal-portrait-toggle"
+            type="button"
+            onClick={() => setIsArtworkOnly(current => !current)}
+            aria-pressed={isArtworkOnly}
+            title={isArtworkOnly ? '\u663e\u793a\u6587\u5b57' : '\u9690\u85cf\u6587\u5b57'}
+          >
+            {isArtworkOnly ? '\u663e\u793a\u6587\u5b57' : '\u7eaf\u7acb\u7ed8'}
+          </button>
+        )}
 
         <div className="modal-header" style={{ backgroundColor: getGameColor(character.game) }}>
           {character.avatar ? (
@@ -103,6 +157,9 @@ function App() {
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [editingCharacter, setEditingCharacter] = useState<Character | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [isFilterSidebarCollapsed, setIsFilterSidebarCollapsed] = useState(false);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+  const [activeFilterGame, setActiveFilterGame] = useState(GAME_IDS[0]);
 
   const {
     characters,
@@ -126,6 +183,22 @@ function App() {
     updateFilters,
   } = useCharacters();
 
+  useEffect(() => {
+    const nextActiveGame = resolveActiveFilterGame(activeFilterGame, selectedGames, GAME_IDS);
+    if (nextActiveGame !== activeFilterGame) {
+      setActiveFilterGame(nextActiveGame);
+    }
+  }, [activeFilterGame, selectedGames]);
+
+  const activeFilterCount = getActiveFilterCount(filters);
+
+  const handleClearFilters = () => {
+    updateFilters({
+      gameFilters: createClearedGameFilters(GAME_IDS),
+      showMissingInfo: true,
+    });
+  };
+
   const handleSaveCharacter = (data: Parameters<typeof addCharacter>[0]) => {
     if (editingCharacter) {
       editCharacter(editingCharacter.id, data);
@@ -144,8 +217,6 @@ function App() {
   return (
     <div className="app">
       <Header
-        selectedGames={selectedGames}
-        onToggleGame={toggleGame}
         onSync={fetchFromWiki}
         isSyncing={loading}
         syncProgress={syncProgress}
@@ -156,9 +227,8 @@ function App() {
         onWeekStartChange={setWeekStart}
         portraitBackgroundEnabled={portraitBackgroundEnabled}
         onPortraitBackgroundChange={setPortraitBackgroundEnabled}
-        filters={filters}
-        filterOptionsByGame={filterOptionsByGame}
-        onFiltersChange={updateFilters}
+        activeFilterCount={activeFilterCount}
+        onOpenFilters={() => setIsMobileFilterOpen(true)}
         onAddCharacter={() => {
           setEditingCharacter(null);
           setShowAddModal(true);
@@ -166,18 +236,46 @@ function App() {
         onExport={exportData}
       />
 
-      <main className="app-main">
-        <Calendar
-          characters={characters}
-          view={view}
-          currentDate={currentDate}
-          displayMode={displayMode}
-          weekStart={weekStart}
-          onDateChange={setCurrentDate}
-          onViewChange={setView}
-          onCharacterClick={setSelectedCharacter}
+      <div className="app-body">
+        <FilterSidebar
+          collapsed={isFilterSidebarCollapsed}
+          selectedGames={selectedGames}
+          activeGameId={activeFilterGame}
+          filters={filters}
+          filterOptionsByGame={filterOptionsByGame}
+          onToggleCollapsed={() => setIsFilterSidebarCollapsed(collapsed => !collapsed)}
+          onToggleGame={toggleGame}
+          onActiveGameChange={setActiveFilterGame}
+          onFiltersChange={updateFilters}
+          onClearFilters={handleClearFilters}
         />
-      </main>
+
+        <main className="app-main">
+          <Calendar
+            characters={characters}
+            view={view}
+            currentDate={currentDate}
+            displayMode={displayMode}
+            weekStart={weekStart}
+            onDateChange={setCurrentDate}
+            onViewChange={setView}
+            onCharacterClick={setSelectedCharacter}
+          />
+        </main>
+      </div>
+
+      <FilterBottomSheet
+        isOpen={isMobileFilterOpen}
+        selectedGames={selectedGames}
+        activeGameId={activeFilterGame}
+        filters={filters}
+        filterOptionsByGame={filterOptionsByGame}
+        onClose={() => setIsMobileFilterOpen(false)}
+        onToggleGame={toggleGame}
+        onActiveGameChange={setActiveFilterGame}
+        onFiltersChange={updateFilters}
+        onClearFilters={handleClearFilters}
+      />
 
       <CharacterModal
         character={selectedCharacter}

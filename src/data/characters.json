@@ -11,7 +11,8 @@
     "element": "岩",
     "weapon": "单手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Albedo.webp"
   },
   {
     "source": "manual",
@@ -25,7 +26,23 @@
     "element": "火",
     "weapon": "长柄武器",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Arlecchino.webp"
+  },
+  {
+    "source": "nanoka",
+    "id": "nanoka-genshin-10000148",
+    "name": "阿罗夏",
+    "nameEn": "Alyosha",
+    "game": "genshin",
+    "birthday": "01-01",
+    "avatar": "https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Alyosha.webp",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Alyosha.webp",
+    "rarity": 4,
+    "element": "雷",
+    "weapon": "长柄武器",
+    "updatedAt": "2026-07-02T00:38:40.862Z",
+    "region": ""
   },
   {
     "source": "nanoka",
@@ -39,7 +56,8 @@
     "element": "冰",
     "weapon": "弓",
     "region": "其他",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Aloy.webp"
   },
   {
     "source": "manual",
@@ -53,7 +71,8 @@
     "element": "草",
     "weapon": "单手剑",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Alhatham.webp"
   },
   {
     "source": "manual",
@@ -67,7 +86,8 @@
     "element": "草",
     "weapon": "长柄武器",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.220Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Emilie.webp"
   },
   {
     "source": "nanoka",
@@ -81,7 +101,8 @@
     "element": "冰",
     "weapon": "长柄武器",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.220Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Escoffier.webp"
   },
   {
     "source": "nanoka",
@@ -95,7 +116,8 @@
     "element": "水",
     "weapon": "双手剑",
     "region": "挪德卡莱",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.220Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Aino.webp"
   },
   {
     "source": "manual",
@@ -109,7 +131,23 @@
     "element": "火",
     "weapon": "弓",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Ambor.webp"
+  },
+  {
+    "source": "nanoka",
+    "id": "nanoka-genshin-10000150",
+    "name": "奥黛塔",
+    "nameEn": "Odette",
+    "game": "genshin",
+    "birthday": "01-01",
+    "avatar": "https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Odette.webp",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Odette.webp",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "单手剑",
+    "updatedAt": "2026-07-02T00:38:40.862Z",
+    "region": ""
   },
   {
     "source": "manual",
@@ -123,7 +161,8 @@
     "element": "雷",
     "weapon": "法器",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Yae.webp"
   },
   {
     "source": "manual",
@@ -137,7 +176,8 @@
     "element": "水",
     "weapon": "法器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Barbara.webp"
   },
   {
     "source": "manual",
@@ -151,7 +191,8 @@
     "element": "草",
     "weapon": "法器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Baizhuer.webp"
   },
   {
     "source": "manual",
@@ -165,7 +206,8 @@
     "element": "火",
     "weapon": "单手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Bennett.webp"
   },
   {
     "source": "manual",
@@ -179,7 +221,8 @@
     "element": "雷",
     "weapon": "双手剑",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Beidou.webp"
   },
   {
     "source": "nanoka",
@@ -193,7 +236,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.220Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Prune.webp"
   },
   {
     "source": "manual",
@@ -207,7 +251,8 @@
     "element": "水",
     "weapon": "弓",
     "region": "至冬",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Tartaglia.webp"
   },
   {
     "source": "manual",
@@ -221,7 +266,8 @@
     "element": "冰",
     "weapon": "弓",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Diona.webp"
   },
   {
     "source": "manual",
@@ -235,7 +281,8 @@
     "element": "火",
     "weapon": "双手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Diluc.webp"
   },
   {
     "source": "manual",
@@ -249,7 +296,8 @@
     "element": "火",
     "weapon": "双手剑",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Dehya.webp"
   },
   {
     "source": "nanoka",
@@ -263,7 +311,8 @@
     "element": "火",
     "weapon": "单手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Durin.webp"
   },
   {
     "source": "manual",
@@ -277,7 +326,8 @@
     "element": "雷",
     "weapon": "双手剑",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Dori.webp"
   },
   {
     "source": "nanoka",
@@ -291,7 +341,8 @@
     "element": "风",
     "weapon": "双手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.220Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Varka.webp"
   },
   {
     "source": "manual",
@@ -305,7 +356,8 @@
     "element": "风",
     "weapon": "弓",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Faruzan.webp"
   },
   {
     "source": "nanoka",
@@ -319,7 +371,8 @@
     "element": "雷",
     "weapon": "长柄武器",
     "region": "挪德卡莱",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.220Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Flins.webp"
   },
   {
     "source": "manual",
@@ -333,7 +386,8 @@
     "element": "冰",
     "weapon": "双手剑",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:50.996Z"
+    "updatedAt": "2026-07-02T00:38:41.219Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Freminet.webp"
   },
   {
     "source": "manual",
@@ -347,7 +401,8 @@
     "element": "雷",
     "weapon": "弓",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Fischl.webp"
   },
   {
     "source": "nanoka",
@@ -361,7 +416,8 @@
     "element": "风",
     "weapon": "单手剑",
     "region": "稻妻<!--蒙德、璃月、稻妻、须弥、枫丹、纳塔、至冬-->",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Kazuha.webp"
   },
   {
     "source": "manual",
@@ -375,7 +431,8 @@
     "element": "水",
     "weapon": "单手剑",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Furina.webp"
   },
   {
     "source": "manual",
@@ -389,7 +446,8 @@
     "element": "冰",
     "weapon": "弓",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Ganyu.webp"
   },
   {
     "source": "nanoka",
@@ -403,7 +461,8 @@
     "element": "水",
     "weapon": "法器",
     "region": "挪德卡莱",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Columbina.webp"
   },
   {
     "source": "manual",
@@ -417,7 +476,8 @@
     "element": "火",
     "weapon": "长柄武器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Hutao.webp"
   },
   {
     "source": "manual",
@@ -431,7 +491,8 @@
     "element": "岩",
     "weapon": "双手剑",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Itto.webp"
   },
   {
     "source": "manual",
@@ -445,7 +506,8 @@
     "element": "草",
     "weapon": "双手剑",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Kinich.webp"
   },
   {
     "source": "manual",
@@ -459,7 +521,8 @@
     "element": "火",
     "weapon": "双手剑",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Gaming.webp"
   },
   {
     "source": "nanoka",
@@ -473,7 +536,8 @@
     "element": "雷",
     "weapon": "弓",
     "region": "稻妻<!--蒙德、璃月、稻妻、须弥、枫丹、纳塔、至冬-->",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Sara.webp"
   },
   {
     "source": "manual",
@@ -487,7 +551,8 @@
     "element": "雷",
     "weapon": "单手剑",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Shinobu.webp"
   },
   {
     "source": "manual",
@@ -501,7 +566,8 @@
     "element": "岩",
     "weapon": "长柄武器",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Kachina.webp"
   },
   {
     "source": "manual",
@@ -515,7 +581,8 @@
     "element": "草",
     "weapon": "双手剑",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Kaveh.webp"
   },
   {
     "source": "manual",
@@ -529,7 +596,8 @@
     "element": "冰",
     "weapon": "单手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Kaeya.webp"
   },
   {
     "source": "manual",
@@ -543,7 +611,8 @@
     "element": "水",
     "weapon": "长柄武器",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Candace.webp"
   },
   {
     "source": "manual",
@@ -557,7 +626,8 @@
     "element": "草",
     "weapon": "弓",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Collei.webp"
   },
   {
     "source": "manual",
@@ -571,7 +641,8 @@
     "element": "火",
     "weapon": "法器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Klee.webp"
   },
   {
     "source": "manual",
@@ -585,7 +656,8 @@
     "element": "雷",
     "weapon": "单手剑",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Clorinde.webp"
   },
   {
     "source": "manual",
@@ -599,7 +671,8 @@
     "element": "雷",
     "weapon": "单手剑",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Keqing.webp"
   },
   {
     "source": "nanoka",
@@ -613,7 +686,8 @@
     "element": "草",
     "weapon": "法器",
     "region": "挪德卡莱",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Lauma.webp"
   },
   {
     "source": "manual",
@@ -627,7 +701,8 @@
     "element": "冰",
     "weapon": "法器",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Wriothesley.webp"
   },
   {
     "source": "manual",
@@ -641,7 +716,8 @@
     "element": "冰",
     "weapon": "单手剑",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Layla.webp"
   },
   {
     "source": "manual",
@@ -655,7 +731,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Lanyan.webp"
   },
   {
     "source": "manual",
@@ -669,7 +746,8 @@
     "element": "雷",
     "weapon": "长柄武器",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:51.526Z"
+    "updatedAt": "2026-07-02T00:38:41.635Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Shougun.webp"
   },
   {
     "source": "manual",
@@ -683,7 +761,8 @@
     "element": "雷",
     "weapon": "双手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Razor.webp"
   },
   {
     "source": "manual",
@@ -697,7 +776,8 @@
     "element": "雷",
     "weapon": "法器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Lisa.webp"
   },
   {
     "source": "nanoka",
@@ -711,7 +791,8 @@
     "element": "岩",
     "weapon": "弓",
     "region": "挪德卡莱",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Linnea.webp"
   },
   {
     "source": "manual",
@@ -725,7 +806,8 @@
     "element": "火",
     "weapon": "弓",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Liney.webp"
   },
   {
     "source": "manual",
@@ -739,7 +821,8 @@
     "element": "风",
     "weapon": "单手剑",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Linette.webp"
   },
   {
     "source": "manual",
@@ -753,7 +836,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Wanderer.webp"
   },
   {
     "source": "manual",
@@ -767,7 +851,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:52.264Z"
+    "updatedAt": "2026-07-02T00:38:42.024Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Heizo.webp"
   },
   {
     "source": "nanoka",
@@ -780,8 +865,9 @@
     "rarity": 5,
     "element": "火",
     "weapon": "单手剑",
-    "updatedAt": "2026-07-01T05:26:55.344Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_PlayerGirl.webp"
   },
   {
     "source": "manual",
@@ -795,7 +881,8 @@
     "element": "冰",
     "weapon": "长柄武器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:52.264Z"
+    "updatedAt": "2026-07-02T00:38:42.024Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Rosaria.webp"
   },
   {
     "source": "nanoka",
@@ -808,8 +895,9 @@
     "rarity": 5,
     "element": "冰",
     "weapon": "长柄武器",
-    "updatedAt": "2026-07-01T05:26:52.265Z",
-    "region": "蒙德"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "region": "蒙德",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Lohen.webp"
   },
   {
     "source": "manual",
@@ -823,7 +911,8 @@
     "element": "水",
     "weapon": "法器",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Mualani.webp"
   },
   {
     "source": "manual",
@@ -837,7 +926,8 @@
     "element": "火",
     "weapon": "双手剑",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Mavuika.webp"
   },
   {
     "source": "nanoka",
@@ -851,7 +941,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Mizuki.webp"
   },
   {
     "source": "manual",
@@ -865,7 +956,8 @@
     "element": "冰",
     "weapon": "长柄武器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Mika.webp"
   },
   {
     "source": "manual",
@@ -879,7 +971,8 @@
     "element": "水",
     "weapon": "法器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:52.264Z"
+    "updatedAt": "2026-07-02T00:38:42.024Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Mona.webp"
   },
   {
     "source": "manual",
@@ -893,7 +986,8 @@
     "element": "水",
     "weapon": "法器",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Neuvillette.webp"
   },
   {
     "source": "manual",
@@ -907,7 +1001,8 @@
     "element": "草",
     "weapon": "法器",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:52.264Z"
+    "updatedAt": "2026-07-02T00:38:42.024Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Nahida.webp"
   },
   {
     "source": "manual",
@@ -921,7 +1016,8 @@
     "element": "岩",
     "weapon": "双手剑",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Navia.webp"
   },
   {
     "source": "nanoka",
@@ -935,7 +1031,8 @@
     "element": "草",
     "weapon": "法器",
     "region": "挪德卡莱",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Nefer.webp"
   },
   {
     "source": "manual",
@@ -949,7 +1046,8 @@
     "element": "水",
     "weapon": "单手剑",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Nilou.webp"
   },
   {
     "source": "nanoka",
@@ -963,7 +1061,8 @@
     "element": "火",
     "weapon": "法器",
     "region": "其他",
-    "updatedAt": "2026-07-01T05:26:52.265Z"
+    "updatedAt": "2026-07-02T00:38:42.025Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Nicole.webp"
   },
   {
     "source": "manual",
@@ -977,7 +1076,8 @@
     "element": "岩",
     "weapon": "法器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Ningguang.webp"
   },
   {
     "source": "manual",
@@ -991,7 +1091,8 @@
     "element": "岩",
     "weapon": "双手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Noel.webp"
   },
   {
     "source": "manual",
@@ -1005,7 +1106,8 @@
     "element": "雷",
     "weapon": "弓",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Olorun.webp"
   },
   {
     "source": "manual",
@@ -1019,7 +1121,8 @@
     "element": "冰",
     "weapon": "单手剑",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Qiqi.webp"
   },
   {
     "source": "nanoka",
@@ -1033,7 +1136,8 @@
     "element": "草",
     "weapon": "单手剑",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Momoka.webp"
   },
   {
     "source": "manual",
@@ -1047,7 +1151,8 @@
     "element": "风",
     "weapon": "弓",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Chasca.webp"
   },
   {
     "source": "manual",
@@ -1061,7 +1166,8 @@
     "element": "岩",
     "weapon": "单手剑",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Chiori.webp"
   },
   {
     "source": "manual",
@@ -1075,7 +1181,8 @@
     "element": "冰",
     "weapon": "法器",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Citlali.webp"
   },
   {
     "source": "manual",
@@ -1089,7 +1196,8 @@
     "element": "风",
     "weapon": "单手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Qin.webp"
   },
   {
     "source": "manual",
@@ -1103,7 +1211,8 @@
     "element": "雷",
     "weapon": "长柄武器",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Cyno.webp"
   },
   {
     "source": "manual",
@@ -1117,7 +1226,8 @@
     "element": "雷",
     "weapon": "弓",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Sethos.webp"
   },
   {
     "source": "nanoka",
@@ -1130,8 +1240,9 @@
     "rarity": 5,
     "element": "冰",
     "weapon": "双手剑",
-    "updatedAt": "2026-07-01T05:26:50.203Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:38:40.862Z",
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_MarionetteNew.webp"
   },
   {
     "source": "manual",
@@ -1145,7 +1256,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Sucrose.webp"
   },
   {
     "source": "manual",
@@ -1159,7 +1271,8 @@
     "element": "水",
     "weapon": "法器",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Kokomi.webp"
   },
   {
     "source": "manual",
@@ -1173,7 +1286,8 @@
     "element": "冰",
     "weapon": "长柄武器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Shenhe.webp"
   },
   {
     "source": "manual",
@@ -1187,7 +1301,8 @@
     "element": "冰",
     "weapon": "单手剑",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:55.344Z"
+    "updatedAt": "2026-07-02T00:38:43.812Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Ayaka.webp"
   },
   {
     "source": "manual",
@@ -1201,7 +1316,8 @@
     "element": "水",
     "weapon": "单手剑",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Ayato.webp"
   },
   {
     "source": "nanoka",
@@ -1215,7 +1331,8 @@
     "element": "冰",
     "weapon": "单手剑",
     "region": "其他",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_SkirkNew.webp"
   },
   {
     "source": "nanoka",
@@ -1229,7 +1346,8 @@
     "element": "水",
     "weapon": "单手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Dahlia.webp"
   },
   {
     "source": "manual",
@@ -1243,7 +1361,8 @@
     "element": "草",
     "weapon": "弓",
     "region": "须弥",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Tighnari.webp"
   },
   {
     "source": "manual",
@@ -1257,7 +1376,8 @@
     "element": "火",
     "weapon": "长柄武器",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Tohma.webp"
   },
   {
     "source": "manual",
@@ -1271,7 +1391,8 @@
     "element": "雷",
     "weapon": "法器",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Varesa.webp"
   },
   {
     "source": "manual",
@@ -1285,7 +1406,8 @@
     "element": "风",
     "weapon": "弓",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:53.058Z"
+    "updatedAt": "2026-07-02T00:38:42.419Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Venti.webp"
   },
   {
     "source": "manual",
@@ -1299,7 +1421,8 @@
     "element": "岩",
     "weapon": "弓",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Gorou.webp"
   },
   {
     "source": "manual",
@@ -1313,7 +1436,8 @@
     "element": "水",
     "weapon": "弓",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Sigewinne.webp"
   },
   {
     "source": "manual",
@@ -1327,7 +1451,8 @@
     "element": "岩",
     "weapon": "单手剑",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Xilonen.webp"
   },
   {
     "source": "manual",
@@ -1341,7 +1466,8 @@
     "element": "冰",
     "weapon": "法器",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Charlotte.webp"
   },
   {
     "source": "manual",
@@ -1355,7 +1481,8 @@
     "element": "火",
     "weapon": "长柄武器",
     "region": "枫丹",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Chevreuse.webp"
   },
   {
     "source": "manual",
@@ -1369,7 +1496,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Liuyun.webp"
   },
   {
     "source": "manual",
@@ -1383,7 +1511,8 @@
     "element": "火",
     "weapon": "长柄武器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Xiangling.webp"
   },
   {
     "source": "manual",
@@ -1397,7 +1526,8 @@
     "element": "火",
     "weapon": "弓",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Yoimiya.webp"
   },
   {
     "source": "manual",
@@ -1411,7 +1541,8 @@
     "element": "风",
     "weapon": "长柄武器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Xiao.webp"
   },
   {
     "source": "manual",
@@ -1425,7 +1556,8 @@
     "element": "火",
     "weapon": "双手剑",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Xinyan.webp"
   },
   {
     "source": "manual",
@@ -1439,7 +1571,8 @@
     "element": "水",
     "weapon": "单手剑",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Xingqiu.webp"
   },
   {
     "source": "nanoka",
@@ -1452,8 +1585,9 @@
     "rarity": 4,
     "element": "风",
     "weapon": "弓",
-    "updatedAt": "2026-07-01T05:26:53.810Z",
-    "region": "挪德卡莱"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "region": "挪德卡莱",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Jahoda.webp"
   },
   {
     "source": "manual",
@@ -1467,7 +1601,8 @@
     "element": "火",
     "weapon": "法器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Feiyan.webp"
   },
   {
     "source": "manual",
@@ -1481,7 +1616,8 @@
     "element": "草",
     "weapon": "长柄武器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Yaoyao.webp"
   },
   {
     "source": "nanoka",
@@ -1494,8 +1630,9 @@
     "rarity": 4,
     "element": "岩",
     "weapon": "长柄武器",
-    "updatedAt": "2026-07-01T05:26:53.810Z",
-    "region": "挪德卡莱"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "region": "挪德卡莱",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Illuga.webp"
   },
   {
     "source": "manual",
@@ -1509,7 +1646,8 @@
     "element": "水",
     "weapon": "弓",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Yelan.webp"
   },
   {
     "source": "manual",
@@ -1523,7 +1661,8 @@
     "element": "雷",
     "weapon": "长柄武器",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Iansan.webp"
   },
   {
     "source": "manual",
@@ -1537,7 +1676,8 @@
     "element": "风",
     "weapon": "法器",
     "region": "纳塔",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Ifa.webp"
   },
   {
     "source": "nanoka",
@@ -1550,8 +1690,9 @@
     "rarity": 5,
     "element": "雷",
     "weapon": "长柄武器",
-    "updatedAt": "2026-07-01T05:26:53.810Z",
-    "region": "挪德卡莱"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "region": "挪德卡莱",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Ineffa.webp"
   },
   {
     "source": "manual",
@@ -1565,7 +1706,8 @@
     "element": "冰",
     "weapon": "双手剑",
     "region": "蒙德",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Eula.webp"
   },
   {
     "source": "manual",
@@ -1579,7 +1721,8 @@
     "element": "岩",
     "weapon": "长柄武器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Yunjin.webp"
   },
   {
     "source": "manual",
@@ -1593,7 +1736,8 @@
     "element": "风",
     "weapon": "双手剑",
     "region": "稻妻",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Sayu.webp"
   },
   {
     "source": "manual",
@@ -1607,7 +1751,8 @@
     "element": "岩",
     "weapon": "长柄武器",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Zhongli.webp"
   },
   {
     "source": "manual",
@@ -1621,7 +1766,8 @@
     "element": "冰",
     "weapon": "双手剑",
     "region": "璃月",
-    "updatedAt": "2026-07-01T05:26:53.810Z"
+    "updatedAt": "2026-07-02T00:38:42.819Z",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Chongyun.webp"
   },
   {
     "source": "nanoka",
@@ -1634,8 +1780,24 @@
     "rarity": 5,
     "element": "岩",
     "weapon": "单手剑",
-    "updatedAt": "2026-07-01T05:26:53.810Z",
-    "region": "璃月"
+    "updatedAt": "2026-07-02T00:38:42.820Z",
+    "region": "璃月",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Zibai.webp"
+  },
+  {
+    "source": "nanoka",
+    "id": "nanoka-genshin-10000134",
+    "name": "TPS旅行者",
+    "nameEn": "TPS Traveler",
+    "game": "genshin",
+    "birthday": "01-01",
+    "avatar": "https://static.nanoka.cc/assets/gi/UI_AvatarIcon_PlayerBoy.webp",
+    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_PlayerGirl.webp",
+    "rarity": 5,
+    "element": "冰",
+    "weapon": "WEAPON_CROSSBOW",
+    "updatedAt": "2026-07-02T00:38:40.862Z",
+    "region": ""
   },
   {
     "source": "bwiki",
@@ -1644,12 +1806,13 @@
     "nameEn": "Aponia",
     "game": "honkai3",
     "birthday": "05-25",
-    "avatar": "https://ui-avatars.com/api/?name=%E9%98%BF%E6%B3%A2%E5%B0%BC%E4%BA%9A&background=ff8cc8&color=fff&size=256&font-size=0.4&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/5/54/f9eep47hn6d1b4kec729vgir4qccg1p.jpg",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:23.260Z",
+    "updatedAt": "2026-07-02T00:38:55.930Z",
     "element": "",
     "weapon": "",
-    "region": ""
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/5/54/f9eep47hn6d1b4kec729vgir4qccg1p.jpg"
   },
   {
     "source": "bwiki",
@@ -1661,7 +1824,7 @@
     "avatar": "https://ui-avatars.com/api/?name=%E7%88%B1%E8%8E%89%E5%B8%8C%E9%9B%85&background=ff8cc8&color=fff&size=256&font-size=0.4&bold=true",
     "rarity": 4,
     "region": "逐火之蛾（前文明纪元）",
-    "updatedAt": "2026-07-01T05:27:19.369Z",
+    "updatedAt": "2026-07-02T00:38:54.545Z",
     "element": "",
     "weapon": ""
   },
@@ -1676,7 +1839,7 @@
     "rarity": 5,
     "element": "冰",
     "weapon": "太刀",
-    "updatedAt": "2026-07-01T05:27:12.501Z",
+    "updatedAt": "2026-07-02T00:38:54.124Z",
     "region": "休伯利安号"
   },
   {
@@ -1700,12 +1863,13 @@
     "nameEn": "Silverwing N-EX",
     "game": "honkai3",
     "birthday": "08-18",
-    "avatar": "https://ui-avatars.com/api/?name=%E6%AC%A1%E7%94%9F%E9%93%B6%E7%BF%BC&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/5/50/h0jtc550b2gl3wubk0pfbsbmtj05zke.png",
     "rarity": 5,
     "element": "冰",
     "weapon": "重炮",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:38:56.564Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/d/de/qichk68mn45utk5e0q39ogowt9flw5i.png"
   },
   {
     "source": "manual",
@@ -1732,7 +1896,7 @@
     "rarity": 5,
     "element": "雷",
     "weapon": "十字架",
-    "updatedAt": "2026-07-01T05:27:15.203Z",
+    "updatedAt": "2026-07-02T00:38:54.298Z",
     "region": "圣芙蕾雅学院、休伯利安"
   },
   {
@@ -1774,7 +1938,7 @@
     "rarity": 5,
     "element": "火",
     "weapon": "拳套",
-    "updatedAt": "2026-07-01T05:27:13.897Z",
+    "updatedAt": "2026-07-02T00:38:54.220Z",
     "region": "圣芙蕾雅、休伯利安、天命、逐火之蛾(上一纪元)"
   },
   {
@@ -1787,7 +1951,7 @@
     "avatar": "https://ui-avatars.com/api/?name=%E6%A0%BC%E8%95%BE%E4%BF%AE&background=ff8cc8&color=fff&size=256&font-size=0.4&bold=true",
     "rarity": 4,
     "region": "逐火之蛾",
-    "updatedAt": "2026-07-01T05:27:21.964Z",
+    "updatedAt": "2026-07-02T00:38:54.669Z",
     "element": "",
     "weapon": ""
   },
@@ -1840,12 +2004,13 @@
     "nameEn": "Herrscher of the Void",
     "game": "honkai3",
     "birthday": "12-07",
-    "avatar": "https://ui-avatars.com/api/?name=%E7%A9%BA%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/9/90/j50xphv86zas7oxxowvgl1mav23qnop.png",
     "rarity": 5,
     "element": "物理",
     "weapon": "双枪",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:38:58.126Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/3/35/o28bzup9wjtwg2gvghkzivid6346git.png"
   },
   {
     "source": "manual",
@@ -1868,12 +2033,13 @@
     "nameEn": "Herrscher of Thunder",
     "game": "honkai3",
     "birthday": "04-13",
-    "avatar": "https://ui-avatars.com/api/?name=%E9%9B%B7%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/0/05/4epz03gtbbhd5og7k1gcs2t469785m0.png",
     "rarity": 5,
     "element": "雷",
     "weapon": "太刀",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:38:58.457Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/e/e7/tpi4cqwogx8418jbd17zpq3ajr3k6hp.png"
   },
   {
     "source": "bwiki",
@@ -1884,7 +2050,7 @@
     "birthday": "04-03",
     "avatar": "https://ui-avatars.com/api/?name=%E6%9D%8E%E7%B4%A0%E8%A3%B3&background=ff8cc8&color=fff&size=256&font-size=0.4&bold=true",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:24.540Z",
+    "updatedAt": "2026-07-02T00:38:54.794Z",
     "element": "",
     "weapon": "",
     "region": ""
@@ -1896,12 +2062,13 @@
     "nameEn": "Herrscher of Reason",
     "game": "honkai3",
     "birthday": "08-18",
-    "avatar": "https://ui-avatars.com/api/?name=%E7%90%86%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/0/02/dvnqcmerbgyafnwip4qyr91l2pro2jp.png",
     "rarity": 5,
     "element": "冰",
     "weapon": "重炮",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:38:58.747Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/5/51/8pmk6cu7sefg0o1qxgmv6dsrg4rfhok.png"
   },
   {
     "source": "manual",
@@ -1914,7 +2081,7 @@
     "rarity": 5,
     "element": "冰",
     "weapon": "镰刀",
-    "updatedAt": "2026-07-01T05:27:16.383Z",
+    "updatedAt": "2026-07-02T00:38:54.388Z",
     "region": "天命"
   },
   {
@@ -1955,7 +2122,7 @@
     "avatar": "https://ui-avatars.com/api/?name=%E6%A2%85%E6%AF%94%E4%B9%8C%E6%96%AF&background=ff8cc8&color=fff&size=256&font-size=0.4&bold=true",
     "rarity": 4,
     "region": "逐火之蛾",
-    "updatedAt": "2026-07-01T05:27:17.936Z",
+    "updatedAt": "2026-07-02T00:38:54.461Z",
     "element": "",
     "weapon": ""
   },
@@ -1994,12 +2161,13 @@
     "nameEn": "Pardofelis",
     "game": "honkai3",
     "birthday": "07-11",
-    "avatar": "https://ui-avatars.com/api/?name=%E5%B8%95%E6%9C%B5%E8%8F%B2%E8%8E%89%E4%B8%9D&background=ff8cc8&color=fff&size=256&font-size=0.4&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/3/3e/ipzkmybcv8w0h4h7xhr6bpcg5es9oo2.jpg",
     "rarity": 4,
     "region": "逐火之蛾",
-    "updatedAt": "2026-07-01T05:27:20.643Z",
+    "updatedAt": "2026-07-02T00:38:59.830Z",
     "element": "",
-    "weapon": ""
+    "weapon": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/3/3e/ipzkmybcv8w0h4h7xhr6bpcg5es9oo2.jpg"
   },
   {
     "source": "manual",
@@ -2064,12 +2232,13 @@
     "nameEn": "Shigure Kira",
     "game": "honkai3",
     "birthday": "未实装",
-    "avatar": "https://ui-avatars.com/api/?name=%E6%97%B6%E9%9B%A8%E7%BB%AE%E7%BD%97&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/d/dc/3kujx9otayyrsq7i0f240xi40ehbtnc.png",
     "rarity": 5,
     "element": "冰",
     "weapon": "十字架",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:00.608Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/d/dc/3kujx9otayyrsq7i0f240xi40ehbtnc.png"
   },
   {
     "source": "manual",
@@ -2078,12 +2247,13 @@
     "nameEn": "Herrscher of Sentience",
     "game": "honkai3",
     "birthday": "02-09",
-    "avatar": "https://ui-avatars.com/api/?name=%E8%AF%86%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/9/94/s2s83lsyr8yfegxfv67t3tp5ec805go.png",
     "rarity": 5,
     "element": "物理",
     "weapon": "拳套",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:00.772Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/6/61/p1d0oa7pzdap8ozldzdgyrwtnbzx244.png"
   },
   {
     "source": "manual",
@@ -2092,12 +2262,13 @@
     "nameEn": "Herrscher of Origin",
     "game": "honkai3",
     "birthday": "04-13",
-    "avatar": "https://ui-avatars.com/api/?name=%E5%A7%8B%E6%BA%90%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/1/12/0n807560yshwkcuylyi2m6con883xy9.png",
     "rarity": 5,
     "element": "雷",
     "weapon": "太刀",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:00.934Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/e/e4/g6g0cfrwbvtumtzz5i2hiswq7iyl0tb.png"
   },
   {
     "source": "manual",
@@ -2106,12 +2277,13 @@
     "nameEn": "Herrscher of Rebirth",
     "game": "honkai3",
     "birthday": "10-18",
-    "avatar": "https://ui-avatars.com/api/?name=%E6%AD%BB%E7%94%9F%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/b/b9/od2ik8vyftflo9ohhupjny3okn63idk.png",
     "rarity": 5,
     "element": "物理",
     "weapon": "镰刀",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:01.080Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/d/d9/s5k00j69v4oi1atrphtqac3ntbdj3pj.png"
   },
   {
     "source": "manual",
@@ -2138,7 +2310,7 @@
     "rarity": 4,
     "element": "物理",
     "weapon": "环刃",
-    "updatedAt": "2026-07-01T05:27:27.489Z",
+    "updatedAt": "2026-07-02T00:38:55.204Z",
     "region": "天命"
   },
   {
@@ -2148,12 +2320,13 @@
     "nameEn": "Palatinus Equinox",
     "game": "honkai3",
     "birthday": "01-01",
-    "avatar": "https://ui-avatars.com/api/?name=%E5%A4%A9%E5%85%83%E9%AA%91%E8%8B%B1&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/7/7b/jqkxitdhd57vblr4wy77uvtadt4h7g0.png",
     "rarity": 5,
     "element": "物理",
     "weapon": "骑枪",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:01.538Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/0/01/nr37cz5bd310jkl2ym86h997jawtgba.png"
   },
   {
     "source": "manual",
@@ -2180,7 +2353,7 @@
     "rarity": 5,
     "element": "火",
     "weapon": "大剑",
-    "updatedAt": "2026-07-01T05:27:26.291Z",
+    "updatedAt": "2026-07-02T00:38:55.116Z",
     "region": "天命（旧）逆熵休伯利安（新）"
   },
   {
@@ -2190,12 +2363,13 @@
     "nameEn": "Infinite Ouroboros",
     "game": "honkai3",
     "birthday": "04-13",
-    "avatar": "https://ui-avatars.com/api/?name=%E6%97%A0%E9%99%90%C2%B7%E5%99%AC%E7%95%8C%E4%B9%8B%E8%9B%87&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/a/a2/4xczkxfewepjzwjmenidn990mjcs2y3.png",
     "rarity": 5,
     "element": "雷",
     "weapon": "十字架",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:02.020Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/f/fc/aq31tn9ewym9js6fb244rd5tlod30q0.png"
   },
   {
     "source": "manual",
@@ -2232,12 +2406,13 @@
     "nameEn": "Herrscher of Flamescion",
     "game": "honkai3",
     "birthday": "12-07",
-    "avatar": "https://ui-avatars.com/api/?name=%E8%96%AA%E7%82%8E%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/3/31/k3duyamd21dpnuhfwbkjaw49n4sn1w7.png",
     "rarity": 5,
     "element": "火",
     "weapon": "大剑",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:02.470Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/c/c2/1jy8sgwsgzxvlhcb8o8947yxiuoic29.png"
   },
   {
     "source": "manual",
@@ -2274,12 +2449,13 @@
     "nameEn": "Lunar Vow: Crimson Love",
     "game": "honkai3",
     "birthday": "未实装",
-    "avatar": "https://ui-avatars.com/api/?name=%E6%9C%88%E4%B8%8B%E8%AA%93%E7%BA%A6%C2%B7%E4%BA%88%E7%88%B1%E4%BB%A5%E5%BF%83&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/f/fb/qfr5cb57lna4qod4qf9h478v0pzn0z4.png",
     "rarity": 5,
     "element": "雷",
     "weapon": "十字架",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:02.971Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/a/a6/n1v2q92tkrkhx3pd0blcsl0ig2yphfl.png"
   },
   {
     "source": "manual",
@@ -2288,12 +2464,13 @@
     "nameEn": "Herrscher of Truth",
     "game": "honkai3",
     "birthday": "08-18",
-    "avatar": "https://ui-avatars.com/api/?name=%E7%9C%9F%E7%90%86%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/9/98/qr1vl9d7i5tab0fuhi6dazocpy008n5.png",
     "rarity": 5,
     "element": "冰",
     "weapon": "重炮",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:03.119Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/e/e9/hkjmoo928j7cko3den8xlk88yvzjrgw.png"
   },
   {
     "source": "manual",
@@ -2302,12 +2479,13 @@
     "nameEn": "Herrscher of Finality",
     "game": "honkai3",
     "birthday": "12-07",
-    "avatar": "https://ui-avatars.com/api/?name=%E7%BB%88%E7%84%89%E4%B9%8B%E5%BE%8B%E8%80%85&background=ff8cc8&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://patchwiki.biligame.com/images/bh3/4/48/nly4wx6203drukwwgkyf7ejushgvrsi.png",
     "rarity": 5,
     "element": "火",
     "weapon": "双枪",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "region": ""
+    "updatedAt": "2026-07-02T00:39:03.291Z",
+    "region": "",
+    "portrait": "https://patchwiki.biligame.com/images/bh3/9/93/mddh78454lyvzdr8z9mnx1jrflaokie.png"
   },
   {
     "source": "manual",
@@ -2333,9 +2511,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1402.webp",
     "rarity": 5,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "记忆",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1402.webp"
   },
   {
     "source": "manual",
@@ -2347,9 +2526,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1008.webp",
     "rarity": 4,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1008.webp"
   },
   {
     "source": "manual",
@@ -2361,9 +2541,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1009.webp",
     "rarity": 4,
     "element": "火",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1009.webp"
   },
   {
     "source": "manual",
@@ -2375,9 +2556,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1408.webp",
     "rarity": 5,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1408.webp"
   },
   {
     "source": "manual",
@@ -2389,9 +2571,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1211.webp",
     "rarity": 5,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "丰饶",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1211.webp"
   },
   {
     "source": "manual",
@@ -2403,9 +2586,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1315.webp",
     "rarity": 5,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1315.webp"
   },
   {
     "source": "manual",
@@ -2417,9 +2601,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1101.webp",
     "rarity": 5,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1101.webp"
   },
   {
     "source": "manual",
@@ -2431,9 +2616,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1401.webp",
     "rarity": 5,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1401.webp"
   },
   {
     "source": "manual",
@@ -2445,9 +2631,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1002.webp",
     "rarity": 4,
     "element": "风",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1002.webp"
   },
   {
     "source": "manual",
@@ -2459,9 +2646,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1213.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1213.webp"
   },
   {
     "source": "manual",
@@ -2473,9 +2661,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1220.webp",
     "rarity": 5,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1220.webp"
   },
   {
     "source": "manual",
@@ -2487,9 +2676,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1314.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1314.webp"
   },
   {
     "source": "manual",
@@ -2501,9 +2691,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1409.webp",
     "rarity": 5,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "记忆",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1409.webp"
   },
   {
     "source": "manual",
@@ -2515,9 +2706,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1208.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "存护",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1208.webp"
   },
   {
     "source": "manual",
@@ -2529,9 +2721,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1210.webp",
     "rarity": 4,
     "element": "火",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1210.webp"
   },
   {
     "source": "manual",
@@ -2543,9 +2736,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1215.webp",
     "rarity": 4,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1215.webp"
   },
   {
     "source": "manual",
@@ -2557,9 +2751,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1307.webp",
     "rarity": 5,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1307.webp"
   },
   {
     "source": "manual",
@@ -2571,9 +2766,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1109.webp",
     "rarity": 4,
     "element": "火",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1109.webp"
   },
   {
     "source": "manual",
@@ -2585,9 +2781,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1306.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1306.webp"
   },
   {
     "source": "manual",
@@ -2599,9 +2796,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1308.webp",
     "rarity": 5,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1308.webp"
   },
   {
     "source": "manual",
@@ -2613,9 +2811,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1217.webp",
     "rarity": 5,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "丰饶",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1217.webp"
   },
   {
     "source": "manual",
@@ -2627,9 +2826,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1003.webp",
     "rarity": 5,
     "element": "火",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1003.webp"
   },
   {
     "source": "manual",
@@ -2641,9 +2841,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1301.webp",
     "rarity": 4,
     "element": "火",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "丰饶",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1301.webp"
   },
   {
     "source": "manual",
@@ -2655,9 +2856,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1218.webp",
     "rarity": 5,
     "element": "火",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1218.webp"
   },
   {
     "source": "manual",
@@ -2669,9 +2871,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1104.webp",
     "rarity": 5,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "存护",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1104.webp"
   },
   {
     "source": "manual",
@@ -2683,9 +2886,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1204.webp",
     "rarity": 5,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1204.webp"
   },
   {
     "source": "manual",
@@ -2697,9 +2901,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1212.webp",
     "rarity": 5,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1212.webp"
   },
   {
     "source": "manual",
@@ -2711,9 +2916,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1005.webp",
     "rarity": 5,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1005.webp"
   },
   {
     "source": "manual",
@@ -2725,9 +2931,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1107.webp",
     "rarity": 5,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1107.webp"
   },
   {
     "source": "manual",
@@ -2739,9 +2946,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1222.webp",
     "rarity": 5,
     "element": "火",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "丰饶",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1222.webp"
   },
   {
     "source": "manual",
@@ -2753,9 +2961,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1310.webp",
     "rarity": 5,
     "element": "火",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1310.webp"
   },
   {
     "source": "manual",
@@ -2767,9 +2976,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1111.webp",
     "rarity": 4,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1111.webp"
   },
   {
     "source": "manual",
@@ -2781,9 +2991,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1317.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1317.webp"
   },
   {
     "source": "manual",
@@ -2795,9 +3006,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1203.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "丰饶",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1203.webp"
   },
   {
     "source": "manual",
@@ -2809,9 +3021,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1312.webp",
     "rarity": 4,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1312.webp"
   },
   {
     "source": "manual",
@@ -2823,9 +3036,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1223.webp",
     "rarity": 4,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1223.webp"
   },
   {
     "source": "manual",
@@ -2837,9 +3051,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1405.webp",
     "rarity": 5,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1405.webp"
   },
   {
     "source": "manual",
@@ -2851,9 +3066,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1105.webp",
     "rarity": 4,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "丰饶",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1105.webp"
   },
   {
     "source": "manual",
@@ -2865,9 +3081,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1106.webp",
     "rarity": 4,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1106.webp"
   },
   {
     "source": "manual",
@@ -2879,9 +3096,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1201.webp",
     "rarity": 4,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1201.webp"
   },
   {
     "source": "manual",
@@ -2893,9 +3111,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1205.webp",
     "rarity": 5,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1205.webp"
   },
   {
     "source": "manual",
@@ -2907,9 +3126,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1303.webp",
     "rarity": 5,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1303.webp"
   },
   {
     "source": "manual",
@@ -2921,9 +3141,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1406.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1406.webp"
   },
   {
     "source": "manual",
@@ -2935,9 +3156,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1001.webp",
     "rarity": 4,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "存护",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1224.webp"
   },
   {
     "source": "manual",
@@ -2949,9 +3171,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1108.webp",
     "rarity": 4,
     "element": "风",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1108.webp"
   },
   {
     "source": "manual",
@@ -2963,9 +3186,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1304.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "存护",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1304.webp"
   },
   {
     "source": "manual",
@@ -2977,9 +3201,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1206.webp",
     "rarity": 4,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1206.webp"
   },
   {
     "source": "manual",
@@ -2991,9 +3216,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1403.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1403.webp"
   },
   {
     "source": "manual",
@@ -3005,9 +3231,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1202.webp",
     "rarity": 4,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1202.webp"
   },
   {
     "source": "manual",
@@ -3016,12 +3243,13 @@
     "nameEn": "Topaz",
     "game": "hsr",
     "birthday": "08-29",
-    "avatar": "https://ui-avatars.com/api/?name=%E6%89%98%E5%B8%95&background=6b5ce7&color=fff&size=128&font-size=0.5&bold=true",
+    "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1112.webp",
     "rarity": 5,
     "element": "火",
-    "updatedAt": "2026-06-06T08:27:01.812Z",
-    "weapon": "",
-    "region": ""
+    "updatedAt": "2026-07-02T00:38:45.947Z",
+    "weapon": "巡猎",
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1112.webp"
   },
   {
     "source": "manual",
@@ -3033,9 +3261,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1004.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1004.webp"
   },
   {
     "source": "manual",
@@ -3047,9 +3276,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1404.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1404.webp"
   },
   {
     "source": "manual",
@@ -3061,9 +3291,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1225.webp",
     "rarity": 5,
     "element": "火",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1225.webp"
   },
   {
     "source": "manual",
@@ -3075,9 +3306,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1102.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1102.webp"
   },
   {
     "source": "manual",
@@ -3089,9 +3321,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1103.webp",
     "rarity": 4,
     "element": "雷",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1103.webp"
   },
   {
     "source": "manual",
@@ -3103,9 +3336,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1407.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "记忆",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1407.webp"
   },
   {
     "source": "manual",
@@ -3117,9 +3351,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1313.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1313.webp"
   },
   {
     "source": "manual",
@@ -3131,9 +3366,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1209.webp",
     "rarity": 5,
     "element": "冰",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1209.webp"
   },
   {
     "source": "manual",
@@ -3145,9 +3381,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1006.webp",
     "rarity": 5,
     "element": "量子",
-    "updatedAt": "2026-07-01T05:27:03.631Z",
+    "updatedAt": "2026-07-02T00:38:48.641Z",
     "weapon": "虚无",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1006.webp"
   },
   {
     "source": "manual",
@@ -3159,9 +3396,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1302.webp",
     "rarity": 5,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "智识",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1302.webp"
   },
   {
     "source": "manual",
@@ -3173,9 +3411,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1207.webp",
     "rarity": 4,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1207.webp"
   },
   {
     "source": "manual",
@@ -3187,9 +3426,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1221.webp",
     "rarity": 5,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "毁灭",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1221.webp"
   },
   {
     "source": "manual",
@@ -3201,9 +3441,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1305.webp",
     "rarity": 5,
     "element": "虚数",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "巡猎",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1305.webp"
   },
   {
     "source": "manual",
@@ -3215,9 +3456,10 @@
     "avatar": "https://static.nanoka.cc/assets/hsr/avatarshopicon/1309.webp",
     "rarity": 5,
     "element": "物理",
-    "updatedAt": "2026-07-01T05:26:58.753Z",
+    "updatedAt": "2026-07-02T00:38:45.947Z",
     "weapon": "同谐",
-    "region": ""
+    "region": "",
+    "portrait": "https://static.nanoka.cc/assets/hsr/avatardrawcard/1309.webp"
   },
   {
     "source": "nanoka",
@@ -3226,11 +3468,11 @@
     "nameEn": "Seed",
     "game": "zzz",
     "birthday": "11-22",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1461-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle48.webp",
     "rarity": 4,
     "element": "电",
     "region": "防卫军·奥波勒斯小队",
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.319Z",
     "weapon": "强攻",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole48.webp"
   },
@@ -3241,9 +3483,9 @@
     "nameEn": "Soldier 11",
     "game": "zzz",
     "birthday": "08-15",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1041-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle05.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "火",
     "weapon": "强攻",
     "region": "防卫军·奥波勒斯小队",
@@ -3256,9 +3498,9 @@
     "nameEn": "Ellen",
     "game": "zzz",
     "birthday": "01-17",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1191-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle21.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.825Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "冰",
     "weapon": "强攻",
     "region": "维多利亚家政",
@@ -3271,11 +3513,11 @@
     "nameEn": "Alice Thymefield",
     "game": "zzz",
     "birthday": "08-30",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1401-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle46.webp",
     "rarity": 4,
     "element": "物理",
     "region": "怪啖屋",
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "weapon": "异常",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole46.webp"
   },
@@ -3286,11 +3528,11 @@
     "nameEn": "Aria",
     "game": "zzz",
     "birthday": "06-07",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1501-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle57.webp",
     "rarity": 4,
     "element": "以太",
     "region": "妄想天使",
-    "updatedAt": "2026-07-01T05:27:07.827Z",
+    "updatedAt": "2026-07-02T00:38:51.319Z",
     "weapon": "异常",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole57.webp"
   },
@@ -3301,9 +3543,9 @@
     "nameEn": "Anby",
     "game": "zzz",
     "birthday": "05-01",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1011-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle01.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "电",
     "weapon": "击破",
     "region": "狡兔屋",
@@ -3316,9 +3558,9 @@
     "nameEn": "Anton",
     "game": "zzz",
     "birthday": "03-08",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1111-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle15.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:07.825Z",
+    "updatedAt": "2026-07-02T00:38:51.317Z",
     "element": "电",
     "weapon": "强攻",
     "region": "白祇重工",
@@ -3331,11 +3573,11 @@
     "nameEn": "Orphie Magnusson & Magus",
     "game": "zzz",
     "birthday": "11-03",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1301-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle49.webp",
     "rarity": 4,
     "element": "火",
     "region": "防卫军·奥波勒斯小队",
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.319Z",
     "weapon": "强攻",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole49.webp"
   },
@@ -3346,9 +3588,9 @@
     "nameEn": "Burnice",
     "game": "zzz",
     "birthday": "04-01",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1171-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle32.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "火",
     "weapon": "异常",
     "region": "卡吕冬之子",
@@ -3361,11 +3603,11 @@
     "nameEn": "Banyue",
     "game": "zzz",
     "birthday": "07-24",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1471-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle53.webp",
     "rarity": 4,
     "element": "火",
     "region": "坎卜斯黑枝",
-    "updatedAt": "2026-07-01T05:27:07.827Z",
+    "updatedAt": "2026-07-02T00:38:51.319Z",
     "weapon": "命破",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole53.webp"
   },
@@ -3376,9 +3618,9 @@
     "nameEn": "Ben",
     "game": "zzz",
     "birthday": "07-16",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1121-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle16.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:07.825Z",
+    "updatedAt": "2026-07-02T00:38:51.317Z",
     "element": "火",
     "weapon": "防护",
     "region": "白祇重工",
@@ -3391,9 +3633,9 @@
     "nameEn": "Billy",
     "game": "zzz",
     "birthday": "10-28",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1081-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle10.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "物理",
     "weapon": "强攻",
     "region": "狡兔屋",
@@ -3406,9 +3648,9 @@
     "nameEn": "Pulchra",
     "game": "zzz",
     "birthday": "07-16",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1351-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle38.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "物理",
     "weapon": "击破",
     "region": "卡吕冬之子",
@@ -3421,9 +3663,9 @@
     "nameEn": "Soukaku",
     "game": "zzz",
     "birthday": "04-17",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1131-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle17.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:07.825Z",
+    "updatedAt": "2026-07-02T00:38:51.317Z",
     "element": "冰",
     "weapon": "支援",
     "region": "对空六课",
@@ -3436,9 +3678,9 @@
     "nameEn": "Grace",
     "game": "zzz",
     "birthday": "01-06",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1181-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle20.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.825Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "电",
     "weapon": "异常",
     "region": "白祇重工",
@@ -3451,9 +3693,9 @@
     "nameEn": "Jane",
     "game": "zzz",
     "birthday": "01-01",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1261-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle24.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "物理",
     "weapon": "异常",
     "region": "治安局·刑侦特勤组",
@@ -3466,9 +3708,9 @@
     "nameEn": "Ju Fufu",
     "game": "zzz",
     "birthday": "02-08",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1391-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle43.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "火",
     "weapon": "击破",
     "region": "云岿山",
@@ -3481,9 +3723,9 @@
     "nameEn": "Caesar",
     "game": "zzz",
     "birthday": "07-04",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1071-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle25.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "物理",
     "weapon": "防护",
     "region": "卡吕冬之子",
@@ -3496,9 +3738,9 @@
     "nameEn": "Koleda",
     "game": "zzz",
     "birthday": "09-23",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1101-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle14.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "火",
     "weapon": "击破",
     "region": "白祇重工",
@@ -3511,9 +3753,9 @@
     "nameEn": "Corin",
     "game": "zzz",
     "birthday": "02-14",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1061-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle09.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "物理",
     "weapon": "强攻",
     "region": "维多利亚家政",
@@ -3526,9 +3768,9 @@
     "nameEn": "Lycaon",
     "game": "zzz",
     "birthday": "12-04",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1141-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle18.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.825Z",
+    "updatedAt": "2026-07-02T00:38:51.317Z",
     "element": "冰",
     "weapon": "击破",
     "region": "维多利亚家政",
@@ -3541,9 +3783,9 @@
     "nameEn": "Lighter",
     "game": "zzz",
     "birthday": "10-05",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1161-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle26.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "火",
     "weapon": "击破",
     "region": "卡吕冬之子",
@@ -3556,9 +3798,9 @@
     "nameEn": "Rina",
     "game": "zzz",
     "birthday": "09-27",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1211-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle22.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "电",
     "weapon": "支援",
     "region": "维多利亚家政",
@@ -3571,9 +3813,9 @@
     "nameEn": "Trigger",
     "game": "zzz",
     "birthday": "05-01",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1361-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle40.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:07.826Z",
+    "updatedAt": "2026-07-02T00:38:51.318Z",
     "element": "电",
     "weapon": "击破",
     "region": "防卫军·奥波勒斯小队",
@@ -3586,11 +3828,11 @@
     "nameEn": "Dialyn",
     "game": "zzz",
     "birthday": "05-28",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1481-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle54.webp",
     "rarity": 4,
     "element": "物理",
     "region": "坎卜斯黑枝",
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "weapon": "击破",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole54.webp"
   },
@@ -3601,11 +3843,11 @@
     "nameEn": "Tsukishiro Yanagi",
     "game": "zzz",
     "birthday": "09-21",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1221-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle31.webp",
     "rarity": 4,
     "element": "电",
     "region": "对空六课",
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "weapon": "异常",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole31.webp"
   },
@@ -3616,11 +3858,11 @@
     "nameEn": "Lucia Elowen",
     "game": "zzz",
     "birthday": "03-17",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1451-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle50.webp",
     "rarity": 4,
     "element": "以太",
     "region": "怪啖屋",
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "weapon": "支援",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole50.webp"
   },
@@ -3631,9 +3873,9 @@
     "nameEn": "Lucy",
     "game": "zzz",
     "birthday": "08-06",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1151-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle27.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "火",
     "weapon": "支援",
     "region": "卡吕冬之子",
@@ -3646,9 +3888,9 @@
     "nameEn": "Nekomata",
     "game": "zzz",
     "birthday": "04-11",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1021-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle11.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "物理",
     "weapon": "强攻",
     "region": "狡兔屋",
@@ -3661,11 +3903,11 @@
     "nameEn": "Nangong Yu",
     "game": "zzz",
     "birthday": "09-29",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1511-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle59.webp",
     "rarity": 4,
     "element": "以太",
     "region": "妄想天使",
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.687Z",
     "weapon": "击破",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole59.webp"
   },
@@ -3676,9 +3918,9 @@
     "nameEn": "Nicole",
     "game": "zzz",
     "birthday": "07-30",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1031-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle12.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "以太",
     "weapon": "支援",
     "region": "狡兔屋",
@@ -3691,9 +3933,9 @@
     "nameEn": "Piper",
     "game": "zzz",
     "birthday": "08-17",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1281-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle28.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "物理",
     "weapon": "异常",
     "region": "卡吕冬之子",
@@ -3706,9 +3948,9 @@
     "nameEn": "Pan Yinhu",
     "game": "zzz",
     "birthday": "08-13",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1421-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle45.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "物理",
     "weapon": "防护",
     "region": "云岿山",
@@ -3721,11 +3963,11 @@
     "nameEn": "Sunna",
     "game": "zzz",
     "birthday": "07-18",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1491-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle58.webp",
     "rarity": 4,
     "element": "物理",
     "region": "妄想天使",
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.687Z",
     "weapon": "支援",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole58.webp"
   },
@@ -3736,9 +3978,9 @@
     "nameEn": "Harumasa",
     "game": "zzz",
     "birthday": "07-19",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1201-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle35.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.794Z",
+    "updatedAt": "2026-07-02T00:38:51.938Z",
     "element": "电",
     "weapon": "强攻",
     "region": "对空六课",
@@ -3751,9 +3993,9 @@
     "nameEn": "Qingyi",
     "game": "zzz",
     "birthday": "03-21",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1251-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle29.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "电",
     "weapon": "击破",
     "region": "治安局·刑侦特勤组",
@@ -3766,9 +4008,9 @@
     "nameEn": "Seth",
     "game": "zzz",
     "birthday": "05-01",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1271-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle30.webp",
     "rarity": 4,
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "电",
     "weapon": "防护",
     "region": "治安局·刑侦特勤组",
@@ -3781,9 +4023,9 @@
     "nameEn": "Vivian",
     "game": "zzz",
     "birthday": "01-20",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1331-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle41.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "以太",
     "weapon": "异常",
     "region": "反舌鸟",
@@ -3796,11 +4038,11 @@
     "nameEn": "Cissia",
     "game": "zzz",
     "birthday": "01-10",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1521-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle60.webp",
     "rarity": 4,
     "element": "电",
     "region": "治安局·都市秩序部",
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.687Z",
     "weapon": "强攻",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole60.webp"
   },
@@ -3811,11 +4053,11 @@
     "nameEn": "Starlight - Billy",
     "game": "zzz",
     "birthday": "11-25",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1531-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle62.webp",
     "rarity": 4,
     "element": "物理",
     "region": "狡兔屋",
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.687Z",
     "weapon": "命破",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole62.webp"
   },
@@ -3826,9 +4068,9 @@
     "nameEn": "Miyabi",
     "game": "zzz",
     "birthday": "06-19",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1091-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle13.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "element": "冰",
     "weapon": "异常",
     "region": "对空六课",
@@ -3841,9 +4083,9 @@
     "nameEn": "Astra Yao",
     "game": "zzz",
     "birthday": "05-04",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1311-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle36.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "以太",
     "weapon": "支援",
     "region": "天琴座",
@@ -3856,11 +4098,11 @@
     "nameEn": "Ye Shunguang",
     "game": "zzz",
     "birthday": "01-20",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1431-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle55.webp",
     "rarity": 4,
     "element": "物理",
     "region": "云岿山",
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "weapon": "强攻",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole55.webp"
   },
@@ -3871,11 +4113,11 @@
     "nameEn": "Yidhari Murphy",
     "game": "zzz",
     "birthday": "03-19",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1051-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle52.webp",
     "rarity": 4,
     "element": "冰",
     "region": "怪啖屋",
-    "updatedAt": "2026-07-01T05:27:10.337Z",
+    "updatedAt": "2026-07-02T00:38:53.316Z",
     "weapon": "命破",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole52.webp"
   },
@@ -3886,9 +4128,9 @@
     "nameEn": "Evelyn",
     "game": "zzz",
     "birthday": "08-24",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1321-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle37.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.420Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "火",
     "weapon": "强攻",
     "region": "天琴座",
@@ -3901,9 +4143,9 @@
     "nameEn": "Yi Xuan",
     "game": "zzz",
     "birthday": "03-26",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1371-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle44.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.421Z",
+    "updatedAt": "2026-07-02T00:38:51.686Z",
     "element": "以太",
     "weapon": "命破",
     "region": "云岿山",
@@ -3916,11 +4158,11 @@
     "nameEn": "Ukinami Yuzuha",
     "game": "zzz",
     "birthday": "11-02",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1411-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle47.webp",
     "rarity": 4,
     "element": "物理",
     "region": "怪啖屋",
-    "updatedAt": "2026-07-01T05:27:08.795Z",
+    "updatedAt": "2026-07-02T00:38:51.938Z",
     "weapon": "支援",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole47.webp"
   },
@@ -3931,9 +4173,9 @@
     "nameEn": "Hugo",
     "game": "zzz",
     "birthday": "12-24",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1291-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle42.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.794Z",
+    "updatedAt": "2026-07-02T00:38:51.938Z",
     "element": "冰",
     "weapon": "强攻",
     "region": "反舌鸟",
@@ -3946,11 +4188,11 @@
     "nameEn": "Zhao",
     "game": "zzz",
     "birthday": "10-14",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1341-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle56.webp",
     "rarity": 4,
     "element": "冰",
     "region": "坎卜斯黑枝",
-    "updatedAt": "2026-07-01T05:27:08.795Z",
+    "updatedAt": "2026-07-02T00:38:51.939Z",
     "weapon": "防护",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole56.webp"
   },
@@ -3961,11 +4203,11 @@
     "nameEn": "Komano Manato",
     "game": "zzz",
     "birthday": "01-05",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1441-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle51.webp",
     "rarity": 4,
     "element": "火",
     "region": "怪啖屋",
-    "updatedAt": "2026-07-01T05:27:08.795Z",
+    "updatedAt": "2026-07-02T00:38:51.939Z",
     "weapon": "命破",
     "portrait": "https://static.nanoka.cc/assets/zzz/IconRole51.webp"
   },
@@ -3976,9 +4218,9 @@
     "nameEn": "Zhu Yuan",
     "game": "zzz",
     "birthday": "06-03",
-    "avatar": "https://zzz.honeyhunterworld.com/img/character/1241-char_icon_100.webp",
+    "avatar": "https://static.nanoka.cc/assets/zzz/IconRoleCircle23.webp",
     "rarity": 5,
-    "updatedAt": "2026-07-01T05:27:08.794Z",
+    "updatedAt": "2026-07-02T00:38:51.938Z",
     "element": "以太",
     "weapon": "强攻",
     "region": "治安局·刑侦特勤组",

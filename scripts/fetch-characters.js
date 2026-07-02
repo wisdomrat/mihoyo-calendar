@@ -50,6 +50,9 @@ const HONEY_VALUE_MAP = {
 };
 
 const CHARACTER_ALIAS_GROUPS = {
+  hsr: [
+    ['\u6258\u5e15', '\u6258\u5e15&\u8d26\u8d26', 'Topaz', 'Topaz & Numby'],
+  ],
   zzz: [
     ['\u661f\u89c1\u96c5', '\u661f\u898b\u96c5', '\u96c5', 'Miyabi', 'Hoshimi Miyabi'],
     ['\u6d45\u7fbd\u60a0\u771f', '\u60a0\u771f', 'Harumasa', 'Asaba Harumasa'],
@@ -69,6 +72,7 @@ function isPlaceholderAvatar(avatar = '') { return !avatar || avatar.includes('u
 function avatarScore(avatar = '') {
   if (!avatar) return 0;
   if (avatar.includes('ui-avatars.com')) return 1;
+  if (avatar.includes('static.nanoka.cc/assets/zzz/IconRoleCircle')) return 5;
   if (avatar.includes('static.nanoka.cc/assets/zzz/IconRole')) return 2;
   if (avatar.includes('static.nanoka.cc')) return 5;
   if (avatar.includes('honeyhunterworld.com')) return 4;
@@ -82,10 +86,11 @@ export function classifyImageRole({ width, height, url = '' }) {
     if (ratio >= 0.82 && ratio <= 1.22) return 'avatar';
     if (ratio < 0.82) return 'portrait';
   }
+  if (/static\.nanoka\.cc\/assets\/zzz\/IconRoleCircle/i.test(url)) return 'avatar';
   if (/honeyhunterworld\.com\/img\/character\/.+_icon_100\.webp/i.test(url)) return 'avatar';
   if (/static\.nanoka\.cc\/assets\/zzz\/IconRole/i.test(url)) return 'portrait';
   if (/avatar|head|icon_100|shopicon/i.test(url)) return 'avatar';
-  if (/portrait|gacha|full|stand|立绘/i.test(url)) return 'portrait';
+  if (/portrait|gacha|full|stand|\u7acb\u7ed8/i.test(url)) return 'portrait';
   return 'unknown';
 }
 function sourceScore(source = '') { return SOURCE_PRIORITY[source] ?? 0; }
@@ -170,6 +175,41 @@ async function getBwikiImage(charName, bwikiName, wikitext = '') {
   return null;
 }
 
+function stripImageExtension(name = '') {
+  return String(name || '').replace(/\.(png|jpg|jpeg|webp)$/i, '');
+}
+
+function isHonkai3StigmaImageName(name = '') {
+  return /[（(](上|中|下)[）)]/.test(name) || /圣痕|stigma/i.test(name);
+}
+
+export function selectBwikiRoleImages(charName, images = []) {
+  const normalizedName = String(charName || '').trim();
+  const candidates = images
+    .map(image => ({ ...image, name: String(image.name || '').trim(), url: String(image.url || '').trim() }))
+    .filter(image => image.name && image.url && image.name.startsWith(normalizedName));
+  const avatar = candidates.find(image => stripImageExtension(image.name) === `${normalizedName}头像`)
+    || candidates.find(image => image.name.includes('头像') && !isHonkai3StigmaImageName(image.name));
+  const portrait = candidates.find(image => stripImageExtension(image.name) === `${normalizedName}立绘`)
+    || candidates.find(image => image.name.includes('立绘') && !image.name.includes('头像') && !isHonkai3StigmaImageName(image.name))
+    || candidates.find(image => stripImageExtension(image.name) === normalizedName && !image.name.includes('头像'));
+
+  return {
+    avatar: avatar?.url || '',
+    portrait: portrait?.url || '',
+  };
+}
+
+async function getBwikiRoleImages(charName, bwikiName) {
+  const url = `https://wiki.biligame.com/${bwikiName}/api.php?action=query&list=allimages&aiprefix=${encodeURIComponent(charName)}&ailimit=30&aiprop=url|mime|size&format=json`;
+  try {
+    const data = await fetchJson(url, { retries: 1, timeoutMs: 10000, headers: { Referer: 'https://wiki.biligame.com/' } });
+    return selectBwikiRoleImages(charName, data?.query?.allimages || []);
+  } catch {
+    return { avatar: '', portrait: '' };
+  }
+}
+
 function normalizeCharacter(char) {
   const rawName = String(char.name || char.nameEn || '').trim();
   const nameEn = String(char.nameEn || rawName).trim();
@@ -208,10 +248,20 @@ export function mergeData(existing, newChars) {
 function loadExistingData() { for (const dataPath of [...DATA_FILES].reverse()) { try { if (fs.existsSync(dataPath)) return JSON.parse(fs.readFileSync(dataPath, 'utf8')); } catch (error) { console.warn(`Failed to read ${dataPath}: ${error.message}`); } } return []; }
 function saveData(characters) { for (const dataPath of DATA_FILES) { fs.mkdirSync(path.dirname(dataPath), { recursive: true }); fs.writeFileSync(dataPath, `${JSON.stringify(characters, null, 2)}\n`, 'utf8'); console.log(`Saved ${path.relative(ROOT_DIR, dataPath)}`); } }
 function nanokaCharacterUrl(html, gameKey) { return String(html || '').match(new RegExp(`https://static\\.nanoka\\.cc/${gameKey}/[^"' ]+/character\\.json`))?.[0] || null; }
+function zzzRoleAssetUrl(iconName, prefix = 'IconRole') {
+  const clean = String(iconName || '').trim().replace(/\.(png|webp|jpg|jpeg)$/i, '');
+  const suffix = clean.match(/^IconRole(.+)$/i)?.[1];
+  return suffix ? `https://static.nanoka.cc/assets/zzz/${prefix}${suffix}.webp` : '';
+}
+function genshinGachaPortraitUrl(iconName) {
+  const clean = String(iconName || '').trim().replace(/\.(png|webp|jpg|jpeg)$/i, '');
+  const suffix = clean.match(/^UI_AvatarIcon_(.+)$/i)?.[1];
+  return suffix ? `https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_${suffix}.webp` : '';
+}
 export function normalizeNanokaCharacter(gameId, id, info) {
-  if (gameId === 'genshin') return normalizeCharacter({ id: `nanoka-genshin-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: Array.isArray(info.birth) ? formatBirthday(info.birth[0], info.birth[1]) : '', avatar: info.icon ? `https://static.nanoka.cc/assets/gi/${info.icon}.webp` : '', rarity: info.rank === 'QUALITY_ORANGE' ? 5 : info.rank === 'QUALITY_PURPLE' ? 4 : undefined, element: GI_ELEMENT[info.element] || info.element || '', weapon: GI_WEAPON[info.weapon] || info.weapon || '', source: 'nanoka', updatedAt: nowIso() });
-  if (gameId === 'hsr') { const rarity = String(info.rank || '').match(/(\d)$/)?.[1]; return normalizeCharacter({ id: `nanoka-hsr-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: `https://static.nanoka.cc/assets/hsr/avatarshopicon/${id}.webp`, rarity: rarity ? Number(rarity) : undefined, element: HSR_ELEMENT[info.damageType] || info.damageType || '', weapon: HSR_PATH[info.baseType] || info.baseType || '', source: 'nanoka', updatedAt: nowIso() }); }
-  if (gameId === 'zzz') return normalizeCharacter({ id: `nanoka-zzz-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: `https://zzz.honeyhunterworld.com/img/character/${id}-char_icon_100.webp`, portrait: info.icon ? `https://static.nanoka.cc/assets/zzz/${info.icon}.webp` : '', rarity: info.rank >= 4 ? 5 : info.rank >= 3 ? 4 : info.rank, element: ZZZ_ELEMENT[info.element] || '', weapon: ZZZ_TYPE[info.type] || '', source: 'nanoka', updatedAt: nowIso() });
+  if (gameId === 'genshin') return normalizeCharacter({ id: `nanoka-genshin-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: Array.isArray(info.birth) ? formatBirthday(info.birth[0], info.birth[1]) : '', avatar: info.icon ? `https://static.nanoka.cc/assets/gi/${info.icon}.webp` : '', portrait: genshinGachaPortraitUrl(info.icon), rarity: info.rank === 'QUALITY_ORANGE' ? 5 : info.rank === 'QUALITY_PURPLE' ? 4 : undefined, element: GI_ELEMENT[info.element] || info.element || '', weapon: GI_WEAPON[info.weapon] || info.weapon || '', source: 'nanoka', updatedAt: nowIso() });
+  if (gameId === 'hsr') { const rarity = String(info.rank || '').match(/(\d)$/)?.[1]; return normalizeCharacter({ id: `nanoka-hsr-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: `https://static.nanoka.cc/assets/hsr/avatarshopicon/${id}.webp`, portrait: `https://static.nanoka.cc/assets/hsr/avatardrawcard/${id}.webp`, rarity: rarity ? Number(rarity) : undefined, element: HSR_ELEMENT[info.damageType] || info.damageType || '', weapon: HSR_PATH[info.baseType] || info.baseType || '', source: 'nanoka', updatedAt: nowIso() }); }
+  if (gameId === 'zzz') return normalizeCharacter({ id: `nanoka-zzz-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: zzzRoleAssetUrl(info.icon, 'IconRoleCircle'), portrait: zzzRoleAssetUrl(info.icon), rarity: info.rank >= 4 ? 5 : info.rank >= 3 ? 4 : info.rank, element: ZZZ_ELEMENT[info.element] || '', weapon: ZZZ_TYPE[info.type] || '', source: 'nanoka', updatedAt: nowIso() });
   return null;
 }
 async function fetchFromNanoka(gameId, config) { if (!config.nanokaHost) return []; console.log(`\nFetching nanoka for ${config.name}...`); try { const html = await fetchText(config.nanokaHost, { retries: 2, timeoutMs: 20000 }); const url = nanokaCharacterUrl(html, config.nanokaGame); if (!url) throw new Error('character.json URL not found'); const data = await fetchJson(url, { retries: 2, timeoutMs: 20000 }); const chars = Object.entries(data).map(([id, info]) => normalizeNanokaCharacter(gameId, id, info)).filter(Boolean).filter(char => char.name && !/^\(.+\)/.test(char.name)); console.log(`  ${chars.length} records`); return chars; } catch (error) { console.warn(`  nanoka failed for ${gameId}: ${error.message}`); return []; } }
@@ -231,13 +281,30 @@ async function fetchFromBwiki(gameId, config) {
   try { const listUrl = `https://${config.bwiki}/api.php?action=query&list=categorymembers&cmtitle=Category:${encodeURIComponent(U.roleCategory)}&cmlimit=150&format=json`; const listData = await fetchJson(listUrl, { retries: 2, timeoutMs: 25000, headers: { Referer: 'https://wiki.biligame.com/' } }); const pages = (listData?.query?.categorymembers || []).filter(page => page.title && !page.title.includes(':') && !page.title.includes('\u5206\u7c7b') && !page.title.includes('\u6a21\u677f') && page.title.length < 32).slice(0, 150); if (!pages.length) return [];
     const characters = [];
     for (let i = 0; i < pages.length; i += 25) { let wikiPages = []; try { wikiPages = await fetchBwikiRevisions(config, pages.slice(i, i + 25).map(page => page.title)); } catch (error) { console.warn(`  BWIKI batch failed ${i + 1}: ${error.message}`); continue; }
-      for (const wikiPage of wikiPages) { const title = wikiPage.title; const wikitext = wikiPage.revisions?.[0]?.['*'] || wikiPage.revisions?.[0]?.slots?.main?.['*'] || ''; const info = parseBwikiWikitext(wikitext); if (!info.birthday) continue; const avatar = gameId === 'honkai3' ? await getBwikiImage(title, config.bwikiName, wikitext) || '' : ''; characters.push(normalizeCharacter({ id: `bwiki-${gameId}-${title}`, name: title, nameEn: info.nameEn || title, game: gameId, birthday: info.birthday, avatar, rarity: info.rarity, element: info.element, weapon: info.weapon, region: info.region, source: 'bwiki', updatedAt: nowIso() })); }
+      for (const wikiPage of wikiPages) { const title = wikiPage.title; const wikitext = wikiPage.revisions?.[0]?.['*'] || wikiPage.revisions?.[0]?.slots?.main?.['*'] || ''; const info = parseBwikiWikitext(wikitext); if (!info.birthday) continue; const roleImages = gameId === 'honkai3' ? await getBwikiRoleImages(title, config.bwikiName) : { avatar: '', portrait: '' }; const avatar = roleImages.avatar || (gameId === 'honkai3' ? roleImages.portrait : ''); characters.push(normalizeCharacter({ id: `bwiki-${gameId}-${title}`, name: title, nameEn: info.nameEn || title, game: gameId, birthday: info.birthday, avatar, portrait: roleImages.portrait, rarity: info.rarity, element: info.element, weapon: info.weapon, region: info.region, source: 'bwiki', updatedAt: nowIso() })); }
       await sleep(150);
     }
     console.log(`  ${characters.length} records with birthdays`); return characters;
   } catch (error) { console.warn(`  BWIKI failed for ${gameId}: ${error.message}`); return []; }
 }
 async function fetchAllSources() { const all = []; for (const [gameId, config] of Object.entries(GAMES)) { for (const result of [await fetchFromNanoka(gameId, config), await fetchFromBwiki(gameId, config), await fetchFromHoneyHunter(gameId, config)]) all.push(...result); await sleep(500); } return all; }
+async function fetchHonkai3ImagesForExisting(existing) {
+  const source = unique((existing || []).filter(char => char.game === 'honkai3' && char.name).map(char => JSON.stringify({ name: char.name, nameEn: char.nameEn, birthday: char.birthday, id: char.id })));
+  const characters = [];
+  if (!source.length) return characters;
+  console.log(`\nFetching BWIKI images for existing ${GAMES.honkai3.name} records...`);
+  for (const raw of source) {
+    const char = JSON.parse(raw);
+    const roleImages = await getBwikiRoleImages(char.name, GAMES.honkai3.bwikiName);
+    const avatar = roleImages.avatar || roleImages.portrait || '';
+    if (avatar || roleImages.portrait) {
+      characters.push(normalizeCharacter({ id: `bwiki-honkai3-images-${normalizeKeyPart(char.id || char.name)}`, name: char.name, nameEn: char.nameEn || char.name, game: 'honkai3', birthday: char.birthday, avatar, portrait: roleImages.portrait, source: 'bwiki', updatedAt: nowIso() }));
+    }
+    await sleep(80);
+  }
+  console.log(`  ${characters.length} records with images`);
+  return characters;
+}
 function printSummary(characters) { const byGame = {}; let withAvatar = 0; let withBirthday = 0; for (const char of characters) { byGame[char.game] = (byGame[char.game] || 0) + 1; if (!isPlaceholderAvatar(char.avatar)) withAvatar++; if (char.birthday && char.birthday !== '??-??') withBirthday++; } console.log(`\nTotal: ${characters.length} characters`); for (const [game, count] of Object.entries(byGame)) console.log(`  ${game}: ${count}`); console.log(`With images: ${withAvatar}/${characters.length}`); console.log(`With birthdays: ${withBirthday}/${characters.length}`); }
-export async function main() { console.log('Fetching character data from multiple sources...'); const existing = loadExistingData().map(char => normalizeCharacter(char)); console.log(`Loaded ${existing.length} existing characters`); const fetched = await fetchAllSources(); console.log(`\nFetched ${fetched.length} candidate records`); const merged = mergeData(existing, fetched); printSummary(merged); saveData(merged); }
+export async function main() { console.log('Fetching character data from multiple sources...'); const existing = loadExistingData().map(char => normalizeCharacter(char)); console.log(`Loaded ${existing.length} existing characters`); const fetched = await fetchAllSources(); fetched.push(...await fetchHonkai3ImagesForExisting(existing)); console.log(`\nFetched ${fetched.length} candidate records`); const merged = mergeData(existing, fetched); printSummary(merged); saveData(merged); }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch(error => { console.error('Sync failed:', error); process.exitCode = 1; });

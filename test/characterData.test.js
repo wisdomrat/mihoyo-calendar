@@ -83,3 +83,34 @@ test('mergeCharacterCollections preserves incoming portrait artwork', () => {
 
   assert.equal(merged[0].portrait, 'https://static.nanoka.cc/assets/zzz/IconRole01.webp');
 });
+test('mergeCharacterCollections merges Star Rail Topaz aliases from cached manual data', () => {
+  const cachedTopaz = {
+    id: 'topaz-hsr',
+    name: '托帕',
+    nameEn: 'Topaz',
+    game: 'hsr',
+    birthday: '08-29',
+    avatar: 'https://ui-avatars.com/api/?name=T',
+    source: 'manual',
+    updatedAt: '2026-01-01T00:00:00.000Z',
+  };
+  const bundledTopaz = {
+    id: 'nanoka-hsr-1112',
+    name: '托帕&账账',
+    nameEn: 'Topaz & Numby',
+    game: 'hsr',
+    birthday: '',
+    avatar: 'https://static.nanoka.cc/assets/hsr/avatarshopicon/1112.webp',
+    portrait: 'https://static.nanoka.cc/assets/hsr/avatardrawcard/1112.webp',
+    source: 'nanoka',
+    updatedAt: '2026-01-02T00:00:00.000Z',
+  };
+
+  const merged = mergeCharacterCollections([bundledTopaz], [cachedTopaz]);
+
+  assert.equal(merged.length, 1);
+  assert.equal(merged[0].name, '托帕&账账');
+  assert.equal(merged[0].birthday, '08-29');
+  assert.equal(merged[0].avatar, bundledTopaz.avatar);
+  assert.equal(merged[0].portrait, bundledTopaz.portrait);
+});
