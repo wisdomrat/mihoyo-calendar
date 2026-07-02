@@ -46,6 +46,7 @@ function getArtworkOnlyLayout(dimensions: PortraitDimensions, className: string)
 export function getPortraitModalLayout(
   dimensions: PortraitDimensions | null | undefined,
   mode: PortraitDisplayMode = 'detail',
+  gameId?: string,
 ): PortraitModalLayout {
   if (!isValidDimensions(dimensions)) {
     return { className: 'portrait-layout-pending', style: {} };
@@ -55,6 +56,18 @@ export function getPortraitModalLayout(
 
   if (ratio >= 1.15) {
     if (mode === 'artwork') {
+      if (gameId === 'genshin') {
+        return {
+          className: 'portrait-layout-landscape portrait-layout-genshin-artwork',
+          style: {
+            '--portrait-modal-width': 'min(620px, 94vw)',
+            '--portrait-size': 'auto 96%',
+            '--portrait-position': 'center center',
+            '--portrait-aspect-ratio': '4 / 5',
+          },
+        };
+      }
+
       return getArtworkOnlyLayout(dimensions, 'portrait-layout-landscape');
     }
 

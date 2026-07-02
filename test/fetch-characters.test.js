@@ -31,6 +31,29 @@ test('parseBwikiWikitext extracts birthday and profile fields from Chinese infob
   });
 });
 
+
+test('parseBwikiWikitext strips HTML comments from profile values', () => {
+  const info = parseBwikiWikitext(`{{角色信息
+|生日 = 10月29日
+|地区 = 稻妻<!--蒙德、璃月、稻妻、须弥、枫丹、纳塔、至冬-->
+}}`);
+
+  assert.equal(info.region, '稻妻');
+});
+
+test('normalizeNanokaCharacter ignores Genshin TPS Traveler test records', () => {
+  const character = normalizeNanokaCharacter('genshin', '10000134', {
+    icon: 'UI_AvatarIcon_PlayerBoy',
+    birth: [1, 1],
+    rank: 'QUALITY_ORANGE',
+    weapon: 'WEAPON_CROSSBOW',
+    element: 'Cryo',
+    en: 'TPS Traveler',
+    zh: 'TPS旅行者',
+  });
+
+  assert.equal(character, null);
+});
 test('extractImageCandidatesFromWikitext finds explicit avatar and file references', () => {
   const candidates = extractImageCandidatesFromWikitext(`{{\u89d2\u8272\u4fe1\u606f
 |\u5934\u50cf = \u5b89\u67cf\u5934\u50cf.png

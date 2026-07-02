@@ -50,7 +50,7 @@ test('artwork-only portrait mode hides text and sizes the modal from image ratio
   assert.equal(declarationValue(artworkLayer, 'max-height'), '90vh');
   assert.equal(declarationValue(hiddenTextLayer, 'display'), 'none');
   assert.equal(declarationValue(controlLayer, 'z-index'), '3');
-  assert.match(appSource, /getPortraitModalLayout\(portraitDimensions, isArtworkOnly \? 'artwork' : 'detail'\)/);
+  assert.match(appSource, /getPortraitModalLayout\(portraitDimensions, isArtworkOnly \? 'artwork' : 'detail', character\.game\)/);
   assert.match(appSource, /portrait-artwork-only/);
   assert.match(appSource, /setIsArtworkOnly/);
 });

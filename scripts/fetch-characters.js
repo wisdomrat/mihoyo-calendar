@@ -59,6 +59,7 @@ const CHARACTER_ALIAS_GROUPS = {
   ],
 };
 const INVALID_CHARACTER_ALIASES = {
+  genshin: [['TPS旅行者', 'TPS Traveler', 'nanoka-genshin-10000134']],
   zzz: [['\u4e91\u5cbf\u5c71\u00b7\u6cf0\u97f3', 'Taiyin', 'taiyin-zzz']],
 };
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -66,7 +67,8 @@ const nowIso = () => new Date().toISOString();
 const pad2 = value => String(value).padStart(2, '0');
 function formatBirthday(month, day) { const m = Number(month); const d = Number(day); return Number.isInteger(m) && Number.isInteger(d) && m >= 1 && m <= 12 && d >= 1 && d <= 31 ? `${pad2(m)}-${pad2(d)}` : ''; }
 function decodeHtml(value = '') { return value.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&#8217;/g, "'").replace(/\\\//g, '/').replace(/\\"/g, '"').replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16))); }
-function stripTags(value = '') { return decodeHtml(value.replace(/<[^>]+>/g, '')).trim(); }
+function cleanProfileValue(value = '') { return decodeHtml(String(value || '').replace(/<!--[\\s\\S]*?-->/g, '').replace(/<[^>]+>/g, '')).replace(/\\{\\{.*?\\}\\}/g, '').trim(); }
+function stripTags(value = '') { return cleanProfileValue(value); }
 function unique(values) { const seen = new Set(); const result = []; for (const raw of values) { const value = String(raw || '').trim(); if (value && !seen.has(value)) { seen.add(value); result.push(value); } } return result; }
 function isPlaceholderAvatar(avatar = '') { return !avatar || avatar.includes('ui-avatars.com'); }
 function avatarScore(avatar = '') {
@@ -214,7 +216,7 @@ function normalizeCharacter(char) {
   const rawName = String(char.name || char.nameEn || '').trim();
   const nameEn = String(char.nameEn || rawName).trim();
   const name = canonicalNameFor(char.game, rawName, nameEn);
-  return { ...char, id: String(char.id || `${name}-${char.game}`).trim(), name, nameEn, birthday: char.birthday || '', avatar: char.avatar || generateDefaultAvatar(name, char.game), rarity: char.rarity ? Number(char.rarity) : undefined, element: String(char.element || '').trim(), weapon: String(char.weapon || '').trim(), region: String(char.region || '').trim(), source: char.source || 'existing', updatedAt: char.updatedAt || nowIso() };
+  return { ...char, id: String(char.id || `${name}-${char.game}`).trim(), name, nameEn, birthday: char.birthday || '', avatar: char.avatar || generateDefaultAvatar(name, char.game), rarity: char.rarity ? Number(char.rarity) : undefined, element: cleanProfileValue(char.element), weapon: cleanProfileValue(char.weapon), region: cleanProfileValue(char.region), source: char.source || 'existing', updatedAt: char.updatedAt || nowIso() };
 }
 function mergeCharacter(existing, incoming) {
   const merged = { ...existing }; const existingManual = existing.source === 'manual';
@@ -259,7 +261,7 @@ function genshinGachaPortraitUrl(iconName) {
   return suffix ? `https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_${suffix}.webp` : '';
 }
 export function normalizeNanokaCharacter(gameId, id, info) {
-  if (gameId === 'genshin') return normalizeCharacter({ id: `nanoka-genshin-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: Array.isArray(info.birth) ? formatBirthday(info.birth[0], info.birth[1]) : '', avatar: info.icon ? `https://static.nanoka.cc/assets/gi/${info.icon}.webp` : '', portrait: genshinGachaPortraitUrl(info.icon), rarity: info.rank === 'QUALITY_ORANGE' ? 5 : info.rank === 'QUALITY_PURPLE' ? 4 : undefined, element: GI_ELEMENT[info.element] || info.element || '', weapon: GI_WEAPON[info.weapon] || info.weapon || '', source: 'nanoka', updatedAt: nowIso() });
+  if (gameId === 'genshin') { const character = normalizeCharacter({ id: `nanoka-genshin-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: Array.isArray(info.birth) ? formatBirthday(info.birth[0], info.birth[1]) : '', avatar: info.icon ? `https://static.nanoka.cc/assets/gi/${info.icon}.webp` : '', portrait: genshinGachaPortraitUrl(info.icon), rarity: info.rank === 'QUALITY_ORANGE' ? 5 : info.rank === 'QUALITY_PURPLE' ? 4 : undefined, element: GI_ELEMENT[info.element] || info.element || '', weapon: GI_WEAPON[info.weapon] || info.weapon || '', source: 'nanoka', updatedAt: nowIso() }); return isInvalidCharacter(character) ? null : character; }
   if (gameId === 'hsr') { const rarity = String(info.rank || '').match(/(\d)$/)?.[1]; return normalizeCharacter({ id: `nanoka-hsr-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: `https://static.nanoka.cc/assets/hsr/avatarshopicon/${id}.webp`, portrait: `https://static.nanoka.cc/assets/hsr/avatardrawcard/${id}.webp`, rarity: rarity ? Number(rarity) : undefined, element: HSR_ELEMENT[info.damageType] || info.damageType || '', weapon: HSR_PATH[info.baseType] || info.baseType || '', source: 'nanoka', updatedAt: nowIso() }); }
   if (gameId === 'zzz') return normalizeCharacter({ id: `nanoka-zzz-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: zzzRoleAssetUrl(info.icon, 'IconRoleCircle'), portrait: zzzRoleAssetUrl(info.icon), rarity: info.rank >= 4 ? 5 : info.rank >= 3 ? 4 : info.rank, element: ZZZ_ELEMENT[info.element] || '', weapon: ZZZ_TYPE[info.type] || '', source: 'nanoka', updatedAt: nowIso() });
   return null;

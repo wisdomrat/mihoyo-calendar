@@ -114,3 +114,37 @@ test('mergeCharacterCollections merges Star Rail Topaz aliases from cached manua
   assert.equal(merged[0].avatar, bundledTopaz.avatar);
   assert.equal(merged[0].portrait, bundledTopaz.portrait);
 });
+
+test('mergeCharacterCollections removes known invalid Genshin test records from cached data', () => {
+  const merged = mergeCharacterCollections([
+    {
+      id: 'nanoka-genshin-10000134',
+      name: 'TPS旅行者',
+      nameEn: 'TPS Traveler',
+      game: 'genshin',
+      birthday: '01-01',
+      avatar: 'https://static.nanoka.cc/assets/gi/UI_AvatarIcon_PlayerBoy.webp',
+      rarity: 5,
+      element: '冰',
+      weapon: 'WEAPON_CROSSBOW',
+      source: 'nanoka',
+      updatedAt: '2026-01-01T00:00:00.000Z',
+    },
+  ], []);
+
+  assert.deepEqual(merged, []);
+});
+
+test('getFilterOptionsByGame strips HTML comments from cached profile fields', () => {
+  const options = getFilterOptionsByGame([
+    {
+      ...baseCharacter,
+      id: 'kazuha-genshin',
+      name: '枫原万叶',
+      game: 'genshin',
+      region: '稻妻<!--蒙德、璃月、稻妻、须弥、枫丹、纳塔、至冬-->',
+    },
+  ]);
+
+  assert.deepEqual(options.genshin.regions, ['稻妻']);
+});

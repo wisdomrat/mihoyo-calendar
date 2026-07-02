@@ -29,6 +29,10 @@ const CHARACTER_ALIAS_GROUPS: Record<string, string[][]> = {
   ],
 };
 
+const INVALID_CHARACTER_ALIASES: Record<string, string[][]> = {
+  genshin: [['TPS旅行者', 'TPS Traveler', 'nanoka-genshin-10000134']],
+};
+
 function normalizeKeyPart(value: string | undefined): string {
   return String(value || '')
     .toLowerCase()
@@ -36,6 +40,13 @@ function normalizeKeyPart(value: string | undefined): string {
     .trim();
 }
 
+function cleanProfileValue(value: string | undefined): string {
+  return String(value || '')
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\{\{.*?\}\}/g, '')
+    .trim();
+}
 function uniqueStrings(values: string[]): string[] {
   const seen = new Set<string>();
   const result: string[] = [];
@@ -61,6 +72,12 @@ function aliasPartsFor(game: string, parts: string[]): string[] {
   return uniqueStrings(expanded);
 }
 
+function isInvalidCharacter(character: Character): boolean {
+  const parts = [character.id, character.name, character.nameEn].map(value => normalizeKeyPart(value)).filter(Boolean);
+  return (INVALID_CHARACTER_ALIASES[character.game] || []).some(group => (
+    group.map(value => normalizeKeyPart(value)).some(part => parts.includes(part))
+  ));
+}
 function characterKeys(character: Character): string[] {
   const parts = uniqueStrings([character.name, character.nameEn].map(value => normalizeKeyPart(value)).filter(Boolean));
   const aliases = aliasPartsFor(character.game, parts);
@@ -95,9 +112,9 @@ function completenessScore(character: Character): number {
 export function normalizeCharacter(character: Character): Character {
   return {
     ...character,
-    element: character.element?.trim() || '',
-    weapon: character.weapon?.trim() || '',
-    region: character.region?.trim() || '',
+    element: cleanProfileValue(character.element),
+    weapon: cleanProfileValue(character.weapon),
+    region: cleanProfileValue(character.region),
     portrait: character.portrait?.trim() || '',
   };
 }
@@ -140,11 +157,13 @@ export function mergeCharacterCollections(
   const map = new Map<string, Character>();
 
   for (const rawCharacter of baseCharacters) {
-    setCharacterForKeys(map, rawCharacter);
+    const character = normalizeCharacter(rawCharacter);
+    if (!isInvalidCharacter(character)) setCharacterForKeys(map, character);
   }
 
   for (const rawCharacter of incomingCharacters) {
     const incoming = normalizeCharacter(rawCharacter);
+    if (isInvalidCharacter(incoming)) continue;
     const incomingKeys = characterKeys(incoming);
     const existing = incomingKeys.map(key => map.get(key)).find((character): character is Character => Boolean(character));
 
@@ -207,7 +226,9 @@ export function applyCharacterFilters(
 export function getFilterOptionsByGame(characters: Character[]): Record<string, FilterOptions> {
   const result: Record<string, FilterOptions> = {};
 
-  for (const character of characters) {
+  for (const rawCharacter of characters) {
+    const character = normalizeCharacter(rawCharacter);
+    if (isInvalidCharacter(character)) continue;
     result[character.game] ||= createEmptyFilterOptions();
     const options = result[character.game];
     if (character.element && !options.elements.includes(character.element)) options.elements.push(character.element);

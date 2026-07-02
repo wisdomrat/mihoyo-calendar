@@ -23,6 +23,16 @@ test('wide portrait artwork uses image ratio and full containment in artwork-onl
   assert.equal(layout.style['--portrait-aspect-ratio'], '2048 / 1024');
 });
 
+
+test('Genshin wide artwork-only layout enlarges character art instead of containing the full landscape canvas', () => {
+  const layout = getPortraitModalLayout({ width: 2048, height: 1024 }, 'artwork', 'genshin');
+
+  assert.equal(layout.className, 'portrait-layout-landscape portrait-layout-genshin-artwork');
+  assert.equal(layout.style['--portrait-modal-width'], 'min(620px, 94vw)');
+  assert.equal(layout.style['--portrait-size'], 'auto 96%');
+  assert.equal(layout.style['--portrait-position'], 'center center');
+  assert.equal(layout.style['--portrait-aspect-ratio'], '4 / 5');
+});
 test('square portrait artwork centers instead of leaning right in detail mode', () => {
   const layout = getPortraitModalLayout({ width: 2048, height: 2048 });
 

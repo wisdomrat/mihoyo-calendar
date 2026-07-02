@@ -55,7 +55,7 @@ function CharacterModal({ character, onClose, onEdit, portraitBackgroundEnabled 
   if (!character) return null;
 
   const usePortraitBackground = portraitBackgroundEnabled && Boolean(character.portrait);
-  const portraitLayout = getPortraitModalLayout(portraitDimensions, isArtworkOnly ? 'artwork' : 'detail');
+  const portraitLayout = getPortraitModalLayout(portraitDimensions, isArtworkOnly ? 'artwork' : 'detail', character.game);
   const artworkOnlyClassName = isArtworkOnly ? 'portrait-artwork-only' : '';
   const portraitClassName = usePortraitBackground ? `with-portrait-bg game-${character.game} ${portraitLayout.className} ${artworkOnlyClassName}` : '';
   const modalStyle = usePortraitBackground
