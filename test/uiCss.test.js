@@ -54,3 +54,11 @@ test('artwork-only portrait mode hides text and sizes the modal from image ratio
   assert.match(appSource, /portrait-artwork-only/);
   assert.match(appSource, /setIsArtworkOnly/);
 });
+test('mobile month grid columns cannot be widened by card or avatar content', () => {
+  assert.equal(declarationValue(blockFor('.weekday-header'), 'grid-template-columns'), 'repeat(7, minmax(0, 1fr))');
+  assert.equal(declarationValue(blockFor('.days-grid'), 'grid-template-columns'), 'repeat(7, minmax(0, 1fr))');
+  assert.equal(declarationValue(blockFor('.day-cell'), 'min-width'), '0');
+  assert.equal(declarationValue(blockFor('.day-characters'), 'min-width'), '0');
+  assert.equal(declarationValue(blockFor('.day-character-card'), 'min-width'), '0');
+  assert.equal(declarationValue(blockFor('.card-name'), 'min-width'), '0');
+});
