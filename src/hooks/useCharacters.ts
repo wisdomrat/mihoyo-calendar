@@ -11,6 +11,11 @@ import {
   type FilterOptions,
   type ScopedFilterState,
 } from '../utils/characterData';
+import {
+  normalizeFavoriteIds,
+  resolveFavoriteCharacters,
+  toggleFavoriteId,
+} from '../utils/favorites.ts';
 
 const STORAGE_KEY = 'mihoyo-calendar-characters-v5';
 const LEGACY_STORAGE_KEYS = ['mihoyo-calendar-characters-v4'];
@@ -19,13 +24,14 @@ const DISPLAY_MODE_KEY = 'mihoyo-calendar-display-mode';
 const WEEK_START_KEY = 'mihoyo-calendar-week-start';
 const FILTERS_KEY = 'mihoyo-calendar-filters-v3';
 const PORTRAIT_BACKGROUND_KEY = 'mihoyo-calendar-portrait-background';
+const FAVORITES_KEY = 'mihoyo-calendar-favorite-ids-v1';
 const LEGACY_FILTERS_KEY = 'mihoyo-calendar-filters-v2';
 const GAME_IDS = ['genshin', 'hsr', 'zzz', 'honkai3'];
 
 const ALL_CHARACTERS: Character[] = charactersData as Character[];
 
 export type DisplayMode = 'avatar' | 'card' | 'compact';
-export type WeekStart = 0 | 1; // 0 = Sunday, 1 = Monday
+export type WeekStart = 0 | 1;
 export type { FilterOptions };
 export type FilterState = ScopedFilterState;
 
@@ -86,14 +92,16 @@ export function useCharacters() {
   const [weekStart, setWeekStart] = useState<WeekStart>(0);
   const [portraitBackgroundEnabled, setPortraitBackgroundEnabled] = useState(false);
   const [filters, setFilters] = useState<FilterState>(() => emptyFilterState());
+  const [favoriteCharacterIds, setFavoriteCharacterIds] = useState<string[]>([]);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
-  // Load data on mount. Built-in JSON is authoritative; old cached data only contributes manual additions.
   useEffect(() => {
     const lastSyncTime = localStorage.getItem(LAST_SYNC_KEY);
     const savedMode = localStorage.getItem(DISPLAY_MODE_KEY) as DisplayMode | null;
     const savedWeekStart = localStorage.getItem(WEEK_START_KEY);
     const savedFilters = localStorage.getItem(FILTERS_KEY) || localStorage.getItem(LEGACY_FILTERS_KEY);
     const savedPortraitBackground = localStorage.getItem(PORTRAIT_BACKGROUND_KEY);
+    const savedFavorites = localStorage.getItem(FAVORITES_KEY);
 
     if (savedMode && ['avatar', 'card', 'compact'].includes(savedMode)) {
       setDisplayMode(savedMode);
@@ -111,6 +119,13 @@ export function useCharacters() {
         setFilters(emptyFilterState());
       }
     }
+    if (savedFavorites) {
+      try {
+        setFavoriteCharacterIds(normalizeFavoriteIds(JSON.parse(savedFavorites)));
+      } catch {
+        setFavoriteCharacterIds([]);
+      }
+    }
 
     const manualCharacters = [
       ...extractManualCharacters(readCharactersFromStorage(STORAGE_KEY)),
@@ -125,26 +140,26 @@ export function useCharacters() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
     for (const key of LEGACY_STORAGE_KEYS) localStorage.removeItem(key);
 
-    if (lastSyncTime) {
-      setLastSync(lastSyncTime);
-    }
+    if (lastSyncTime) setLastSync(lastSyncTime);
   }, []);
 
-  // Save to localStorage when characters change
   useEffect(() => {
     if (characters.length > 0) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(characters));
     }
   }, [characters]);
 
-  // Save filters
   useEffect(() => {
     localStorage.setItem(FILTERS_KEY, JSON.stringify(filters));
   }, [filters]);
 
+  useEffect(() => {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoriteCharacterIds));
+  }, [favoriteCharacterIds]);
+
   const fetchFromWiki = useCallback(async () => {
     setLoading(true);
-    setSyncProgress('正在检查远程数据...');
+    setSyncProgress('正在检查已发布数据...');
 
     const urls = [
       '/data/characters.json',
@@ -157,7 +172,7 @@ export function useCharacters() {
 
     for (const baseUrl of urls) {
       try {
-        setSyncProgress(`正在尝试获取: ${baseUrl}...`);
+        setSyncProgress(`正在尝试 ${baseUrl}...`);
         const cacheBuster = `?t=${Date.now()}`;
         const response = await fetch(`${baseUrl}${cacheBuster}`, {
           method: 'GET',
@@ -167,7 +182,7 @@ export function useCharacters() {
         if (response.ok) {
           const data = await response.json();
           if (Array.isArray(data) && data.length > 0) {
-            setSyncProgress(`获取到 ${data.length} 个角色，正在合并去重...`);
+            setSyncProgress(`已获取 ${data.length} 个角色，正在合并...`);
 
             const merged = mergeCharacterCollections(
               characters.map(normalizeCharacter),
@@ -179,7 +194,7 @@ export function useCharacters() {
             const now = new Date().toISOString();
             localStorage.setItem(LAST_SYNC_KEY, now);
             setLastSync(now);
-            setSyncProgress(`同步完成！共 ${merged.length} 个角色`);
+            setSyncProgress(`更新完成：共 ${merged.length} 个角色。`);
 
             setTimeout(() => setSyncProgress(''), 3000);
             success = true;
@@ -193,7 +208,7 @@ export function useCharacters() {
     }
 
     if (!success) {
-      setSyncProgress('远程数据为空或不可用，已使用本地数据');
+      setSyncProgress('已发布数据不可用，继续使用本地内置数据。');
       setTimeout(() => setSyncProgress(''), 3000);
     }
 
@@ -219,26 +234,26 @@ export function useCharacters() {
   }, []);
 
   const removeCharacter = useCallback((id: string) => {
-    setCharacters(prev => prev.filter(c => c.id !== id));
+    setCharacters(prev => prev.filter(character => character.id !== id));
   }, []);
 
   const exportData = useCallback(() => {
     const dataStr = JSON.stringify(characters, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `mihoyo-characters-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `mihoyo-characters-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
     URL.revokeObjectURL(url);
   }, [characters]);
 
   const toggleGame = useCallback((gameId: string) => {
     setSelectedGames(prev =>
       prev.includes(gameId)
-        ? prev.filter(g => g !== gameId)
+        ? prev.filter(game => game !== gameId)
         : [...prev, gameId],
     );
   }, []);
@@ -262,7 +277,14 @@ export function useCharacters() {
     setFilters(prev => normalizeFilterState({ ...prev, ...newFilters }));
   }, []);
 
-  const filteredCharacters = applyCharacterFilters(characters, selectedGames, filters);
+  const toggleFavorite = useCallback((id: string) => {
+    setFavoriteCharacterIds(prev => toggleFavoriteId(prev, id));
+  }, []);
+
+  const favoriteCharacters = resolveFavoriteCharacters(favoriteCharacterIds, characters);
+  const favoriteCount = favoriteCharacters.length;
+  const filteredCharacters = applyCharacterFilters(characters, selectedGames, filters)
+    .filter(character => !showFavoritesOnly || favoriteCharacterIds.includes(character.id));
   const filterOptionsByGame = getFilterOptionsByGame(characters);
 
   return {
@@ -275,6 +297,10 @@ export function useCharacters() {
     displayMode,
     weekStart,
     portraitBackgroundEnabled,
+    favoriteCharacterIds,
+    favoriteCharacters,
+    favoriteCount,
+    showFavoritesOnly,
     filters,
     filterOptionsByGame,
     fetchFromWiki,
@@ -286,6 +312,8 @@ export function useCharacters() {
     setDisplayMode: setMode,
     setWeekStart: setWeekStartDay,
     setPortraitBackgroundEnabled: setPortraitBackground,
+    toggleFavorite,
+    setShowFavoritesOnly,
     updateFilters,
   };
 }

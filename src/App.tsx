@@ -4,6 +4,7 @@ import Header from './components/Header';
 import FilterSidebar from './components/FilterSidebar';
 import FilterBottomSheet from './components/FilterBottomSheet';
 import AddCharacterModal from './components/AddCharacterModal';
+import CharacterSearch from './components/CharacterSearch';
 import { useCharacters } from './hooks/useCharacters';
 import type { Character, ViewMode } from './types';
 import { formatBirthday, getGameColor, getGameName, GAMES } from './utils/calendar';
@@ -13,13 +14,46 @@ import {
   getActiveFilterCount,
   resolveActiveFilterGame,
 } from './utils/filterUi';
+import { buildBirthdayIcs, getCharactersWithValidBirthdays } from './utils/ics.ts';
+import { isFavoriteCharacter } from './utils/favorites.ts';
 
 const GAME_IDS = Object.keys(GAMES);
 
-function CharacterModal({ character, onClose, onEdit, portraitBackgroundEnabled }: {
+function downloadTextFile(filename: string, content: string, mimeType: string) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  document.body.removeChild(anchor);
+  URL.revokeObjectURL(url);
+}
+
+function birthdayMonthDate(character: Character, fallback: Date): Date {
+  const match = character.birthday.match(/^(\d{2})-(\d{2})$/);
+  if (!match) return fallback;
+  const month = Number(match[1]);
+  if (month < 1 || month > 12) return fallback;
+  return new Date(fallback.getFullYear(), month - 1, 1);
+}
+
+function CharacterModal({
+  character,
+  onClose,
+  onEdit,
+  onToggleFavorite,
+  onExportIcs,
+  isFavorite,
+  portraitBackgroundEnabled,
+}: {
   character: Character | null;
   onClose: () => void;
   onEdit: (char: Character) => void;
+  onToggleFavorite: (id: string) => void;
+  onExportIcs: (character: Character) => void;
+  isFavorite: boolean;
   portraitBackgroundEnabled: boolean;
 }) {
   const [portraitDimensions, setPortraitDimensions] = useState<PortraitDimensions | null>(null);
@@ -66,19 +100,19 @@ function CharacterModal({ character, onClose, onEdit, portraitBackgroundEnabled 
     <div className="modal-overlay" onClick={onClose}>
       <div
         className={`modal-content ${portraitClassName}`}
-        onClick={e => e.stopPropagation()}
+        onClick={event => event.stopPropagation()}
         style={modalStyle}
       >
-        <button className="modal-close" onClick={onClose}>×</button>
+        <button className="modal-close" onClick={onClose}>x</button>
         {usePortraitBackground && (
           <button
             className="modal-portrait-toggle"
             type="button"
             onClick={() => setIsArtworkOnly(current => !current)}
             aria-pressed={isArtworkOnly}
-            title={isArtworkOnly ? '\u663e\u793a\u6587\u5b57' : '\u9690\u85cf\u6587\u5b57'}
+            title={isArtworkOnly ? '显示详情' : '仅看立绘'}
           >
-            {isArtworkOnly ? '\u663e\u793a\u6587\u5b57' : '\u7eaf\u7acb\u7ed8'}
+            {isArtworkOnly ? '详情' : '立绘'}
           </button>
         )}
 
@@ -88,8 +122,8 @@ function CharacterModal({ character, onClose, onEdit, portraitBackgroundEnabled 
               src={character.avatar}
               alt={character.name}
               className="modal-avatar"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
+              onError={(event) => {
+                (event.target as HTMLImageElement).style.display = 'none';
               }}
             />
           ) : (
@@ -116,34 +150,38 @@ function CharacterModal({ character, onClose, onEdit, portraitBackgroundEnabled 
             {character.rarity && (
               <div className="modal-info-item">
                 <span className="modal-info-label">稀有度</span>
-                <span className="modal-info-value">{'★'.repeat(character.rarity)}</span>
+                <span className="modal-info-value">{'*'.repeat(character.rarity)}</span>
               </div>
             )}
 
             {character.element && (
               <div className="modal-info-item">
-                <span className="modal-info-label">元素/属性</span>
+                <span className="modal-info-label">元素</span>
                 <span className="modal-info-value">{character.element}</span>
               </div>
             )}
 
             {character.weapon && (
               <div className="modal-info-item">
-                <span className="modal-info-label">武器类型</span>
+                <span className="modal-info-label">武器 / 命途</span>
                 <span className="modal-info-value">{character.weapon}</span>
               </div>
             )}
 
             {character.region && (
               <div className="modal-info-item">
-                <span className="modal-info-label">地区</span>
+                <span className="modal-info-label">地区 / 阵营</span>
                 <span className="modal-info-value">{character.region}</span>
               </div>
             )}
           </div>
 
           <div className="modal-actions">
-            <button className="btn-edit" onClick={() => onEdit(character)}>编辑</button>
+            <button className="btn-secondary" onClick={() => onToggleFavorite(character.id)}>
+              {isFavorite ? '取消收藏' : '收藏'}
+            </button>
+            <button className="btn-secondary" onClick={() => onExportIcs(character)}>日历</button>
+            <button className="btn-edit" onClick={() => onEdit(character)}>Edit</button>
           </div>
         </div>
       </div>
@@ -160,9 +198,11 @@ function App() {
   const [isFilterSidebarCollapsed, setIsFilterSidebarCollapsed] = useState(false);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [activeFilterGame, setActiveFilterGame] = useState(GAME_IDS[0]);
+  const [icsStatus, setIcsStatus] = useState('');
 
   const {
     characters,
+    allCharacters,
     loading,
     syncProgress,
     lastSync,
@@ -170,6 +210,9 @@ function App() {
     displayMode,
     weekStart,
     portraitBackgroundEnabled,
+    favoriteCharacterIds,
+    favoriteCount,
+    showFavoritesOnly,
     filters,
     filterOptionsByGame,
     fetchFromWiki,
@@ -180,6 +223,8 @@ function App() {
     setDisplayMode,
     setWeekStart,
     setPortraitBackgroundEnabled,
+    toggleFavorite,
+    setShowFavoritesOnly,
     updateFilters,
   } = useCharacters();
 
@@ -214,6 +259,23 @@ function App() {
     setShowAddModal(true);
   };
 
+  const handleSearchSelect = (character: Character) => {
+    setSelectedCharacter(character);
+    setCurrentDate(current => birthdayMonthDate(character, current));
+  };
+
+  const handleExportIcs = (charactersToExport: Character[], filename: string) => {
+    const validCharacters = getCharactersWithValidBirthdays(charactersToExport);
+    if (validCharacters.length === 0) {
+      setIcsStatus('没有可导出的有效生日。');
+      return;
+    }
+
+    downloadTextFile(filename, buildBirthdayIcs(validCharacters), 'text/calendar;charset=utf-8');
+    setIcsStatus(`已下载 ${validCharacters.length} 个生日事件。`);
+    window.setTimeout(() => setIcsStatus(''), 3000);
+  };
+
   return (
     <div className="app">
       <Header
@@ -234,7 +296,20 @@ function App() {
           setShowAddModal(true);
         }}
         onExport={exportData}
+        onExportIcs={() => handleExportIcs(allCharacters, `mihoyo-birthdays-${new Date().toISOString().split('T')[0]}.ics`)}
+        favoriteCount={favoriteCount}
+        showFavoritesOnly={showFavoritesOnly}
+        onShowFavoritesOnlyChange={setShowFavoritesOnly}
       />
+
+      <div className="search-shell">
+        <CharacterSearch
+          characters={allCharacters}
+          favoriteCharacterIds={favoriteCharacterIds}
+          onSelect={handleSearchSelect}
+        />
+        {icsStatus && <div className="ics-status" role="status">{icsStatus}</div>}
+      </div>
 
       <div className="app-body">
         <FilterSidebar
@@ -281,6 +356,9 @@ function App() {
         character={selectedCharacter}
         onClose={() => setSelectedCharacter(null)}
         onEdit={handleEdit}
+        onToggleFavorite={toggleFavorite}
+        onExportIcs={character => handleExportIcs([character], `${character.id}-birthday.ics`)}
+        isFavorite={selectedCharacter ? isFavoriteCharacter(favoriteCharacterIds, selectedCharacter.id) : false}
         portraitBackgroundEnabled={portraitBackgroundEnabled}
       />
 
