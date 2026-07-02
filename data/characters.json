@@ -415,7 +415,7 @@
     "rarity": 5,
     "element": "风",
     "weapon": "单手剑",
-    "region": "稻妻<!--蒙德、璃月、稻妻、须弥、枫丹、纳塔、至冬-->",
+    "region": "稻妻",
     "updatedAt": "2026-07-02T00:38:41.635Z",
     "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Kazuha.webp"
   },
@@ -535,7 +535,7 @@
     "rarity": 4,
     "element": "雷",
     "weapon": "弓",
-    "region": "稻妻<!--蒙德、璃月、稻妻、须弥、枫丹、纳塔、至冬-->",
+    "region": "稻妻",
     "updatedAt": "2026-07-02T00:38:41.635Z",
     "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Sara.webp"
   },
@@ -1783,21 +1783,6 @@
     "updatedAt": "2026-07-02T00:38:42.820Z",
     "region": "璃月",
     "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Zibai.webp"
-  },
-  {
-    "source": "nanoka",
-    "id": "nanoka-genshin-10000134",
-    "name": "TPS旅行者",
-    "nameEn": "TPS Traveler",
-    "game": "genshin",
-    "birthday": "01-01",
-    "avatar": "https://static.nanoka.cc/assets/gi/UI_AvatarIcon_PlayerBoy.webp",
-    "portrait": "https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_PlayerGirl.webp",
-    "rarity": 5,
-    "element": "冰",
-    "weapon": "WEAPON_CROSSBOW",
-    "updatedAt": "2026-07-02T00:38:40.862Z",
-    "region": ""
   },
   {
     "source": "bwiki",
