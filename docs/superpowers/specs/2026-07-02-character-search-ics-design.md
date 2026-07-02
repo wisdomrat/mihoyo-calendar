@@ -9,7 +9,7 @@ The next feature scope is intentionally limited to:
 1. Character search with rich candidates.
 2. ICS export/subscription as the reminder MVP.
 
-Email push, Web Push, cross-device favorites, and server-side subscription management are not part of this implementation scope.
+Email push, Web Push, cookies, accounts, favorites, cross-device storage, and server-side subscription management are not part of this implementation scope.
 
 ## Goals
 
@@ -22,13 +22,13 @@ Email push, Web Push, cross-device favorites, and server-side subscription manag
 ## Non-Goals
 
 - No account login or user identity system.
-- No cross-device synchronized favorites.
+- No cross-device storage or synchronization.
 - No email reminder delivery.
 - No Web Push reminder delivery.
 - No server-side per-user ICS feed in this phase.
 - No fuzzy pinyin search unless added in a later phase.
 
-## Cross-Device Storage Assessment
+## Cross-Device Storage Decision
 
 Cross-device storage requires a stable user identity and a backend store. Cookies alone are not sufficient because they only identify one browser on one device and can be cleared. They also do not solve server-side reminder scheduling.
 
@@ -39,7 +39,7 @@ Practical options:
 - Backend identity: magic-link email login, OAuth, or passkey plus a database; required for automatic cross-device sync.
 - Email subscription identity: verified email address plus server-side subscription records; sufficient for email reminders but still needs backend storage and unsubscribe handling.
 
-Recommendation: do not implement cross-device storage now. For reminders, lean on the user's calendar app: once an ICS file or calendar feed is imported into iCloud/Google/Outlook, that calendar provider handles cross-device sync.
+Final decision: do not implement cross-device storage for this project phase. Do not add cookies, account login, or backend identity as part of the search and ICS reminder work. For reminder portability, rely on the user's calendar app: once an ICS file is imported into iCloud, Google Calendar, Outlook, or another calendar provider, that provider handles cross-device sync.
 
 ## Character Search Design
 
@@ -181,6 +181,6 @@ Browser verification:
 - Local favorites stored in `localStorage`.
 - Favorite-only search or reminder export.
 - Export/import of favorites.
-- Cross-device sync via backend identity.
 - Email reminders through a serverless scheduler and email provider.
 - Web Push reminders through service worker plus backend subscription storage.
+- Cross-device storage is intentionally not planned. Revisit only if the project later adopts backend identity and database architecture.
