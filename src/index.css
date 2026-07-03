@@ -1221,8 +1221,13 @@ body {
   
   /* Card mode on mobile */
   .day-character-card {
-    padding: 2px 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+    padding: 3px 2px;
     font-size: 9px;
+    text-align: center;
   }
   
   .card-avatar-wrapper {
@@ -1231,7 +1236,10 @@ body {
   }
   
   .card-name {
+    width: 100%;
     font-size: 9px;
+    text-align: center;
+    -webkit-line-clamp: 2;
   }
   
   /* Week view */

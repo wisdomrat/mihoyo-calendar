@@ -18,6 +18,7 @@ import { buildBirthdayIcs, getCharactersWithValidBirthdays } from './utils/ics.t
 import { isFavoriteCharacter } from './utils/favorites.ts';
 
 const GAME_IDS = Object.keys(GAMES);
+const RARITY_STAR = '\u2605';
 
 function downloadTextFile(filename: string, content: string, mimeType: string) {
   const blob = new Blob([content], { type: mimeType });
@@ -110,9 +111,9 @@ function CharacterModal({
             type="button"
             onClick={() => setIsArtworkOnly(current => !current)}
             aria-pressed={isArtworkOnly}
-            title={isArtworkOnly ? '显示详情' : '仅看立绘'}
+            title={isArtworkOnly ? '\u663e\u793a\u8be6\u60c5' : '\u4ec5\u770b\u7acb\u7ed8'}
           >
-            {isArtworkOnly ? '详情' : '立绘'}
+            {isArtworkOnly ? '\u8be6\u60c5' : '\u7acb\u7ed8'}
           </button>
         )}
 
@@ -143,45 +144,44 @@ function CharacterModal({
 
           <div className="modal-info-grid">
             <div className="modal-info-item">
-              <span className="modal-info-label">生日</span>
+              <span className="modal-info-label">{'\u751f\u65e5'}</span>
               <span className="modal-info-value">{formatBirthday(character.birthday)}</span>
             </div>
 
             {character.rarity && (
               <div className="modal-info-item">
-                <span className="modal-info-label">稀有度</span>
-                <span className="modal-info-value">{'*'.repeat(character.rarity)}</span>
+                <span className="modal-info-label">{'\u7a00\u6709\u5ea6'}</span>
+                <span className="modal-info-value">{RARITY_STAR.repeat(character.rarity)}</span>
               </div>
             )}
 
             {character.element && (
               <div className="modal-info-item">
-                <span className="modal-info-label">元素</span>
+                <span className="modal-info-label">{'\u5143\u7d20'}</span>
                 <span className="modal-info-value">{character.element}</span>
               </div>
             )}
 
             {character.weapon && (
               <div className="modal-info-item">
-                <span className="modal-info-label">武器 / 命途</span>
+                <span className="modal-info-label">{'\u6b66\u5668 / \u547d\u9014'}</span>
                 <span className="modal-info-value">{character.weapon}</span>
               </div>
             )}
 
             {character.region && (
               <div className="modal-info-item">
-                <span className="modal-info-label">地区 / 阵营</span>
+                <span className="modal-info-label">{'\u5730\u533a / \u9635\u8425'}</span>
                 <span className="modal-info-value">{character.region}</span>
               </div>
             )}
           </div>
-
           <div className="modal-actions">
             <button className="btn-secondary" onClick={() => onToggleFavorite(character.id)}>
-              {isFavorite ? '取消收藏' : '收藏'}
+              {isFavorite ? '\u53d6\u6d88\u6536\u85cf' : '\u6536\u85cf'}
             </button>
-            <button className="btn-secondary" onClick={() => onExportIcs(character)}>日历</button>
-            <button className="btn-edit" onClick={() => onEdit(character)}>Edit</button>
+            <button className="btn-secondary" onClick={() => onExportIcs(character)}>{'\u65e5\u5386'}</button>
+            <button className="btn-edit" onClick={() => onEdit(character)}>{'\u7f16\u8f91'}</button>
           </div>
         </div>
       </div>
@@ -267,12 +267,12 @@ function App() {
   const handleExportIcs = (charactersToExport: Character[], filename: string) => {
     const validCharacters = getCharactersWithValidBirthdays(charactersToExport);
     if (validCharacters.length === 0) {
-      setIcsStatus('没有可导出的有效生日。');
+      setIcsStatus('\u6ca1\u6709\u53ef\u5bfc\u51fa\u7684\u6709\u6548\u751f\u65e5\u3002');
       return;
     }
 
     downloadTextFile(filename, buildBirthdayIcs(validCharacters), 'text/calendar;charset=utf-8');
-    setIcsStatus(`已下载 ${validCharacters.length} 个生日事件。`);
+    setIcsStatus(`\u5df2\u4e0b\u8f7d ${validCharacters.length} \u4e2a\u751f\u65e5\u4e8b\u4ef6\u3002`);
     window.setTimeout(() => setIcsStatus(''), 3000);
   };
 

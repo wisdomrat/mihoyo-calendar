@@ -13,6 +13,11 @@ function declarationValue(block, property) {
   return block.match(new RegExp(`${property}\\s*:\\s*([^;]+);`))?.[1]?.trim();
 }
 
+function mobileBlockFor(selector) {
+  const mobileCss = css.slice(css.indexOf('@media (max-width: 768px)'));
+  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s*');
+  return mobileCss.match(new RegExp(`${escaped}\\s*\\{([\\s\\S]*?)\\}`))?.[1] || '';
+}
 test('portrait modal keeps artwork below transparent overlay and readable content', () => {
   const modalLayer = blockFor('.modal-content');
   const imageLayer = blockFor('.modal-content.with-portrait-bg::before');
@@ -61,4 +66,21 @@ test('mobile month grid columns cannot be widened by card or avatar content', ()
   assert.equal(declarationValue(blockFor('.day-characters'), 'min-width'), '0');
   assert.equal(declarationValue(blockFor('.day-character-card'), 'min-width'), '0');
   assert.equal(declarationValue(blockFor('.card-name'), 'min-width'), '0');
+});
+test('character detail rarity uses star glyph instead of asterisk', () => {
+  const appSource = fs.readFileSync('src/App.tsx', 'utf8');
+
+  assert.equal(appSource.includes("'*'.repeat(character.rarity)"), false);
+  assert.equal(appSource.includes(String.raw`const RARITY_STAR = '\u2605';`), true);
+  assert.match(appSource, /RARITY_STAR\.repeat\(character\.rarity\)/);
+});
+
+test('mobile card mode places character names below avatars', () => {
+  const mobileCard = mobileBlockFor('.day-character-card');
+  const mobileCardName = mobileBlockFor('.card-name');
+
+  assert.equal(declarationValue(mobileCard, 'flex-direction'), 'column');
+  assert.equal(declarationValue(mobileCard, 'align-items'), 'center');
+  assert.equal(declarationValue(mobileCardName, 'text-align'), 'center');
+  assert.equal(declarationValue(mobileCardName, 'width'), '100%');
 });
