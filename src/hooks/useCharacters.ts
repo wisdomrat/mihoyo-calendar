@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { Character } from '../types';
+import type { Character, DateMode } from '../types';
 import charactersData from '../data/characters.json';
 import {
   applyCharacterFilters,
@@ -24,6 +24,7 @@ const DISPLAY_MODE_KEY = 'mihoyo-calendar-display-mode';
 const WEEK_START_KEY = 'mihoyo-calendar-week-start';
 const FILTERS_KEY = 'mihoyo-calendar-filters-v3';
 const PORTRAIT_BACKGROUND_KEY = 'mihoyo-calendar-portrait-background';
+const DATE_MODE_KEY = 'mihoyo-calendar-date-mode';
 const FAVORITES_KEY = 'mihoyo-calendar-favorite-ids-v1';
 const LEGACY_FILTERS_KEY = 'mihoyo-calendar-filters-v2';
 const GAME_IDS = ['genshin', 'hsr', 'zzz', 'honkai3'];
@@ -32,6 +33,7 @@ const ALL_CHARACTERS: Character[] = charactersData as Character[];
 
 export type DisplayMode = 'avatar' | 'card' | 'compact';
 export type WeekStart = 0 | 1;
+export type { DateMode } from '../types';
 export type { FilterOptions };
 export type FilterState = ScopedFilterState;
 
@@ -90,7 +92,8 @@ export function useCharacters() {
   const [selectedGames, setSelectedGames] = useState<string[]>(GAME_IDS);
   const [displayMode, setDisplayMode] = useState<DisplayMode>('avatar');
   const [weekStart, setWeekStart] = useState<WeekStart>(0);
-  const [portraitBackgroundEnabled, setPortraitBackgroundEnabled] = useState(false);
+  const [portraitBackgroundEnabled, setPortraitBackgroundEnabled] = useState(true);
+  const [dateMode, setDateMode] = useState<DateMode>('birthday');
   const [filters, setFilters] = useState<FilterState>(() => emptyFilterState());
   const [favoriteCharacterIds, setFavoriteCharacterIds] = useState<string[]>([]);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
@@ -109,8 +112,13 @@ export function useCharacters() {
     if (savedWeekStart && (savedWeekStart === '0' || savedWeekStart === '1')) {
       setWeekStart(parseInt(savedWeekStart) as WeekStart);
     }
-    if (savedPortraitBackground === 'true') {
-      setPortraitBackgroundEnabled(true);
+    // 默认开启立绘背景；只有用户明确关过（存了 'false'）才尊重关闭
+    if (savedPortraitBackground === 'false') {
+      setPortraitBackgroundEnabled(false);
+    }
+    const savedDateMode = localStorage.getItem(DATE_MODE_KEY);
+    if (savedDateMode === 'release' || savedDateMode === 'birthday') {
+      setDateMode(savedDateMode);
     }
     if (savedFilters) {
       try {
@@ -273,6 +281,11 @@ export function useCharacters() {
     localStorage.setItem(PORTRAIT_BACKGROUND_KEY, String(enabled));
   }, []);
 
+  const setDateModePref = useCallback((mode: DateMode) => {
+    setDateMode(mode);
+    localStorage.setItem(DATE_MODE_KEY, mode);
+  }, []);
+
   const updateFilters = useCallback((newFilters: Partial<FilterState>) => {
     setFilters(prev => normalizeFilterState({ ...prev, ...newFilters }));
   }, []);
@@ -297,6 +310,7 @@ export function useCharacters() {
     displayMode,
     weekStart,
     portraitBackgroundEnabled,
+    dateMode,
     favoriteCharacterIds,
     favoriteCharacters,
     favoriteCount,
@@ -312,6 +326,7 @@ export function useCharacters() {
     setDisplayMode: setMode,
     setWeekStart: setWeekStartDay,
     setPortraitBackgroundEnabled: setPortraitBackground,
+    setDateMode: setDateModePref,
     toggleFavorite,
     setShowFavoritesOnly,
     updateFilters,

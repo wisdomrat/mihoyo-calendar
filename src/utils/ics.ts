@@ -1,8 +1,10 @@
-import type { Character } from '../types';
+import type { Character, DateMode } from '../types';
+import { calendarDateKey, effectiveDateMode } from './calendar.ts';
 
 export interface BirthdayIcsOptions {
   year?: number;
   productId?: string;
+  dateMode?: DateMode;
 }
 
 const DEFAULT_PRODUCT_ID = '-//MiHoYo Calendar//Birthday Calendar//EN';
@@ -34,8 +36,8 @@ export function birthdayToIcsDate(birthday: string | undefined, year = new Date(
   return `${year}${String(month).padStart(2, '0')}${String(day).padStart(2, '0')}`;
 }
 
-export function getCharactersWithValidBirthdays(characters: Character[]): Character[] {
-  return characters.filter(character => birthdayToIcsDate(character.birthday) !== null);
+export function getCharactersWithValidBirthdays(characters: Character[], dateMode: DateMode = 'birthday'): Character[] {
+  return characters.filter(character => birthdayToIcsDate(calendarDateKey(character, dateMode)) !== null);
 }
 
 function eventDescription(character: Character): string {
@@ -47,14 +49,15 @@ function eventDescription(character: Character): string {
   ].filter(Boolean).join('\\n');
 }
 
-function buildEvent(character: Character, year: number): string[] | null {
-  const startDate = birthdayToIcsDate(character.birthday, year);
+function buildEvent(character: Character, year: number, dateMode: DateMode): string[] | null {
+  const startDate = birthdayToIcsDate(calendarDateKey(character, dateMode), year);
   if (!startDate) return null;
 
-  const summary = `${character.name}生日 - ${character.game}`;
+  const isRelease = effectiveDateMode(character.game, dateMode) === 'release';
+  const summary = isRelease ? `${character.name}实装纪念日 - ${character.game}` : `${character.name}生日 - ${character.game}`;
   return [
     'BEGIN:VEVENT',
-    `UID:${escapeIcsText(character.id)}-birthday@${ICS_DOMAIN}`,
+    `UID:${escapeIcsText(character.id)}-${isRelease ? 'release' : 'birthday'}@${ICS_DOMAIN}`,
     `DTSTAMP:${year}0101T000000Z`,
     `DTSTART;VALUE=DATE:${startDate}`,
     `SUMMARY:${escapeIcsText(summary)}`,
@@ -67,6 +70,7 @@ function buildEvent(character: Character, year: number): string[] | null {
 
 export function buildBirthdayIcs(characters: Character[], options: BirthdayIcsOptions = {}): string {
   const year = options.year ?? new Date().getFullYear();
+  const dateMode = options.dateMode ?? 'birthday';
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -76,7 +80,7 @@ export function buildBirthdayIcs(characters: Character[], options: BirthdayIcsOp
   ];
 
   for (const character of characters) {
-    const event = buildEvent(character, year);
+    const event = buildEvent(character, year, dateMode);
     if (event) lines.push(...event);
   }
 
