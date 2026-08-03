@@ -13,14 +13,27 @@ export const GAMES: Record<string, { name: string; color: string }> = {
 // whole game as birthday-less.
 const GAMES_WITHOUT_BIRTHDAY = new Set(['hsr']);
 
+// Games with no recorded release dates across the whole roster (not just a
+// single character). Honkai 3's BWIKI template carries no 实装日期, so the
+// entire game currently has no release data.
+const GAMES_WITHOUT_RELEASE = new Set(['honkai3']);
+
 export function gameHasBirthday(gameId: string): boolean {
   return !GAMES_WITHOUT_BIRTHDAY.has(gameId);
 }
 
-// Resolve which date mode actually applies to a game: games without birthdays
-// are forced into release mode.
+export function gameHasRelease(gameId: string): boolean {
+  return !GAMES_WITHOUT_RELEASE.has(gameId);
+}
+
+// Resolve which date mode actually applies to a game, falling back to whatever
+// the game genuinely has: games without birthdays are forced to release mode,
+// and games without release dates are forced back to birthday mode, so no game
+// ever renders an empty calendar in some mode.
 export function effectiveDateMode(gameId: string, mode: DateMode): DateMode {
-  return gameHasBirthday(gameId) ? mode : 'release';
+  if (!gameHasBirthday(gameId)) return 'release';
+  if (!gameHasRelease(gameId)) return 'birthday';
+  return mode;
 }
 
 // Full filter label for a game, e.g. 原神角色生日 / 原神角色实装日.

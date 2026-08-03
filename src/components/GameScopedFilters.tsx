@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { GAMES, effectiveDateMode, gameHasBirthday, gameDateLabel } from '../utils/calendar';
+import { GAMES, effectiveDateMode, gameHasBirthday, gameHasRelease, gameDateLabel } from '../utils/calendar';
 import {
   getActiveFilterCount,
   getScopedFilterSections,
@@ -46,9 +46,11 @@ const GameScopedFilters = ({
   const sections = getScopedFilterSections(activeGame, filterOptionsByGame);
   // 标题后缀随日期模式变化：原神角色生日 / 原神角色实装日；无生日游戏恒为实装日
   const activeGameDateLabel = gameDateLabel(activeGame, dateMode);
-  // 只有“没有官方生日”的游戏（如星穹铁道）才提示，且与当前模式无关——
-  // 有生日的游戏切到实装模式不应看到这句。
-  const showReleaseNotice = !gameHasBirthday(activeGame);
+  // 整游戏缺某一项时提示（与当前模式无关）：
+  //  - 星穹铁道：官方未公开生日 → 恒用实装日
+  //  - 崩坏3：暂未收录实装日期 → 恒用生日
+  const lacksBirthday = !gameHasBirthday(activeGame);
+  const lacksRelease = !gameHasRelease(activeGame);
 
   const handleGameClick = (gameId: string) => {
     const isSelected = selectedGames.includes(gameId);
@@ -138,9 +140,14 @@ const GameScopedFilters = ({
           {activeGameDateLabel}
         </div>
 
-        {showReleaseNotice && (
+        {lacksBirthday && (
           <p className="game-filter-date-notice">
             {activeGameMeta.name}角色未公开生日，以其首次实装时间代替展示，敬请留意。
+          </p>
+        )}
+        {lacksRelease && (
+          <p className="game-filter-date-notice">
+            {activeGameMeta.name}角色暂未收录首次实装日期，仍以角色生日展示，敬请留意。
           </p>
         )}
 

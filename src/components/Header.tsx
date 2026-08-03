@@ -24,7 +24,7 @@ interface HeaderProps {
 }
 
 const TEXT = {
-  title: '\u7c73\u54c8\u6e38\u89d2\u8272\u751f\u65e5\u5386',
+  title: '\u7c73\u54c8\u6e38\u89d2\u8272\u751f\u65e5\u65e5\u5386',
   subtitle: '\u8ffd\u8e2a\u4f60\u559c\u6b22\u7684\u89d2\u8272\u751f\u65e5',
   filters: '\u7b5b\u9009',
   view: '\u5c55\u793a:',
@@ -38,7 +38,6 @@ const TEXT = {
   artTitle: '\u8be6\u60c5\u7acb\u7ed8\u80cc\u666f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u7eaf\u8272\u80cc\u666f\uff09',
   solid: '\u7eaf\u8272',
   solidTitle: '\u7eaf\u8272\u80cc\u666f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u7acb\u7ed8\u80cc\u666f\uff09',
-  dateLabel: '\u65e5\u671f:',
   birthday: '\u751f\u65e5',
   birthdayTitle: '\u663e\u793a\u89d2\u8272\u751f\u65e5\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u5b9e\u88c5\u65e5\u671f\uff09',
   release: '\u5b9e\u88c5',
@@ -123,7 +122,6 @@ const Header = ({
           </div>
 
           <div className="control-group">
-            <span className="control-label">{TEXT.dateLabel}</span>
             <div className="display-modes">
               {/* 独立二态开关：生日 / 实装日期（当前态恒为深色） */}
               <button
