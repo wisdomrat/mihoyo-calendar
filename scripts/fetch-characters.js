@@ -249,7 +249,10 @@ export function mergeData(existing, newChars) {
 
 function loadExistingData() { for (const dataPath of [...DATA_FILES].reverse()) { try { if (fs.existsSync(dataPath)) return JSON.parse(fs.readFileSync(dataPath, 'utf8')); } catch (error) { console.warn(`Failed to read ${dataPath}: ${error.message}`); } } return []; }
 function saveData(characters) { for (const dataPath of DATA_FILES) { fs.mkdirSync(path.dirname(dataPath), { recursive: true }); fs.writeFileSync(dataPath, `${JSON.stringify(characters, null, 2)}\n`, 'utf8'); console.log(`Saved ${path.relative(ROOT_DIR, dataPath)}`); } }
-function nanokaCharacterUrl(html, gameKey) { return String(html || '').match(new RegExp(`https://static\\.nanoka\\.cc/${gameKey}/[^"' ]+/character\\.json`))?.[0] || null; }
+function nanokaVersionBaseUrl(html, gameKey) {
+  return String(html || '').match(new RegExp(`https://static\\.nanoka\\.cc/${gameKey}/[^/"' ]+`))?.[0] || null;
+}
+function nanokaCharacterUrl(html, gameKey) { const base = nanokaVersionBaseUrl(html, gameKey); return base ? `${base}/character.json` : null; }
 function zzzRoleAssetUrl(iconName, prefix = 'IconRole') {
   const clean = String(iconName || '').trim().replace(/\.(png|webp|jpg|jpeg)$/i, '');
   const suffix = clean.match(/^IconRole(.+)$/i)?.[1];
@@ -263,10 +266,47 @@ function genshinGachaPortraitUrl(iconName) {
 export function normalizeNanokaCharacter(gameId, id, info) {
   if (gameId === 'genshin') { const character = normalizeCharacter({ id: `nanoka-genshin-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: Array.isArray(info.birth) ? formatBirthday(info.birth[0], info.birth[1]) : '', avatar: info.icon ? `https://static.nanoka.cc/assets/gi/${info.icon}.webp` : '', portrait: genshinGachaPortraitUrl(info.icon), rarity: info.rank === 'QUALITY_ORANGE' ? 5 : info.rank === 'QUALITY_PURPLE' ? 4 : undefined, element: GI_ELEMENT[info.element] || info.element || '', weapon: GI_WEAPON[info.weapon] || info.weapon || '', source: 'nanoka', updatedAt: nowIso() }); return isInvalidCharacter(character) ? null : character; }
   if (gameId === 'hsr') { const rarity = String(info.rank || '').match(/(\d)$/)?.[1]; return normalizeCharacter({ id: `nanoka-hsr-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: `https://static.nanoka.cc/assets/hsr/avatarshopicon/${id}.webp`, portrait: `https://static.nanoka.cc/assets/hsr/avatardrawcard/${id}.webp`, rarity: rarity ? Number(rarity) : undefined, element: HSR_ELEMENT[info.damageType] || info.damageType || '', weapon: HSR_PATH[info.baseType] || info.baseType || '', source: 'nanoka', updatedAt: nowIso() }); }
-  if (gameId === 'zzz') return normalizeCharacter({ id: `nanoka-zzz-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: zzzRoleAssetUrl(info.icon, 'IconRoleCircle'), portrait: zzzRoleAssetUrl(info.icon), rarity: info.rank >= 4 ? 5 : info.rank >= 3 ? 4 : info.rank, element: ZZZ_ELEMENT[info.element] || '', weapon: ZZZ_TYPE[info.type] || '', source: 'nanoka', updatedAt: nowIso() });
+  if (gameId === 'zzz') return normalizeCharacter({ id: `nanoka-zzz-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: info.birthday || '', avatar: zzzRoleAssetUrl(info.icon, 'IconRoleCircle'), portrait: zzzRoleAssetUrl(info.icon), rarity: info.rank >= 4 ? 5 : info.rank >= 3 ? 4 : info.rank, element: ZZZ_ELEMENT[info.element] || '', weapon: ZZZ_TYPE[info.type] || '', source: 'nanoka', updatedAt: nowIso() });
   return null;
 }
-async function fetchFromNanoka(gameId, config) { if (!config.nanokaHost) return []; console.log(`\nFetching nanoka for ${config.name}...`); try { const html = await fetchText(config.nanokaHost, { retries: 2, timeoutMs: 20000 }); const url = nanokaCharacterUrl(html, config.nanokaGame); if (!url) throw new Error('character.json URL not found'); const data = await fetchJson(url, { retries: 2, timeoutMs: 20000 }); const chars = Object.entries(data).map(([id, info]) => normalizeNanokaCharacter(gameId, id, info)).filter(Boolean).filter(char => char.name && !/^\(.+\)/.test(char.name)); console.log(`  ${chars.length} records`); return chars; } catch (error) { console.warn(`  nanoka failed for ${gameId}: ${error.message}`); return []; } }
+// Parse ZZZ birthday string like "03/14" or "3/14" -> "03-14"
+function parseZzzBirthday(raw) {
+  if (!raw) return '';
+  const m = String(raw).trim().match(/^(\d{1,2})\s*[\/\-\.]\s*(\d{1,2})$/);
+  if (!m) return '';
+  return formatBirthday(m[1], m[2]);
+}
+
+// Fetch per-character ZZZ details for birthday data (list endpoint lacks birthdays).
+async function fetchZzzBirthdays(baseUrl, data) {
+  const ids = Object.keys(data || {});
+  if (!ids.length || !baseUrl) return data;
+  const url = `${baseUrl}/zh/character`;
+  const CONCURRENCY = 6;
+  const out = { ...data };
+  let idx = 0;
+  let done = 0;
+  let withBd = 0;
+  async function worker() {
+    while (true) {
+      const i = idx++;
+      if (i >= ids.length) return;
+      const id = ids[i];
+      try {
+        const detail = await fetchJson(`${url}/${id}.json`, { retries: 2, timeoutMs: 10000 });
+        const bd = parseZzzBirthday(detail?.partner_info?.birthday);
+        if (bd) { out[id] = { ...(out[id] || {}), birthday: bd }; withBd++; }
+      } catch { /* ignore per-character failures */ }
+      done++;
+    }
+  }
+  const workers = Array.from({ length: Math.min(CONCURRENCY, ids.length) }, () => worker());
+  await Promise.all(workers);
+  console.log(`  ZZZ birthdays: ${withBd}/${ids.length}`);
+  return out;
+}
+
+async function fetchFromNanoka(gameId, config) { if (!config.nanokaHost) return []; console.log(`\nFetching nanoka for ${config.name}...`); try { const html = await fetchText(config.nanokaHost, { retries: 2, timeoutMs: 20000 }); const baseUrl = nanokaVersionBaseUrl(html, config.nanokaGame); if (!baseUrl) throw new Error('character.json URL not found'); const listUrl = `${baseUrl}/character.json`; let data = await fetchJson(listUrl, { retries: 2, timeoutMs: 20000 }); if (gameId === 'zzz') data = await fetchZzzBirthdays(baseUrl, data); const chars = Object.entries(data).map(([id, info]) => normalizeNanokaCharacter(gameId, id, info)).filter(Boolean).filter(char => char.name && !/^\(.+\)/.test(char.name)); console.log(`  ${chars.length} records`); return chars; } catch (error) { console.warn(`  nanoka failed for ${gameId}: ${error.message}`); return []; } }
 function extractTableRows(html) { return [...String(html || '').matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)].map(match => match[1]); }
 function extractCells(row) { return [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(match => match[1]); }
 function absoluteUrl(origin, src) { const clean = decodeHtml(src || '').trim(); if (!clean) return ''; return /^https?:\/\//i.test(clean) ? clean : `${origin}${clean.startsWith('/') ? '' : '/'}${clean}`; }
