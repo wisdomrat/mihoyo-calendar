@@ -11,6 +11,7 @@ export interface Character {
   nameEn: string;
   game: string;
   birthday: string; // MM-DD format
+  releaseDate?: string; // YYYY-MM-DD format, first playable release
   avatar?: string;
   portrait?: string;
   rarity?: number;
@@ -22,6 +23,9 @@ export interface Character {
 }
 
 export type ViewMode = 'month' | 'week';
+
+// birthday = 角色生日; release = 首次实装/上线日期（星穹铁道无官方生日，恒用实装）
+export type DateMode = 'birthday' | 'release';
 
 export interface CalendarDay {
   date: Date;

@@ -66,6 +66,26 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const nowIso = () => new Date().toISOString();
 const pad2 = value => String(value).padStart(2, '0');
 function formatBirthday(month, day) { const m = Number(month); const d = Number(day); return Number.isInteger(m) && Number.isInteger(d) && m >= 1 && m <= 12 && d >= 1 && d <= 31 ? `${pad2(m)}-${pad2(d)}` : ''; }
+// Normalize the many release-date shapes seen across sources into YYYY-MM-DD.
+// Accepts Unix seconds (HSR nanoka), "2021-07-21 00:00:00" (GI nanoka), and
+// "2026年07月29日" (BWIKI 实装日期).
+function formatReleaseDate(raw) {
+  if (raw === null || raw === undefined || raw === '') return '';
+  if (typeof raw === 'number' && Number.isFinite(raw) && raw > 0) {
+    const ms = raw < 1e12 ? raw * 1000 : raw; // seconds vs milliseconds
+    // Game servers run on UTC+8; derive the calendar date there, not UTC,
+    // otherwise timestamps land on the previous day.
+    const d = new Date(ms + 8 * 3600 * 1000);
+    if (Number.isNaN(d.getTime())) return '';
+    return `${d.getUTCFullYear()}-${pad2(d.getUTCMonth() + 1)}-${pad2(d.getUTCDate())}`;
+  }
+  const text = String(raw).trim();
+  const cn = text.match(/(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/);
+  if (cn) return `${cn[1]}-${pad2(cn[2])}-${pad2(cn[3])}`;
+  const iso = text.match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+  if (iso) return `${iso[1]}-${pad2(iso[2])}-${pad2(iso[3])}`;
+  return '';
+}
 function decodeHtml(value = '') { return value.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&#8217;/g, "'").replace(/\\\//g, '/').replace(/\\"/g, '"').replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16))); }
 function cleanProfileValue(value = '') { return decodeHtml(String(value || '').replace(/<!--[\\s\\S]*?-->/g, '').replace(/<[^>]+>/g, '')).replace(/\\{\\{.*?\\}\\}/g, '').trim(); }
 function stripTags(value = '') { return cleanProfileValue(value); }
@@ -154,6 +174,9 @@ export function parseBwikiWikitext(wikitext) {
   ];
   for (const [field, patterns] of fields) for (const pattern of patterns) { const match = text.match(pattern); if (match) { info[field] = stripTags(match[1]).replace(/\{\{.*?\}\}/g, '').trim(); break; } }
   for (const pattern of [/\|\s*\u7a00\u6709\u5ea6\s*[=\uff1d]\s*(\d)\s*\u661f/, /\|\s*\u7a00\u6709\u5ea6\s*[=\uff1d]\s*(\d)/, /\|\s*\u661f\u7ea7\s*[=\uff1d]\s*(\d)/]) { const match = text.match(pattern); if (match) { info.rarity = Number(match[1]); break; } }
+  // \u5b9e\u88c5\u65e5\u671f e.g. |\u5b9e\u88c5\u65e5\u671f=2026\u5e7407\u670829\u65e5 (ZZZ agents carry this on BWIKI)
+  const releaseMatch = text.match(/\|\s*\u5b9e\u88c5\u65e5\u671f\s*[=\uff1d]\s*([^\n|]+)/);
+  if (releaseMatch) { const rd = formatReleaseDate(stripTags(releaseMatch[1])); if (rd) info.releaseDate = rd; }
   return info;
 }
 
@@ -228,6 +251,7 @@ function mergeCharacter(existing, incoming) {
   if ((!merged.nameEn || normalizeKeyPart(merged.nameEn) === normalizeKeyPart(merged.name)) && incoming.nameEn) merged.nameEn = incoming.nameEn;
   if (!merged.name && incoming.name) merged.name = incoming.name;
   for (const field of ['element', 'weapon', 'region']) if (!merged[field] && incoming[field]) merged[field] = incoming[field];
+  if (!merged.releaseDate && incoming.releaseDate) merged.releaseDate = incoming.releaseDate;
   if (!merged.rarity && incoming.rarity) merged.rarity = incoming.rarity;
   if (!existingManual && sourceScore(incoming.source) > sourceScore(merged.source)) merged.source = incoming.source;
   if (!existingManual && incoming.id && sourceScore(incoming.source) >= sourceScore(existing.source)) merged.id = existing.id || incoming.id;
@@ -264,8 +288,8 @@ function genshinGachaPortraitUrl(iconName) {
   return suffix ? `https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_${suffix}.webp` : '';
 }
 export function normalizeNanokaCharacter(gameId, id, info) {
-  if (gameId === 'genshin') { const character = normalizeCharacter({ id: `nanoka-genshin-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: Array.isArray(info.birth) ? formatBirthday(info.birth[0], info.birth[1]) : '', avatar: info.icon ? `https://static.nanoka.cc/assets/gi/${info.icon}.webp` : '', portrait: genshinGachaPortraitUrl(info.icon), rarity: info.rank === 'QUALITY_ORANGE' ? 5 : info.rank === 'QUALITY_PURPLE' ? 4 : undefined, element: GI_ELEMENT[info.element] || info.element || '', weapon: GI_WEAPON[info.weapon] || info.weapon || '', source: 'nanoka', updatedAt: nowIso() }); return isInvalidCharacter(character) ? null : character; }
-  if (gameId === 'hsr') { const rarity = String(info.rank || '').match(/(\d)$/)?.[1]; return normalizeCharacter({ id: `nanoka-hsr-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, avatar: `https://static.nanoka.cc/assets/hsr/avatarshopicon/${id}.webp`, portrait: `https://static.nanoka.cc/assets/hsr/avatardrawcard/${id}.webp`, rarity: rarity ? Number(rarity) : undefined, element: HSR_ELEMENT[info.damageType] || info.damageType || '', weapon: HSR_PATH[info.baseType] || info.baseType || '', source: 'nanoka', updatedAt: nowIso() }); }
+  if (gameId === 'genshin') { const character = normalizeCharacter({ id: `nanoka-genshin-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: Array.isArray(info.birth) ? formatBirthday(info.birth[0], info.birth[1]) : '', releaseDate: formatReleaseDate(info.release), avatar: info.icon ? `https://static.nanoka.cc/assets/gi/${info.icon}.webp` : '', portrait: genshinGachaPortraitUrl(info.icon), rarity: info.rank === 'QUALITY_ORANGE' ? 5 : info.rank === 'QUALITY_PURPLE' ? 4 : undefined, element: GI_ELEMENT[info.element] || info.element || '', weapon: GI_WEAPON[info.weapon] || info.weapon || '', source: 'nanoka', updatedAt: nowIso() }); return isInvalidCharacter(character) ? null : character; }
+  if (gameId === 'hsr') { const rarity = String(info.rank || '').match(/(\d)$/)?.[1]; return normalizeCharacter({ id: `nanoka-hsr-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, releaseDate: formatReleaseDate(info.release), avatar: `https://static.nanoka.cc/assets/hsr/avatarshopicon/${id}.webp`, portrait: `https://static.nanoka.cc/assets/hsr/avatardrawcard/${id}.webp`, rarity: rarity ? Number(rarity) : undefined, element: HSR_ELEMENT[info.damageType] || info.damageType || '', weapon: HSR_PATH[info.baseType] || info.baseType || '', source: 'nanoka', updatedAt: nowIso() }); }
   if (gameId === 'zzz') return normalizeCharacter({ id: `nanoka-zzz-${id}`, name: info.zh || info.en, nameEn: info.en || info.zh, game: gameId, birthday: info.birthday || '', avatar: zzzRoleAssetUrl(info.icon, 'IconRoleCircle'), portrait: zzzRoleAssetUrl(info.icon), rarity: info.rank >= 4 ? 5 : info.rank >= 3 ? 4 : info.rank, element: ZZZ_ELEMENT[info.element] || '', weapon: ZZZ_TYPE[info.type] || '', source: 'nanoka', updatedAt: nowIso() });
   return null;
 }
@@ -323,7 +347,7 @@ async function fetchFromBwiki(gameId, config) {
   try { const listUrl = `https://${config.bwiki}/api.php?action=query&list=categorymembers&cmtitle=Category:${encodeURIComponent(U.roleCategory)}&cmlimit=150&format=json`; const listData = await fetchJson(listUrl, { retries: 2, timeoutMs: 25000, headers: { Referer: 'https://wiki.biligame.com/' } }); const pages = (listData?.query?.categorymembers || []).filter(page => page.title && !page.title.includes(':') && !page.title.includes('\u5206\u7c7b') && !page.title.includes('\u6a21\u677f') && page.title.length < 32).slice(0, 150); if (!pages.length) return [];
     const characters = [];
     for (let i = 0; i < pages.length; i += 25) { let wikiPages = []; try { wikiPages = await fetchBwikiRevisions(config, pages.slice(i, i + 25).map(page => page.title)); } catch (error) { console.warn(`  BWIKI batch failed ${i + 1}: ${error.message}`); continue; }
-      for (const wikiPage of wikiPages) { const title = wikiPage.title; const wikitext = wikiPage.revisions?.[0]?.['*'] || wikiPage.revisions?.[0]?.slots?.main?.['*'] || ''; const info = parseBwikiWikitext(wikitext); if (!info.birthday) continue; const roleImages = gameId === 'honkai3' ? await getBwikiRoleImages(title, config.bwikiName) : { avatar: '', portrait: '' }; const avatar = roleImages.avatar || (gameId === 'honkai3' ? roleImages.portrait : ''); characters.push(normalizeCharacter({ id: `bwiki-${gameId}-${title}`, name: title, nameEn: info.nameEn || title, game: gameId, birthday: info.birthday, avatar, portrait: roleImages.portrait, rarity: info.rarity, element: info.element, weapon: info.weapon, region: info.region, source: 'bwiki', updatedAt: nowIso() })); }
+      for (const wikiPage of wikiPages) { const title = wikiPage.title; const wikitext = wikiPage.revisions?.[0]?.['*'] || wikiPage.revisions?.[0]?.slots?.main?.['*'] || ''; const info = parseBwikiWikitext(wikitext); if (!info.birthday) continue; const roleImages = gameId === 'honkai3' ? await getBwikiRoleImages(title, config.bwikiName) : { avatar: '', portrait: '' }; const avatar = roleImages.avatar || (gameId === 'honkai3' ? roleImages.portrait : ''); characters.push(normalizeCharacter({ id: `bwiki-${gameId}-${title}`, name: title, nameEn: info.nameEn || title, game: gameId, birthday: info.birthday, releaseDate: info.releaseDate, avatar, portrait: roleImages.portrait, rarity: info.rarity, element: info.element, weapon: info.weapon, region: info.region, source: 'bwiki', updatedAt: nowIso() })); }
       await sleep(150);
     }
     console.log(`  ${characters.length} records with birthdays`); return characters;
