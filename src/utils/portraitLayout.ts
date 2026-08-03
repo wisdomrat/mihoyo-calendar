@@ -26,11 +26,14 @@ function imageRatio(dimensions: PortraitDimensions): string {
 
 function getArtworkOnlyLayout(dimensions: PortraitDimensions, className: string): PortraitModalLayout {
   const ratio = dimensions.width / dimensions.height;
+  // Width caps are viewport-driven so desktop scales up while mobile keeps
+  // hitting the vw term first (unchanged behaviour on small screens). The vh
+  // term stops very tall images from overflowing the viewport height.
   const modalWidth = ratio >= 1.15
-    ? 'min(820px, 96vw)'
+    ? 'min(1400px, 96vw, 160vh)'
     : ratio >= 0.9
-      ? 'min(680px, 94vw)'
-      : 'min(520px, 94vw)';
+      ? 'min(1000px, 94vw, 92vh)'
+      : 'min(720px, 94vw, 92vh)';
 
   return {
     className,
@@ -57,13 +60,15 @@ export function getPortraitModalLayout(
   if (ratio >= 1.15) {
     if (mode === 'artwork') {
       if (gameId === 'genshin') {
+        // Use the real aspect ratio instead of forcing 4/5, which used to crop
+        // landscape artwork on wide desktop screens.
         return {
           className: 'portrait-layout-landscape portrait-layout-genshin-artwork',
           style: {
-            '--portrait-modal-width': 'min(620px, 94vw)',
-            '--portrait-size': 'auto 96%',
+            '--portrait-modal-width': 'min(1400px, 96vw, 160vh)',
+            '--portrait-size': 'contain',
             '--portrait-position': 'center center',
-            '--portrait-aspect-ratio': '4 / 5',
+            '--portrait-aspect-ratio': imageRatio(dimensions),
           },
         };
       }
@@ -100,12 +105,17 @@ export function getPortraitModalLayout(
     return getArtworkOnlyLayout(dimensions, 'portrait-layout-vertical');
   }
 
+  // ZZZ vertical portraits often have weapons/gear extending to one side, so a
+  // hard right-bottom pin reads as off-centre once the modal clips that edge.
+  // Centre them horizontally instead; other games keep the right-bottom lean.
+  const verticalPosition = gameId === 'zzz' ? 'center bottom' : 'right bottom';
+
   return {
     className: 'portrait-layout-vertical',
     style: {
       '--portrait-modal-width': '400px',
       '--portrait-size': 'auto 94%',
-      '--portrait-position': 'right bottom',
+      '--portrait-position': verticalPosition,
     },
   };
 }

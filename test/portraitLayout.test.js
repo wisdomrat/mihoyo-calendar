@@ -17,21 +17,21 @@ test('wide portrait artwork uses image ratio and full containment in artwork-onl
   const layout = getPortraitModalLayout({ width: 2048, height: 1024 }, 'artwork');
 
   assert.equal(layout.className, 'portrait-layout-landscape');
-  assert.equal(layout.style['--portrait-modal-width'], 'min(820px, 96vw)');
+  assert.equal(layout.style['--portrait-modal-width'], 'min(1400px, 96vw, 160vh)');
   assert.equal(layout.style['--portrait-size'], 'contain');
   assert.equal(layout.style['--portrait-position'], 'center center');
   assert.equal(layout.style['--portrait-aspect-ratio'], '2048 / 1024');
 });
 
 
-test('Genshin wide artwork-only layout enlarges character art instead of containing the full landscape canvas', () => {
+test('Genshin wide artwork-only layout keeps the real landscape ratio instead of forcing a 4/5 crop', () => {
   const layout = getPortraitModalLayout({ width: 2048, height: 1024 }, 'artwork', 'genshin');
 
   assert.equal(layout.className, 'portrait-layout-landscape portrait-layout-genshin-artwork');
-  assert.equal(layout.style['--portrait-modal-width'], 'min(620px, 94vw)');
-  assert.equal(layout.style['--portrait-size'], 'auto 96%');
+  assert.equal(layout.style['--portrait-modal-width'], 'min(1400px, 96vw, 160vh)');
+  assert.equal(layout.style['--portrait-size'], 'contain');
   assert.equal(layout.style['--portrait-position'], 'center center');
-  assert.equal(layout.style['--portrait-aspect-ratio'], '4 / 5');
+  assert.equal(layout.style['--portrait-aspect-ratio'], '2048 / 1024');
 });
 test('square portrait artwork centers instead of leaning right in detail mode', () => {
   const layout = getPortraitModalLayout({ width: 2048, height: 2048 });
@@ -49,6 +49,15 @@ test('vertical portrait artwork keeps the compact modal framing', () => {
   assert.equal(layout.style['--portrait-modal-width'], '400px');
   assert.equal(layout.style['--portrait-size'], 'auto 94%');
   assert.equal(layout.style['--portrait-position'], 'right bottom');
+});
+
+test('ZZZ vertical portrait artwork centres horizontally in detail mode', () => {
+  const layout = getPortraitModalLayout({ width: 891, height: 1999 }, 'detail', 'zzz');
+
+  assert.equal(layout.className, 'portrait-layout-vertical');
+  assert.equal(layout.style['--portrait-modal-width'], '400px');
+  assert.equal(layout.style['--portrait-size'], 'auto 94%');
+  assert.equal(layout.style['--portrait-position'], 'center bottom');
 });
 
 test('missing portrait dimensions keep CSS fallback values', () => {
