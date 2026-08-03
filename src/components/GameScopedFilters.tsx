@@ -1,16 +1,17 @@
 import type { CSSProperties } from 'react';
-import { GAMES } from '../utils/calendar';
+import { GAMES, effectiveDateMode, gameHasBirthday, gameDateLabel } from '../utils/calendar';
 import {
   getActiveFilterCount,
   getScopedFilterSections,
 } from '../utils/filterUi';
-import type { FilterOptions, FilterState } from '../hooks/useCharacters';
+import type { FilterOptions, FilterState, DateMode } from '../hooks/useCharacters';
 
 interface GameScopedFiltersProps {
   selectedGames: string[];
   activeGameId: string;
   filters: FilterState;
   filterOptionsByGame: Record<string, FilterOptions>;
+  dateMode?: DateMode;
   onToggleGame: (gameId: string) => void;
   onActiveGameChange: (gameId: string) => void;
   onFiltersChange: (filters: Partial<FilterState>) => void;
@@ -32,6 +33,7 @@ const GameScopedFilters = ({
   activeGameId,
   filters,
   filterOptionsByGame,
+  dateMode = 'birthday',
   onToggleGame,
   onActiveGameChange,
   onFiltersChange,
@@ -42,6 +44,11 @@ const GameScopedFilters = ({
   const activeGame = GAMES[activeGameId] ? activeGameId : Object.keys(GAMES)[0];
   const activeGameMeta = GAMES[activeGame];
   const sections = getScopedFilterSections(activeGame, filterOptionsByGame);
+  // 标题后缀随日期模式变化：原神角色生日 / 原神角色实装日；无生日游戏恒为实装日
+  const activeGameDateLabel = gameDateLabel(activeGame, dateMode);
+  // 只有“没有官方生日”的游戏（如星穹铁道）才提示，且与当前模式无关——
+  // 有生日的游戏切到实装模式不应看到这句。
+  const showReleaseNotice = !gameHasBirthday(activeGame);
 
   const handleGameClick = (gameId: string) => {
     const isSelected = selectedGames.includes(gameId);
@@ -95,6 +102,7 @@ const GameScopedFilters = ({
         {Object.entries(GAMES).map(([gameId, game]) => {
           const isSelected = selectedGames.includes(gameId);
           const isActive = activeGame === gameId;
+          const dateSuffix = effectiveDateMode(gameId, dateMode) === 'release' ? '实装日' : '生日';
 
           return (
             <button
@@ -106,7 +114,10 @@ const GameScopedFilters = ({
               style={{ '--game-color': game.color } as CSSProperties}
             >
               <span className="game-indicator" style={{ backgroundColor: game.color }} />
-              {game.name}
+              <span className="game-filter-text">
+                <span className="game-filter-name">{game.name}</span>
+                <span className="game-filter-suffix">角色{dateSuffix}</span>
+              </span>
             </button>
           );
         })}
@@ -124,8 +135,14 @@ const GameScopedFilters = ({
       <section className="game-filter-panel active-game-panel" style={{ '--game-color': activeGameMeta.color } as CSSProperties}>
         <div className="game-filter-title">
           <span className="game-indicator" style={{ backgroundColor: activeGameMeta.color }} />
-          {activeGameMeta.name}
+          {activeGameDateLabel}
         </div>
+
+        {showReleaseNotice && (
+          <p className="game-filter-date-notice">
+            {activeGameMeta.name}角色未公开生日，以其首次实装时间代替展示，敬请留意。
+          </p>
+        )}
 
         <div className="filter-groups scoped">
           {sections.map(section => {

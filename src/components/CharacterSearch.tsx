@@ -1,11 +1,13 @@
 import { useId, useMemo, useState } from 'react';
 import type { Character } from '../types';
-import { formatBirthday, getGameName } from '../utils/calendar.ts';
+import { displayDate, getGameName } from '../utils/calendar.ts';
+import type { DateMode } from '../hooks/useCharacters.ts';
 import { searchCharacters } from '../utils/characterSearch.ts';
 
 interface CharacterSearchProps {
   characters: Character[];
   favoriteCharacterIds: string[];
+  dateMode: DateMode;
   onSelect: (character: Character) => void;
 }
 
@@ -17,7 +19,7 @@ const TEXT = {
   separator: ' \u00b7 ',
 };
 
-const CharacterSearch = ({ characters, favoriteCharacterIds, onSelect }: CharacterSearchProps) => {
+const CharacterSearch = ({ characters, favoriteCharacterIds, dateMode, onSelect }: CharacterSearchProps) => {
   const inputId = useId();
   const listboxId = `${inputId}-results`;
   const [query, setQuery] = useState('');
@@ -120,7 +122,7 @@ const CharacterSearch = ({ characters, favoriteCharacterIds, onSelect }: Charact
                       {character.nameEn && <span>{character.nameEn}</span>}
                     </span>
                     <span className="search-result-meta">
-                      {getGameName(character.game)}{TEXT.separator}{formatBirthday(character.birthday)}
+                      {getGameName(character.game)}{TEXT.separator}{displayDate(character, dateMode)}
                     </span>
                     <span className="search-result-tags">
                       {[character.element, character.weapon, character.region].filter(Boolean).join(TEXT.separator)}

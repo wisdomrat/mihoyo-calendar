@@ -1,6 +1,6 @@
 import GameScopedFilters from './GameScopedFilters';
 import { getActiveFilterCount } from '../utils/filterUi';
-import type { FilterOptions, FilterState } from '../hooks/useCharacters';
+import type { FilterOptions, FilterState, DateMode } from '../hooks/useCharacters';
 
 interface FilterBottomSheetProps {
   isOpen: boolean;
@@ -8,6 +8,7 @@ interface FilterBottomSheetProps {
   activeGameId: string;
   filters: FilterState;
   filterOptionsByGame: Record<string, FilterOptions>;
+  dateMode?: DateMode;
   onClose: () => void;
   onToggleGame: (gameId: string) => void;
   onActiveGameChange: (gameId: string) => void;
@@ -21,6 +22,7 @@ const FilterBottomSheet = ({
   activeGameId,
   filters,
   filterOptionsByGame,
+  dateMode,
   onClose,
   onToggleGame,
   onActiveGameChange,
@@ -45,6 +47,7 @@ const FilterBottomSheet = ({
             activeGameId={activeGameId}
             filters={filters}
             filterOptionsByGame={filterOptionsByGame}
+            dateMode={dateMode}
             onToggleGame={onToggleGame}
             onActiveGameChange={onActiveGameChange}
             onFiltersChange={onFiltersChange}

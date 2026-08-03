@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import type { Character, ViewMode } from '../../types';
-import type { DisplayMode, WeekStart } from '../../hooks/useCharacters';
+import type { DisplayMode, WeekStart, DateMode } from '../../hooks/useCharacters';
 import MonthView from './MonthView';
 import WeekView from './WeekView';
 
@@ -11,6 +11,7 @@ interface CalendarProps {
   currentDate: Date;
   displayMode: DisplayMode;
   weekStart: WeekStart;
+  dateMode: DateMode;
   onDateChange: (date: Date) => void;
   onViewChange: (view: ViewMode) => void;
   onCharacterClick: (character: Character) => void;
@@ -22,6 +23,7 @@ const Calendar = ({
   currentDate,
   displayMode,
   weekStart,
+  dateMode,
   onDateChange,
   onViewChange,
   onCharacterClick,
@@ -116,20 +118,22 @@ const Calendar = ({
       </div>
 
       {view === 'month' ? (
-        <MonthView 
+        <MonthView
           currentDate={currentDate}
           characters={characters}
           displayMode={displayMode}
           weekStart={weekStart}
+          dateMode={dateMode}
           weekdayLabels={weekdayLabels}
           onCharacterClick={onCharacterClick}
         />
       ) : (
-        <WeekView 
+        <WeekView
           currentDate={currentDate}
           characters={characters}
           displayMode={displayMode}
           weekStart={weekStart}
+          dateMode={dateMode}
           weekdayLabels={weekdayLabels}
           onCharacterClick={onCharacterClick}
         />

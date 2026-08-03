@@ -5,9 +5,9 @@ import FilterSidebar from './components/FilterSidebar';
 import FilterBottomSheet from './components/FilterBottomSheet';
 import AddCharacterModal from './components/AddCharacterModal';
 import CharacterSearch from './components/CharacterSearch';
-import { useCharacters } from './hooks/useCharacters';
+import { useCharacters, type DateMode } from './hooks/useCharacters';
 import type { Character, ViewMode } from './types';
-import { formatBirthday, getGameColor, getGameName, GAMES } from './utils/calendar';
+import { calendarDateKey, displayDate, effectiveDateMode, getGameColor, getGameName, GAMES } from './utils/calendar';
 import { getPortraitModalLayout, type PortraitDimensions } from './utils/portraitLayout';
 import {
   createClearedGameFilters,
@@ -32,8 +32,9 @@ function downloadTextFile(filename: string, content: string, mimeType: string) {
   URL.revokeObjectURL(url);
 }
 
-function birthdayMonthDate(character: Character, fallback: Date): Date {
-  const match = character.birthday.match(/^(\d{2})-(\d{2})$/);
+function calendarMonthDate(character: Character, fallback: Date, dateMode: DateMode): Date {
+  const key = calendarDateKey(character, dateMode);
+  const match = key.match(/^(\d{2})-(\d{2})$/);
   if (!match) return fallback;
   const month = Number(match[1]);
   if (month < 1 || month > 12) return fallback;
@@ -48,6 +49,7 @@ function CharacterModal({
   onExportIcs,
   isFavorite,
   portraitBackgroundEnabled,
+  dateMode,
 }: {
   character: Character | null;
   onClose: () => void;
@@ -56,6 +58,7 @@ function CharacterModal({
   onExportIcs: (character: Character) => void;
   isFavorite: boolean;
   portraitBackgroundEnabled: boolean;
+  dateMode: DateMode;
 }) {
   const [portraitDimensions, setPortraitDimensions] = useState<PortraitDimensions | null>(null);
   const [isArtworkOnly, setIsArtworkOnly] = useState(false);
@@ -144,8 +147,8 @@ function CharacterModal({
 
           <div className="modal-info-grid">
             <div className="modal-info-item">
-              <span className="modal-info-label">{'\u751f\u65e5'}</span>
-              <span className="modal-info-value">{formatBirthday(character.birthday)}</span>
+              <span className="modal-info-label">{effectiveDateMode(character.game, dateMode) === 'release' ? '\u5b9e\u88c5\u65e5\u671f' : '\u751f\u65e5'}</span>
+              <span className="modal-info-value">{displayDate(character, dateMode)}</span>
             </div>
 
             {character.rarity && (
@@ -210,6 +213,7 @@ function App() {
     displayMode,
     weekStart,
     portraitBackgroundEnabled,
+    dateMode,
     favoriteCharacterIds,
     favoriteCount,
     showFavoritesOnly,
@@ -223,6 +227,7 @@ function App() {
     setDisplayMode,
     setWeekStart,
     setPortraitBackgroundEnabled,
+    setDateMode,
     toggleFavorite,
     setShowFavoritesOnly,
     updateFilters,
@@ -261,18 +266,18 @@ function App() {
 
   const handleSearchSelect = (character: Character) => {
     setSelectedCharacter(character);
-    setCurrentDate(current => birthdayMonthDate(character, current));
+    setCurrentDate(current => calendarMonthDate(character, current, dateMode));
   };
 
   const handleExportIcs = (charactersToExport: Character[], filename: string) => {
-    const validCharacters = getCharactersWithValidBirthdays(charactersToExport);
+    const validCharacters = getCharactersWithValidBirthdays(charactersToExport, dateMode);
     if (validCharacters.length === 0) {
-      setIcsStatus('\u6ca1\u6709\u53ef\u5bfc\u51fa\u7684\u6709\u6548\u751f\u65e5\u3002');
+      setIcsStatus(dateMode === 'release' ? '\u6ca1\u6709\u53ef\u5bfc\u51fa\u7684\u6709\u6548\u5b9e\u88c5\u65e5\u671f\u3002' : '\u6ca1\u6709\u53ef\u5bfc\u51fa\u7684\u6709\u6548\u751f\u65e5\u3002');
       return;
     }
 
-    downloadTextFile(filename, buildBirthdayIcs(validCharacters), 'text/calendar;charset=utf-8');
-    setIcsStatus(`\u5df2\u4e0b\u8f7d ${validCharacters.length} \u4e2a\u751f\u65e5\u4e8b\u4ef6\u3002`);
+    downloadTextFile(filename, buildBirthdayIcs(validCharacters, { dateMode }), 'text/calendar;charset=utf-8');
+    setIcsStatus(`\u5df2\u4e0b\u8f7d ${validCharacters.length} \u4e2a${dateMode === 'release' ? '\u5b9e\u88c5\u7eaa\u5ff5' : '\u751f\u65e5'}\u4e8b\u4ef6\u3002`);
     window.setTimeout(() => setIcsStatus(''), 3000);
   };
 
@@ -289,6 +294,8 @@ function App() {
         onWeekStartChange={setWeekStart}
         portraitBackgroundEnabled={portraitBackgroundEnabled}
         onPortraitBackgroundChange={setPortraitBackgroundEnabled}
+        dateMode={dateMode}
+        onDateModeChange={setDateMode}
         activeFilterCount={activeFilterCount}
         onOpenFilters={() => setIsMobileFilterOpen(true)}
         onAddCharacter={() => {
@@ -306,6 +313,7 @@ function App() {
         <CharacterSearch
           characters={allCharacters}
           favoriteCharacterIds={favoriteCharacterIds}
+          dateMode={dateMode}
           onSelect={handleSearchSelect}
         />
         {icsStatus && <div className="ics-status" role="status">{icsStatus}</div>}
@@ -318,6 +326,7 @@ function App() {
           activeGameId={activeFilterGame}
           filters={filters}
           filterOptionsByGame={filterOptionsByGame}
+          dateMode={dateMode}
           onToggleCollapsed={() => setIsFilterSidebarCollapsed(collapsed => !collapsed)}
           onToggleGame={toggleGame}
           onActiveGameChange={setActiveFilterGame}
@@ -332,6 +341,7 @@ function App() {
             currentDate={currentDate}
             displayMode={displayMode}
             weekStart={weekStart}
+            dateMode={dateMode}
             onDateChange={setCurrentDate}
             onViewChange={setView}
             onCharacterClick={setSelectedCharacter}
@@ -345,6 +355,7 @@ function App() {
         activeGameId={activeFilterGame}
         filters={filters}
         filterOptionsByGame={filterOptionsByGame}
+        dateMode={dateMode}
         onClose={() => setIsMobileFilterOpen(false)}
         onToggleGame={toggleGame}
         onActiveGameChange={setActiveFilterGame}
@@ -360,6 +371,7 @@ function App() {
         onExportIcs={character => handleExportIcs([character], `${character.id}-birthday.ics`)}
         isFavorite={selectedCharacter ? isFavoriteCharacter(favoriteCharacterIds, selectedCharacter.id) : false}
         portraitBackgroundEnabled={portraitBackgroundEnabled}
+        dateMode={dateMode}
       />
 
       <AddCharacterModal

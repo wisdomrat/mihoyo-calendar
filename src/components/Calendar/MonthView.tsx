@@ -1,6 +1,7 @@
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay } from 'date-fns';
 import type { Character } from '../../types';
-import type { DisplayMode, WeekStart } from '../../hooks/useCharacters';
+import type { DisplayMode, WeekStart, DateMode } from '../../hooks/useCharacters';
+import { calendarDateKey } from '../../utils/calendar';
 import DayCell from './DayCell';
 
 interface MonthViewProps {
@@ -8,16 +9,17 @@ interface MonthViewProps {
   characters: Character[];
   displayMode: DisplayMode;
   weekStart: WeekStart;
+  dateMode: DateMode;
   weekdayLabels: string[];
   onCharacterClick: (character: Character) => void;
 }
 
-const MonthView = ({ currentDate, characters, displayMode, weekStart, weekdayLabels, onCharacterClick }: MonthViewProps) => {
+const MonthView = ({ currentDate, characters, displayMode, weekStart, dateMode, weekdayLabels, onCharacterClick }: MonthViewProps) => {
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
   const calendarStart = startOfWeek(monthStart, { weekStartsOn: weekStart });
   const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: weekStart });
-  
+
   const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
   const today = new Date();
 
@@ -30,11 +32,11 @@ const MonthView = ({ currentDate, characters, displayMode, weekStart, weekdayLab
       </div>
       <div className="days-grid">
         {days.map(day => {
-          const dayCharacters = characters.filter(c => {
-            const [month, dayNum] = c.birthday.split('-');
-            return parseInt(month) === day.getMonth() + 1 && parseInt(dayNum) === day.getDate();
-          });
-          
+          const monthKey = String(day.getMonth() + 1).padStart(2, '0');
+          const dayKey = String(day.getDate()).padStart(2, '0');
+          const dateStr = `${monthKey}-${dayKey}`;
+          const dayCharacters = characters.filter(c => calendarDateKey(c, dateMode) === dateStr);
+
           return (
             <DayCell
               key={day.toISOString()}

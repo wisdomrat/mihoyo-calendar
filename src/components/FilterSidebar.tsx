@@ -1,6 +1,6 @@
 import GameScopedFilters from './GameScopedFilters';
 import { getActiveFilterCount } from '../utils/filterUi';
-import type { FilterOptions, FilterState } from '../hooks/useCharacters';
+import type { FilterOptions, FilterState, DateMode } from '../hooks/useCharacters';
 
 interface FilterSidebarProps {
   collapsed: boolean;
@@ -8,6 +8,7 @@ interface FilterSidebarProps {
   activeGameId: string;
   filters: FilterState;
   filterOptionsByGame: Record<string, FilterOptions>;
+  dateMode: DateMode;
   onToggleCollapsed: () => void;
   onToggleGame: (gameId: string) => void;
   onActiveGameChange: (gameId: string) => void;
@@ -21,6 +22,7 @@ const FilterSidebar = ({
   activeGameId,
   filters,
   filterOptionsByGame,
+  dateMode,
   onToggleCollapsed,
   onToggleGame,
   onActiveGameChange,
@@ -57,6 +59,7 @@ const FilterSidebar = ({
             activeGameId={activeGameId}
             filters={filters}
             filterOptionsByGame={filterOptionsByGame}
+            dateMode={dateMode}
             onToggleGame={onToggleGame}
             onActiveGameChange={onActiveGameChange}
             onFiltersChange={onFiltersChange}

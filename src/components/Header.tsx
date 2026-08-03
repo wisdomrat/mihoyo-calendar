@@ -1,4 +1,4 @@
-import type { DisplayMode, WeekStart } from '../hooks/useCharacters';
+import type { DisplayMode, WeekStart, DateMode } from '../hooks/useCharacters';
 
 interface HeaderProps {
   onSync: () => void;
@@ -11,6 +11,8 @@ interface HeaderProps {
   onWeekStartChange: (start: WeekStart) => void;
   portraitBackgroundEnabled: boolean;
   onPortraitBackgroundChange: (enabled: boolean) => void;
+  dateMode: DateMode;
+  onDateModeChange: (mode: DateMode) => void;
   activeFilterCount: number;
   onOpenFilters: () => void;
   onAddCharacter: () => void;
@@ -33,7 +35,14 @@ const TEXT = {
   compact: '\u7d27\u51d1',
   compactTitle: '\u7d27\u51d1\u6a21\u5f0f',
   art: '\u7acb\u7ed8',
-  artTitle: '\u8be6\u60c5\u7acb\u7ed8\u80cc\u666f',
+  artTitle: '\u8be6\u60c5\u7acb\u7ed8\u80cc\u666f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u7eaf\u8272\u80cc\u666f\uff09',
+  solid: '\u7eaf\u8272',
+  solidTitle: '\u7eaf\u8272\u80cc\u666f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u7acb\u7ed8\u80cc\u666f\uff09',
+  dateLabel: '\u65e5\u671f:',
+  birthday: '\u751f\u65e5',
+  birthdayTitle: '\u663e\u793a\u89d2\u8272\u751f\u65e5\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u5b9e\u88c5\u65e5\u671f\uff09',
+  release: '\u5b9e\u88c5',
+  releaseTitle: '\u663e\u793a\u89d2\u8272\u9996\u6b21\u5b9e\u88c5\u65e5\u671f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u751f\u65e5\uff09',
   week: '\u9996\u65e5:',
   sunday: '\u65e5',
   sundayTitle: '\u5468\u65e5\u5f00\u59cb',
@@ -64,6 +73,8 @@ const Header = ({
   onWeekStartChange,
   portraitBackgroundEnabled,
   onPortraitBackgroundChange,
+  dateMode,
+  onDateModeChange,
   activeFilterCount,
   onOpenFilters,
   onAddCharacter,
@@ -93,10 +104,36 @@ const Header = ({
           <div className="control-group">
             <span className="control-label">{TEXT.view}</span>
             <div className="display-modes">
-              <button className={`display-mode-btn ${displayMode === 'avatar' ? 'active' : ''}`} onClick={() => onDisplayModeChange('avatar')} title={TEXT.avatarTitle}>{TEXT.avatar}</button>
-              <button className={`display-mode-btn ${displayMode === 'card' ? 'active' : ''}`} onClick={() => onDisplayModeChange('card')} title={TEXT.cardTitle}>{TEXT.card}</button>
-              <button className={`display-mode-btn ${displayMode === 'compact' ? 'active' : ''}`} onClick={() => onDisplayModeChange('compact')} title={TEXT.compactTitle}>{TEXT.compact}</button>
-              <button className={`display-mode-btn ${portraitBackgroundEnabled ? 'active' : ''}`} onClick={() => onPortraitBackgroundChange(!portraitBackgroundEnabled)} title={TEXT.artTitle}>{TEXT.art}</button>
+              {/* 三选一互斥视图模式，包成一组外框 */}
+              <div className="segmented-group" role="group" aria-label={TEXT.view}>
+                <button className={`display-mode-btn ${displayMode === 'avatar' ? 'active' : ''}`} onClick={() => onDisplayModeChange('avatar')} title={TEXT.avatarTitle}>{TEXT.avatar}</button>
+                <button className={`display-mode-btn ${displayMode === 'card' ? 'active' : ''}`} onClick={() => onDisplayModeChange('card')} title={TEXT.cardTitle}>{TEXT.card}</button>
+                <button className={`display-mode-btn ${displayMode === 'compact' ? 'active' : ''}`} onClick={() => onDisplayModeChange('compact')} title={TEXT.compactTitle}>{TEXT.compact}</button>
+              </div>
+              {/* 独立二态开关：立绘背景（当前态恒为深色） */}
+              <button
+                className="display-mode-btn toggle-btn active"
+                onClick={() => onPortraitBackgroundChange(!portraitBackgroundEnabled)}
+                title={portraitBackgroundEnabled ? TEXT.solidTitle : TEXT.artTitle}
+                aria-pressed={portraitBackgroundEnabled}
+              >
+                {portraitBackgroundEnabled ? TEXT.art : TEXT.solid}
+              </button>
+            </div>
+          </div>
+
+          <div className="control-group">
+            <span className="control-label">{TEXT.dateLabel}</span>
+            <div className="display-modes">
+              {/* 独立二态开关：生日 / 实装日期（当前态恒为深色） */}
+              <button
+                className="display-mode-btn toggle-btn active"
+                onClick={() => onDateModeChange(dateMode === 'release' ? 'birthday' : 'release')}
+                title={dateMode === 'release' ? TEXT.releaseTitle : TEXT.birthdayTitle}
+                aria-pressed={dateMode === 'release'}
+              >
+                {dateMode === 'release' ? TEXT.release : TEXT.birthday}
+              </button>
             </div>
           </div>
 
