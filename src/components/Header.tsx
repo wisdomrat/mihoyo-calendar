@@ -118,12 +118,7 @@ const Header = ({
               >
                 {portraitBackgroundEnabled ? TEXT.art : TEXT.solid}
               </button>
-            </div>
-          </div>
-
-          <div className="control-group">
-            <div className="display-modes">
-              {/* 独立二态开关：生日 / 实装日期（当前态恒为深色） */}
+              {/* 独立二态开关：生日 / 实装日期，紧挨立绘，与三选一同间距 */}
               <button
                 className="display-mode-btn toggle-btn active"
                 onClick={() => onDateModeChange(dateMode === 'release' ? 'birthday' : 'release')}
@@ -133,6 +128,9 @@ const Header = ({
                 {dateMode === 'release' ? TEXT.release : TEXT.birthday}
               </button>
             </div>
+          </div>
+
+          <div className="control-group week-group">
             <span className="control-label">{TEXT.week}</span>
             <div className="week-start-selector">
               <button className={`week-start-btn ${weekStart === 0 ? 'active' : ''}`} onClick={() => onWeekStartChange(0)} title={TEXT.sundayTitle}>{TEXT.sunday}</button>

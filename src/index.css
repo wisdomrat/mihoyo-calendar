@@ -1292,7 +1292,12 @@ body {
     flex-wrap: wrap;
     gap: 4px;
   }
-  
+
+  /* 首日起独立成行时靠右对齐 */
+  .week-group {
+    justify-content: flex-end;
+  }
+
   .control-label {
     font-size: 11px;
   }
