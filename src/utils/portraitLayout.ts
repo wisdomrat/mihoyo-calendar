@@ -60,15 +60,17 @@ export function getPortraitModalLayout(
   if (ratio >= 1.15) {
     if (mode === 'artwork') {
       if (gameId === 'genshin') {
-        // Use the real aspect ratio instead of forcing 4/5, which used to crop
-        // landscape artwork on wide desktop screens.
+        // 移动端：4/5 竖框 + auto 96% 按高度撑满，扁图放大（左右略裁）——
+        // 这是用户确认的移动端效果。桌面端由 CSS media query 覆盖为
+        // contain + 真实比例，完整不裁（见 portraitLayout 的 genshin-artwork 规则）。
         return {
           className: 'portrait-layout-landscape portrait-layout-genshin-artwork',
           style: {
-            '--portrait-modal-width': 'min(1400px, 96vw, 160vh)',
-            '--portrait-size': 'contain',
+            '--portrait-modal-width': 'min(620px, 94vw)',
+            '--portrait-size': 'auto 96%',
             '--portrait-position': 'center center',
-            '--portrait-aspect-ratio': imageRatio(dimensions),
+            '--portrait-aspect-ratio': '4 / 5',
+            '--portrait-aspect-ratio-desktop': imageRatio(dimensions),
           },
         };
       }

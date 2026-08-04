@@ -810,6 +810,17 @@ body {
   opacity: 1;
 }
 
+/* 桌面端原神横版立绘：恢复真实比例 + contain 完整显示，不裁边 */
+@media (min-width: 769px) {
+  .modal-content.portrait-artwork-only.portrait-layout-genshin-artwork {
+    aspect-ratio: var(--portrait-aspect-ratio-desktop, var(--portrait-aspect-ratio, 1 / 1));
+    max-width: min(1400px, 96vw, 160vh);
+  }
+  .modal-content.portrait-artwork-only.portrait-layout-genshin-artwork::before {
+    background-size: contain;
+  }
+}
+
 .modal-content.portrait-artwork-only .modal-header,
 .modal-content.portrait-artwork-only .modal-body {
   display: none;

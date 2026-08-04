@@ -24,14 +24,17 @@ test('wide portrait artwork uses image ratio and full containment in artwork-onl
 });
 
 
-test('Genshin wide artwork-only layout keeps the real landscape ratio instead of forcing a 4/5 crop', () => {
+test('Genshin wide artwork-only layout uses a 4/5 frame on mobile and exposes the real ratio for desktop', () => {
   const layout = getPortraitModalLayout({ width: 2048, height: 1024 }, 'artwork', 'genshin');
 
   assert.equal(layout.className, 'portrait-layout-landscape portrait-layout-genshin-artwork');
-  assert.equal(layout.style['--portrait-modal-width'], 'min(1400px, 96vw, 160vh)');
-  assert.equal(layout.style['--portrait-size'], 'contain');
+  // Mobile: 4/5 portrait frame with height-driven sizing so flat artwork reads large.
+  assert.equal(layout.style['--portrait-modal-width'], 'min(620px, 94vw)');
+  assert.equal(layout.style['--portrait-size'], 'auto 96%');
   assert.equal(layout.style['--portrait-position'], 'center center');
-  assert.equal(layout.style['--portrait-aspect-ratio'], '2048 / 1024');
+  assert.equal(layout.style['--portrait-aspect-ratio'], '4 / 5');
+  // Desktop CSS media query swaps to the real ratio + contain, driven by this var.
+  assert.equal(layout.style['--portrait-aspect-ratio-desktop'], '2048 / 1024');
 });
 test('square portrait artwork centers instead of leaning right in detail mode', () => {
   const layout = getPortraitModalLayout({ width: 2048, height: 2048 });
