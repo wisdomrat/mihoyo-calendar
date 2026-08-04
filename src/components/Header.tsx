@@ -133,9 +133,6 @@ const Header = ({
                 {dateMode === 'release' ? TEXT.release : TEXT.birthday}
               </button>
             </div>
-          </div>
-
-          <div className="control-group">
             <span className="control-label">{TEXT.week}</span>
             <div className="week-start-selector">
               <button className={`week-start-btn ${weekStart === 0 ? 'active' : ''}`} onClick={() => onWeekStartChange(0)} title={TEXT.sundayTitle}>{TEXT.sunday}</button>
