@@ -28,8 +28,10 @@ interface BoxInput {
   textLeft: number;   // 文字区左边缘 x（相对 hero，桌面端用）
 }
 
-// 移动端断点（与 Hero.css 的 @media (max-width: 768px) 保持一致）
-const MOBILE_MAX = 768;
+// 移动端断点（与 Hero.css 的 @media (max-width: 1024px) 保持一致）。
+// 取 1024 而非 768：平板（820px 等）也走「立绘铺满 + 文字压底」的竖屏版式，
+// 比桌面版式在平板上的效果更好（用户确认）。
+const MOBILE_MAX = 1024;
 
 // 立绘最多放大到原图的 1.5 倍。没有这个上限，128px 的占位头像会被拉成 831px 的马赛克。
 const MAX_UPSCALE = 1.5;
