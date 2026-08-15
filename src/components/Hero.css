@@ -1,0 +1,507 @@
+/* ============================================================
+   Hero — 全屏影院首屏，立绘出血 + 多层叠加 + 归属驱动配色
+
+   层次结构（从下往上）：
+   L0 .hero__bg-portrait   立绘模糊铺底（blur 60px，纯氛围）
+   L1 .hero__mesh          归属色双色调 mesh（统一色温）
+   L2 .hero__vignette      暗角（把文字区"抠"出来）
+   L3 .hero__grain         胶片颗粒（质感）
+   L4 .hero__portrait      清晰立绘（视觉锚点）
+   L5 .hero__content       文字层（永远 Lc>75）
+   ============================================================ */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  /* 「hero 独占一屏」：手机浏览器地址栏会让 100vh 大于可视高度，导致底部被切、
+     要滑一下才看全。dvh 跟随地址栏收放，才是真正的一屏；vh 留给不认 dvh 的旧内核。 */
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--deep);
+  color: #ffffff;
+}
+
+/* ---- L0: 立绘模糊铺底（放大避免边缘露白，模糊 80px 确保无细节抢眼）---- */
+.hero__bg-portrait {
+  position: absolute;
+  inset: -10%;
+  background-size: cover;
+  background-position: center 20%;
+  filter: blur(80px) brightness(0.7);  /* 加强模糊 + 压暗背景，让前景更突出 */
+  transform: scale(1.05);
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 20s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero[data-visible='true'] .hero__bg-portrait {
+  opacity: 1;
+  transform: scale(1.15); /* Ken Burns 慢推 */
+}
+
+/* ---- L1: 归属色双色调 mesh（key → accent 径向渐变，40% 不透明度统一色温）---- */
+.hero__mesh {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 100% at 30% 50%, var(--key), var(--accent));
+  mix-blend-mode: normal;
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) 120ms;
+}
+.hero[data-visible='true'] .hero__mesh {
+  opacity: 0.4;
+}
+
+/* ---- L2: 暗角（中心最亮 → 四周渐暗，把文字区"抠"出来）---- */
+.hero__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 70% 50%, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;
+}
+.hero[data-visible='true'] .hero__vignette {
+  opacity: 1;  /* 从 0.75 改成 1，让暗角完全生效 */
+}
+
+/* ---- L3: 胶片颗粒（SVG feTurbulence，5% 不透明度）---- */
+.hero__grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+}
+
+/* ---- L4: 清晰立绘（视觉锚点；left/top/width/height 由 JS 按 hero 实测尺寸内联设置）---- */
+.hero__portrait {
+  position: absolute;
+  inset: 0;
+  overflow: visible;  /* 不裁剪，让立绘完整显示 */
+  pointer-events: none;  /* 不阻挡下方交互 */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1) 280ms,
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1) 280ms;
+}
+.hero[data-visible='true'] .hero__portrait {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero__portrait img {
+  display: block;
+  pointer-events: auto;  /* 立绘本身可交互 */
+  /* 尺寸位置全部由内联 style 给出（px），此处只管渲染方式 */
+  object-fit: contain;  /* 保持完整，不变形 */
+  object-position: bottom center;
+  mask-image: linear-gradient(to top, transparent 0%, black 8%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 8%);
+}
+
+/* ---- 向下滚动提示（底部居中，动画跳动）---- */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1) 600ms;
+}
+.hero[data-visible='true'] .hero__scroll-hint {
+  opacity: 0.7;
+}
+.hero__scroll-hint:hover {
+  opacity: 1;
+}
+.hero__scroll-hint-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.hero__scroll-hint-icon {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: hero-scroll-bounce 2s ease-in-out infinite;
+}
+.hero__scroll-hint-icon::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+  transform: rotate(45deg) translateY(-2px);
+}
+@keyframes hero-scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ---- L5: 文字层（右侧，压在暗角最深处）----
+   宽度按视口比例而非固定 px：固定 480px 在 820 宽平板上占到 58%（把立绘挤成一条），
+   在 3440 带鱼屏上只占 14%（日期字号被 clamp 到 220px 后反而装不下）。
+   两端用 clamp 兜住：太窄放不下巨号日期，太宽则文字散架。 */
+.hero__content {
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+  width: clamp(300px, 34%, 680px);
+  text-align: right;
+  z-index: 10;
+}
+
+/* 归属徽记（极宽字距 0.24em，加大加粗，加图标前缀，强化视觉存在） */
+.hero__affiliation-badge {
+  font-size: 14px;  /* 从 12px 加大到 14px */
+  font-weight: 800;  /* 从 700 加粗到 800 */
+  letter-spacing: 0.28em;  /* 从 0.24em 加宽到 0.28em */
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);  /* 加深阴影，在亮背景上也清晰 */
+  margin-bottom: 16px;
+  margin-right: -0.28em;  /* 抵消末字后多出的字距，右对齐才真正齐边 */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1) 360ms,
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1) 360ms;
+}
+.hero[data-visible='true'] .hero__affiliation-badge {
+  opacity: 1;  /* 从 0.9 改成 1，完全不透明 */
+  transform: translateY(0);
+}
+
+/* 角色名（大，衬线，紧行高） */
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.55);  /* 立绘/亮背景上也保证可读 */
+  margin: 0 0 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1) 420ms,
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1) 420ms;
+}
+.hero[data-visible='true'] .hero__name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 归属标语（角色名下方一行氛围文字，取自 affiliations 数据的 tagline） */
+.hero__tagline {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.72);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  margin: 0 0 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1) 450ms,
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1) 450ms;
+}
+.hero[data-visible='true'] .hero__tagline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 日期（巨号，作为视觉焦点，tabular-nums） */
+.hero__date {
+  font-size: clamp(80px, 12vw, 220px);  /* 从 64px-180px 提升到 80px-220px */
+  font-weight: 200;  /* 从 300 降到 200，更轻盈 */
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 0.85;  /* 从 0.9 收紧到 0.85 */
+  color: rgba(255, 255, 255, 0.75);  /* 从 0.6 提升到 0.75，更醒目 */
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1) 480ms,
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1) 480ms;
+}
+.hero[data-visible='true'] .hero__date {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 元素 / 武器（小字，交错入场） */
+.hero__meta {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1) 540ms,
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1) 540ms;
+}
+.hero[data-visible='true'] .hero__meta {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero__element::before {
+  content: '◆ ';  /* 中性符号：element 有火/水/风等多种，不能硬编码 ⚡ */
+  opacity: 0.6;
+}
+.hero__weapon::before {
+  content: '⚔ ';
+  opacity: 0.6;
+}
+
+/* ---- 归属驱动配色（--key/--accent/--deep 由 data-affiliation 决定）----
+   ID 与色值必须与 src/data/affiliations-genshin.ts / affiliations-zzz.ts 一一对应，
+   切勿自创 ID —— 对不上就静默落到 .hero 兜底灰（此 bug 已修过一次）。 */
+
+/* 原神（9 个地区）*/
+.hero[data-affiliation='genshin-mondstadt'] {
+  --key: #5eb3d6;    --accent: #74c2a8;    --deep: #2d5a6b;
+}
+.hero[data-affiliation='genshin-liyue'] {
+  --key: #d4a553;    --accent: #c8704a;    --deep: #3d3027;
+}
+.hero[data-affiliation='genshin-inazuma'] {
+  --key: #9d7dd9;    --accent: #e08bb0;    --deep: #1a1428;
+}
+.hero[data-affiliation='genshin-sumeru'] {
+  --key: #6fba72;    --accent: #d9b65d;    --deep: #2d4a34;
+}
+.hero[data-affiliation='genshin-fontaine'] {
+  --key: #4a8fc7;    --accent: #86c8e8;    --deep: #1c2d42;
+}
+.hero[data-affiliation='genshin-natlan'] {
+  --key: #e85a3a;    --accent: #f4c542;    --deep: #2b1612;
+}
+.hero[data-affiliation='genshin-snezhnaya'] {
+  --key: #a2c8dc;    --accent: #6b89a8;    --deep: #1a2433;
+}
+.hero[data-affiliation='genshin-khaenriah'] {
+  --key: #5a6fa8;    --accent: #8b7ba8;    --deep: #1a1a26;
+}
+.hero[data-affiliation='genshin-other'] {
+  --key: #3d9b8f;    --accent: #d3a24a;    --deep: #3a2c12;
+}
+
+/* 绝区零（17 个阵营，与 affiliations-zzz.ts 对齐）*/
+.hero[data-affiliation='zzz-cunning-hares'] {
+  --key: #8dff3d;    --accent: #ffeb3b;    --deep: #0d1a0f;
+}
+.hero[data-affiliation='zzz-victoria-housekeeping'] {
+  --key: #b794f6;    --accent: #f4d03f;    --deep: #1a0f28;
+}
+.hero[data-affiliation='zzz-belobog'] {
+  --key: #ffa726;    --accent: #ffeb3b;    --deep: #1c1410;
+}
+.hero[data-affiliation='zzz-sons-of-calydon'] {
+  --key: #ff5722;    --accent: #ff9800;    --deep: #1a0d0a;
+}
+.hero[data-affiliation='zzz-section-6'] {
+  --key: #42a5f5;    --accent: #80deea;    --deep: #0d1821;
+}
+.hero[data-affiliation='zzz-criminal-investigation'] {
+  --key: #26a69a;    --accent: #ffd54f;    --deep: #0f1a18;
+}
+.hero[data-affiliation='zzz-obol-squad'] {
+  --key: #7e57c2;    --accent: #ab47bc;    --deep: #14101c;
+}
+.hero[data-affiliation='zzz-mountain-cloud'] {
+  --key: #66bb6a;    --accent: #d4a574;    --deep: #2c3e2f;
+}
+.hero[data-affiliation='zzz-hollow-special-operations'] {
+  --key: #ff7043;    --accent: #ffb74d;    --deep: #1a0f0a;
+}
+.hero[data-affiliation='zzz-obsidian'] {
+  --key: #ef5350;    --accent: #ffa726;    --deep: #1c0d0d;
+}
+.hero[data-affiliation='zzz-wildfire'] {
+  --key: #ec407a;    --accent: #ab47bc;    --deep: #1a0d14;
+}
+.hero[data-affiliation='zzz-rosskelieff'] {
+  --key: #5c6bc0;    --accent: #9575cd;    --deep: #0f1018;
+}
+.hero[data-affiliation='zzz-lyra'] {
+  --key: #42a5f5;    --accent: #ab47bc;    --deep: #0a0e14;
+}
+.hero[data-affiliation='zzz-mockingbird'] {
+  --key: #78909c;    --accent: #ffb74d;    --deep: #0d1012;
+}
+.hero[data-affiliation='zzz-academia'] {
+  --key: #5e81ac;    --accent: #d4a574;    --deep: #2e3440;
+}
+.hero[data-affiliation='zzz-pubsec-public-order'] {
+  --key: #42a5f5;    --accent: #ffeb3b;    --deep: #0d1418;
+}
+.hero[data-affiliation='zzz-other'] {
+  --key: #ff6b35;    --accent: #f4e04d;    --deep: #0e0e11;
+}
+
+/* 崩坏：星穹铁道 / 崩坏3 —— 数据层尚未细分归属，先给各游戏一个专属兜底 */
+.hero[data-affiliation='hsr-other'] {
+  --key: #4a5fd9;    --accent: #8ab4f8;    --deep: #0c1020;
+}
+.hero[data-affiliation='honkai3-other'] {
+  --key: #e87bb0;    --accent: #f4b8d4;    --deep: #1f0f1a;
+}
+
+/* 兜底（未映射角色） */
+.hero {
+  --key: #7a7a8a;
+  --accent: #b8b8c8;
+  --deep: #0f0f15;
+}
+
+/* ---- 轮播指示器（底部居中，位于滚动提示上方，避免与其重叠）
+       注意：必须写在下方所有 media query 之前。特异性同为 0,1,0 时后写的赢，
+       若放在文件末尾，响应式里对 bottom 的覆盖会被这里悄悄盖掉。---- */
+.hero__indicators {
+  position: absolute;
+  bottom: 92px;  /* 滚动提示约占底部 28~74px，这里抬高留出间距 */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 16;
+  opacity: 0;
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1) 800ms;
+}
+.hero[data-visible='true'] .hero__indicators {
+  opacity: 1;
+}
+
+.hero__indicator {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1), transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero__indicator:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+.hero__indicator[data-active='true'] {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.3);
+}
+
+/* ---- 响应式（窄屏改为上下布局；立绘几何由 JS 的移动端分支计算）---- */
+@media (max-width: 768px) {
+  .hero__content {
+    top: auto;
+    /* 上方是立绘区，下方要给指示器 + 滚动提示留位，
+       所以文字区固定抬高，不能再用 bottom: 10%（会被底部 UI 压住）。 */
+    bottom: 124px;
+    right: 5%;
+    left: 5%;
+    /* 竖屏由 left/right 决定宽度，必须清掉桌面端的 width，否则过约束时 width 优先 */
+    width: auto;
+    text-align: center;
+    transform: none;
+  }
+  .hero__affiliation-badge,
+  .hero__meta {
+    justify-content: center;
+  }
+  .hero__affiliation-badge {
+    margin-right: 0;  /* 居中排版时不需要抵消末字字距 */
+  }
+  /* 竖屏立绘会铺到文字下方，加一层底部压暗，保证文字始终可读 */
+  .hero__content::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    right: -24px;
+    top: -40px;
+    bottom: -160px;
+    background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.72) 40%,
+      rgba(0, 0, 0, 0.35) 72%,
+      transparent 100%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .hero__indicators {
+    bottom: 76px;
+  }
+  .hero__scroll-hint {
+    bottom: 20px;
+  }
+}
+
+/* ---- 矮视口（横屏手机 / 被拖扁的桌面窗口）：文字整体压缩，
+       保证 hero 仍然精确等于一屏，而不是靠 min-height 撑破一屏 ---- */
+@media (max-height: 520px) {
+  .hero__content {
+    bottom: 76px;
+  }
+  .hero__name {
+    font-size: clamp(24px, 4.5vh, 40px);
+    margin: 0 0 6px;
+  }
+  .hero__date {
+    font-size: clamp(40px, 14vh, 96px);
+    margin-bottom: 10px;
+  }
+  .hero__tagline {
+    font-size: 13px;
+    margin: 0 0 10px;
+  }
+  .hero__affiliation-badge {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .hero__indicators {
+    bottom: 44px;
+  }
+  .hero__scroll-hint {
+    bottom: 10px;
+  }
+  .hero__scroll-hint-icon {
+    display: none;  /* 矮屏优先保证文字，箭头省掉 */
+  }
+}
+
+/* ---- prefers-reduced-motion：禁用所有动效 ---- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg-portrait,
+  .hero__mesh,
+  .hero__vignette,
+  .hero__portrait,
+  .hero__affiliation-badge,
+  .hero__name,
+  .hero__tagline,
+  .hero__date,
+  .hero__meta {
+    transition: none !important;
+  }
+  .hero[data-visible='true'] .hero__bg-portrait {
+    transform: scale(1.05);
+  }
+}
+
+/* ---- 轮播指示器的样式已上移到 media query 之前，避免级联覆盖问题 ---- */

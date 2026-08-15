@@ -14,6 +14,8 @@ export interface Character {
   releaseDate?: string; // YYYY-MM-DD format, first playable release
   avatar?: string;
   portrait?: string;
+  // 可选的动态立绘资源（绝区零 Spine）。stem 用于拼出 skel/atlas 地址。
+  motion?: { type: 'spine'; stem: string };
   rarity?: number;
   element?: string;
   weapon?: string;

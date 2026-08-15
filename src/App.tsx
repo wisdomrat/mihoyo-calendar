@@ -5,7 +5,10 @@ import FilterSidebar from './components/FilterSidebar';
 import FilterBottomSheet from './components/FilterBottomSheet';
 import AddCharacterModal from './components/AddCharacterModal';
 import CharacterSearch from './components/CharacterSearch';
+import Spotlight from './components/Spotlight';
+import { Hero } from './components/Hero.tsx';
 import { useCharacters, type DateMode } from './hooks/useCharacters';
+import { useTheme } from './hooks/useTheme';
 import type { Character, ViewMode } from './types';
 import { calendarDateKey, displayDate, effectiveDateMode, getGameColor, getGameName, GAMES } from './utils/calendar';
 import { getPortraitModalLayout, type PortraitDimensions } from './utils/portraitLayout';
@@ -49,6 +52,7 @@ function CharacterModal({
   onExportIcs,
   isFavorite,
   portraitBackgroundEnabled,
+  motionEnabled,
   dateMode,
 }: {
   character: Character | null;
@@ -58,6 +62,7 @@ function CharacterModal({
   onExportIcs: (character: Character) => void;
   isFavorite: boolean;
   portraitBackgroundEnabled: boolean;
+  motionEnabled: boolean;
   dateMode: DateMode;
 }) {
   const [portraitDimensions, setPortraitDimensions] = useState<PortraitDimensions | null>(null);
@@ -95,7 +100,8 @@ function CharacterModal({
   const usePortraitBackground = portraitBackgroundEnabled && Boolean(character.portrait);
   const portraitLayout = getPortraitModalLayout(portraitDimensions, isArtworkOnly ? 'artwork' : 'detail', character.game);
   const artworkOnlyClassName = isArtworkOnly ? 'portrait-artwork-only' : '';
-  const portraitClassName = usePortraitBackground ? `with-portrait-bg game-${character.game} ${portraitLayout.className} ${artworkOnlyClassName}` : '';
+  const motionClassName = motionEnabled ? 'portrait-motion' : '';
+  const portraitClassName = usePortraitBackground ? `with-portrait-bg game-${character.game} ${portraitLayout.className} ${artworkOnlyClassName} ${motionClassName}` : '';
   const modalStyle = usePortraitBackground
     ? ({ '--portrait-bg': `url(${character.portrait})`, ...portraitLayout.style } as CSSProperties)
     : undefined;
@@ -213,6 +219,7 @@ function App() {
     displayMode,
     weekStart,
     portraitBackgroundEnabled,
+    motionEnabled,
     dateMode,
     favoriteCharacterIds,
     favoriteCount,
@@ -227,11 +234,14 @@ function App() {
     setDisplayMode,
     setWeekStart,
     setPortraitBackgroundEnabled,
+    setMotionEnabled,
     setDateMode,
     toggleFavorite,
     setShowFavoritesOnly,
     updateFilters,
   } = useCharacters();
+
+  const { theme, mode: themeMode, setMode: setThemeMode } = useTheme(selectedCharacter, selectedGames);
 
   useEffect(() => {
     const nextActiveGame = resolveActiveFilterGame(activeFilterGame, selectedGames, GAME_IDS);
@@ -281,8 +291,48 @@ function App() {
     window.setTimeout(() => setIcsStatus(''), 3000);
   };
 
+  // 临时预览：?theme=xxx 可强制覆盖主题，便于逐一截图审阅。
+  const previewTheme = typeof window !== 'undefined'
+    ? new URLSearchParams(window.location.search).get('theme')
+    : null;
+  const appliedTheme = previewTheme || theme;
+
+  // 为 Hero 轮播挑选代表角色：今天过生日的 + 未来7天内的，按日期排序，最多4个
+  const heroCharacters = characters.length > 0 ? (() => {
+    const today = new Date();
+
+    // 收集今天和未来7天内的所有角色
+    const upcomingChars = characters.filter(c => {
+      const key = calendarDateKey(c, dateMode);
+      const match = key.match(/^(\d{2})-(\d{2})$/);
+      if (!match) return false;
+      const charDate = new Date(today.getFullYear(), Number(match[1]) - 1, Number(match[2]));
+      const diffDays = Math.floor((charDate.getTime() - today.getTime()) / 86400000);
+      return diffDays >= 0 && diffDays <= 7; // 包括今天（diffDays=0）
+    }).sort((a, b) => {
+      // 按日期排序：今天的排最前面，然后是明天、后天...
+      const keyA = calendarDateKey(a, dateMode);
+      const keyB = calendarDateKey(b, dateMode);
+      return keyA.localeCompare(keyB);
+    }).slice(0, 4); // 最多4个
+
+    if (upcomingChars.length > 0) return upcomingChars;
+
+    // 兜底：如果未来7天内没有任何角色，每个游戏挑一个
+    const byGame = new Map<string, Character>();
+    for (const char of characters) {
+      if (!byGame.has(char.game)) byGame.set(char.game, char);
+    }
+    return Array.from(byGame.values()).slice(0, 4);
+  })() : [];
+
   return (
-    <div className="app">
+    <div className="app" data-theme={appliedTheme}>
+      {/* Hero 首屏：轮播多个游戏的代表角色 */}
+      {heroCharacters.length > 0 && (
+        <Hero characters={heroCharacters} />
+      )}
+
       <Header
         onSync={fetchFromWiki}
         isSyncing={loading}
@@ -294,8 +344,12 @@ function App() {
         onWeekStartChange={setWeekStart}
         portraitBackgroundEnabled={portraitBackgroundEnabled}
         onPortraitBackgroundChange={setPortraitBackgroundEnabled}
+        motionEnabled={motionEnabled}
+        onMotionChange={setMotionEnabled}
         dateMode={dateMode}
         onDateModeChange={setDateMode}
+        themeMode={themeMode}
+        onThemeModeChange={setThemeMode}
         activeFilterCount={activeFilterCount}
         onOpenFilters={() => setIsMobileFilterOpen(true)}
         onAddCharacter={() => {
@@ -318,6 +372,12 @@ function App() {
         />
         {icsStatus && <div className="ics-status" role="status">{icsStatus}</div>}
       </div>
+
+      <Spotlight
+        characters={characters}
+        dateMode={dateMode}
+        onSelect={handleSearchSelect}
+      />
 
       <div className="app-body">
         <FilterSidebar
@@ -371,6 +431,7 @@ function App() {
         onExportIcs={character => handleExportIcs([character], `${character.id}-birthday.ics`)}
         isFavorite={selectedCharacter ? isFavoriteCharacter(favoriteCharacterIds, selectedCharacter.id) : false}
         portraitBackgroundEnabled={portraitBackgroundEnabled}
+        motionEnabled={motionEnabled}
         dateMode={dateMode}
       />
 

@@ -24,6 +24,7 @@ const DISPLAY_MODE_KEY = 'mihoyo-calendar-display-mode';
 const WEEK_START_KEY = 'mihoyo-calendar-week-start';
 const FILTERS_KEY = 'mihoyo-calendar-filters-v3';
 const PORTRAIT_BACKGROUND_KEY = 'mihoyo-calendar-portrait-background';
+const MOTION_KEY = 'mihoyo-calendar-motion';
 const DATE_MODE_KEY = 'mihoyo-calendar-date-mode';
 const FAVORITES_KEY = 'mihoyo-calendar-favorite-ids-v1';
 const LEGACY_FILTERS_KEY = 'mihoyo-calendar-filters-v2';
@@ -93,6 +94,7 @@ export function useCharacters() {
   const [displayMode, setDisplayMode] = useState<DisplayMode>('avatar');
   const [weekStart, setWeekStart] = useState<WeekStart>(0);
   const [portraitBackgroundEnabled, setPortraitBackgroundEnabled] = useState(true);
+  const [motionEnabled, setMotionEnabled] = useState(true);
   const [dateMode, setDateMode] = useState<DateMode>('birthday');
   const [filters, setFilters] = useState<FilterState>(() => emptyFilterState());
   const [favoriteCharacterIds, setFavoriteCharacterIds] = useState<string[]>([]);
@@ -115,6 +117,10 @@ export function useCharacters() {
     // 默认开启立绘背景；只有用户明确关过（存了 'false'）才尊重关闭
     if (savedPortraitBackground === 'false') {
       setPortraitBackgroundEnabled(false);
+    }
+    // 动态立绘默认开启；用户明确关过才关闭
+    if (localStorage.getItem(MOTION_KEY) === 'false') {
+      setMotionEnabled(false);
     }
     const savedDateMode = localStorage.getItem(DATE_MODE_KEY);
     if (savedDateMode === 'release' || savedDateMode === 'birthday') {
@@ -281,6 +287,11 @@ export function useCharacters() {
     localStorage.setItem(PORTRAIT_BACKGROUND_KEY, String(enabled));
   }, []);
 
+  const setMotion = useCallback((enabled: boolean) => {
+    setMotionEnabled(enabled);
+    localStorage.setItem(MOTION_KEY, String(enabled));
+  }, []);
+
   const setDateModePref = useCallback((mode: DateMode) => {
     setDateMode(mode);
     localStorage.setItem(DATE_MODE_KEY, mode);
@@ -310,6 +321,7 @@ export function useCharacters() {
     displayMode,
     weekStart,
     portraitBackgroundEnabled,
+    motionEnabled,
     dateMode,
     favoriteCharacterIds,
     favoriteCharacters,
@@ -326,6 +338,7 @@ export function useCharacters() {
     setDisplayMode: setMode,
     setWeekStart: setWeekStartDay,
     setPortraitBackgroundEnabled: setPortraitBackground,
+    setMotionEnabled: setMotion,
     setDateMode: setDateModePref,
     toggleFavorite,
     setShowFavoritesOnly,
