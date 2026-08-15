@@ -1,0 +1,324 @@
+/* ============================================================
+   Theme token layer
+   Every surface reads from these variables. The app root sets
+   data-theme="neutral|genshin|hsr|zzz|honkai3"; each theme only
+   overrides the tokens below, so a single attribute swap restyles
+   the whole app (header, sidebar, calendar, modal) at once.
+
+   设计原则：保持工作面（卡片、日历格、弹窗）可读的中性面，
+   只用 accent 与 motif（边框光晕 / 顶部色条 / 背景纹理）表达
+   各游戏气质 —— 不把整块表面染成品牌色，避免刺眼与文字看不清。
+   ============================================================ */
+:root {
+  /* ---- 背景与表面（暖中性、分层） ---- */
+  --bg: #f6f6f4;
+  --bg-accent: #efeeea;
+  --surface: #ffffff;
+  --surface-2: #f5f4f1;
+  --surface-3: #ebeae5;
+
+  /* ---- 文本墨色（冷炭黑，4 级） ---- */
+  --ink: #26282e;
+  --ink-strong: #141519;
+  --ink-soft: #5c6068;
+  --ink-faint: #6a7079;   /* AA: 4.5:1 on --surface-2 */
+
+  /* ---- 边框（3 级） ---- */
+  --line: #e4e3de;
+  --line-soft: #efeee9;
+  --line-strong: #d4d2cb;
+
+  /* ---- 品牌/聚焦：克制的靛蓝 ---- */
+  --accent: #5b5bd6;
+  --accent-strong: #4646c2;
+  --accent-2: #5b5bd6;
+  --accent-ink: #ffffff;
+  --accent-bg: rgba(91, 91, 214, 0.1);
+  --accent-border: rgba(91, 91, 214, 0.4);
+
+  /* ---- 形状 ---- */
+  --radius: 16px;
+  --radius-md: 12px;
+  --radius-sm: 9px;
+
+  /* ---- 分层柔和阴影（贴合墨色，不用纯黑） ---- */
+  --shadow-sm: 0 1px 2px rgba(20, 21, 25, 0.05), 0 1px 1px rgba(20, 21, 25, 0.03);
+  --shadow: 0 1px 2px rgba(20, 21, 25, 0.04), 0 4px 16px rgba(20, 21, 25, 0.06);
+  --shadow-lg: 0 2px 4px rgba(20, 21, 25, 0.04), 0 12px 32px rgba(20, 21, 25, 0.1), 0 24px 64px rgba(20, 21, 25, 0.06);
+
+  /* ---- 字体 ---- */
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', sans-serif;
+  --font-display: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC',
+    -apple-system, sans-serif;
+
+  /* ---- 字号阶梯（约 1.2 递比，避免"随手写 px"造成的层级混乱） ---- */
+  --fs-micro: 11px;   /* 大写小标签 */
+  --fs-xs: 12px;      /* 辅助说明 */
+  --fs-sm: 13px;      /* 次要正文 */
+  --fs-base: 15px;    /* 正文 */
+  --fs-md: 18px;      /* 小标题 */
+  --fs-lg: 22px;      /* 区块标题 */
+  --fs-xl: 28px;      /* 页面标题 */
+  --fs-2xl: 34px;     /* 展示型大标题 */
+  --lh-tight: 1.15;
+  --lh-body: 1.55;
+  --tracking-cap: 0.08em;   /* 大写小标签必须加字距，否则字挤在一起 */
+  --tracking-tight: -0.02em;/* 大字号收紧字距才显得整齐 */
+
+  /* ---- 间距（4pt 基） ---- */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+
+  /* ---- 动效 ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 120ms; --dur-med: 200ms; --dur-slow: 320ms;
+
+  /* ---- 装饰：整页背景纹理 / 日历边框 / 顶部色条 ---- */
+  --texture: none;
+  --texture-size: auto;
+  --texture-opacity: 1;
+  --frame-border: var(--line);
+  --frame-glow: none;
+  /* 顶栏底部 / 日历顶部的主题色渐变条 */
+  --accent-rule: linear-gradient(90deg, var(--accent), var(--accent-2));
+
+  /* 选中“chip”控件（分段组选中、主按钮） */
+  --sel-bg: #26282e;
+  --sel-ink: #ffffff;
+
+  /* ---- 语义色：危险 / 成功 / 收藏 / 弹窗遮罩 ---- */
+  --danger: #d0453f;
+  --success: #2f6b46;
+  --star: #e0a300;
+  --scrim: rgba(20, 21, 25, 0.45);
+
+  color-scheme: light;
+}
+
+/* ---- 原神 Genshin：暖调绘卷，羊皮纸 + 古金 + 青（浅色） ---- */
+[data-theme='genshin'] {
+  --bg: #f4eee0;
+  --bg-accent: #ece5d8;
+  --surface: #fbf7ec;
+  --surface-2: #f3eddd;
+  --surface-3: #eae2cd;
+  --ink: #3b4255;
+  --ink-strong: #2a3040;
+  --ink-soft: #6a7086;
+  --ink-faint: #6b6670;   /* AA on 羊皮纸底 */
+  --line: #e3d9c2;
+  --line-soft: #ece4cf;
+  --line-strong: #d3c6a4;
+  --accent: #3d9b8f;
+  --accent-strong: #26685f;  /* 6.5:1 vs 白字 */
+  --accent-2: #d3a24a;
+  --accent-ink: #ffffff;
+  --accent-bg: rgba(61, 155, 143, 0.12);
+  --accent-border: rgba(211, 162, 74, 0.55);
+  --sel-bg: #3b4255;
+  --sel-ink: #fbf7ec;
+  --danger: #c0563e;
+  --success: #3d7a4e;
+  --star: #d3a24a;
+  --scrim: rgba(58, 44, 18, 0.5);
+  --font-display: 'Palatino Linotype', 'Book Antiqua', Palatino, 'STKaiti', 'KaiTi', 'Noto Serif SC', serif;
+  --frame-border: rgba(211, 162, 74, 0.45);
+  --frame-glow: 0 0 0 1px rgba(211, 162, 74, 0.15), 0 12px 32px rgba(120, 95, 40, 0.12);
+  --texture: radial-gradient(1200px 600px at 50% -10%, rgba(211, 162, 74, 0.12), transparent 60%);
+}
+
+/* ---- 崩坏：星穹铁道 HSR：深空海军蓝 + 金 + 青（深色、玻璃感） ---- */
+[data-theme='hsr'] {
+  --bg: #0c1020;
+  --bg-accent: #0b0e1e;
+  --surface: #161b30;
+  --surface-2: #1d2440;
+  --surface-3: #273057;
+  --ink: #eaf0ff;
+  --ink-strong: #ffffff;
+  --ink-soft: #aab3d6;
+  --ink-faint: #949ec9;   /* 深底需提亮而非加深 */
+  --line: #2b3358;
+  --line-soft: #232a48;
+  --line-strong: #3a4470;
+  --accent: #e7c36b;
+  --accent-strong: #c9a24b;
+  --accent-2: #6fb7ff;
+  --accent-ink: #1a1407;
+  --accent-bg: rgba(231, 195, 107, 0.16);
+  --accent-border: rgba(111, 183, 255, 0.4);
+  --sel-bg: #e7c36b;
+  --sel-ink: #1a1407;
+  --danger: #ff8080;
+  --success: #7fd6a8;
+  --star: #e7c36b;
+  --scrim: rgba(4, 6, 18, 0.68);
+  --font-display: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --frame-border: rgba(201, 162, 75, 0.4);
+  --frame-glow: 0 0 0 1px rgba(139, 124, 246, 0.28), 0 12px 40px rgba(6, 8, 24, 0.6);
+  --texture: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  --texture-size: 28px 28px;
+  --texture-opacity: 0.35;
+  color-scheme: dark;
+}
+
+/* ---- 绝区零 ZZZ：近黑街头 + 信号橙 + 荧光黄（深色、硬朗） ---- */
+[data-theme='zzz'] {
+  --bg: #0e0e11;
+  --bg-accent: #121216;
+  --surface: #1b1b21;
+  --surface-2: #23232b;
+  --surface-3: #2e2e37;
+  --ink: #f2f2ee;
+  --ink-strong: #ffffff;
+  --ink-soft: #b9bac0;
+  --ink-faint: #9a9ba4;
+  --line: #2e2e35;
+  --line-soft: #26262c;
+  --line-strong: #3d3d46;
+  --accent: #ff5a00;
+  --accent-strong: #ff7733;
+  --accent-2: #f5e100;
+  --accent-ink: #161616;
+  --accent-bg: rgba(255, 90, 0, 0.16);
+  --accent-border: rgba(245, 225, 0, 0.4);
+  --sel-bg: #ff5a00;
+  --sel-ink: #161616;
+  --danger: #ff5a4d;
+  --success: #9be36a;
+  --star: #f5e100;
+  --scrim: rgba(0, 0, 0, 0.72);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --font-display: 'Arial Black', 'Archivo Black', 'Segoe UI', 'PingFang SC', sans-serif;
+  --frame-border: rgba(255, 90, 0, 0.5);
+  --frame-glow: 0 0 0 1px rgba(245, 225, 0, 0.12), 0 12px 32px rgba(0, 0, 0, 0.65);
+  --texture: repeating-linear-gradient(45deg, rgba(255, 90, 0, 0.05) 0 14px, transparent 14px 28px);
+  --texture-opacity: 1;
+  color-scheme: dark;
+}
+
+/* ---- 崩坏3 Honkai 3：清透动漫科技，白/蓝 + 品红（浅色） ---- */
+[data-theme='honkai3'] {
+  --bg: #f4f6fb;
+  --bg-accent: #e9edf7;
+  --surface: #ffffff;
+  --surface-2: #f2f5fc;
+  --surface-3: #e6ecf8;
+  --ink: #2b3245;
+  --ink-strong: #1b2233;
+  --ink-soft: #5a6488;
+  --ink-faint: #626b7b;
+  --line: #dfe5f2;
+  --line-soft: #e9eef8;
+  --line-strong: #c6d2ec;
+  --accent: #f23d7f;
+  --accent-strong: #b81f57;  /* 6.2:1 vs 白字 */
+  --accent-2: #3ec8f0;
+  --accent-ink: #ffffff;
+  --accent-bg: rgba(242, 61, 127, 0.1);
+  --accent-border: rgba(62, 200, 240, 0.45);
+  --sel-bg: #1b2233;
+  --sel-ink: #ffffff;
+  --danger: #e04a5f;
+  --success: #2f8f6a;
+  --star: #f0a800;
+  --scrim: rgba(27, 34, 51, 0.48);
+  --font-display: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --frame-border: rgba(242, 61, 127, 0.3);
+  --frame-glow: 0 0 0 1px rgba(62, 200, 240, 0.15), 0 12px 32px rgba(60, 90, 180, 0.12);
+  --texture: linear-gradient(135deg, rgba(242, 61, 127, 0.05), rgba(62, 200, 240, 0.06));
+}
+
+/* ============================================================
+   基础 reset + body（token 驱动）
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 表单控件不继承颜色是深色主题「黑字压深底」的主要来源，这里统一拉回 token */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  background-color: var(--surface);
+}
+
+/* 画布底色画在 html 上而不是 body 上：body 只是 .app 的祖先，
+   由它上色会在深色主题下盖住 html 的主题底（实测 body-bg 恒为 #f6f6f4）。 */
+html {
+  background-color: var(--bg);
+  transition: background-color var(--dur-slow) var(--ease-soft);
+}
+
+body {
+  font-family: var(--font-body);
+  accent-color: var(--accent);
+  background-color: transparent;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: color var(--dur-slow) var(--ease-soft);
+}
+
+/* var() 在 html/body 上只解析到 :root 的中性值（data-theme 挂在后代 .app 上），
+   所以主题底色必须显式反向传播，否则滚动惯性 / overscroll 区域露出亮底。 */
+html:has(.app[data-theme='genshin']) { background-color: #f4eee0; }
+html:has(.app[data-theme='hsr'])     { background-color: #0c1020; color-scheme: dark; }
+html:has(.app[data-theme='zzz'])     { background-color: #0e0e11; color-scheme: dark; }
+html:has(.app[data-theme='honkai3']) { background-color: #f4f6fb; }
+
+/* 整页主题纹理（极轻，绝不喧宾夺主）。
+   .app 自己铺主题底色：data-theme 挂在 .app 上，body 继承不到，
+   所以底色必须由 .app 来画，否则深色主题会露出 body 的中性灰。 */
+.app {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--ink);
+  transition: background-color var(--dur-slow) var(--ease-soft), color var(--dur-slow) var(--ease-soft);
+}
+.app::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--texture);
+  background-size: var(--texture-size);
+  opacity: var(--texture-opacity);
+  pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-soft);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* 统一的可访问聚焦环 */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+  border-radius: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-med: 1ms;
+    --dur-slow: 1ms;
+  }
+}

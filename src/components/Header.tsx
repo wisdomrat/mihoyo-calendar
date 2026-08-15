@@ -1,4 +1,5 @@
 import type { DisplayMode, WeekStart, DateMode } from '../hooks/useCharacters';
+import type { ThemeMode } from '../hooks/useTheme';
 
 interface HeaderProps {
   onSync: () => void;
@@ -11,8 +12,12 @@ interface HeaderProps {
   onWeekStartChange: (start: WeekStart) => void;
   portraitBackgroundEnabled: boolean;
   onPortraitBackgroundChange: (enabled: boolean) => void;
+  motionEnabled: boolean;
+  onMotionChange: (enabled: boolean) => void;
   dateMode: DateMode;
   onDateModeChange: (mode: DateMode) => void;
+  themeMode: ThemeMode;
+  onThemeModeChange: (mode: ThemeMode) => void;
   activeFilterCount: number;
   onOpenFilters: () => void;
   onAddCharacter: () => void;
@@ -38,10 +43,18 @@ const TEXT = {
   artTitle: '\u8be6\u60c5\u7acb\u7ed8\u80cc\u666f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u7eaf\u8272\u80cc\u666f\uff09',
   solid: '\u7eaf\u8272',
   solidTitle: '\u7eaf\u8272\u80cc\u666f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u7acb\u7ed8\u80cc\u666f\uff09',
+  motion: '\u52a8\u6001',
+  motionTitle: '\u5f00\u542f\u52a8\u6001\u7acb\u7ed8\u6548\u679c\uff08\u70b9\u51fb\u5173\u95ed\uff09',
+  motionOff: '\u9759\u6001',
+  motionOffTitle: '\u5173\u95ed\u52a8\u6001\u7acb\u7ed8\u6548\u679c\uff08\u70b9\u51fb\u5f00\u542f\uff09',
   birthday: '\u751f\u65e5',
   birthdayTitle: '\u663e\u793a\u89d2\u8272\u751f\u65e5\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u5b9e\u88c5\u65e5\u671f\uff09',
   release: '\u5b9e\u88c5',
   releaseTitle: '\u663e\u793a\u89d2\u8272\u9996\u6b21\u5b9e\u88c5\u65e5\u671f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u751f\u65e5\uff09',
+  themeNeutral: '\u4e2d\u6027\u4e3b\u9898',
+  themeNeutralTitle: '\u672a\u9009\u4e2d\u89d2\u8272\u65f6\u4f7f\u7528\u7edf\u4e00\u4e2d\u6027\u4e3b\u9898\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u8ddf\u968f\u89d2\u8272\uff09',
+  themeFollow: '\u8ddf\u968f\u89d2\u8272',
+  themeFollowTitle: '\u754c\u9762\u4e3b\u9898\u59cb\u7ec8\u8ddf\u968f\u5f53\u524d\u9009\u4e2d\u89d2\u8272\u7684\u6e38\u620f\uff08\u70b9\u51fb\u5207\u6362\u4e3a\u4e2d\u6027\u4e3b\u9898\uff09',
   week: '\u9996\u65e5:',
   sunday: '\u65e5',
   sundayTitle: '\u5468\u65e5\u5f00\u59cb',
@@ -72,8 +85,12 @@ const Header = ({
   onWeekStartChange,
   portraitBackgroundEnabled,
   onPortraitBackgroundChange,
+  motionEnabled,
+  onMotionChange,
   dateMode,
   onDateModeChange,
+  themeMode,
+  onThemeModeChange,
   activeFilterCount,
   onOpenFilters,
   onAddCharacter,
@@ -126,6 +143,24 @@ const Header = ({
                 aria-pressed={dateMode === 'release'}
               >
                 {dateMode === 'release' ? TEXT.release : TEXT.birthday}
+              </button>
+              {/* 主题来源开关：未选中角色时用中性主题，或始终跟随角色 */}
+              <button
+                className="display-mode-btn toggle-btn active"
+                onClick={() => onThemeModeChange(themeMode === 'follow-character' ? 'follow-neutral' : 'follow-character')}
+                title={themeMode === 'follow-character' ? TEXT.themeFollowTitle : TEXT.themeNeutralTitle}
+                aria-pressed={themeMode === 'follow-character'}
+              >
+                {themeMode === 'follow-character' ? TEXT.themeFollow : TEXT.themeNeutral}
+              </button>
+              {/* 动态立绘开关：开启后立绘有轻微动效，绝区零可放 Spine */}
+              <button
+                className="display-mode-btn toggle-btn active"
+                onClick={() => onMotionChange(!motionEnabled)}
+                title={motionEnabled ? TEXT.motionTitle : TEXT.motionOffTitle}
+                aria-pressed={motionEnabled}
+              >
+                {motionEnabled ? TEXT.motion : TEXT.motionOff}
               </button>
             </div>
           </div>
