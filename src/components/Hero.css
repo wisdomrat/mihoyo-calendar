@@ -99,6 +99,55 @@
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 8%);
 }
 
+/* 可点立绘：点击打开角色详情。之前这里只有 pointer-events:auto 却没有 onClick，
+   「可交互」是死的 —— 现在补上，并给出明确的可点提示。 */
+.hero__portrait img.is-clickable {
+  cursor: pointer;
+  transition: filter 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero__portrait img.is-clickable:hover {
+  filter: brightness(1.07) saturate(1.04);
+  transform: translateY(-4px);
+}
+.hero__portrait img.is-clickable:focus-visible {
+  outline: none;
+  filter: brightness(1.07);
+}
+
+/* ---- 底边渐隐：把 hero 的硬下边化进页面底色。
+       全站暗色后 --deep（hero 底）与 --bg（页面底）同族，这一层负责抹掉接缝。
+
+       画在 hero 内部而非插兄弟元素：.hero 是 overflow:hidden 的自封闭堆叠上下文，
+       这样不动 App.tsx 布局、不用负 margin、也不与 .app-header 的
+       position:relative 抢层级。
+       z-index 5 —— 盖住立绘（L0~L4 都没有 z-index，靠绘制顺序排），但压在
+       .hero__content(10) / .hero__scroll-hint(15) / .hero__indicators(16) 之下，
+       所以底部那两个控件仍然清晰。
+       多级色标是为了逼近缓动曲线：两点线性渐变在大面积深色上会出色带。
+       高度取 min(220px, 30%)，横屏矮视口（max-height:520px）下不会吃掉半个 hero。
+       渐隐终点用 --surface 而非 --bg：hero 正下方紧接着的是 .app-header
+       （background: var(--surface)），落在同一色上接缝才真正消失。
+       注意这些 token 在 .hero 内解析正确 —— Hero 只覆盖了 --key/--accent/--deep。---- */
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: min(220px, 30%);
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    var(--surface) 0%,
+    color-mix(in srgb, var(--surface) 86%, transparent) 24%,
+    color-mix(in srgb, var(--surface) 55%, transparent) 50%,
+    color-mix(in srgb, var(--surface) 20%, transparent) 76%,
+    transparent 100%
+  );
+}
+
 /* ---- 向下滚动提示（底部居中，动画跳动）---- */
 .hero__scroll-hint {
   position: absolute;
@@ -270,99 +319,14 @@
   opacity: 0.6;
 }
 
-/* ---- 归属驱动配色（--key/--accent/--deep 由 data-affiliation 决定）----
-   ID 与色值必须与 src/data/affiliations-genshin.ts / affiliations-zzz.ts 一一对应，
-   切勿自创 ID —— 对不上就静默落到 .hero 兜底灰（此 bug 已修过一次）。 */
+/* ---- 归属驱动配色 ----
+   --key / --accent / --deep 由 Hero.tsx 从 resolveAffiliation(character).colors
+   内联注入，不在这里重复一份色板。
 
-/* 原神（9 个地区）*/
-.hero[data-affiliation='genshin-mondstadt'] {
-  --key: #5eb3d6;    --accent: #74c2a8;    --deep: #2d5a6b;
-}
-.hero[data-affiliation='genshin-liyue'] {
-  --key: #d4a553;    --accent: #c8704a;    --deep: #3d3027;
-}
-.hero[data-affiliation='genshin-inazuma'] {
-  --key: #9d7dd9;    --accent: #e08bb0;    --deep: #1a1428;
-}
-.hero[data-affiliation='genshin-sumeru'] {
-  --key: #6fba72;    --accent: #d9b65d;    --deep: #2d4a34;
-}
-.hero[data-affiliation='genshin-fontaine'] {
-  --key: #4a8fc7;    --accent: #86c8e8;    --deep: #1c2d42;
-}
-.hero[data-affiliation='genshin-natlan'] {
-  --key: #e85a3a;    --accent: #f4c542;    --deep: #2b1612;
-}
-.hero[data-affiliation='genshin-snezhnaya'] {
-  --key: #a2c8dc;    --accent: #6b89a8;    --deep: #1a2433;
-}
-.hero[data-affiliation='genshin-khaenriah'] {
-  --key: #5a6fa8;    --accent: #8b7ba8;    --deep: #1a1a26;
-}
-.hero[data-affiliation='genshin-other'] {
-  --key: #3d9b8f;    --accent: #d3a24a;    --deep: #3a2c12;
-}
-
-/* 绝区零（17 个阵营，与 affiliations-zzz.ts 对齐）*/
-.hero[data-affiliation='zzz-cunning-hares'] {
-  --key: #8dff3d;    --accent: #ffeb3b;    --deep: #0d1a0f;
-}
-.hero[data-affiliation='zzz-victoria-housekeeping'] {
-  --key: #b794f6;    --accent: #f4d03f;    --deep: #1a0f28;
-}
-.hero[data-affiliation='zzz-belobog'] {
-  --key: #ffa726;    --accent: #ffeb3b;    --deep: #1c1410;
-}
-.hero[data-affiliation='zzz-sons-of-calydon'] {
-  --key: #ff5722;    --accent: #ff9800;    --deep: #1a0d0a;
-}
-.hero[data-affiliation='zzz-section-6'] {
-  --key: #42a5f5;    --accent: #80deea;    --deep: #0d1821;
-}
-.hero[data-affiliation='zzz-criminal-investigation'] {
-  --key: #26a69a;    --accent: #ffd54f;    --deep: #0f1a18;
-}
-.hero[data-affiliation='zzz-obol-squad'] {
-  --key: #7e57c2;    --accent: #ab47bc;    --deep: #14101c;
-}
-.hero[data-affiliation='zzz-mountain-cloud'] {
-  --key: #66bb6a;    --accent: #d4a574;    --deep: #2c3e2f;
-}
-.hero[data-affiliation='zzz-hollow-special-operations'] {
-  --key: #ff7043;    --accent: #ffb74d;    --deep: #1a0f0a;
-}
-.hero[data-affiliation='zzz-obsidian'] {
-  --key: #ef5350;    --accent: #ffa726;    --deep: #1c0d0d;
-}
-.hero[data-affiliation='zzz-wildfire'] {
-  --key: #ec407a;    --accent: #ab47bc;    --deep: #1a0d14;
-}
-.hero[data-affiliation='zzz-rosskelieff'] {
-  --key: #5c6bc0;    --accent: #9575cd;    --deep: #0f1018;
-}
-.hero[data-affiliation='zzz-lyra'] {
-  --key: #42a5f5;    --accent: #ab47bc;    --deep: #0a0e14;
-}
-.hero[data-affiliation='zzz-mockingbird'] {
-  --key: #78909c;    --accent: #ffb74d;    --deep: #0d1012;
-}
-.hero[data-affiliation='zzz-academia'] {
-  --key: #5e81ac;    --accent: #d4a574;    --deep: #2e3440;
-}
-.hero[data-affiliation='zzz-pubsec-public-order'] {
-  --key: #42a5f5;    --accent: #ffeb3b;    --deep: #0d1418;
-}
-.hero[data-affiliation='zzz-other'] {
-  --key: #ff6b35;    --accent: #f4e04d;    --deep: #0e0e11;
-}
-
-/* 崩坏：星穹铁道 / 崩坏3 —— 数据层尚未细分归属，先给各游戏一个专属兜底 */
-.hero[data-affiliation='hsr-other'] {
-  --key: #4a5fd9;    --accent: #8ab4f8;    --deep: #0c1020;
-}
-.hero[data-affiliation='honkai3-other'] {
-  --key: #e87bb0;    --accent: #f4b8d4;    --deep: #1f0f1a;
-}
+   这里原来抄了 28 个 .hero[data-affiliation='…'] 色块，和
+   src/data/affiliations-genshin.ts / affiliations-zzz.ts 是两套真相 ——
+   ID 一旦对不上就静默落到下面的兜底灰（此 bug 已修过一次）。现在只剩一份。
+   data-affiliation 属性保留，仅作调试标识。 ---- */
 
 /* 兜底（未映射角色） */
 .hero {

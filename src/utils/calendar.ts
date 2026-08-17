@@ -1,10 +1,17 @@
 import type { Character, DateMode } from '../types';
 
-export const GAMES: Record<string, { name: string; color: string }> = {
-  genshin: { name: '原神', color: '#4a90e2' },
-  hsr: { name: '崩坏：星穹铁道', color: '#6b5ce7' },
-  zzz: { name: '绝区零', color: '#ff6b6b' },
-  honkai3: { name: '崩坏3', color: '#ff8cc8' },
+// `short` 是日历格子里用的窄标签：完整名（崩坏：星穹铁道）在周视图的
+// 单元格里会溢出，所以角色卡上的游戏标只用短名。
+//
+// `color` 同时充当两种角色：日历上的头像环 / 圆点 / 卡片左边框（需 ≥3:1），
+// 以及 .modal-game-badge 的底色配 --accent-ink 深字（需 ≥4.5:1）。
+// 全站暗色后星铁原本的 #6b5ce7 在徽章上只有 3.49~4.00:1，是四色里唯一不合格的，
+// 提亮到 #9d90ff 后两种用法都在 5.8 以上；其余三色两项均达标，保持原值不动。
+export const GAMES: Record<string, { name: string; short: string; color: string }> = {
+  genshin: { name: '原神', short: '原神', color: '#4a90e2' },
+  hsr: { name: '崩坏：星穹铁道', short: '星穹铁道', color: '#9d90ff' },
+  zzz: { name: '绝区零', short: '绝区零', color: '#ff6b6b' },
+  honkai3: { name: '崩坏3', short: '崩坏3', color: '#ff8cc8' },
 };
 
 // Games whose characters have no official birthday; they always show the
@@ -74,6 +81,10 @@ export function getGameColor(gameId: string): string {
 
 export function getGameName(gameId: string): string {
   return GAMES[gameId]?.name || gameId;
+}
+
+export function getGameShortName(gameId: string): string {
+  return GAMES[gameId]?.short || gameId;
 }
 
 export function formatBirthday(birthday: string): string {

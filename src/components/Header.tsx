@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { DisplayMode, WeekStart, DateMode } from '../hooks/useCharacters';
 import type { ThemeMode } from '../hooks/useTheme';
 
@@ -26,6 +27,10 @@ interface HeaderProps {
   favoriteCount: number;
   showFavoritesOnly: boolean;
   onShowFavoritesOnlyChange: (enabled: boolean) => void;
+  // 搜索框并进标题行：省掉一整条独立带子，顶栏内容更多但总高更矮。
+  // 用插槽而不是把 CharacterSearch 的一堆 props 透传进来。
+  searchSlot?: ReactNode;
+  statusSlot?: ReactNode;
 }
 
 const TEXT = {
@@ -99,15 +104,22 @@ const Header = ({
   favoriteCount,
   showFavoritesOnly,
   onShowFavoritesOnlyChange,
+  searchSlot,
+  statusSlot,
 }: HeaderProps) => {
   const filterButtonLabel = activeFilterCount > 0 ? `${TEXT.filters} ${activeFilterCount}` : TEXT.filters;
 
   return (
     <header className="app-header">
       <div className="header-content">
-        <div className="header-title">
-          <h1>{TEXT.title}</h1>
-          <p className="header-subtitle">{TEXT.subtitle}</p>
+        {/* 第一行：标题 + 搜索 + 唯一的主操作 */}
+        <div className="header-titlerow">
+          <div className="header-title">
+            <h1>{TEXT.title}</h1>
+            <p className="header-subtitle">{TEXT.subtitle}</p>
+          </div>
+          {searchSlot && <div className="header-search">{searchSlot}</div>}
+          <button className="action-btn add-btn" onClick={onAddCharacter} title={TEXT.addTitle}>{TEXT.add}</button>
         </div>
 
         {syncProgress && (
@@ -115,47 +127,51 @@ const Header = ({
             <div className="sync-progress-text">{syncProgress}</div>
           </div>
         )}
+        {statusSlot}
 
+        {/* 第二行：设置全部装进一条工具栏（内部用 1px 竖线分组），动作留在右侧。
+            原来 13 个控件各自带描边，眼睛数不清有几组；现在描边只剩工具栏一圈。 */}
         <div className="header-controls">
-          <div className="control-group">
-            <span className="control-label">{TEXT.view}</span>
-            <div className="display-modes">
-              {/* 三选一互斥视图模式，包成一组外框 */}
+          <div className="control-bar">
+            <div className="control-group">
+              <span className="control-label">{TEXT.view}</span>
+              {/* 三选一互斥 */}
               <div className="segmented-group" role="group" aria-label={TEXT.view}>
                 <button className={`display-mode-btn ${displayMode === 'avatar' ? 'active' : ''}`} onClick={() => onDisplayModeChange('avatar')} title={TEXT.avatarTitle}>{TEXT.avatar}</button>
                 <button className={`display-mode-btn ${displayMode === 'card' ? 'active' : ''}`} onClick={() => onDisplayModeChange('card')} title={TEXT.cardTitle}>{TEXT.card}</button>
                 <button className={`display-mode-btn ${displayMode === 'compact' ? 'active' : ''}`} onClick={() => onDisplayModeChange('compact')} title={TEXT.compactTitle}>{TEXT.compact}</button>
               </div>
-              {/* 独立二态开关：立绘背景（当前态恒为深色） */}
+            </div>
+
+            {/* 二态开关组：显示的是「当前值」而非「可选项」，所以用小圆点而不是选中块，
+                和左边三选一在视觉上分开 */}
+            <div className="control-group control-group--toggles">
               <button
-                className="display-mode-btn toggle-btn active"
+                className="toggle-btn"
                 onClick={() => onPortraitBackgroundChange(!portraitBackgroundEnabled)}
                 title={portraitBackgroundEnabled ? TEXT.solidTitle : TEXT.artTitle}
                 aria-pressed={portraitBackgroundEnabled}
               >
                 {portraitBackgroundEnabled ? TEXT.art : TEXT.solid}
               </button>
-              {/* 独立二态开关：生日 / 实装日期，紧挨立绘，与三选一同间距 */}
               <button
-                className="display-mode-btn toggle-btn active"
+                className="toggle-btn"
                 onClick={() => onDateModeChange(dateMode === 'release' ? 'birthday' : 'release')}
                 title={dateMode === 'release' ? TEXT.releaseTitle : TEXT.birthdayTitle}
                 aria-pressed={dateMode === 'release'}
               >
                 {dateMode === 'release' ? TEXT.release : TEXT.birthday}
               </button>
-              {/* 主题来源开关：未选中角色时用中性主题，或始终跟随角色 */}
               <button
-                className="display-mode-btn toggle-btn active"
+                className="toggle-btn"
                 onClick={() => onThemeModeChange(themeMode === 'follow-character' ? 'follow-neutral' : 'follow-character')}
                 title={themeMode === 'follow-character' ? TEXT.themeFollowTitle : TEXT.themeNeutralTitle}
                 aria-pressed={themeMode === 'follow-character'}
               >
                 {themeMode === 'follow-character' ? TEXT.themeFollow : TEXT.themeNeutral}
               </button>
-              {/* 动态立绘开关：开启后立绘有轻微动效，绝区零可放 Spine */}
               <button
-                className="display-mode-btn toggle-btn active"
+                className="toggle-btn"
                 onClick={() => onMotionChange(!motionEnabled)}
                 title={motionEnabled ? TEXT.motionTitle : TEXT.motionOffTitle}
                 aria-pressed={motionEnabled}
@@ -163,13 +179,13 @@ const Header = ({
                 {motionEnabled ? TEXT.motion : TEXT.motionOff}
               </button>
             </div>
-          </div>
 
-          <div className="control-group week-group">
-            <span className="control-label">{TEXT.week}</span>
-            <div className="week-start-selector">
-              <button className={`week-start-btn ${weekStart === 0 ? 'active' : ''}`} onClick={() => onWeekStartChange(0)} title={TEXT.sundayTitle}>{TEXT.sunday}</button>
-              <button className={`week-start-btn ${weekStart === 1 ? 'active' : ''}`} onClick={() => onWeekStartChange(1)} title={TEXT.mondayTitle}>{TEXT.monday}</button>
+            <div className="control-group week-group">
+              <span className="control-label">{TEXT.week}</span>
+              <div className="week-start-selector">
+                <button className={`week-start-btn ${weekStart === 0 ? 'active' : ''}`} onClick={() => onWeekStartChange(0)} title={TEXT.sundayTitle}>{TEXT.sunday}</button>
+                <button className={`week-start-btn ${weekStart === 1 ? 'active' : ''}`} onClick={() => onWeekStartChange(1)} title={TEXT.mondayTitle}>{TEXT.monday}</button>
+              </div>
             </div>
           </div>
 
@@ -177,7 +193,6 @@ const Header = ({
             <button className="action-btn filter-entry-btn" onClick={onOpenFilters} aria-label={TEXT.openFilters}>
               {filterButtonLabel}
             </button>
-            <button className="action-btn add-btn" onClick={onAddCharacter} title={TEXT.addTitle}>{TEXT.add}</button>
             <button
               className={`action-btn favorite-filter-btn ${showFavoritesOnly ? 'active' : ''}`}
               onClick={() => onShowFavoritesOnlyChange(!showFavoritesOnly)}
@@ -186,12 +201,15 @@ const Header = ({
             >
               {TEXT.favorites} {favoriteCount}
             </button>
-            <button className="action-btn ics-btn" onClick={onExportIcs} title={TEXT.downloadIcs}>{TEXT.calendar}</button>
-            <button className="action-btn export-btn" onClick={onExport} title={TEXT.exportTitle}>{TEXT.export}</button>
-            <button className="action-btn sync-btn" onClick={onSync} disabled={isSyncing} title={TEXT.updateTitle}>
-              {isSyncing ? TEXT.updating : TEXT.update}
-            </button>
-            {lastSync && <span className="last-sync">{new Date(lastSync).toLocaleDateString('zh-CN')}</span>}
+            {/* 数据操作（低频）：一道分隔线之后收成安静的 ghost 按钮 */}
+            <div className="header-actions-data">
+              <button className="action-btn ics-btn" onClick={onExportIcs} title={TEXT.downloadIcs}>{TEXT.calendar}</button>
+              <button className="action-btn export-btn" onClick={onExport} title={TEXT.exportTitle}>{TEXT.export}</button>
+              <button className="action-btn sync-btn" onClick={onSync} disabled={isSyncing} title={TEXT.updateTitle}>
+                {isSyncing ? TEXT.updating : TEXT.update}
+              </button>
+              {lastSync && <span className="last-sync">{new Date(lastSync).toLocaleDateString('zh-CN')}</span>}
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { startOfWeek, endOfWeek, eachDayOfInterval, format, isSameDay } from 'date-fns';
 import type { Character } from '../../types';
 import type { DisplayMode, WeekStart, DateMode } from '../../hooks/useCharacters';
-import { calendarDateKey } from '../../utils/calendar';
+import { calendarDateKey, getGameColor, getGameShortName } from '../../utils/calendar';
 
 interface WeekViewProps {
   currentDate: Date;
@@ -27,7 +27,9 @@ const WeekView = ({ currentDate, characters, displayMode, weekStart, dateMode, w
             key={day.toISOString()} 
             className={`week-view-day-header ${isSameDay(day, today) ? 'today' : ''}`}
           >
-            <div className="week-view-weekday">{weekdayLabels[day.getDay() === 0 ? 6 : day.getDay() - 1]}日</div>
+            {/* weekdayLabels 的排列跟随 weekStart（周一起首 / 周日起首），
+                所以下标必须减去 weekStart，不能写死周一起首。 */}
+            <div className="week-view-weekday">周{weekdayLabels[(day.getDay() - weekStart + 7) % 7]}</div>
             <div className="week-view-date">{format(day, 'M/d')}</div>
           </div>
         ))}
@@ -71,7 +73,7 @@ const WeekView = ({ currentDate, characters, displayMode, weekStart, dateMode, w
                         
                         <div className="week-character-info">
                           <div className="week-character-name">{character.name}</div>
-                          <div className="week-character-game">{getGameName(character.game)}</div>
+                          <div className="week-character-game">{getGameShortName(character.game)}</div>
                         </div>
                       </div>
                     ))}
@@ -87,25 +89,5 @@ const WeekView = ({ currentDate, characters, displayMode, weekStart, dateMode, w
     </div>
   );
 };
-
-function getGameColor(gameId: string): string {
-  const colors: Record<string, string> = {
-    genshin: '#4a90e2',
-    hsr: '#6b5ce7',
-    zzz: '#ff6b6b',
-    honkai3: '#ff8cc8',
-  };
-  return colors[gameId] || '#999';
-}
-
-function getGameName(gameId: string): string {
-  const names: Record<string, string> = {
-    genshin: '原神',
-    hsr: '星穹铁道',
-    zzz: '绝区零',
-    honkai3: '崩坏3',
-  };
-  return names[gameId] || gameId;
-}
 
 export default WeekView;

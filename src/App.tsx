@@ -1,14 +1,14 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useCallback, useEffect, useState, type CSSProperties } from 'react';
 import Calendar from './components/Calendar/Calendar';
 import Header from './components/Header';
 import FilterSidebar from './components/FilterSidebar';
 import FilterBottomSheet from './components/FilterBottomSheet';
 import AddCharacterModal from './components/AddCharacterModal';
 import CharacterSearch from './components/CharacterSearch';
-import Spotlight from './components/Spotlight';
 import { Hero } from './components/Hero.tsx';
 import { useCharacters, type DateMode } from './hooks/useCharacters';
 import { useTheme } from './hooks/useTheme';
+import { useReveal } from './hooks/useReveal';
 import type { Character, ViewMode } from './types';
 import { calendarDateKey, displayDate, effectiveDateMode, getGameColor, getGameName, GAMES } from './utils/calendar';
 import { getPortraitModalLayout, type PortraitDimensions } from './utils/portraitLayout';
@@ -297,6 +297,24 @@ function App() {
     : null;
   const appliedTheme = previewTheme || theme;
 
+  // Hero 当前轮播到的角色的归属色，向下渗透到整个页面。
+  // 命名空间必须带前缀：--accent 在 .hero 内被归属色遮蔽，若直接写到 .app
+  // 会把主题 accent 全站污染。这里只喂给 --accent-rule（顶栏底部 / 日历顶部
+  // 那两条 2px 色条），让页面继续「记得」首屏是谁，但不动其余 token。
+  const [affilColors, setAffilColors] = useState<{ key: string; accent: string } | null>(null);
+  const handleAffiliationChange = useCallback(
+    (affiliation: { colors: { key: string; accent: string } }) => {
+      const { key, accent } = affiliation.colors;
+      setAffilColors(prev => (prev && prev.key === key && prev.accent === accent ? prev : { key, accent }));
+    },
+    [],
+  );
+  const affilStyle = affilColors
+    ? ({ '--affil-key': affilColors.key, '--affil-accent': affilColors.accent } as CSSProperties)
+    : undefined;
+
+  // 日历区滚入视口时才放入场动画（Hero 占满首屏，加载时它还在屏幕外）
+  const { ref: bodyRef, revealed: bodyRevealed } = useReveal<HTMLDivElement>();
   // 为 Hero 轮播挑选代表角色：今天过生日的 + 未来7天内的，按日期排序，最多4个
   const heroCharacters = characters.length > 0 ? (() => {
     const today = new Date();
@@ -327,10 +345,14 @@ function App() {
   })() : [];
 
   return (
-    <div className="app" data-theme={appliedTheme}>
+    <div className="app" data-theme={appliedTheme} style={affilStyle}>
       {/* Hero 首屏：轮播多个游戏的代表角色 */}
       {heroCharacters.length > 0 && (
-        <Hero characters={heroCharacters} />
+        <Hero
+          characters={heroCharacters}
+          onAffiliationChange={handleAffiliationChange}
+          onCharacterClick={handleSearchSelect}
+        />
       )}
 
       <Header
@@ -361,25 +383,18 @@ function App() {
         favoriteCount={favoriteCount}
         showFavoritesOnly={showFavoritesOnly}
         onShowFavoritesOnlyChange={setShowFavoritesOnly}
+        searchSlot={
+          <CharacterSearch
+            characters={allCharacters}
+            favoriteCharacterIds={favoriteCharacterIds}
+            dateMode={dateMode}
+            onSelect={handleSearchSelect}
+          />
+        }
+        statusSlot={icsStatus ? <div className="ics-status" role="status">{icsStatus}</div> : null}
       />
 
-      <div className="search-shell">
-        <CharacterSearch
-          characters={allCharacters}
-          favoriteCharacterIds={favoriteCharacterIds}
-          dateMode={dateMode}
-          onSelect={handleSearchSelect}
-        />
-        {icsStatus && <div className="ics-status" role="status">{icsStatus}</div>}
-      </div>
-
-      <Spotlight
-        characters={characters}
-        dateMode={dateMode}
-        onSelect={handleSearchSelect}
-      />
-
-      <div className="app-body">
+      <div className={`app-body${bodyRevealed ? ' is-revealed' : ''}`} ref={bodyRef}>
         <FilterSidebar
           collapsed={isFilterSidebarCollapsed}
           selectedGames={selectedGames}

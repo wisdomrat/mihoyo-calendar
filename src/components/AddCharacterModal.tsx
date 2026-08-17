@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import type { Character } from '../types';
+import { GAMES } from '../utils/calendar';
 
 interface AddCharacterModalProps {
   isOpen: boolean;
@@ -7,13 +8,6 @@ interface AddCharacterModalProps {
   onClose: () => void;
   onSave: (character: Omit<Character, 'id' | 'updatedAt' | 'source'>) => void;
 }
-
-const GAMES = [
-  { id: 'genshin', name: '原神', color: '#4a90e2' },
-  { id: 'hsr', name: '星穹铁道', color: '#6b5ce7' },
-  { id: 'zzz', name: '绝区零', color: '#ff6b6b' },
-  { id: 'honkai3', name: '崩坏3', color: '#ff8cc8' },
-];
 
 const emptyForm = {
   name: '',
@@ -146,7 +140,7 @@ const AddCharacterModal = ({ isOpen, editingCharacter, onClose, onSave }: AddCha
       <div className="modal-content add-character-modal" onClick={e => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
         
-        <div className="modal-header" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+        <div className="modal-header" style={{ background: 'var(--accent-rule)' }}>
           <h2>{editingCharacter ? '编辑角色' : '添加新角色'}</h2>
         </div>
         
@@ -196,8 +190,8 @@ const AddCharacterModal = ({ isOpen, editingCharacter, onClose, onSave }: AddCha
                     value={formData.game} 
                     onChange={e => handleChange('game', e.target.value)}
                   >
-                    {GAMES.map(g => (
-                      <option key={g.id} value={g.id}>{g.name}</option>
+                    {Object.entries(GAMES).map(([id, g]) => (
+                      <option key={id} value={id}>{g.short}</option>
                     ))}
                   </select>
                 </div>

@@ -8,43 +8,59 @@
    设计原则：保持工作面（卡片、日历格、弹窗）可读的中性面，
    只用 accent 与 motif（边框光晕 / 顶部色条 / 背景纹理）表达
    各游戏气质 —— 不把整块表面染成品牌色，避免刺眼与文字看不清。
+
+   全站暗色（2026-08）：与 Hero 全屏影院首屏统一。五套主题共用一副
+   亮度骨架，只在色相/彩度上各自发挥 —— 这是让五个游戏看起来像同一个
+   产品的关键。相邻面的亮度差统一在 6~9 个 CIE L* 单位（不是 WCAG
+   比值：那个指标在近黑区两边都趋近 1.0，看不出差距）。台阶开得够大，
+   日历格才不会和容器糊在一起，各游戏的底色色相也才有地方显出来。
+
+   深色底上黑色投影几乎不可见，所以「浮起感」按这个顺序承担：
+   1. surface 台阶（主力）2. --line 亮边（暗底上边框是亮的，不是暗的）
+   3. --frame-glow 的顶部内高光 4. 大半径黑影（只在压更亮的面上才有用）
    ============================================================ */
 :root {
-  /* ---- 背景与表面（暖中性、分层） ---- */
-  --bg: #f6f6f4;
-  --bg-accent: #efeeea;
-  --surface: #ffffff;
-  --surface-2: #f5f4f1;
-  --surface-3: #ebeae5;
+  /* ---- 背景与表面（石墨中性、分层） ---- */
+  --bg: #101115;
+  --bg-accent: #0c0d10;
+  --surface: #212429;
+  --surface-2: #2e323a;
+  --surface-3: #3b404a;
 
-  /* ---- 文本墨色（冷炭黑，4 级） ---- */
-  --ink: #26282e;
-  --ink-strong: #141519;
-  --ink-soft: #5c6068;
-  --ink-faint: #6a7079;   /* AA: 4.5:1 on --surface-2 */
+  /* ---- 文本墨色（暖白，4 级）----
+     浅色时代的底色 #f6f6f4 在这里变成墨色，暖/冷的性格保持不变。 */
+  --ink: #e8e7e3;
+  --ink-strong: #fcfbf8;
+  --ink-soft: #bcbfc8;
+  --ink-faint: #a9adb7;   /* 下限由「压最亮的 --surface-3 仍需 4.5:1」钉死 */
 
-  /* ---- 边框（3 级） ---- */
-  --line: #e4e3de;
-  --line-soft: #efeee9;
-  --line-strong: #d4d2cb;
+  /* ---- 边框（3 级）：暗底上边框比面更亮 ---- */
+  --line: #333741;
+  --line-soft: #262a32;
+  --line-strong: #5b6070;
 
-  /* ---- 品牌/聚焦：克制的靛蓝 ---- */
-  --accent: #5b5bd6;
-  --accent-strong: #4646c2;
-  --accent-2: #5b5bd6;
-  --accent-ink: #ffffff;
-  --accent-bg: rgba(91, 91, 214, 0.1);
-  --accent-border: rgba(91, 91, 214, 0.4);
+  /* ---- 品牌/聚焦：克制的靛蓝（暗底上提亮，原 #5b5bd6 在深色上发闷） ---- */
+  --accent: #9b9bf5;
+  --accent-strong: #b3b3fa;   /* 暗色下 hover/active 是「更亮」而非「更深」 */
+  --accent-2: #9b9bf5;
+  --accent-ink: #14142c;      /* accent 当底色时压在上面的深墨 */
+  --accent-bg: rgba(155, 155, 245, 0.14);
+  --accent-border: rgba(155, 155, 245, 0.42);
 
-  /* ---- 形状 ---- */
+  /* ---- 形状 ----
+     --radius     卡片 / 弹窗
+     --radius-md  日历格 / 输入框
+     --radius-sm  控件托盘 / 按钮
+     --radius-xs  托盘内部的分段项（必须比托盘小一档，否则看起来是「方块塞圆角」） */
   --radius: 16px;
   --radius-md: 12px;
   --radius-sm: 9px;
+  --radius-xs: 6px;
 
-  /* ---- 分层柔和阴影（贴合墨色，不用纯黑） ---- */
-  --shadow-sm: 0 1px 2px rgba(20, 21, 25, 0.05), 0 1px 1px rgba(20, 21, 25, 0.03);
-  --shadow: 0 1px 2px rgba(20, 21, 25, 0.04), 0 4px 16px rgba(20, 21, 25, 0.06);
-  --shadow-lg: 0 2px 4px rgba(20, 21, 25, 0.04), 0 12px 32px rgba(20, 21, 25, 0.1), 0 24px 64px rgba(20, 21, 25, 0.06);
+  /* ---- 分层阴影（暗底：alpha 大幅提高，且黑色偏向主题最暗的色相） ---- */
+  --shadow-sm: 0 1px 2px rgba(4, 5, 8, 0.5), 0 1px 3px rgba(4, 5, 8, 0.34);
+  --shadow: 0 1px 2px rgba(4, 5, 8, 0.46), 0 6px 18px rgba(4, 5, 8, 0.52);
+  --shadow-lg: 0 2px 6px rgba(4, 5, 8, 0.46), 0 16px 40px rgba(4, 5, 8, 0.6), 0 36px 88px rgba(4, 5, 8, 0.44);
 
   /* ---- 字体 ---- */
   --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -76,160 +92,178 @@
   --dur-fast: 120ms; --dur-med: 200ms; --dur-slow: 320ms;
 
   /* ---- 装饰：整页背景纹理 / 日历边框 / 顶部色条 ---- */
-  --texture: none;
+  --texture: radial-gradient(1100px 560px at 50% -12%, rgba(155, 155, 245, 0.1), transparent 62%);
   --texture-size: auto;
   --texture-opacity: 1;
-  --frame-border: var(--line);
-  --frame-glow: none;
-  /* 顶栏底部 / 日历顶部的主题色渐变条 */
+  --frame-border: #333741;
+  /* 顶部内高光模拟「光源在上方」，是暗底上最可信的浮起线索 */
+  --frame-glow: inset 0 1px 0 rgba(232, 231, 227, 0.06), 0 0 0 1px rgba(155, 155, 245, 0.08);
+  /* 顶栏底部 / 日历顶部的主题色渐变条。
+     这里是不含归属色的基础版；带归属色的那版定义在下面的 .app 上（原因见那里）。 */
   --accent-rule: linear-gradient(90deg, var(--accent), var(--accent-2));
 
-  /* 选中“chip”控件（分段组选中、主按钮） */
-  --sel-bg: #26282e;
-  --sel-ink: #ffffff;
+  /* 选中“chip”控件（分段组选中、主按钮）：浅色时代是「深 chip 压浅底」，
+     这里整体反过来 —— 亮 chip 压暗底。 */
+  --sel-bg: #e8e7e3;
+  --sel-ink: #16171b;
 
   /* ---- 语义色：危险 / 成功 / 收藏 / 弹窗遮罩 ---- */
-  --danger: #d0453f;
-  --success: #2f6b46;
-  --star: #e0a300;
-  --scrim: rgba(20, 21, 25, 0.45);
+  --danger: #ff8a80;
+  --success: #7fd6a8;
+  --star: #f0c04a;
+  --scrim: rgba(6, 7, 10, 0.8);
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
-/* ---- 原神 Genshin：暖调绘卷，羊皮纸 + 古金 + 青（浅色） ---- */
+/* ---- 原神 Genshin：夜绘卷 —— 灯下的漆器卷轴，暖褐底 + 青 + 古金 ----
+   羊皮纸的浅底在暗色里无法保留，所以把隐喻从「羊皮纸」挪到「夜里的漆卷」：
+   暖色相（R>G>B，色相约 40°）留在底色上，羊皮纸的颜色转世成墨色 --ink，
+   青主金辅的关系与 serif 标题字不变。 */
 [data-theme='genshin'] {
-  --bg: #f4eee0;
-  --bg-accent: #ece5d8;
-  --surface: #fbf7ec;
-  --surface-2: #f3eddd;
-  --surface-3: #eae2cd;
-  --ink: #3b4255;
-  --ink-strong: #2a3040;
-  --ink-soft: #6a7086;
-  --ink-faint: #6b6670;   /* AA on 羊皮纸底 */
-  --line: #e3d9c2;
-  --line-soft: #ece4cf;
-  --line-strong: #d3c6a4;
-  --accent: #3d9b8f;
-  --accent-strong: #26685f;  /* 6.5:1 vs 白字 */
-  --accent-2: #d3a24a;
-  --accent-ink: #ffffff;
-  --accent-bg: rgba(61, 155, 143, 0.12);
-  --accent-border: rgba(211, 162, 74, 0.55);
-  --sel-bg: #3b4255;
-  --sel-ink: #fbf7ec;
-  --danger: #c0563e;
-  --success: #3d7a4e;
-  --star: #d3a24a;
-  --scrim: rgba(58, 44, 18, 0.5);
+  --bg: #14110b;
+  --bg-accent: #100e09;
+  --surface: #292317;
+  --surface-2: #383221;
+  --surface-3: #464028;
+  --ink: #f0e9d8;
+  --ink-strong: #fdf8ec;
+  --ink-soft: #c9bd9a;
+  --ink-faint: #b7ab8a;
+  --line: #3c3524;
+  --line-soft: #2c2618;
+  --line-strong: #665c3f;
+  --accent: #5fcbb8;
+  --accent-strong: #85dfcd;
+  --accent-2: #e6bb63;
+  --accent-ink: #07201c;
+  --accent-bg: rgba(95, 203, 184, 0.14);
+  --accent-border: rgba(230, 187, 99, 0.45);
+  --shadow-sm: 0 1px 2px rgba(7, 5, 2, 0.52), 0 1px 3px rgba(7, 5, 2, 0.36);
+  --shadow: 0 1px 2px rgba(7, 5, 2, 0.48), 0 6px 18px rgba(7, 5, 2, 0.54);
+  --shadow-lg: 0 2px 6px rgba(7, 5, 2, 0.48), 0 16px 40px rgba(7, 5, 2, 0.62), 0 36px 88px rgba(7, 5, 2, 0.46);
+  --sel-bg: #e6bb63;
+  --sel-ink: #1d1704;
+  --danger: #f4897b;
+  --success: #8ad39c;
+  --star: #e6bb63;
+  --scrim: rgba(10, 8, 3, 0.8);
   --font-display: 'Palatino Linotype', 'Book Antiqua', Palatino, 'STKaiti', 'KaiTi', 'Noto Serif SC', serif;
-  --frame-border: rgba(211, 162, 74, 0.45);
-  --frame-glow: 0 0 0 1px rgba(211, 162, 74, 0.15), 0 12px 32px rgba(120, 95, 40, 0.12);
-  --texture: radial-gradient(1200px 600px at 50% -10%, rgba(211, 162, 74, 0.12), transparent 60%);
+  --frame-border: rgba(230, 187, 99, 0.32);
+  --frame-glow: inset 0 1px 0 rgba(230, 187, 99, 0.14), 0 0 0 1px rgba(230, 187, 99, 0.1);
+  --texture: radial-gradient(1200px 620px at 50% -12%, rgba(230, 187, 99, 0.11), transparent 62%);
 }
 
-/* ---- 崩坏：星穹铁道 HSR：深空海军蓝 + 金 + 青（深色、玻璃感） ---- */
+/* ---- 崩坏：星穹铁道 HSR：深空海军蓝 + 金 + 青（玻璃感） ---- */
 [data-theme='hsr'] {
   --bg: #0c1020;
-  --bg-accent: #0b0e1e;
-  --surface: #161b30;
-  --surface-2: #1d2440;
-  --surface-3: #273057;
+  --bg-accent: #080c1a;
+  --surface: #1c2340;
+  --surface-2: #293253;
+  --surface-3: #343d64;
   --ink: #eaf0ff;
   --ink-strong: #ffffff;
-  --ink-soft: #aab3d6;
-  --ink-faint: #949ec9;   /* 深底需提亮而非加深 */
-  --line: #2b3358;
-  --line-soft: #232a48;
-  --line-strong: #3a4470;
-  --accent: #e7c36b;
-  --accent-strong: #c9a24b;
-  --accent-2: #6fb7ff;
+  --ink-soft: #b0badf;
+  --ink-faint: #a1abd4;
+  --line: #2e3760;
+  --line-soft: #232a4a;
+  --line-strong: #4f5a90;
+  --accent: #e9c774;
+  --accent-strong: #f2d68f;
+  --accent-2: #7cc0ff;
   --accent-ink: #1a1407;
-  --accent-bg: rgba(231, 195, 107, 0.16);
-  --accent-border: rgba(111, 183, 255, 0.4);
-  --sel-bg: #e7c36b;
+  --accent-bg: rgba(233, 199, 116, 0.16);
+  --accent-border: rgba(124, 192, 255, 0.42);
+  --shadow-sm: 0 1px 2px rgba(2, 3, 10, 0.55), 0 1px 3px rgba(2, 3, 10, 0.38);
+  --shadow: 0 1px 2px rgba(2, 3, 10, 0.5), 0 6px 18px rgba(2, 3, 10, 0.56);
+  --shadow-lg: 0 2px 6px rgba(2, 3, 10, 0.5), 0 16px 40px rgba(2, 3, 10, 0.64), 0 36px 88px rgba(2, 3, 10, 0.48);
+  --sel-bg: #e9c774;
   --sel-ink: #1a1407;
-  --danger: #ff8080;
+  --danger: #ff9089;
   --success: #7fd6a8;
-  --star: #e7c36b;
-  --scrim: rgba(4, 6, 18, 0.68);
+  --star: #e9c774;
+  --scrim: rgba(3, 5, 14, 0.82);
   --font-display: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --frame-border: rgba(201, 162, 75, 0.4);
-  --frame-glow: 0 0 0 1px rgba(139, 124, 246, 0.28), 0 12px 40px rgba(6, 8, 24, 0.6);
+  --frame-border: rgba(124, 192, 255, 0.26);
+  --frame-glow: inset 0 1px 0 rgba(180, 205, 255, 0.1), 0 0 0 1px rgba(124, 192, 255, 0.12);
   --texture: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px);
   --texture-size: 28px 28px;
-  --texture-opacity: 0.35;
-  color-scheme: dark;
+  --texture-opacity: 0.32;
 }
 
-/* ---- 绝区零 ZZZ：近黑街头 + 信号橙 + 荧光黄（深色、硬朗） ---- */
+/* ---- 绝区零 ZZZ：近黑街头 + 信号橙 + 荧光黄（硬朗） ---- */
 [data-theme='zzz'] {
-  --bg: #0e0e11;
-  --bg-accent: #121216;
-  --surface: #1b1b21;
-  --surface-2: #23232b;
-  --surface-3: #2e2e37;
+  --bg: #0d0d11;
+  --bg-accent: #0a0a0d;
+  --surface: #232329;
+  --surface-2: #313139;
+  --surface-3: #3e3e49;
   --ink: #f2f2ee;
   --ink-strong: #ffffff;
-  --ink-soft: #b9bac0;
-  --ink-faint: #9a9ba4;
-  --line: #2e2e35;
-  --line-soft: #26262c;
-  --line-strong: #3d3d46;
+  --ink-soft: #bfc0c8;
+  --ink-faint: #abacb6;
+  --line: #37373f;
+  --line-soft: #2a2a30;
+  --line-strong: #61616b;
   --accent: #ff5a00;
-  --accent-strong: #ff7733;
+  --accent-strong: #ff7d38;
   --accent-2: #f5e100;
-  --accent-ink: #161616;
+  --accent-ink: #150e05;
   --accent-bg: rgba(255, 90, 0, 0.16);
-  --accent-border: rgba(245, 225, 0, 0.4);
+  --accent-border: rgba(245, 225, 0, 0.42);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.62), 0 1px 3px rgba(0, 0, 0, 0.44);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.56), 0 6px 18px rgba(0, 0, 0, 0.62);
+  --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.56), 0 16px 40px rgba(0, 0, 0, 0.7), 0 36px 88px rgba(0, 0, 0, 0.52);
   --sel-bg: #ff5a00;
-  --sel-ink: #161616;
-  --danger: #ff5a4d;
-  --success: #9be36a;
+  --sel-ink: #150e05;
+  --danger: #ff6f61;
+  --success: #a5e56d;
   --star: #f5e100;
-  --scrim: rgba(0, 0, 0, 0.72);
+  --scrim: rgba(0, 0, 0, 0.84);
   --radius-sm: 6px;
   --radius-md: 10px;
+  --radius-xs: 4px;
   --font-display: 'Arial Black', 'Archivo Black', 'Segoe UI', 'PingFang SC', sans-serif;
-  --frame-border: rgba(255, 90, 0, 0.5);
-  --frame-glow: 0 0 0 1px rgba(245, 225, 0, 0.12), 0 12px 32px rgba(0, 0, 0, 0.65);
-  --texture: repeating-linear-gradient(45deg, rgba(255, 90, 0, 0.05) 0 14px, transparent 14px 28px);
+  --frame-border: rgba(255, 90, 0, 0.48);
+  --frame-glow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 0 0 1px rgba(245, 225, 0, 0.12);
+  --texture: repeating-linear-gradient(45deg, rgba(255, 90, 0, 0.055) 0 14px, transparent 14px 28px);
   --texture-opacity: 1;
-  color-scheme: dark;
 }
 
-/* ---- 崩坏3 Honkai 3：清透动漫科技，白/蓝 + 品红（浅色） ---- */
+/* ---- 崩坏3 Honkai 3：深靛紫科技底 + 品红 + 青 ----
+   刻意推向靛紫（B≫R）而不是星铁的海军蓝，否则两套深蓝主题会撞。 */
 [data-theme='honkai3'] {
-  --bg: #f4f6fb;
-  --bg-accent: #e9edf7;
-  --surface: #ffffff;
-  --surface-2: #f2f5fc;
-  --surface-3: #e6ecf8;
-  --ink: #2b3245;
-  --ink-strong: #1b2233;
-  --ink-soft: #5a6488;
-  --ink-faint: #626b7b;
-  --line: #dfe5f2;
-  --line-soft: #e9eef8;
-  --line-strong: #c6d2ec;
-  --accent: #f23d7f;
-  --accent-strong: #b81f57;  /* 6.2:1 vs 白字 */
-  --accent-2: #3ec8f0;
-  --accent-ink: #ffffff;
-  --accent-bg: rgba(242, 61, 127, 0.1);
-  --accent-border: rgba(62, 200, 240, 0.45);
-  --sel-bg: #1b2233;
-  --sel-ink: #ffffff;
-  --danger: #e04a5f;
-  --success: #2f8f6a;
-  --star: #f0a800;
-  --scrim: rgba(27, 34, 51, 0.48);
+  --bg: #0e1024;
+  --bg-accent: #0b0d1e;
+  --surface: #1e2140;
+  --surface-2: #2c3059;
+  --surface-3: #373c6b;
+  --ink: #e9ecfb;
+  --ink-strong: #ffffff;
+  --ink-soft: #b2b8dd;
+  --ink-faint: #a3aad4;
+  --line: #333870;
+  --line-soft: #272b52;
+  --line-strong: #565d9c;
+  --accent: #ff5f96;
+  --accent-strong: #ff8bb4;
+  --accent-2: #56d6f5;
+  --accent-ink: #2b0715;
+  --accent-bg: rgba(255, 95, 150, 0.14);
+  --accent-border: rgba(86, 214, 245, 0.45);
+  --shadow-sm: 0 1px 2px rgba(2, 3, 12, 0.55), 0 1px 3px rgba(2, 3, 12, 0.38);
+  --shadow: 0 1px 2px rgba(2, 3, 12, 0.5), 0 6px 18px rgba(2, 3, 12, 0.56);
+  --shadow-lg: 0 2px 6px rgba(2, 3, 12, 0.5), 0 16px 40px rgba(2, 3, 12, 0.64), 0 36px 88px rgba(2, 3, 12, 0.48);
+  --sel-bg: #ff5f96;
+  --sel-ink: #2b0715;
+  --danger: #ff8090;
+  --success: #6fd8ac;
+  --star: #f5c451;
+  --scrim: rgba(4, 6, 19, 0.82);
   --font-display: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --frame-border: rgba(242, 61, 127, 0.3);
-  --frame-glow: 0 0 0 1px rgba(62, 200, 240, 0.15), 0 12px 32px rgba(60, 90, 180, 0.12);
-  --texture: linear-gradient(135deg, rgba(242, 61, 127, 0.05), rgba(62, 200, 240, 0.06));
+  --frame-border: rgba(255, 95, 150, 0.3);
+  --frame-glow: inset 0 1px 0 rgba(190, 210, 255, 0.1), 0 0 0 1px rgba(86, 214, 245, 0.14);
+  --texture: linear-gradient(135deg, rgba(255, 95, 150, 0.07), rgba(86, 214, 245, 0.07));
 }
 
 /* ============================================================
@@ -274,11 +308,12 @@ body {
 }
 
 /* var() 在 html/body 上只解析到 :root 的中性值（data-theme 挂在后代 .app 上），
-   所以主题底色必须显式反向传播，否则滚动惯性 / overscroll 区域露出亮底。 */
-html:has(.app[data-theme='genshin']) { background-color: #f4eee0; }
-html:has(.app[data-theme='hsr'])     { background-color: #0c1020; color-scheme: dark; }
-html:has(.app[data-theme='zzz'])     { background-color: #0e0e11; color-scheme: dark; }
-html:has(.app[data-theme='honkai3']) { background-color: #f4f6fb; }
+   所以主题底色必须显式反向传播，否则滚动惯性 / overscroll 区域露出别的底色。
+   色值必须与上面各主题的 --bg 保持一致。 */
+html:has(.app[data-theme='genshin']) { background-color: #14110b; }
+html:has(.app[data-theme='hsr'])     { background-color: #0c1020; }
+html:has(.app[data-theme='zzz'])     { background-color: #0d0d11; }
+html:has(.app[data-theme='honkai3']) { background-color: #0e1024; }
 
 /* 整页主题纹理（极轻，绝不喧宾夺主）。
    .app 自己铺主题底色：data-theme 挂在 .app 上，body 继承不到，
@@ -289,6 +324,18 @@ html:has(.app[data-theme='honkai3']) { background-color: #f4f6fb; }
   min-height: 100vh;
   background-color: var(--bg);
   color: var(--ink);
+  /* 带归属色的色条必须定义在这里，不能定义在 :root。
+     自定义属性里的 var() 是在「声明它的那个元素」上就解析完、再把结果往下继承的，
+     不是等到使用处才解析。--affil-key / --affil-accent 由 App.tsx 注入到 .app 上，
+     若把这条写在 :root，解析发生在 :root（那里没有 --affil-*），永远只取到 fallback。
+     实测踩过：算出来是纯 --accent，归属色完全没混进去。
+     混得很轻（45%）：这两条 2px 色条是页面里唯一「记得首屏是谁」的地方，
+     重了就喧宾夺主。 */
+  --accent-rule: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--affil-key, var(--accent)) 45%, var(--accent)),
+    color-mix(in srgb, var(--affil-accent, var(--accent-2)) 45%, var(--accent-2))
+  );
   transition: background-color var(--dur-slow) var(--ease-soft), color var(--dur-slow) var(--ease-soft);
 }
 .app::before {

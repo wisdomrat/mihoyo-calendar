@@ -6,6 +6,11 @@ import './Hero.css';
 interface HeroProps {
   characters: Character[];  // 改成接收多个角色
   autoRotateMs?: number;     // 自动轮播间隔，默认 6000ms
+  // 当前轮播到谁，把它的归属色报给上层，让 hero 之外的页面也能「记得」首屏是谁
+  onAffiliationChange?: (affiliation: ReturnType<typeof resolveAffiliation>) => void;
+  // 点立绘打开角色详情。原来 .hero__portrait img 写着 pointer-events:auto
+  // 却没有任何 onClick，那个「可交互」是死的。
+  onCharacterClick?: (character: Character) => void;
 }
 
 // 立绘尺寸/位置（纯 px，分两阶段计算：先测立绘比例，再按 hero 实测尺寸计算）
@@ -106,7 +111,7 @@ function computePortraitBox({
   };
 }
 
-export function Hero({ characters, autoRotateMs = 6000 }: HeroProps) {
+export function Hero({ characters, autoRotateMs = 6000, onAffiliationChange, onCharacterClick }: HeroProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [portraitNatural, setPortraitNatural] = useState<{ w: number; h: number } | null>(null);
@@ -202,6 +207,11 @@ export function Hero({ characters, autoRotateMs = 6000 }: HeroProps) {
   // birthday 格式是 "MM-DD"，转成 "MM.DD"
   const monthDay = character.birthday ? character.birthday.replace('-', '.') : '';
 
+  // 归属色报给上层
+  useEffect(() => {
+    onAffiliationChange?.(affiliation);
+  }, [affiliation, onAffiliationChange]);
+
   // 立绘规则（用户要求）：
   // 1. Hero 宽 = 屏幕宽，高 ≤ 屏幕高；先定 hero 分辨率，再定文字区，最后按立绘比例放立绘
   // 2. 竖向立绘：高度 = hero 高度，居中在「hero 左边缘 ↔ 文字左边缘」之间
@@ -218,7 +228,21 @@ export function Hero({ characters, autoRotateMs = 6000 }: HeroProps) {
     : undefined;
 
   return (
-    <div className="hero" ref={heroRef} data-affiliation={affiliation.id} data-visible={isVisible}>
+    <div
+      className="hero"
+      ref={heroRef}
+      data-affiliation={affiliation.id}
+      data-visible={isVisible}
+      /* 归属色直接从数据层内联注入。Hero.css 里原来抄了一份 28 个
+         [data-affiliation] 色块，和 src/data/affiliations-*.ts 是两套真相，
+         文件自己的注释就在警告这件事（对不上会静默落到兜底灰）。
+         data-affiliation 保留，仅作调试标识用。 */
+      style={{
+        '--key': affiliation.colors.key,
+        '--accent': affiliation.colors.accent,
+        '--deep': affiliation.colors.deep,
+      } as React.CSSProperties}
+    >
       {/* L0: 立绘模糊铺底（纯氛围；无图时留空，靠归属渐变兜底） */}
       {imageUrl && <div className="hero__bg-portrait" style={{ backgroundImage: `url(${imageUrl})` }} />}
 
@@ -241,7 +265,24 @@ export function Hero({ characters, autoRotateMs = 6000 }: HeroProps) {
       {/* L4: 清晰立绘（视觉锚点，位置尺寸由 JS 按 hero 实测尺寸计算；无真实立绘时整层不渲染） */}
       {imageUrl && (
         <div className="hero__portrait">
-          <img src={imageUrl} alt="" loading="eager" decoding="sync" style={portraitStyle} />
+          <img
+            src={imageUrl}
+            alt=""
+            loading="eager"
+            decoding="sync"
+            style={portraitStyle}
+            className={onCharacterClick ? 'is-clickable' : undefined}
+            role={onCharacterClick ? 'button' : undefined}
+            tabIndex={onCharacterClick ? 0 : undefined}
+            aria-label={onCharacterClick ? `查看 ${character.name} 详情` : undefined}
+            onClick={onCharacterClick ? () => onCharacterClick(character) : undefined}
+            onKeyDown={onCharacterClick ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onCharacterClick(character);
+              }
+            } : undefined}
+          />
         </div>
       )}
 

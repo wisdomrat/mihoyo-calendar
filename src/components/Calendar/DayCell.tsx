@@ -1,7 +1,10 @@
 import { useLayoutEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
+import { createPortal } from 'react-dom';
 import { format, isLeapYear } from 'date-fns';
 import type { Character } from '../../types';
 import type { DisplayMode } from '../../hooks/useCharacters';
+import { getGameColor, getGameShortName } from '../../utils/calendar';
 
 interface DayCellProps {
   date: Date;
@@ -26,8 +29,16 @@ function useCellCapacity(itemSize: number, gap: number, reserveHeight: number) {
       const width = el.clientWidth;
       const height = el.clientHeight;
       if (width <= 0 || height <= 0) { setCapacity(0); return; }
-      const cols = Math.max(1, Math.floor((width + gap) / (itemSize + gap)));
-      const rows = Math.max(1, Math.floor((height + gap - reserveHeight) / (itemSize + gap)));
+      // 用实际渲染出来的头像宽度，而不是 JS 里照抄的 CSS 数值 ——
+      // 响应式下 .day-character 会缩到 20px，写死 30 会算少格数、提前弹出 "+N"。
+      // 必须用 offsetWidth 而不是 getBoundingClientRect()：后者含 transform，
+      // 悬停时 scale(1.18) 会把量出来的宽度撑大 → 容量变小 → 头像被收走 →
+      // 鼠标不再悬停 → 容量变大 → 头像回来，形成无限抖动。
+      const first = el.firstElementChild as HTMLElement | null;
+      const measured = first ? first.offsetWidth : 0;
+      const size = measured > 0 ? measured : itemSize;
+      const cols = Math.max(1, Math.floor((width + gap) / (size + gap)));
+      const rows = Math.max(1, Math.floor((height + gap - reserveHeight) / (size + gap)));
       setCapacity(cols * rows);
     };
 
@@ -40,65 +51,53 @@ function useCellCapacity(itemSize: number, gap: number, reserveHeight: number) {
   return { containerRef, capacity };
 }
 
-// The clickable "+N" overflow badge that opens a list of all the day's characters.
-function OverflowList({
+// 某一天的全部角色面板。原来它归 "+N" 按钮私有，所以只有溢出时才打开得了；
+// 现在提到格子这一层，点格子空白处也能打开 —— .day-cell 一直声明着
+// cursor:pointer 却没有任何 onClick，这条终于名副其实。
+//
+// 必须 portal 到 body：遮罩是 position:fixed，而 .day-cell:hover 带
+// transform: translateY(-1px) —— 带 transform 的祖先会成为 fixed 后代的包含块，
+// 于是遮罩被关进格子里变成一个小弹窗，鼠标移开又弹回视口尺寸，来回抖动。
+function DayPanel({
   characters,
-  overflowCount,
   dateLabel,
-  compact,
+  onClose,
   onCharacterClick,
 }: {
   characters: Character[];
-  overflowCount: number;
   dateLabel: string;
-  compact?: boolean;
+  onClose: () => void;
   onCharacterClick: (character: Character) => void;
 }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <button
-        type="button"
-        className={compact ? 'more-dots more-dots-btn' : 'more-characters more-characters-btn'}
-        onClick={(e) => {
-          e.stopPropagation();
-          setOpen(true);
-        }}
-        title={`查看全部 ${characters.length} 个角色`}
-      >
-        +{overflowCount}
-      </button>
-      {open && (
-        <div className="day-overflow-overlay" onClick={(e) => { e.stopPropagation(); setOpen(false); }}>
-          <div className="day-overflow-panel" onClick={(e) => e.stopPropagation()}>
-            <div className="day-overflow-header">
-              <span>{dateLabel}</span>
-              <button type="button" className="day-overflow-close" onClick={() => setOpen(false)}>×</button>
-            </div>
-            <div className="day-overflow-list">
-              {characters.map(character => (
-                <button
-                  key={character.id}
-                  type="button"
-                  className="day-overflow-item"
-                  style={{ borderLeftColor: getGameColor(character.game) }}
-                  onClick={() => { setOpen(false); onCharacterClick(character); }}
-                >
-                  {character.avatar ? (
-                    <img src={character.avatar} alt="" className="day-overflow-avatar" loading="lazy" />
-                  ) : (
-                    <span className="day-overflow-initial">{character.name[0]}</span>
-                  )}
-                  <span className="day-overflow-name">{character.name}</span>
-                  <span className="day-overflow-game">{getGameName(character.game)}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+  return createPortal(
+    <div className="day-overflow-overlay" onClick={(e) => { e.stopPropagation(); onClose(); }}>
+      <div className="day-overflow-panel" onClick={(e) => e.stopPropagation()}>
+        <div className="day-overflow-header">
+          <span>{dateLabel}</span>
+          <button type="button" className="day-overflow-close" onClick={onClose}>×</button>
         </div>
-      )}
-    </>
+        <div className="day-overflow-list">
+          {characters.map(character => (
+            <button
+              key={character.id}
+              type="button"
+              className="day-overflow-item"
+              style={{ borderLeftColor: getGameColor(character.game) }}
+              onClick={() => { onClose(); onCharacterClick(character); }}
+            >
+              {character.avatar ? (
+                <img src={character.avatar} alt="" className="day-overflow-avatar" loading="lazy" />
+              ) : (
+                <span className="day-overflow-initial">{character.name[0]}</span>
+              )}
+              <span className="day-overflow-name">{character.name}</span>
+              <span className="day-overflow-game">{getGameShortName(character.game)}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -117,60 +116,11 @@ const DayCell = ({
   const isFakeFeb29 = isFeb29 && !isLeapYear(date);
   const dateLabel = format(date, 'M月d日');
 
-  if (displayMode === 'compact') {
-    return <CompactDayCell {...{ date, isCurrentMonth, isToday, characters, isFakeFeb29, dayNumber, dateLabel, onCharacterClick }} />;
-  }
+  const inner = { date, isCurrentMonth, isToday, characters, isFakeFeb29, dayNumber, dateLabel, onCharacterClick };
 
-  if (displayMode === 'card') {
-    return (
-      <div
-        className={`day-cell card-mode ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${isFakeFeb29 ? 'fake-feb29' : ''}`}
-        title={isFakeFeb29 ? `${date.getFullYear()}年不是闰年，2月没有29日` : undefined}
-      >
-        <div className="day-number">{dayNumber}</div>
-        {isFakeFeb29 && (
-          <div className="feb29-notice">无29日</div>
-        )}
-        <div className="day-characters card">
-          {characters.map(character => (
-            <div
-              key={character.id}
-              className="day-character-card"
-              onClick={(e) => {
-                e.stopPropagation();
-                onCharacterClick(character);
-              }}
-              title={`${character.name} - ${getGameName(character.game)}`}
-              style={{ borderColor: getGameColor(character.game) }}
-            >
-              <div className="card-avatar-wrapper">
-                {character.avatar ? (
-                  <img
-                    src={character.avatar}
-                    alt={character.name}
-                    className="card-avatar"
-                    loading="lazy"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.parentElement!.classList.add('avatar-fallback');
-                      target.parentElement!.textContent = character.name[0];
-                    }}
-                  />
-                ) : (
-                  <span className="card-initial">{character.name[0]}</span>
-                )}
-              </div>
-              <span className="card-name" title={character.name}>{character.name}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  // Default avatar mode: measure how many 32px avatars fit, reserve one slot for +N.
-  return <AvatarDayCell {...{ date, isCurrentMonth, isToday, characters, isFakeFeb29, dayNumber, dateLabel, onCharacterClick }} />;
+  if (displayMode === 'compact') return <CompactDayCell {...inner} />;
+  if (displayMode === 'card') return <CardDayCell {...inner} />;
+  return <AvatarDayCell {...inner} />;
 };
 
 interface InnerCellProps {
@@ -184,34 +134,52 @@ interface InnerCellProps {
   onCharacterClick: (character: Character) => void;
 }
 
+// 三种模式共用的格子外壳：类名拼装、点击打开当日面板、假 2/29 提示。
+// has-characters 以前只有头像模式发得出来，紧凑 / 卡片模式没有 —— 现在统一。
+function useDayShell(characters: Character[], isCurrentMonth: boolean, isToday: boolean, isFakeFeb29: boolean, extra: string, date: Date) {
+  const [panelOpen, setPanelOpen] = useState(false);
+  const hasCharacters = characters.length > 0;
+
+  const className = [
+    'day-cell',
+    extra,
+    !isCurrentMonth && 'other-month',
+    isToday && 'today',
+    hasCharacters && 'has-characters',
+    isFakeFeb29 && 'fake-feb29',
+  ].filter(Boolean).join(' ');
+
+  const shellProps = {
+    className,
+    title: isFakeFeb29 ? `${date.getFullYear()}年不是闰年，2月没有29日` : undefined,
+    onClick: hasCharacters ? () => setPanelOpen(true) : undefined,
+  };
+
+  return { panelOpen, setPanelOpen, hasCharacters, shellProps };
+}
+
 function AvatarDayCell({ date, isCurrentMonth, isToday, characters, isFakeFeb29, dayNumber, dateLabel, onCharacterClick }: InnerCellProps) {
   // Reserve ~20px for the day number row.
-  const { containerRef, capacity } = useCellCapacity(32, 4, 20);
+  const { containerRef, capacity } = useCellCapacity(30, 4, 20);
+  const { panelOpen, setPanelOpen, shellProps } = useDayShell(characters, isCurrentMonth, isToday, isFakeFeb29, '', date);
+
   const overflow = capacity > 0 && characters.length > capacity;
   const visibleCount = overflow ? Math.max(1, capacity - 1) : characters.length;
   const visible = overflow ? characters.slice(0, visibleCount) : characters;
   const hidden = overflow ? characters.slice(visibleCount) : [];
 
   return (
-    <div
-      className={`day-cell ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${characters.length > 0 ? 'has-characters' : ''} ${isFakeFeb29 ? 'fake-feb29' : ''}`}
-      title={isFakeFeb29 ? `${date.getFullYear()}年不是闰年，2月没有29日` : undefined}
-    >
+    <div {...shellProps}>
       <div className="day-number">{dayNumber}</div>
-      {isFakeFeb29 && (
-        <div className="feb29-notice">无</div>
-      )}
+      {isFakeFeb29 && <div className="feb29-notice">无</div>}
       <div className="day-characters" ref={containerRef}>
         {visible.map(character => (
           <div
             key={character.id}
             className="day-character"
-            onClick={(e) => {
-              e.stopPropagation();
-              onCharacterClick(character);
-            }}
-            title={`${character.name} - ${getGameName(character.game)}`}
-            style={{ borderColor: getGameColor(character.game) }}
+            onClick={(e) => { e.stopPropagation(); onCharacterClick(character); }}
+            title={`${character.name} - ${getGameShortName(character.game)}`}
+            style={{ '--game-color': getGameColor(character.game) } as CSSProperties}
           >
             {character.avatar ? (
               <img
@@ -232,25 +200,34 @@ function AvatarDayCell({ date, isCurrentMonth, isToday, characters, isFakeFeb29,
           </div>
         ))}
         {overflow && (
-          <OverflowList characters={characters} overflowCount={hidden.length} dateLabel={dateLabel} onCharacterClick={onCharacterClick} />
+          <button
+            type="button"
+            className="more-characters more-characters-btn"
+            onClick={(e) => { e.stopPropagation(); setPanelOpen(true); }}
+            title={`查看全部 ${characters.length} 个角色`}
+          >
+            +{hidden.length}
+          </button>
         )}
       </div>
+      {panelOpen && (
+        <DayPanel characters={characters} dateLabel={dateLabel} onClose={() => setPanelOpen(false)} onCharacterClick={onCharacterClick} />
+      )}
     </div>
   );
 }
 
 function CompactDayCell({ date, isCurrentMonth, isToday, characters, isFakeFeb29, dayNumber, dateLabel, onCharacterClick }: InnerCellProps) {
   const { containerRef, capacity } = useCellCapacity(8, 2, 16);
+  const { panelOpen, setPanelOpen, shellProps } = useDayShell(characters, isCurrentMonth, isToday, isFakeFeb29, 'compact', date);
+
   const overflow = capacity > 0 && characters.length > capacity;
   const visibleCount = overflow ? Math.max(1, capacity - 1) : characters.length;
   const visible = overflow ? characters.slice(0, visibleCount) : characters;
   const hidden = overflow ? characters.slice(visibleCount) : [];
 
   return (
-    <div
-      className={`day-cell compact ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''} ${isFakeFeb29 ? 'fake-feb29' : ''}`}
-      title={isFakeFeb29 ? `${date.getFullYear()}年不是闰年，2月没有29日` : undefined}
-    >
+    <div {...shellProps}>
       <div className="day-number">{dayNumber}</div>
       {characters.length > 0 && (
         <div className="day-characters compact" ref={containerRef}>
@@ -258,41 +235,73 @@ function CompactDayCell({ date, isCurrentMonth, isToday, characters, isFakeFeb29
             <div
               key={character.id}
               className="day-character-dot"
-              onClick={(e) => {
-                e.stopPropagation();
-                onCharacterClick(character);
-              }}
-              title={`${character.name} - ${getGameName(character.game)}`}
+              onClick={(e) => { e.stopPropagation(); onCharacterClick(character); }}
+              title={`${character.name} - ${getGameShortName(character.game)}`}
               style={{ backgroundColor: getGameColor(character.game) }}
             />
           ))}
           {overflow && (
-            <OverflowList characters={characters} overflowCount={hidden.length} dateLabel={dateLabel} compact onCharacterClick={onCharacterClick} />
+            <button
+              type="button"
+              className="more-dots more-dots-btn"
+              onClick={(e) => { e.stopPropagation(); setPanelOpen(true); }}
+              title={`查看全部 ${characters.length} 个角色`}
+            >
+              +{hidden.length}
+            </button>
           )}
         </div>
+      )}
+      {panelOpen && (
+        <DayPanel characters={characters} dateLabel={dateLabel} onClose={() => setPanelOpen(false)} onCharacterClick={onCharacterClick} />
       )}
     </div>
   );
 }
 
-function getGameColor(gameId: string): string {
-  const colors: Record<string, string> = {
-    genshin: '#4a90e2',
-    hsr: '#6b5ce7',
-    zzz: '#ff6b6b',
-    honkai3: '#ff8cc8',
-  };
-  return colors[gameId] || '#999';
-}
+function CardDayCell({ date, isCurrentMonth, isToday, characters, isFakeFeb29, dayNumber, dateLabel, onCharacterClick }: InnerCellProps) {
+  const { panelOpen, setPanelOpen, shellProps } = useDayShell(characters, isCurrentMonth, isToday, isFakeFeb29, 'card-mode', date);
 
-function getGameName(gameId: string): string {
-  const names: Record<string, string> = {
-    genshin: '原神',
-    hsr: '星穹铁道',
-    zzz: '绝区零',
-    honkai3: '崩坏3',
-  };
-  return names[gameId] || gameId;
+  return (
+    <div {...shellProps}>
+      <div className="day-number">{dayNumber}</div>
+      {isFakeFeb29 && <div className="feb29-notice">无29日</div>}
+      <div className="day-characters card">
+        {characters.map(character => (
+          <div
+            key={character.id}
+            className="day-character-card"
+            onClick={(e) => { e.stopPropagation(); onCharacterClick(character); }}
+            title={`${character.name} - ${getGameShortName(character.game)}`}
+            style={{ '--game-color': getGameColor(character.game) } as CSSProperties}
+          >
+            <div className="card-avatar-wrapper">
+              {character.avatar ? (
+                <img
+                  src={character.avatar}
+                  alt={character.name}
+                  className="card-avatar"
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.classList.add('avatar-fallback');
+                    target.parentElement!.textContent = character.name[0];
+                  }}
+                />
+              ) : (
+                <span className="card-initial">{character.name[0]}</span>
+              )}
+            </div>
+            <span className="card-name" title={character.name}>{character.name}</span>
+          </div>
+        ))}
+      </div>
+      {panelOpen && (
+        <DayPanel characters={characters} dateLabel={dateLabel} onClose={() => setPanelOpen(false)} onCharacterClick={onCharacterClick} />
+      )}
+    </div>
+  );
 }
 
 export default DayCell;

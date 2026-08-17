@@ -25,8 +25,9 @@
   pointer-events: none;
 }
 
+/* 与 .app-body 同宽 —— 全站一个列宽 */
 .header-content {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -46,19 +47,52 @@
   line-height: var(--lh-body);
 }
 
+/* 顶栏第一行：标题 + 搜索 + 唯一的实心主操作。
+   搜索原本独占一整条带子（外加一个孤零零的「搜索」小标签），并进来之后
+   顶栏内容更多，总高反而更矮。 */
+.header-titlerow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.header-search {
+  flex: 1;
+  min-width: 0;
+  max-width: 460px;
+  margin-left: auto;
+}
+
+.header-search .character-search {
+  width: 100%;
+}
+
+/* 并进标题行后不再需要可见标签（输入框自带 placeholder），
+   但保留在 DOM 里给读屏用 —— 不能 display:none */
+.header-search .character-search-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .header-controls {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: var(--space-3);
   flex-wrap: wrap;
-  gap: 24px;
+  gap: var(--space-3);
 }
 
 .control-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
 }
 
 .control-label,
@@ -67,60 +101,126 @@
   color: var(--ink-faint);
   font-weight: 700;
   letter-spacing: var(--tracking-cap);
-  text-transform: uppercase;
 }
 
-.display-modes {
+.control-label {
+  margin-right: 5px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   控件体系
+
+   杂乱的根源不是控件多，是「每一样东西自己带一个框」—— 顶栏原来 13 个
+   控件就是 13 圈描边，眼睛数不清有几组。
+   现在所有设置装进一个 .control-bar，内部靠 1px 竖线分成
+   「展示 / 开关 / 首日」三组：内容一个没少，描边只剩一圈。
+   ============================================================ */
+.control-bar {
   display: flex;
-  gap: 4px;
+  align-items: stretch;
+  flex-wrap: wrap;
   background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   padding: 3px;
-  border-radius: 8px;
 }
 
-.display-mode-btn {
-  padding: 5px 10px;
+.control-bar .control-group {
+  padding: 0 var(--space-2);
+}
+
+.control-bar .control-group + .control-group {
+  border-left: 1px solid var(--line-strong);
+}
+
+/* ---- 分段控件（三选一互斥）----
+   在 .control-bar 里它们不画自己的托盘（外层那圈就是托盘）；
+   日历工具条里的月/周不在 bar 内，需要自己的托盘，单独补。 */
+.segmented-group,
+.week-start-selector,
+.view-switcher {
+  display: flex;
+  gap: 2px;
+}
+
+.view-switcher {
+  padding: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- 分段控件：托盘内的项 ---- */
+.display-mode-btn,
+.week-start-btn,
+.view-btn {
+  padding: 5px 11px;
   border: none;
   background: transparent;
-  border-radius: 6px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-soft),
+    background var(--dur-fast) var(--ease-soft);
 }
 
-.display-mode-btn.active {
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
+.display-mode-btn:hover,
+.week-start-btn:hover,
+.view-btn:hover {
+  color: var(--ink-strong);
 }
 
-/* 三选一互斥视图模式包成一组外框，与独立二态开关区分 */
-.segmented-group {
-  display: flex;
-  gap: 4px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 2px;
-  background: var(--surface-3);
-}
-
-/* 组内选中项：深色底白字，选中态一眼可见 */
-.segmented-group .display-mode-btn.active {
+/* 选中项：亮 chip 压暗底。顶部内高光与 --frame-glow 是同一套浮起语言 ——
+   暗底上黑影没用，「被照亮」才是可信的凸起线索。 */
+.segmented-group .display-mode-btn.active,
+.week-start-btn.active,
+.view-btn.active {
   background: var(--sel-bg);
   color: var(--sel-ink);
-  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), var(--shadow-sm);
 }
 
-/* 独立二态开关（立绘/纯色、生日/实装）：实线边框的胶囊，显示当前值，
-   与三选一的深色选中区分开，但始终清晰可点 */
+/* ---- 二态开关（立绘/纯色、生日/实装、主题来源、动/静）----
+   它显示的是「当前值」而不是「可选项」，所以不做选中块 —— 否则和左边
+   三选一的深色选中块混在一起，一排看过去分不清哪个是「选中了」哪个是
+   「当前是」。改用一个小圆点表示「这是一项活的设置」。 */
 .toggle-btn {
-  border: 1.5px solid var(--ink-soft);
-  background: var(--surface);
-  color: var(--ink-strong);
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease-soft),
+    color var(--dur-fast) var(--ease-soft);
 }
+
+.toggle-btn::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.85;
+  flex: none;
+}
+
 .toggle-btn:hover {
-  background: var(--surface-2);
-  border-color: var(--ink-strong);
+  background: var(--surface-3);
+  color: var(--ink-strong);
 }
 
 /* 无生日游戏的实装日期提示 */
@@ -197,36 +297,16 @@
   color: var(--ink-soft);
 }
 
-.sync-section {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .last-sync {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: var(--ink-faint);
+  font-feature-settings: 'tnum';
+  padding-left: var(--space-1);
 }
 
-.sync-btn {
-  padding: 8px 16px;
-  background: var(--accent-strong);
-  color: var(--accent-ink);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s;
-}
-
-.sync-btn:hover:not(:disabled) {
-  background: var(--accent-strong);
-}
-
-.sync-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
+/* .sync-btn 原有的整块样式（accent 底 + 6px 圆角 + 14px）已全部被后面的
+   .action-btn 覆盖（同特异性、后写者赢），只剩 :hover 还会把「更新」染成
+   accent —— 那会和「添加」抢主操作的位置。整块删掉，让它落到数据操作那一档。 */
 
 /* Main */
 .app-main {
@@ -266,29 +346,36 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
+  padding: var(--space-4) var(--space-6);
   border-bottom: 1px solid var(--line-soft);
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .calendar-nav {
   display: flex;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .nav-btn {
-  padding: 8px 12px;
+  padding: 7px 12px;
   border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: background var(--dur-fast) var(--ease-soft),
+    border-color var(--dur-fast) var(--ease-soft),
+    color var(--dur-fast) var(--ease-soft);
 }
 
 .nav-btn:hover {
-  background: var(--surface-2);
+  background: var(--surface-3);
+  border-color: var(--line-strong);
+  color: var(--ink-strong);
 }
 
 .today-btn {
@@ -301,17 +388,20 @@
   display: inline-block;
 }
 
+/* 月份是这一屏的焦点，从 --fs-lg 提到 --fs-2xl 拉开与控件的层级 —— Hero 那边
+   靠 clamp(80px,12vw,220px) 的巨大日期建立视觉锚点，日历这边至少要有一个 */
 .calendar-title {
   font-family: var(--font-display);
-  font-size: var(--fs-lg);
+  font-size: var(--fs-2xl);
   font-weight: 700;
+  line-height: var(--lh-tight);
   letter-spacing: var(--tracking-tight);
   font-feature-settings: 'tnum';
   color: var(--ink-strong);
   cursor: pointer;
-  padding: 4px 12px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-sm);
+  transition: background var(--dur-fast) var(--ease-soft);
 }
 
 .calendar-title.clickable:hover {
@@ -338,100 +428,108 @@
   cursor: pointer;
 }
 
-.view-switcher {
-  display: flex;
-  gap: 4px;
-  background: var(--surface-2);
-  padding: 4px;
-  border-radius: 8px;
-}
-
-.view-btn {
-  padding: 6px 16px;
-  border: none;
-  background: transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
-}
-
-.view-btn.active {
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  font-weight: 500;
-}
+/* .view-switcher / .view-btn 样式已并入文件开头的「控件体系」统一段 */
 
 /* Month View */
 .month-view {
-  padding: 16px;
+  padding: var(--space-4);
 }
 
 .weekday-header {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
 .weekday-label {
   text-align: center;
   font-weight: 700;
   color: var(--ink-faint);
-  padding: var(--space-2);
+  padding: var(--space-1) 0 var(--space-2);
   font-size: var(--fs-micro);
   letter-spacing: var(--tracking-cap);
-  text-transform: uppercase;
 }
 
 .days-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
+  gap: var(--space-2);
 }
 
+/* 格子的三层信息，全部靠填色表达，不画逐格边框：
+     空日子     = 不填色（只剩一个日期数字，退成留白）
+     有生日     = 填 --surface-2（浮起来的色块）
+     非本月     = 整体变淡后退
+   42 个格子各画一圈描边是杂乱的最大来源；改成「若干块浮色 + 大片留白」之后，
+   眼睛看到的是「哪几天有事」，而不是「一张网格」。
+
+   border 留 1px transparent 占位：有无边框切换时不会让格子尺寸跳动。
+   1.35 而不是 1:1：1440px 宽屏上正方格是 144×144，只装一个 30px 头像，
+   竖直方向浪费掉一整屏。 */
 .day-cell {
-  aspect-ratio: 1;
-  border: 1px solid var(--line-soft);
+  aspect-ratio: 1.35;
+  border: 1px solid transparent;
   border-radius: var(--radius-md);
-  padding: 8px;
-  cursor: pointer;
-  transition: all var(--dur-med) var(--ease-soft);
+  padding: var(--space-2);
+  transition: background var(--dur-med) var(--ease-soft),
+    border-color var(--dur-med) var(--ease-soft),
+    transform var(--dur-med) var(--ease-soft),
+    box-shadow var(--dur-med) var(--ease-soft);
   display: flex;
   flex-direction: column;
-  min-height: 80px;
+  min-height: 76px;
   min-width: 0;
 }
 
-.day-cell:hover {
+.day-cell.has-characters {
   background: var(--surface-2);
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--line-strong));
+  /* 只有有内容的格子才可点（打开当日角色面板）；
+     空格子不再谎报 cursor:pointer */
+  cursor: pointer;
+}
+
+.day-cell.has-characters:hover {
+  background: var(--surface-3);
   box-shadow: var(--shadow);
   transform: translateY(-1px);
 }
 
-
+/* 非本月：靠「变淡」后退，而不是靠「变暗」。
+   之前用比容器更暗的底，结果一行里最不重要的空白上月日期反而成了最抢眼的黑块。 */
 .day-cell.other-month {
-  background: var(--surface-2);
+  background: transparent;
+  border-color: transparent;
+  opacity: 0.5;
+}
+
+.day-cell.other-month.has-characters {
+  background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
+  opacity: 0.65;
 }
 
 .day-cell.other-month .day-number {
   color: var(--ink-faint);
 }
 
-/* 今天：干净的描边 + 数字做成 accent 圆点，而非整格染色 */
+/* 今天：整格轻染 accent + 一圈内描边。去掉逐格边框之后，
+   「今天」是网格里唯一还有描边的格子，反而更醒目。 */
 .day-cell.today {
-  background: var(--surface);
-  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, var(--surface-2));
   box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.day-cell.today:hover {
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface-2));
+  box-shadow: inset 0 0 0 1px var(--accent), var(--shadow);
 }
 
 .day-cell.today .day-number {
   color: var(--accent-ink);
   background: var(--accent);
   border-radius: 999px;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -439,47 +537,55 @@
 }
 
 .day-number {
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   font-feature-settings: 'tnum';
-  color: var(--ink);
-  margin-bottom: 4px;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-1);
+}
+
+.day-cell.has-characters .day-number {
+  color: var(--ink-strong);
 }
 
 .day-characters {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: var(--space-1);
   flex: 1;
   align-content: flex-start;
   min-width: 0;
   overflow: hidden;
 }
 
+/* 头像环：原来是 2px 实心游戏色 + 1.5px 表面色外圈，两个环叠在 32px 的圆上
+   会糊成一坨色块。改成 1.5px 细环 + 一圈极轻外发光 —— 暗底上发光比实边
+   更能把小圆从格子里托出来，同时不吃掉头像本身的面积。 */
 .day-character {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid transparent;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) var(--ease-soft);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--line-soft);
-  font-size: 12px;
+  background: var(--surface-3);
+  font-size: var(--fs-xs);
   font-weight: 600;
-}
-
-.day-character {
-  box-shadow: 0 0 0 1.5px var(--surface);
+  box-shadow:
+    0 0 0 1.5px var(--game-color, var(--line-strong)),
+    0 0 0 3px color-mix(in srgb, var(--game-color, var(--accent)) 22%, transparent);
 }
 
 .day-character:hover {
-  transform: scale(1.15);
+  transform: scale(1.18);
   z-index: 1;
-  box-shadow: 0 0 0 1.5px var(--surface), var(--shadow-sm);
+  box-shadow:
+    0 0 0 1.5px var(--game-color, var(--line-strong)),
+    0 0 0 5px color-mix(in srgb, var(--game-color, var(--accent)) 34%, transparent);
 }
 
 .day-character-avatar {
@@ -489,29 +595,30 @@
 }
 
 .day-character-initial {
-  color: var(--ink-soft);
-  font-size: 14px;
+  color: var(--ink);
+  font-size: var(--fs-sm);
 }
 
 .avatar-fallback {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--line);
-  color: var(--ink-soft);
-  font-size: 14px;
+  background: var(--surface-3);
+  color: var(--ink);
+  font-size: var(--fs-sm);
   font-weight: 600;
 }
 
 .more-characters {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: var(--line);
+  background: var(--surface-3);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: var(--fs-micro);
   color: var(--ink-soft);
   font-weight: 600;
 }
@@ -526,7 +633,9 @@
   transition: background 0.2s, transform 0.2s;
 }
 .more-characters-btn:hover {
-  background: var(--line-strong);
+  background: var(--surface-3);
+  box-shadow: inset 0 0 0 1px var(--accent-border);
+  color: var(--ink-strong);
   transform: scale(1.1);
 }
 .more-dots-btn {
@@ -549,7 +658,8 @@
 }
 .day-overflow-panel {
   background: var(--surface);
-  border-radius: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   width: 100%;
   max-width: 340px;
   max-height: 70vh;
@@ -767,6 +877,11 @@
 .modal-content {
   background: var(--surface);
   border-radius: var(--radius);
+  /* 暗色下 scrim 是「近黑压近黑」，遮罩最多只能拉开约 1.3:1，撑不起弹窗边界。
+     所以浮起感必须由 1px 亮边 + 大半径阴影自己承担 —— 浅色时代靠白压灰白拿的
+     那份分离度，在这里是没有的。 */
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
   max-width: var(--portrait-modal-width, 400px);
   width: 100%;
   max-height: 90vh;
@@ -915,6 +1030,16 @@
   position: relative;
 }
 
+/* 添加/编辑弹窗的标题压在 --accent-rule 渐变带上，而这条渐变两端（--accent /
+   --accent-2）在每套主题里都是亮色，所以字色必须用配套的深墨。
+   继承 --ink 会得到亮字压亮底（原来那条硬编码的紫色渐变也只有 3.6:1）。 */
+.modal-header h2 {
+  color: var(--accent-ink);
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--tracking-tight);
+}
+
 .modal-avatar {
   width: 120px;
   height: 120px;
@@ -1060,13 +1185,13 @@
   align-items: center;
   gap: 6px;
   padding: 4px 6px;
-  border-radius: 6px;
-  background: var(--surface-2);
+  border-radius: var(--radius-xs);
+  background: var(--surface-3);
   border: 1px solid transparent;
-  border-left: 3px solid;
+  border-left: 3px solid var(--game-color, var(--line-strong));
   cursor: pointer;
-  transition: all 0.2s;
-  font-size: 11px;
+  transition: all var(--dur-fast) var(--ease-soft);
+  font-size: var(--fs-micro);
   min-width: 0;
   width: 100%;
 }
@@ -1142,30 +1267,7 @@
   font-weight: 500;
 }
 
-/* Week start selector */
-.week-start-selector {
-  display: flex;
-  gap: 2px;
-  background: var(--surface-2);
-  padding: 3px;
-  border-radius: 6px;
-}
-
-.week-start-btn {
-  padding: 4px 8px;
-  border: none;
-  background: transparent;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s;
-}
-
-.week-start-btn.active {
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  font-weight: 500;
-}
+/* Week start selector —— 样式已并入文件开头的「控件体系」统一段 */
 
 /* Advanced Filters */
 .advanced-filters {
@@ -1332,29 +1434,34 @@
 }
 /* Responsive（断点 1024px：平板也走移动版式） */
 @media (max-width: 1024px) {
-  .app-header {
-    padding: 10px 12px;
+  /* 标题行在窄屏换行：搜索独占一行，标题与「添加」同行 */
+  .header-titlerow {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .header-search {
+    order: 3;
+    max-width: none;
+    flex-basis: 100%;
+    margin-left: 0;
   }
 
   .header-title h1 {
-    font-size: 18px;
+    font-size: var(--fs-md);
   }
-  
+
   .header-subtitle {
-    font-size: 12px;
+    font-size: var(--fs-xs);
   }
   
-  .header-controls {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    margin-top: 10px;
-  }
+  /* 顶栏的移动端规则全部并到下面第二个 max-width:1024px 块里。
+     这两块原来在 flex-direction 上互相打架（这里 column、那边 row，后者赢），
+     .header-controls / .control-group / .header-actions / .action-btn 这几条
+     整段是死代码。响应式只留一处，改的时候不用再数覆盖顺序。 */
   
   .control-group {
-    width: 100%;
     flex-wrap: wrap;
-    gap: 4px;
   }
 
   /* 首日起独立成行时靠右对齐 */
@@ -1375,23 +1482,32 @@
     font-size: 12px;
   }
   
-  .display-modes {
-    gap: 2px;
+  /* 工具栏换行后，竖分隔线会跑到新行的行首变成一条孤立的竖杠。
+     窄屏上换行本身已经表达了分组，直接去掉分隔线。 */
+  .control-bar .control-group + .control-group {
+    border-left: none;
   }
-  
-  .display-mode-btn {
-    padding: 4px 8px;
-    font-size: 12px;
+
+  .control-bar {
+    row-gap: 2px;
+  }
+
+  /* 三处分段控件用同一条移动端收缩规则 */
+  .display-mode-btn,
+  .week-start-btn,
+  .view-btn {
+    padding: 4px 9px;
+    font-size: var(--fs-xs);
+  }
+
+  .toggle-btn,
+  .toggle-btn.active {
+    padding: 5px 9px;
+    font-size: var(--fs-xs);
   }
   
   .header-actions {
     justify-content: flex-end;
-    gap: 4px;
-  }
-  
-  .action-btn {
-    padding: 6px 10px;
-    font-size: 12px;
   }
   
   .app-main {
@@ -1416,11 +1532,6 @@
     min-width: 45px;
   }
   
-  .view-btn {
-    padding: 4px 10px;
-    font-size: 12px;
-  }
-  
   .month-view {
     padding: 8px 4px;
   }
@@ -1441,7 +1552,7 @@
   .day-cell {
     min-height: 50px;
     padding: 2px;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
   }
   
   .day-number {
@@ -1453,9 +1564,21 @@
     min-height: auto;
   }
   
+  /* 20px 的圆再套 1.5px 环 + 3px 外发光，等于一半面积都是环，会糊成色块。
+     小尺寸下只留细环。 */
   .day-character {
     width: 20px;
     height: 20px;
+    box-shadow: 0 0 0 1.5px var(--game-color, var(--line-strong));
+  }
+
+  .day-character:hover {
+    box-shadow: 0 0 0 1.5px var(--game-color, var(--line-strong)),
+      0 0 0 3px color-mix(in srgb, var(--game-color, var(--accent)) 30%, transparent);
+  }
+
+  .day-character-initial {
+    font-size: 10px;
   }
   
   .day-character-avatar {
@@ -1641,44 +1764,54 @@
 /* Sync Progress */
 .sync-progress-bar {
   background: var(--accent-bg);
-  border-radius: 4px;
-  padding: 8px 16px;
-  margin-top: 8px;
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-xs);
+  padding: var(--space-2) var(--space-4);
+  margin-top: var(--space-2);
   text-align: center;
 }
 
 .sync-progress-text {
   color: var(--accent-strong);
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-weight: 500;
 }
 
-/* Header Actions */
+/* ============================================================
+   顶栏动作区 —— 三档权重
+   1 主操作    添加                  accent 实心，全区唯一
+   2 模式入口  筛选 / 收藏            描边胶囊，带计数与状态
+   3 数据操作  日历 / 导出 / 更新      无边框 ghost，低频、退到后面
+   原来六个按钮同等重量平铺，眼睛没有落点。
+   ============================================================ */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .action-btn {
-  padding: 8px 14px;
+  padding: 7px 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 13px;
+  font-family: inherit;
+  font-size: var(--fs-sm);
   font-weight: 500;
   transition: all var(--dur-med) var(--ease-soft);
   display: flex;
   align-items: center;
-  gap: 4px;
-  background: transparent;
-  color: var(--ink-soft);
+  gap: var(--space-1);
+  background: var(--surface-2);
+  color: var(--ink);
+  white-space: nowrap;
 }
 
 .action-btn:hover {
-  background: var(--surface-2);
-  color: var(--ink);
+  background: var(--surface-3);
+  color: var(--ink-strong);
   border-color: var(--line-strong);
   transform: translateY(-1px);
 }
@@ -1693,8 +1826,9 @@
   transform: none;
 }
 
-/* 主操作：添加 / 更新 用品牌 accent，其余为安静的 ghost 按钮 */
-.add-btn {
+/* ---- 1 主操作 ---- */
+.add-btn,
+.add-btn:disabled {
   background: var(--accent-strong);
   border-color: transparent;
   color: var(--accent-ink);
@@ -1707,8 +1841,27 @@
   border-color: transparent;
 }
 
-.export-btn {
+/* ---- 3 数据操作：一道分隔线之后，收成无边框 ghost ---- */
+.header-actions-data {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: var(--space-2);
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--line);
+}
+
+.header-actions-data .action-btn {
   background: transparent;
+  border-color: transparent;
+  color: var(--ink-faint);
+  padding: 7px 10px;
+}
+
+.header-actions-data .action-btn:hover {
+  background: var(--surface-2);
+  border-color: transparent;
+  color: var(--ink);
 }
 
 /* Modal Actions */
@@ -1897,18 +2050,13 @@
 }
 
 /* Filter sidebar layout */
-.header-content {
-  max-width: 1440px;
-}
-
 .app-body {
   display: flex;
   align-items: flex-start;
   gap: 20px;
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto;
-  padding: 24px;
+  margin: 0 auto;  padding: 24px;
   flex: 1;
 }
 
@@ -1920,10 +2068,50 @@
   padding: 0;
 }
 
+/* ---- 日历区入场编排 ----
+   呼应 Hero 首屏那条 120→200→280→360ms 的阶梯延迟，用同一条缓动曲线。
+   由 useReveal 在滚入视口时加 .is-revealed 触发（Hero 占满首屏，
+   加载时这块还在屏幕外，load 时放动画等于没放）。
+
+   用 transition 而非 animation：结束后 transform 回到 none，
+   不会给 position:fixed 的后代留下一个包含块（弹层被 transform 祖先
+   劫持成小窗口的坑刚踩过一次）。 */
+.app-body .filter-sidebar,
+.app-body .calendar-container {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 620ms var(--ease-out), transform 620ms var(--ease-out);
+}
+
+.app-body.is-revealed .filter-sidebar {
+  opacity: 1;
+  transform: none;
+  transition-delay: 60ms;
+}
+
+.app-body.is-revealed .calendar-container {
+  opacity: 1;
+  transform: none;
+  transition-delay: 170ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-body .filter-sidebar,
+  .app-body .calendar-container {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* 移动端才显示的筛选入口（桌面用侧栏）。全区只留「添加」一个 accent 实心主操作，
+   这里用 accent 描边表示「带状态的模式入口」，不和主操作抢。 */
 .filter-entry-btn {
   display: none;
-  background: var(--accent-strong);
-  color: var(--accent-ink);
+  background: var(--surface-2);
+  color: var(--ink-strong);
+  border-color: var(--accent-border);
+  font-weight: 600;
 }
 
 .filter-sidebar {
@@ -2148,7 +2336,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
   }
 
   .control-group {
@@ -2157,6 +2346,7 @@
        360px 屏上把整页顶到 384px 导致左右晃动，且上面那条 flex-wrap 永远触发不了。 */
     flex: 0 1 auto;
     min-width: 0;
+    gap: var(--space-1);
   }
 
   .header-actions {
@@ -2171,7 +2361,14 @@
   .action-btn {
     flex: 0 0 auto;
     padding: 7px 10px;
-    font-size: 12px;
+    font-size: var(--fs-xs);
+  }
+
+  /* 窄屏上分隔线换成更小的间距，避免动作区被挤成两行 */
+  .header-actions-data {
+    margin-left: var(--space-1);
+    padding-left: var(--space-2);
+    gap: 2px;
   }
 
   .last-sync {
@@ -2215,16 +2412,6 @@
 }
 
 /* Search, ICS, and favorites */
-.search-shell {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 14px 24px 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
 .character-search {
   position: relative;
   width: min(620px, 100%);
@@ -2370,28 +2557,15 @@
   font-size: 13px;
 }
 
-.favorite-filter-btn {
-  background: transparent;
-  color: var(--ink-soft);
-}
-
+/* 收藏是开关：关时与其他二级按钮同级，开启后用 accent 明确标示。
+   （.ics-btn 的 transparent 已由 .header-actions-data 统一接管，不再单列。） */
 .favorite-filter-btn.active {
-  background: var(--surface-2);
-  color: var(--ink);
-  border-color: var(--line-strong);
-  box-shadow: inset 0 0 0 1px var(--line-strong);
-}
-
-.ics-btn {
-  background: transparent;
+  background: var(--accent-bg);
+  color: var(--ink-strong);
+  border-color: var(--accent-border);
 }
 
 @media (max-width: 1024px) {
-  .search-shell {
-    display: block;
-    padding: 10px 12px 0;
-  }
-
   .character-search {
     width: 100%;
   }
@@ -2403,151 +2577,4 @@
   .ics-status {
     margin-top: 8px;
   }
-}
-/* ============================================================
-   Spotlight：未聚焦时的“近期生日/实装”轮播带。
-   位于中性界面与日历之间，单格用角色游戏色 + 立绘点染，
-   不改动整体主题，保证日历可读。
-   ============================================================ */
-.spotlight {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.spotlight-stage {
-  position: relative;
-  border-radius: var(--radius);
-  border: 1px solid var(--frame-border);
-  background: var(--surface);
-  box-shadow: var(--frame-glow), var(--shadow);
-  overflow: hidden;
-  min-height: 152px;
-  transition: border-color var(--dur-slow) var(--ease-soft), box-shadow var(--dur-slow) var(--ease-soft);
-}
-
-.spotlight-slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: var(--space-6) var(--space-8);
-  border: none;
-  /* 渐变只在右侧收尾处透出角色所属游戏色，左侧保持中性以保证文字对比度 */
-  background: linear-gradient(100deg,
-      var(--surface) 0%,
-      var(--surface) 48%,
-      color-mix(in srgb, var(--spot-accent, var(--accent)) 13%, var(--surface)) 100%);
-  cursor: pointer;
-  text-align: left;
-  font: inherit;
-  color: var(--ink);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(24px);
-  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
-}
-
-.spotlight-slide.active {
-  position: relative;
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-}
-
-.spotlight-portrait {
-  flex-shrink: 0;
-  width: 112px;
-  height: 112px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.spotlight-portrait img {
-  height: 100%;
-  width: auto;
-  object-fit: contain;
-  /* 用角色主题色的投影，而非黑影，让立绘像被自己的游戏色点亮 */
-  filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--spot-accent, var(--accent)) 35%, transparent));
-  animation: spotlight-float 5s ease-in-out infinite;
-}
-
-.spotlight-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.spotlight-eyebrow {
-  font-size: var(--fs-micro);
-  font-weight: 800;
-  letter-spacing: var(--tracking-cap);
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--spot-accent, var(--accent)) 48%, var(--ink-strong));
-  margin-bottom: var(--space-1);
-}
-
-.spotlight-name {
-  font-family: var(--font-display);
-  font-size: var(--fs-2xl);
-  font-weight: 750;
-  letter-spacing: var(--tracking-tight);
-  color: var(--ink-strong);
-  line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.spotlight-name-en {
-  font-size: var(--fs-sm);
-  color: var(--ink-faint);
-}
-
-.spotlight-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 0 0;
-}
-
-.spotlight-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  border: none;
-  background: var(--line-strong);
-  cursor: pointer;
-  padding: 0;
-  transition: width var(--dur-med) var(--ease-soft), background var(--dur-med) var(--ease-soft);
-}
-
-/* 当前项拉成胶囊，是更现代的轮播指示 */
-.spotlight-dot.active {
-  width: 22px;
-  background: var(--accent);
-}
-
-@keyframes spotlight-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .spotlight-portrait img { animation: none; }
-  .spotlight-slide { transition: opacity 0.2s ease, visibility 0.2s; transform: none; }
-}
-
-@media (max-width: 1024px) {
-  .spotlight { padding: 0 16px; }
-  .spotlight-slide { padding: 16px 18px; gap: 14px; }
-  .spotlight-name { font-size: var(--fs-lg); }
-  .spotlight-portrait { width: 76px; height: 76px; }
-  .spotlight-stage { min-height: 108px; }
 }
