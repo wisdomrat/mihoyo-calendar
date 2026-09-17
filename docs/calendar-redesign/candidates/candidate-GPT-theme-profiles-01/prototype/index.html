@@ -1,0 +1,71 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="米哈游角色日历 GPT Theme Profile 视觉验证" />
+  <title>米哈游角色日历 · GPT Theme Profiles 01</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="返回中性主题">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span><strong>米哈游角色日历</strong><small>生日与实装纪念</small></span>
+    </a>
+    <nav class="profiles" aria-label="Theme Profile 状态">
+      <button data-state="neutral">中性</button>
+      <button data-state="sumeru">须弥</button>
+      <button data-state="hsr">星铁</button>
+      <button data-state="furina">芙宁娜</button>
+      <button data-state="density">高密</button>
+      <button data-state="hero">Hero</button>
+    </nav>
+    <div class="top-actions">
+      <span id="monthCount">2026年8月 · 8 条事件</span>
+      <button class="today" id="today" type="button">今天</button>
+      <button class="icon" id="searchOpen" type="button" aria-label="搜索角色" title="搜索角色">⌕</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="stage" aria-labelledby="stageName">
+      <img id="stageImage" alt="" />
+      <div class="fallback" id="fallback" hidden><strong id="fallbackLetter">阿</strong><span>角色图片暂不可用</span></div>
+      <div class="stage-overlay" aria-hidden="true"></div>
+      <div class="stage-top"><span id="stageContext">当前主角 · 原神</span><span class="signal"><i></i><b id="stageSignal">生日</b></span></div>
+      <div class="stage-copy">
+        <span class="eyebrow" id="stageKicker">记忆轨道 04</span>
+        <h1 id="stageName">阿蕾奇诺</h1>
+        <p id="stageEnglish">Arlecchino</p>
+        <div class="stage-meta"><span id="stageAffiliation">枫丹 · 愚人众</span><span id="stageDate">08月22日 · 生日</span></div>
+        <button class="stage-button" id="heroOpen" type="button"><span>进入全屏</span><span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <section class="calendar" aria-labelledby="calendarTitle">
+      <header class="calendar-head">
+        <div><span class="eyebrow" id="calendarEyebrow">日历工作区</span><h2 id="calendarTitle">2026年 8月</h2></div>
+        <div class="calendar-tools">
+          <button class="icon" id="prevMonth" type="button" aria-label="上个月" title="上个月">‹</button>
+          <button class="icon" id="nextMonth" type="button" aria-label="下个月" title="下个月">›</button>
+          <div class="segmented" role="group" aria-label="日期语义"><button data-mode="birthday" class="active">生日</button><button data-mode="release">实装</button></div>
+          <div class="segmented" role="group" aria-label="视图"><button data-view="month" class="active">月</button><button data-view="week">周</button></div>
+        </div>
+      </header>
+      <div class="context-row"><div><span>当前筛选</span><strong id="contextSummary">全部游戏</strong></div><button class="link" id="clearState" type="button">清除</button></div>
+      <div class="grid" id="calendarGrid" aria-label="月历">
+        <span class="weekday">一</span><span class="weekday">二</span><span class="weekday">三</span><span class="weekday">四</span><span class="weekday">五</span><span class="weekday weekend">六</span><span class="weekday weekend">日</span>
+      </div>
+      <footer class="calendar-foot"><div class="legend"><span><i class="dot birthday"></i>生日</span><span><i class="dot release"></i>实装</span></div><div class="filters"><button class="active" data-filter="all">全部游戏</button><button data-filter="genshin">原神</button><button data-filter="hsr">星穹铁道</button></div></footer>
+      <div class="selected" id="selected"><div class="selected-date"><strong id="selectedDay">22</strong><small id="selectedMonth">8月</small></div><div class="selected-info"><span id="selectedType">生日</span><strong id="selectedName">阿蕾奇诺</strong><small id="selectedNote">枫丹 · 愚人众</small></div><button class="icon" id="selectedOpen" type="button" aria-label="打开全屏角色" title="打开全屏">↗</button></div>
+    </section>
+  </main>
+
+  <dialog id="searchDialog" class="dialog"><form method="dialog" class="dialog-head"><div><span class="eyebrow">角色索引</span><h2>搜索角色</h2></div><button class="icon" aria-label="关闭">×</button></form><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="输入角色名称" /></label><div id="searchResults" class="results"></div></dialog>
+  <dialog id="heroDialog" class="hero"><img id="heroImage" alt="" /><div class="hero-shade"></div><button class="hero-close" id="heroClose" type="button" aria-label="关闭全屏">×</button><div class="hero-top"><span id="heroProfile">NEUTRAL / CHARACTER ACCENT</span><span>04 / 31</span></div><div class="hero-copy"><span class="eyebrow" id="heroKicker">生日记忆</span><h2 id="heroName">阿蕾奇诺</h2><p id="heroEnglish">Arlecchino</p><div><span id="heroDate">2026.08.22</span><span id="heroAffiliation">原神 · 枫丹 · 愚人众</span></div></div><div class="hero-foot"><span>角色日历</span><button id="heroReturn" type="button">返回月历 ↓</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

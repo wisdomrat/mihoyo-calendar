@@ -1,0 +1,677 @@
+/* V2 Dialogs and Detail Views */
+
+.v2-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(90vw, 42rem);
+  max-height: min(90vh, 48rem);
+  background: rgba(var(--v2-deep), 0.95);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(var(--v2-edge), 0.15);
+  border-radius: clamp(16px, 3vw, 24px);
+  color: rgb(var(--v2-edge));
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.v2-dialog::backdrop {
+  background: rgba(var(--v2-deep), 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.v2-dialog-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(var(--v2-edge), 0.1);
+}
+
+.v2-dialog-heading h2 {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  color: rgb(var(--v2-edge));
+  margin: 0;
+}
+
+.v2-dialog-content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 8rem);
+}
+
+.v2-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.v2-dialog-actions button {
+  background: rgba(var(--v2-surface), 0.4);
+  border: 1px solid rgba(var(--v2-edge), 0.1);
+  color: rgba(var(--v2-edge), 0.8);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 0.625rem 1.5rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.v2-dialog-actions button:hover {
+  background: rgba(var(--v2-surface), 0.6);
+  color: rgb(var(--v2-edge));
+}
+
+/* Character Detail Dialog
+   Window size is driven from the portrait's real pixel dimensions in JS
+   (WorkspaceCharacterDetail.computeDetailLayout): the component sets an explicit
+   `width` plus --detail-portrait-w / --detail-portrait-h / --detail-info-w, so the
+   window genuinely resizes to the portrait instead of a fixed two-column box. */
+.v2-detail-dialog {
+  /* width is set inline; override the base .v2-dialog caps */
+  max-width: 94vw;
+  max-height: 92vh;
+  padding: 0;
+  overflow: auto;
+}
+
+
+.v2-detail-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--v2-deep), 0.9);
+  border: 1px solid rgba(var(--v2-edge), 0.2);
+  border-radius: 999px;
+  color: rgba(var(--v2-edge), 0.8);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.v2-detail-close:hover {
+  background: rgba(var(--v2-deep), 1);
+  color: rgb(var(--v2-edge));
+  border-color: rgba(var(--v2-edge), 0.4);
+}
+
+.v2-detail-close svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2.5;
+}
+
+.v2-detail-layout {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: flex-start;
+}
+
+.v2-detail-visual {
+  flex: none;
+  width: var(--detail-portrait-w, 18rem);
+  height: var(--detail-portrait-h, 24rem);
+  border-radius: clamp(12px, 2vw, 16px);
+  overflow: hidden;
+  background: rgba(var(--v2-surface), 0.3);
+}
+
+.v2-detail-visual img,
+.v2-detail-visual .v2-image-fallback {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+}
+
+/* Genshin gacha art uses a wider transparent canvas than the approved
+   Remielle reference. A 1.6:1 crop preserves proportions while giving the
+   visible character the same visual weight. */
+.v2-detail-dialog.game-genshin .v2-detail-visual img {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Immersive stage hero */
+.v2-hero-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  color: rgb(var(--v2-edge));
+  background:
+    radial-gradient(ellipse 70% 100% at 68% 30%, rgba(var(--v2-halo), 0.3), transparent 72%),
+    radial-gradient(ellipse 65% 85% at 98% 75%, rgba(var(--v2-fill), 0.16), transparent 70%),
+    linear-gradient(135deg, var(--v2-start), var(--v2-mid) 50%, var(--v2-end));
+}
+
+.v2-hero-dialog[open] {
+  display: block;
+}
+
+.v2-hero-dialog::backdrop {
+  background: rgb(var(--v2-deep));
+}
+
+.v2-hero-media,
+.v2-hero-shade,
+.v2-hero-grid {
+  position: absolute;
+  inset: 0;
+}
+
+.v2-hero-media {
+  overflow: hidden;
+}
+
+.v2-hero-backdrop,
+.v2-hero-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.v2-hero-backdrop {
+  object-fit: cover;
+  filter: blur(44px);
+  opacity: 0.32;
+  transform: scale(1.09);
+}
+
+.v2-hero-art {
+  object-fit: contain;
+  object-position: 68% center;
+}
+
+.v2-hero-dialog.game-genshin .v2-hero-art {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.v2-hero-shade {
+  /* Shade only the copy and outer edges. Broad overlapping gradients used to
+     dim the character's face and put the colored light on top of the art. */
+  background:
+    linear-gradient(90deg, rgba(var(--v2-deep), 0.72) 0%, rgba(var(--v2-deep), 0.4) 22%, rgba(var(--v2-deep), 0.06) 42%, transparent 58%),
+    linear-gradient(0deg, rgba(var(--v2-deep), 0.9) 0%, rgba(var(--v2-deep), 0.45) 10%, transparent 32%),
+    linear-gradient(180deg, rgba(var(--v2-deep), 0.24), transparent 16%);
+  pointer-events: none;
+}
+
+.v2-hero-grid {
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(var(--v2-edge), 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--v2-edge), 0.08) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: linear-gradient(90deg, black, transparent 68%);
+}
+
+.v2-hero-topline,
+.v2-hero-copy,
+.v2-hero-footer,
+.v2-hero-close {
+  position: absolute;
+  z-index: 2;
+}
+
+.v2-hero-topline {
+  top: 1.75rem;
+  left: clamp(1.5rem, 5vw, 4.5rem);
+  right: 6rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--v2-accent);
+  font-size: 0.6875rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.v2-hero-close {
+  top: 1.25rem;
+  right: 1.5rem;
+  width: 2.875rem;
+  height: 2.875rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(var(--v2-edge), 0.55);
+  border-radius: 6px;
+  color: rgb(var(--v2-edge));
+  background: rgba(var(--v2-deep), 0.54);
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+
+.v2-hero-close:hover,
+.v2-hero-close:focus-visible {
+  border-color: var(--v2-accent);
+  background: rgba(var(--v2-deep), 0.78);
+}
+
+.v2-hero-close svg {
+  width: 1.375rem;
+  height: 1.375rem;
+  stroke-width: 1.8;
+}
+
+.v2-hero-copy {
+  left: clamp(1.5rem, 7vw, 6.25rem);
+  bottom: 6.75rem;
+  width: min(38rem, 78vw);
+  text-shadow: 0 2px 18px rgba(var(--v2-deep), 0.6);
+}
+
+.v2-hero-kicker {
+  color: var(--v2-accent);
+  font-size: 0.75rem;
+}
+
+.v2-hero-copy h2 {
+  margin: 0.65rem 0 0;
+  color: rgb(var(--v2-edge));
+  font-size: 5.75rem;
+  font-weight: 350;
+  line-height: 0.98;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.v2-hero-copy > p {
+  margin: 0.5rem 0 1.5rem;
+  color: rgba(var(--v2-edge), 0.72);
+  font-size: 1.25rem;
+}
+
+.v2-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.v2-hero-meta span {
+  min-height: 2rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 2px solid var(--v2-accent);
+  color: rgba(var(--v2-edge), 0.9);
+  background: rgba(var(--v2-deep), 0.48);
+  font-size: 0.75rem;
+  backdrop-filter: blur(10px);
+}
+
+.v2-hero-footer {
+  left: clamp(1.5rem, 5vw, 4.5rem);
+  right: clamp(1.5rem, 5vw, 4.5rem);
+  bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: rgba(var(--v2-edge), 0.5);
+  font-size: 0.6875rem;
+}
+
+.v2-hero-footer button {
+  min-height: 2.25rem;
+  padding: 0 0.875rem;
+  border: 1px solid rgba(var(--v2-edge), 0.24);
+  border-radius: 6px;
+  color: rgba(var(--v2-edge), 0.82);
+  background: rgba(var(--v2-deep), 0.48);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.v2-hero-footer button:hover,
+.v2-hero-footer button:focus-visible {
+  border-color: var(--v2-accent);
+  color: rgb(var(--v2-edge));
+}
+
+.v2-detail-text {
+  flex: none;
+  width: var(--detail-info-w, 20rem);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+}
+
+/* Stacked (narrow viewport): portrait on top, info below, both centered */
+.v2-detail-dialog.is-stacked .v2-detail-layout {
+  flex-direction: column;
+  align-items: center;
+}
+
+.v2-detail-dialog.is-stacked .v2-detail-visual {
+  margin: 0 auto;
+}
+
+.v2-detail-dialog.is-stacked .v2-detail-text {
+  width: 100%;
+}
+
+.v2-detail-text .v2-eyebrow {
+  margin-bottom: 0.75rem;
+}
+
+.v2-detail-text h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: rgb(var(--v2-edge));
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.v2-detail-english {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: rgba(var(--v2-edge), 0.6);
+  margin: 0 0 2rem;
+}
+
+.v2-detail-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.v2-detail-meta dt {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(var(--v2-edge), 0.5);
+}
+
+.v2-detail-meta dd {
+  font-size: 0.9375rem;
+  color: rgb(var(--v2-edge));
+  margin: 0;
+}
+
+.v2-detail-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.v2-detail-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(var(--v2-surface), 0.4);
+  border: 1px solid rgba(var(--v2-edge), 0.1);
+  color: rgba(var(--v2-edge), 0.8);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.v2-detail-actions button:hover {
+  background: rgba(var(--v2-surface), 0.6);
+  color: rgb(var(--v2-edge));
+}
+
+.v2-detail-actions button[aria-pressed="true"] {
+  background: rgba(var(--v2-halo), 0.2);
+  color: var(--v2-accent);
+  border-color: rgba(var(--v2-halo), 0.3);
+}
+
+.v2-detail-actions svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  stroke-width: 2;
+}
+
+/* Roster Dialog */
+.v2-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.v2-roster-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(var(--v2-surface), 0.3);
+  border: 1px solid rgba(var(--v2-edge), 0.08);
+  border-radius: clamp(8px, 2vw, 12px);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+}
+
+.v2-roster-item:hover {
+  background: rgba(var(--v2-surface), 0.5);
+  border-color: rgba(var(--v2-edge), 0.15);
+}
+
+.v2-roster-item img,
+.v2-roster-item .v2-image-fallback {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.v2-roster-item span {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(var(--v2-edge));
+}
+
+.v2-roster-item small {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgba(var(--v2-edge), 0.5);
+}
+
+/* Filters Dialog */
+.v2-filters-dialog {
+  max-width: min(90vw, 48rem);
+}
+
+.v2-filter-section {
+  margin-bottom: 2rem;
+}
+
+.v2-filter-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.v2-filter-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(var(--v2-edge));
+  margin: 0 0 1rem;
+}
+
+.v2-game-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.v2-chip {
+  background: rgba(var(--v2-surface), 0.3);
+  border: 1px solid rgba(var(--v2-edge), 0.1);
+  color: rgba(var(--v2-edge), 0.8);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.v2-chip:hover {
+  background: rgba(var(--v2-surface), 0.5);
+  color: rgb(var(--v2-edge));
+}
+
+.v2-chip[aria-pressed="true"] {
+  background: rgba(var(--v2-halo), 0.2);
+  color: var(--v2-accent);
+  border-color: rgba(var(--v2-halo), 0.3);
+}
+
+.v2-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+  color: rgba(var(--v2-edge), 0.8);
+  cursor: pointer;
+}
+
+.v2-checkbox-label input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--v2-accent);
+  cursor: pointer;
+}
+
+/* Month Picker Dialog */
+.v2-month-dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.v2-month-dialog label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: rgba(var(--v2-edge), 0.8);
+}
+
+.v2-month-dialog input[type="month"] {
+  background: rgba(var(--v2-surface), 0.4);
+  border: 1px solid rgba(var(--v2-edge), 0.15);
+  color: rgb(var(--v2-edge));
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: clamp(8px, 2vw, 12px);
+  color-scheme: dark;
+}
+
+.v2-month-dialog input[type="month"]:focus {
+  outline: 2px solid var(--v2-accent);
+  outline-offset: 2px;
+}
+
+/* Search Dialog */
+.v2-search-dialog .v2-dialog-content {
+  padding: 0;
+}
+
+/* Empty State */
+.v2-empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: rgba(var(--v2-edge), 0.5);
+  font-size: 0.9375rem;
+}
+
+/* Responsive
+   Detail dialog layout (row vs. stacked, portrait box, window width) is computed
+   in JS from the viewport, so it is intentionally NOT overridden here. */
+@media (max-width: 768px) {
+  .v2-hero-art {
+    object-position: center center;
+  }
+
+  .v2-hero-shade {
+    background:
+      linear-gradient(0deg, rgba(var(--v2-deep), 0.94) 0%, rgba(var(--v2-deep), 0.72) 17%, rgba(var(--v2-deep), 0.18) 38%, transparent 55%),
+      linear-gradient(180deg, rgba(var(--v2-deep), 0.25), transparent 16%);
+  }
+
+  .v2-hero-grid {
+    background-size: 64px 64px;
+    mask-image: linear-gradient(0deg, black, transparent 74%);
+  }
+
+  .v2-hero-topline {
+    top: 1.375rem;
+    left: 1.25rem;
+    right: 4.75rem;
+  }
+
+  .v2-hero-topline span:last-child {
+    display: none;
+  }
+
+  .v2-hero-close {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .v2-hero-copy {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 5.5rem;
+    width: auto;
+  }
+
+  .v2-hero-copy h2 {
+    font-size: 3.375rem;
+  }
+
+  .v2-hero-copy > p {
+    margin-bottom: 1rem;
+    font-size: 1.0625rem;
+  }
+
+  .v2-hero-meta span:nth-child(3) {
+    display: none;
+  }
+
+  .v2-hero-footer {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.125rem;
+  }
+
+  .v2-detail-actions {
+    flex-wrap: wrap;
+  }
+
+  .v2-dialog-content {
+    padding: 1rem;
+  }
+}

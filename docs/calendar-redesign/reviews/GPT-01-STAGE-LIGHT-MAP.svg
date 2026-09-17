@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1500" height="1000" viewBox="0 0 1500 1000">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#f0c98a"/></marker>
+    <marker id="b" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7de5cf"/></marker>
+    <style>
+      .t{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#f6f1e9}.s{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#b9bbca;font-size:14px}.h{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#fff8eb;font-size:17px;font-weight:650}.box{fill:none;stroke:#f0c98a;stroke-width:2.5;stroke-dasharray:8 6}.lay{fill:none;stroke:#7de5cf;stroke-width:2.5;stroke-dasharray:8 6}.ar{fill:none;stroke:#f0c98a;stroke-width:2.5;marker-end:url(#a)}.lr{fill:none;stroke:#7de5cf;stroke-width:2.5;marker-end:url(#b)}.tag{fill:#151526;fill-opacity:.95;stroke:#f0c98a;stroke-width:1.2}.ltag{fill:#102b2b;fill-opacity:.96;stroke:#7de5cf;stroke-width:1.2}
+    </style>
+  </defs>
+  <rect width="1500" height="1000" fill="#0b0d18"/>
+  <text x="40" y="42" class="t" font-size="26" font-weight="650">GPT-01 左侧角色舞台 / 光场定义</text>
+  <text x="40" y="70" class="s">底图：02-sumeru-filter-GPT · 金色 = 结构区域 · 薄荷 = 视觉图层</text>
+  <rect x="40" y="95" width="690" height="850" rx="26" fill="#111426"/>
+  <svg x="40" y="95" width="690" height="850" viewBox="72 146 470 690" preserveAspectRatio="none"><image x="0" y="0" width="1440" height="900" xlink:href="../candidates/candidate-GPT-01/concept-v3-GPT/02-sumeru-filter-GPT.png"/></svg>
+  <rect x="40" y="95" width="690" height="850" rx="26" class="box"/>
+  <rect x="40" y="95" width="690" height="125" class="lay" opacity=".75"/>
+  <ellipse cx="330" cy="240" rx="310" ry="165" class="lay"/>
+  <rect x="40" y="700" width="690" height="245" class="lay"/>
+  <rect x="58" y="114" width="270" height="42" class="box"/>
+  <rect x="458" y="114" width="245" height="42" class="box"/>
+  <rect x="58" y="715" width="625" height="195" class="box"/>
+
+  <g>
+    <rect x="790" y="105" width="320" height="78" class="tag"/><text x="810" y="135" class="h">S1 舞台容器</text><text x="810" y="161" class="s">圆角边界、裁切范围、舞台表面</text><path d="M790 145L730 145" class="ar"/>
+    <rect x="1140" y="105" width="320" height="78" class="ltag"/><text x="1160" y="135" class="h">L1 角色对应主光晕</text><text x="1160" y="161" class="s">须弥态主光位于左上/角色上方</text><path d="M1140 145L500 250" class="lr"/>
+    <rect x="790" y="205" width="320" height="78" class="tag"/><text x="810" y="235" class="h">S2 立绘主体区</text><text x="810" y="261" class="s">角色裁切、主体位置、视觉焦点</text><path d="M790 245L500 450" class="ar"/>
+    <rect x="1140" y="205" width="320" height="78" class="ltag"/><text x="1160" y="235" class="h">L2 全局色温渐变</text><text x="1160" y="261" class="s">深青绿向右下紫色连续过渡</text><path d="M1140 245L680 420" class="lr"/>
+    <rect x="790" y="305" width="320" height="78" class="tag"/><text x="810" y="335" class="h">S3 舞台顶部上下文</text><text x="810" y="361" class="s">当前角色/游戏/地区与事件信号</text><path d="M790 345L320 135" class="ar"/>
+    <rect x="1140" y="305" width="320" height="78" class="ltag"/><text x="1160" y="335" class="h">L3 立绘垂直压暗</text><text x="1160" y="361" class="s">顶部保留图像，底部逐渐变深</text><path d="M1140 345L420 825" class="lr"/>
+    <rect x="790" y="405" width="320" height="78" class="tag"/><text x="810" y="435" class="h">S4 角色信息区</text><text x="810" y="461" class="s">地区标题、角色名、英文名、日期</text><path d="M790 445L330 825" class="ar"/>
+    <rect x="1140" y="405" width="320" height="78" class="ltag"/><text x="1160" y="435" class="h">L4 可读性落点</text><text x="1160" y="461" class="s">文字必须落在压暗后的稳定区域</text><path d="M1140 445L520 830" class="lr"/>
+    <rect x="790" y="505" width="320" height="78" class="tag"/><text x="810" y="535" class="h">S5 舞台边界</text><text x="810" y="561" class="s">边框只做轻边界，不做发光卡片</text><path d="M790 545L730 700" class="ar"/>
+    <rect x="1140" y="505" width="320" height="78" class="ltag"/><text x="1160" y="535" class="h">L5 角色局部强调</text><text x="1160" y="561" class="s">边框、微光、标签可随主题变化</text><path d="M1140 545L690 780" class="lr"/>
+    <rect x="790" y="605" width="670" height="110" class="ltag"/><text x="810" y="637" class="h">光场原则</text><text x="810" y="666" class="s">须弥：光从角色/舞台左上进入，向月历区域和右下自然衰减。</text><text x="810" y="692" class="s">中性：主光回到右上/日历上方；芙宁娜：只保留弱局部强调。</text>
+  </g>
+  <text x="40" y="980" class="s">后续讨论示例：“L1 主光晕位置”“L3 压暗曲线”“S4 角色信息区”，不再统称为“打光”。</text>
+</svg>

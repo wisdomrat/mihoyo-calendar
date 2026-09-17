@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type CSSProperties } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 import Calendar from './components/Calendar/Calendar';
 import Header from './components/Header';
 import FilterSidebar from './components/FilterSidebar';
@@ -19,6 +19,8 @@ import {
 } from './utils/filterUi';
 import { buildBirthdayIcs, getCharactersWithValidBirthdays } from './utils/ics.ts';
 import { isFavoriteCharacter } from './utils/favorites.ts';
+import CalendarWorkspaceV2 from './components/v2/CalendarWorkspaceV2';
+import { resolveUiVersion } from './utils/uiVersion';
 
 const GAME_IDS = Object.keys(GAMES);
 const RARITY_STAR = '\u2605';
@@ -68,11 +70,18 @@ function CharacterModal({
   const [portraitDimensions, setPortraitDimensions] = useState<PortraitDimensions | null>(null);
   const [isArtworkOnly, setIsArtworkOnly] = useState(false);
 
+  // Reset artwork-only mode when character or portrait setting changes
+  const artworkResetKey = `${character?.id}-${portraitBackgroundEnabled}`;
+  const prevArtworkResetKeyRef = useRef(artworkResetKey);
   useEffect(() => {
-    if (!character?.portrait || !portraitBackgroundEnabled) {
-      setPortraitDimensions(null);
-      return;
+    if (prevArtworkResetKeyRef.current !== artworkResetKey) {
+      prevArtworkResetKeyRef.current = artworkResetKey;
+      setIsArtworkOnly(false);
     }
+  }, [artworkResetKey]);
+
+  useEffect(() => {
+    if (!character?.portrait || !portraitBackgroundEnabled) return;
 
     let cancelled = false;
     const image = new Image();
@@ -90,10 +99,6 @@ function CharacterModal({
       cancelled = true;
     };
   }, [character?.portrait, portraitBackgroundEnabled]);
-
-  useEffect(() => {
-    setIsArtworkOnly(false);
-  }, [character?.id, portraitBackgroundEnabled]);
 
   if (!character) return null;
 
@@ -206,7 +211,6 @@ function App() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [isFilterSidebarCollapsed, setIsFilterSidebarCollapsed] = useState(false);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-  const [activeFilterGame, setActiveFilterGame] = useState(GAME_IDS[0]);
   const [icsStatus, setIcsStatus] = useState('');
 
   const {
@@ -243,12 +247,9 @@ function App() {
 
   const { theme, mode: themeMode, setMode: setThemeMode } = useTheme(selectedCharacter, selectedGames);
 
-  useEffect(() => {
-    const nextActiveGame = resolveActiveFilterGame(activeFilterGame, selectedGames, GAME_IDS);
-    if (nextActiveGame !== activeFilterGame) {
-      setActiveFilterGame(nextActiveGame);
-    }
-  }, [activeFilterGame, selectedGames]);
+  // Derive active filter game from selected games instead of storing in state
+  const [initialActiveFilterGame] = useState(() => resolveActiveFilterGame(GAME_IDS[0], selectedGames, GAME_IDS));
+  const [activeFilterGame, setActiveFilterGame] = useState(initialActiveFilterGame);
 
   const activeFilterCount = getActiveFilterCount(filters);
 
@@ -344,6 +345,52 @@ function App() {
     return Array.from(byGame.values()).slice(0, 4);
   })() : [];
 
+  const uiVersion = resolveUiVersion(typeof window === 'undefined' ? '' : window.location.search);
+
+  // V2 mode: pass all data to CalendarWorkspaceV2
+  if (uiVersion === 'v2') {
+    return (
+      <CalendarWorkspaceV2
+        data-theme={appliedTheme}
+        style={affilStyle}
+        themeId={appliedTheme}
+        characters={characters}
+        allCharacters={allCharacters}
+        selectedGames={selectedGames}
+        dateMode={dateMode}
+        setDateMode={setDateMode}
+        weekStart={weekStart}
+        setWeekStart={setWeekStart}
+        displayMode={displayMode}
+        setDisplayMode={setDisplayMode}
+        portraitBackgroundEnabled={portraitBackgroundEnabled}
+        setPortraitBackgroundEnabled={setPortraitBackgroundEnabled}
+        motionEnabled={motionEnabled}
+        setMotionEnabled={setMotionEnabled}
+        favoriteCharacterIds={favoriteCharacterIds}
+        showFavoritesOnly={showFavoritesOnly}
+        filters={filters}
+        filterOptionsByGame={filterOptionsByGame}
+        currentDate={currentDate}
+        view={view}
+        selectedCharacter={selectedCharacter}
+        onDateChange={setCurrentDate}
+        onViewChange={setView}
+        onCharacterSelect={setSelectedCharacter}
+        toggleGame={toggleGame}
+        updateFilters={updateFilters}
+        setShowFavoritesOnly={setShowFavoritesOnly}
+        toggleFavorite={toggleFavorite}
+        onEditCharacter={handleEdit}
+        onExportIcs={(character) => handleExportIcs([character], `${character.id}-birthday.ics`)}
+        onAddCharacter={() => setShowAddModal(true)}
+        onExportData={exportData}
+        onExportAllIcs={() => handleExportIcs(allCharacters, `mihoyo-birthdays-${new Date().toISOString().split('T')[0]}.ics`)}
+      />
+    );
+  }
+
+  // V1 mode: original layout
   return (
     <div className="app" data-theme={appliedTheme} style={affilStyle}>
       {/* Hero 首屏：轮播多个游戏的代表角色 */}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>角色纪念日墙 · candidate-02 原型 V2</title>
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══ 缘：时间坐标轨（导航 + 语义；不含搜索/收藏/添加） ═══ -->
+  <header class="edge" aria-label="时间坐标">
+    <div class="edge-left">
+      <button class="icobtn" data-act="prev" aria-label="上一个月/周">‹</button>
+      <button class="edge-coord" id="edgeCoord" data-act="jump" title="跳转年月">2026年 · 8月</button>
+      <button class="icobtn" data-act="next" aria-label="下一个月/周">›</button>
+      <button class="todaybtn" data-act="today">回到今天</button>
+    </div>
+    <div class="edge-right">
+      <div class="seg" role="group" aria-label="视图">
+        <button data-act="view" data-view="month" class="on">月</button>
+        <button data-act="view" data-view="week">周</button>
+      </div>
+      <div class="seg" role="group" aria-label="日期语义">
+        <button data-act="mode" data-mode="birthday" class="on" title="星穹铁道恒为实装；崩坏3缺实装时回落生日">生日</button>
+        <button data-act="mode" data-mode="release">实装</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ 舞台：墙面 + 立板 + 面板 ═══ -->
+  <div class="stage">
+    <!-- 活跃范围筹码 -->
+    <div class="chips" id="chips" hidden aria-label="当前范围"></div>
+
+    <!-- 墙面：无容器日历表面 -->
+    <div class="wall" id="wall">
+      <div class="wall-fx" aria-hidden="true">
+        <div class="wall-glow" id="wallGlow"></div>
+        <div class="wall-motif" id="wallMotif"></div>
+        <div class="wall-watermark" id="wallMark"></div>
+      </div>
+
+      <div class="monthview" id="monthview">
+        <div class="wdays" id="wdays" aria-hidden="true"></div>
+        <div class="grid" id="grid" role="grid" aria-label="月视图"></div>
+        <div class="calm" id="calm" hidden>
+          <h2 class="calm-t">安静的一页</h2>
+          <p class="calm-d" id="calmD">这个月在当前日期语义下没有事件。</p>
+          <div class="calm-acts">
+            <button class="chipbtn" data-act="clearAll">清除范围</button>
+            <button class="chipbtn primary" data-act="gotoBusy">去热闹的八月</button>
+          </div>
+        </div>
+      </div>
+      <div class="emptygames" id="emptygames" hidden>
+        <h2 class="calm-t">四个抽屉都空着</h2>
+        <p class="calm-d">墙上没有任何档案。把至少一个游戏放回来。</p>
+        <div class="emptygame-btns" id="emptygameBtns"></div>
+      </div>
+
+      <div class="weekview" id="weekview" hidden>
+        <div class="weekcols" id="weekcols"></div>
+      </div>
+    </div>
+
+    <!-- 纪念日立板：当日名单 -->
+    <aside class="board" id="board" hidden aria-label="纪念日立板">
+      <div class="board-band" id="boardBand" aria-hidden="true"></div>
+      <div class="board-scroll">
+        <div class="board-lead" id="boardLead"></div>
+        <div class="board-aff" id="boardAff"></div>
+        <p class="board-date" id="boardTag"></p>
+        <div class="board-roster" id="boardRoster"></div>
+      </div>
+      <div class="board-bar">
+        <button class="chipbtn" data-act="boardPrev">‹ 上一天</button>
+        <button class="chipbtn" data-act="boardClose">收起立板</button>
+        <button class="chipbtn" data-act="boardNext">下一天 ›</button>
+      </div>
+    </aside>
+
+    <!-- 角色一幕：独立场景（非居中弹窗） -->
+    <section class="scene" id="scene" hidden role="dialog" aria-modal="true" aria-label="角色详情">
+      <div class="scene-port" id="scenePort"></div>
+      <div class="scene-info">
+        <div class="scene-topbar">
+          <button class="chipbtn" data-act="sceneBack">← 返回名单</button>
+          <span class="scene-step" id="sceneStep"></span>
+          <button class="icobtn" data-act="sceneClose" aria-label="关闭详情">✕</button>
+        </div>
+        <div class="scene-body" id="sceneBody"></div>
+      </div>
+    </section>
+
+    <!-- 临时面板：互斥升起（筛选 / 搜索 / 偏好 / 添加编辑 / 跳转） -->
+    <section class="pop" id="popFilter" hidden aria-label="范围与筛选">
+      <div class="pop-head">
+        <span class="pop-title">范围与筛选</span>
+        <span class="psync" id="filterCount"></span>
+        <button class="icobtn" data-act="closePops" aria-label="关闭">✕</button>
+      </div>
+      <div class="pop-scroll" id="filterBody"></div>
+      <div class="pop-foot">
+        <button class="chipbtn" data-act="clearAll">清除全部</button>
+        <button class="chipbtn primary" data-act="closePops">完成</button>
+      </div>
+    </section>
+
+    <section class="pop pop-search" id="popSearch" hidden aria-label="搜索">
+      <input class="search-input" id="searchInput" type="text" placeholder="搜索中英文名 / 游戏 / 属性 / 武器 / 地区 / 生日" autocomplete="off"
+             role="combobox" aria-expanded="true" aria-controls="searchResults" aria-label="搜索全部角色">
+      <div class="pop-scroll" id="searchResults" role="listbox"></div>
+    </section>
+
+    <section class="pop" id="popPrefs" hidden aria-label="偏好">
+      <div class="pop-head">
+        <span class="pop-title">桌面与数据</span>
+        <button class="icobtn" data-act="closePops" aria-label="关闭">✕</button>
+      </div>
+      <div class="pop-scroll" id="prefsBody"></div>
+    </section>
+
+    <section class="pop pop-wide" id="popAdd" hidden aria-label="添加或编辑角色">
+      <div class="pop-head">
+        <span class="pop-title" id="addTitle">添加角色</span>
+        <button class="icobtn" data-act="closePops" aria-label="关闭">✕</button>
+      </div>
+      <div class="pop-scroll" id="addBody"></div>
+    </section>
+
+    <section class="pop" id="popJump" hidden aria-label="跳转年月">
+      <div class="pop-head">
+        <span class="pop-title">跳转年月</span>
+        <button class="icobtn" data-act="closePops" aria-label="关闭">✕</button>
+      </div>
+      <div class="pop-scroll" id="jumpBody"></div>
+    </section>
+  </div>
+
+  <!-- ═══ 命令坞：范围 / 筛选 / 搜索 / 密度 / 维护 ═══ -->
+  <footer class="dock" id="dock" aria-label="命令坞">
+    <div class="dock-games" id="dockGames" role="group" aria-label="游戏多选"></div>
+    <span class="dock-div" aria-hidden="true"></span>
+    <button class="dockbtn" id="btnFilter" data-act="openFilter">筛选</button>
+    <button class="dockbtn" id="openSearch" data-act="openSearch" aria-label="搜索角色（快捷键 /）">⌕ 搜索</button>
+    <button class="dockbtn" id="btnDensity" data-act="density" title="切换显示密度">卡</button>
+    <span class="dock-div" aria-hidden="true"></span>
+    <button class="dockbtn" id="openPrefs" data-act="openPrefs">桌面</button>
+    <button class="dockbtn" id="openAdd" data-act="openAdd">＋</button>
+  </footer>
+
+  <!-- dev 演示条：快速钉住某个阵营上下文（截图/评审用） -->
+  <div class="devstrip" id="devstrip" aria-label="演示：阵营上下文">
+    <span class="devlabel">上下文演示</span>
+    <button data-dev="" class="on">中性</button>
+    <button data-dev="genshin-mondstadt">蒙德</button>
+    <button data-dev="genshin-liyue">璃月</button>
+    <button data-dev="genshin-inazuma">稻妻</button>
+    <button data-dev="zzz-cunning-hares">狡兔屋</button>
+    <button data-dev="zzz-belobog">白祇重工</button>
+    <button data-dev="hsr-other">星铁 fallback</button>
+    <button data-dev="honkai3-other">崩坏3 fallback</button>
+  </div>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <div class="syncrow" id="syncrow" hidden></div>
+</div>
+
+<script src="./js/data.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

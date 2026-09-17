@@ -13,6 +13,9 @@ import {
   resolveZzzAffiliation,
 } from './affiliations-zzz.ts';
 
+// Re-export the Affiliation type for external use
+export type { Affiliation };
+
 /**
  * 星铁 / 崩坏3 的阵营尚未细分，先给每个游戏一个通用兜底。
  * 必须存在：否则 resolveAffiliation 的两级兜底会一路落到 genshin-other，

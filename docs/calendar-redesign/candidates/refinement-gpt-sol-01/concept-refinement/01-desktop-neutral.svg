@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#070b17"/><stop offset=".58" stop-color="#151a31"/><stop offset="1" stop-color="#282342"/></linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#07101b" stop-opacity=".04"/><stop offset=".64" stop-color="#07101b" stop-opacity=".18"/><stop offset="1" stop-color="#07101b" stop-opacity=".94"/></linearGradient>
+    <radialGradient id="halo" cx="74%" cy="10%" r="72%"><stop stop-color="#8c7cff" stop-opacity=".24"/><stop offset="1" stop-color="#8c7cff" stop-opacity="0"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="36"/></filter>
+    <clipPath id="heroClip"><rect x="72" y="146" width="470" height="690" rx="26"/></clipPath>
+    <clipPath id="c1"><circle cx="577" cy="226" r="25"/></clipPath>
+    <clipPath id="c2"><circle cx="273" cy="354" r="18"/></clipPath><clipPath id="c3"><circle cx="303" cy="354" r="18"/></clipPath>
+    <clipPath id="c4"><circle cx="680" cy="418" r="14"/></clipPath><clipPath id="c5"><circle cx="702" cy="418" r="14"/></clipPath><clipPath id="c6"><circle cx="724" cy="418" r="14"/></clipPath>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg)"/><rect width="1440" height="900" fill="url(#halo)"/>
+  <circle cx="1290" cy="80" r="190" fill="#8d7bff" opacity=".12" filter="url(#blur)"/><circle cx="360" cy="820" r="210" fill="#48dfd2" opacity=".07" filter="url(#blur)"/>
+  <g stroke="#fff" stroke-opacity=".08" fill="none"><path d="M0 112H1440"/><path d="M0 846H1440"/><path d="M570 146V836"/></g>
+  <g font-family="Arial,'Microsoft YaHei',sans-serif">
+    <text x="72" y="57" font-size="19" letter-spacing="1" fill="#f2f1ee">米哈游角色生日日历</text>
+    <text x="72" y="84" font-size="11" letter-spacing="2.2" fill="#8e92ad">角色生日与实装纪念日</text>
+    <g font-size="12" letter-spacing="1.2" fill="#a0a4bb"><text x="590" y="62">日历</text><text x="650" y="62">搜索角色</text><text x="742" y="62">设置</text></g>
+    <text x="1196" y="58" font-size="11" letter-spacing="1.3" fill="#9da2bb">2026年8月 · 8 条事件</text>
+    <rect x="1293" y="72" width="76" height="32" rx="16" fill="#f0efe9"/><text x="1331" y="93" text-anchor="middle" font-size="12" fill="#121527">今天</text>
+  </g>
+  <g clip-path="url(#heroClip)"><image x="28" y="116" width="562" height="770" xlink:href="../../candidate-GPT-01/concept-v3-GPT/arlecchino.webp" preserveAspectRatio="xMidYMid slice"/><rect x="72" y="146" width="470" height="690" fill="url(#fade)"/></g>
+  <rect x="72" y="146" width="470" height="690" rx="26" fill="none" stroke="#ffffff" stroke-opacity=".18"/>
+  <g font-family="Arial,'Microsoft YaHei',sans-serif"><text x="100" y="186" font-size="11" letter-spacing="2.4" fill="#f3f1eb">当前主角 · 原神</text><circle cx="496" cy="180" r="6" fill="#ff7964"/>
+    <text x="101" y="735" font-size="72" fill="#f4f2ee" letter-spacing="-3">08</text><text x="101" y="770" font-size="15" letter-spacing="3.5" fill="#f4f2ee">8月 · 星期五</text><text x="101" y="803" font-size="18" fill="#f4f2ee">阿蕾奇诺 <tspan fill="#9ea2bb">/ 枫丹 · 原神</tspan></text>
+    <rect x="100" y="214" width="106" height="25" rx="12.5" fill="#171b30" stroke="#ff7964" stroke-opacity=".65"/><text x="153" y="231" text-anchor="middle" font-size="10" fill="#ffc2b6">生日 · 1 位角色</text>
+  </g>
+  <g transform="translate(590 146)" font-family="Arial,'Microsoft YaHei',sans-serif">
+    <rect width="778" height="690" rx="26" fill="#101426" fill-opacity=".84" stroke="#ffffff" stroke-opacity=".14"/>
+    <text x="30" y="42" font-size="11" letter-spacing="2.2" fill="#898eaa">日历工作区</text><text x="30" y="89" font-size="42" fill="#f4f2ee">2026年 8月</text>
+    <g transform="translate(30 108)"><rect width="74" height="28" rx="14" fill="#1c2137" stroke="#7770e7"/><text x="37" y="19" text-anchor="middle" font-size="11" fill="#dcd9ff">‹ 上月</text><rect x="82" width="62" height="28" rx="14" fill="#f0efe9"/><text x="113" y="19" text-anchor="middle" font-size="11" fill="#131527">今天</text><rect x="152" width="74" height="28" rx="14" fill="#1c2137" stroke="#7770e7"/><text x="189" y="19" text-anchor="middle" font-size="11" fill="#dcd9ff">下月 ›</text></g>
+    <g transform="translate(472 108)"><rect width="65" height="28" rx="14" fill="#f0efe9"/><text x="32" y="19" text-anchor="middle" font-size="11" fill="#131527">月视图</text><rect x="71" width="65" height="28" rx="14" fill="#1c2137"/><text x="103" y="19" text-anchor="middle" font-size="11" fill="#aeb2c5">周视图</text><rect x="144" width="70" height="28" rx="14" fill="#1c2137" stroke="#ff7964"/><text x="179" y="19" text-anchor="middle" font-size="11" fill="#ffc2b6">生日</text></g>
+    <g transform="translate(30 166)" fill="#858aa6" font-size="10" letter-spacing="1.1"><text x="0">一</text><text x="102">二</text><text x="204">三</text><text x="306">四</text><text x="408">五</text><text x="510">六</text><text x="612">日</text></g>
+    <g transform="translate(30 190)" stroke="#ffffff" stroke-opacity=".09" fill="none"><path d="M0 0H714M0 66H714M0 132H714M0 198H714M0 264H714M0 330H714M0 396H714"/><path d="M102 0V396M204 0V396M306 0V396M408 0V396M510 0V396M612 0V396M714 0V396"/></g>
+    <g transform="translate(43 212)" font-size="14" fill="#e0dfeb"><g fill="#696f89"><text x="0">27</text><text x="102">28</text><text x="204">29</text><text x="306">30</text><text x="408">31</text></g>
+      <text x="510">1</text><text x="612">2</text><text x="0" y="66">3</text><text x="102" y="66">4</text><text x="204" y="66">5</text><text x="306" y="66">6</text><text x="408" y="66">7</text><text x="510" y="66" fill="#fff">8</text><text x="612" y="66">9</text>
+      <text x="0" y="132">10</text><text x="102" y="132">11</text><text x="204" y="132">12</text><text x="306" y="132">13</text><text x="408" y="132">14</text><text x="510" y="132">15</text><text x="612" y="132">16</text>
+      <text x="0" y="198">17</text><text x="102" y="198">18</text><text x="204" y="198">19</text><text x="306" y="198">20</text><text x="408" y="198">21</text><text x="510" y="198" fill="#fff">22</text><text x="612" y="198">23</text>
+      <text x="0" y="264">24</text><text x="102" y="264">25</text><text x="204" y="264">26</text><text x="306" y="264">27</text><text x="408" y="264">28</text><text x="510" y="264">29</text><text x="612" y="264">30</text><text x="0" y="330">31</text>
+    </g>
+    <g fill="#ff7964"><circle cx="552" cy="278" r="4"/><circle cx="450" cy="410" r="4"/><circle cx="654" cy="476" r="4"/></g><g fill="#88efd7"><circle cx="348" cy="344" r="4"/><circle cx="246" cy="476" r="4"/></g>
+    <g clip-path="url(#c1)"><image x="552" y="201" width="50" height="50" xlink:href="../../candidate-GPT-01/concept-v3-GPT/nahida.webp" preserveAspectRatio="xMidYMid slice"/></g><circle cx="577" cy="226" r="26" fill="none" stroke="#8df1da" stroke-width="2"/>
+    <g clip-path="url(#c2)"><image x="255" y="336" width="36" height="36" xlink:href="../../candidate-GPT-01/concept-v3-GPT/furina.webp" preserveAspectRatio="xMidYMid slice"/></g><circle cx="273" cy="354" r="19" fill="none" stroke="#ff7964" stroke-width="2"/><g clip-path="url(#c3)"><image x="285" y="336" width="36" height="36" xlink:href="../../candidate-GPT-01/concept-v3-GPT/kafka.webp" preserveAspectRatio="xMidYMid slice"/></g><circle cx="303" cy="354" r="19" fill="none" stroke="#ff7964" stroke-width="2"/>
+    <g clip-path="url(#c4)"><image x="666" y="404" width="28" height="28" xlink:href="../../candidate-GPT-01/concept-v3-GPT/arlecchino.webp" preserveAspectRatio="xMidYMid slice"/></g><circle cx="680" cy="418" r="15" fill="none" stroke="#ff7964" stroke-width="2"/><g clip-path="url(#c5)"><image x="688" y="404" width="28" height="28" xlink:href="../../candidate-GPT-01/concept-v3-GPT/ellen.webp" preserveAspectRatio="xMidYMid slice"/></g><circle cx="702" cy="418" r="15" fill="none" stroke="#a69dff" stroke-width="2"/><g clip-path="url(#c6)"><image x="710" y="404" width="28" height="28" xlink:href="../../candidate-GPT-01/concept-v3-GPT/nahida.webp" preserveAspectRatio="xMidYMid slice"/></g><circle cx="724" cy="418" r="15" fill="none" stroke="#8df1da" stroke-width="2"/><text x="747" y="423" font-size="12" fill="#aeb2c5">+2</text>
+    <rect x="506" y="345" width="100" height="42" rx="21" fill="#f0efe9"/><text x="556" y="363" text-anchor="middle" font-size="10" fill="#161629">22 · 今天</text><text x="556" y="379" text-anchor="middle" font-size="10" fill="#61657d">芙宁娜 + 卡芙卡</text>
+    <g transform="translate(30 606)"><text x="0" y="0" font-size="10" letter-spacing="1.6" fill="#858aa6">当前筛选</text><rect y="13" width="98" height="29" rx="14.5" fill="#f0efe9"/><text x="49" y="32" text-anchor="middle" font-size="11" fill="#131527">全部游戏</text><rect x="108" y="13" width="88" height="29" rx="14.5" fill="#1c2137" stroke="#7770e7"/><text x="152" y="32" text-anchor="middle" font-size="11" fill="#dcd9ff">生日</text><rect x="206" y="13" width="84" height="29" rx="14.5" fill="#1c2137"/><text x="248" y="32" text-anchor="middle" font-size="11" fill="#b9bdd0">无收藏</text><rect x="600" y="13" width="114" height="29" rx="14.5" fill="#1c2137" stroke="#ffffff" stroke-opacity=".18"/><text x="657" y="32" text-anchor="middle" font-size="11" fill="#e5e3ed">筛选 / 显示 / 更多</text></g>
+    <text x="30" y="671" font-size="10" fill="#6f748f">单角色 48–64px · 2–3 位重叠 · 4+ 位显示 3 个头像 +N</text>
+  </g>
+  <text x="72" y="874" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="10" letter-spacing="1.7" fill="#686e89">角色生日与实装纪念日 · 本机数据</text>
+</svg>

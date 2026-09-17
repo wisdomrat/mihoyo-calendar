@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>board01</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .band-bg { position:absolute; inset:0; background:
+      radial-gradient(560px 300px at 16% 30%, rgba(124,24,39,.07), transparent 70%),
+      radial-gradient(420px 260px at 86% 78%, rgba(185,138,68,.08), transparent 70%);
+  }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="band-bg"></div>
+
+  <!-- masthead -->
+  <div class="masthead">
+    <div class="logo">
+      <div class="logo-seal">志</div>
+      <div class="logo-word">角色志<small>CHARACTER CHRONICLE</small></div>
+    </div>
+    <div class="mast-nav">
+      <span class="on">月刊</span><span>专题</span><span>图鉴</span><span>档案</span>
+    </div>
+    <div class="mast-right">2026 · 八月刊<br>VOL.08</div>
+  </div>
+
+  <!-- cover band -->
+  <div class="band">
+    <div class="giant-num" style="left:120px; top:66px;">08</div>
+
+    <div class="band-meta">
+      <div class="vol">本期人物 · COVER STORY</div>
+      <div class="date">八月刊，<br>与二十九位角色共度。</div>
+      <div class="loc">原神 · 星穹铁道 · 绝区零 · 崩坏3</div>
+      <div class="rule"></div>
+      <div class="loc" style="margin-top:14px;">本月 30 场纪念日，其中 8 月 22 日登上封面。</div>
+    </div>
+
+    <div class="cover">
+      <div class="cover-frame"><img src="assets/pt-Arlecchino.webp" alt="阿蕾奇诺"></div>
+      <div class="cover-caption">
+        <div class="k">封面人物 · 8.22 生日快乐</div>
+        <div class="n">阿蕾奇诺</div>
+        <div class="s">枫丹 · 火 · 「父亲」</div>
+        <div class="game-tag">原神 · GENSHIN IMPACT</div>
+      </div>
+    </div>
+
+    <div class="rail">
+      <div class="rail-label">近期栏目 <em>UPCOMING</em></div>
+      <div class="rail-item">
+        <div class="d">24</div>
+        <div style="flex:1"><div class="nm">灵砂</div><div class="mt">星穹铁道 · 火</div></div>
+        <div class="gdot" style="background:var(--c-hsr)"></div>
+      </div>
+      <div class="rail-item">
+        <div class="d">24</div>
+        <div style="flex:1"><div class="nm">伊芙琳</div><div class="mt">绝区零 · 天琴座 · 火</div></div>
+        <div class="gdot" style="background:var(--c-zzz)"></div>
+      </div>
+      <div class="rail-item">
+        <div class="d">25</div>
+        <div style="flex:1"><div class="nm">卡芙卡</div><div class="mt">星穹铁道 · 雷</div></div>
+        <div class="gdot" style="background:var(--c-hsr)"></div>
+      </div>
+      <div class="rail-item">
+        <div class="d">26</div>
+        <div style="flex:1"><div class="nm">凝光</div><div class="mt">原神 · 璃月 · 岩</div></div>
+        <div class="gdot" style="background:var(--c-genshin)"></div>
+      </div>
+      <div class="rail-item">
+        <div class="d">28</div>
+        <div style="flex:1"><div class="nm">玛薇卡</div><div class="mt">原神 · 纳塔 · 火</div></div>
+        <div class="gdot" style="background:var(--c-genshin)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- calendar -->
+  <div class="cal">
+    <div class="cal-head">
+      <div class="t">八月目录 <em>2026 年 8 月 · 30 位</em></div>
+      <div class="cal-tools">
+        <div class="tbtn">生日</div><div class="tbtn">实装</div>
+        <div class="tbtn on">月</div><div class="tbtn">周</div>
+        <div class="tbtn">＋</div>
+      </div>
+    </div>
+    <div class="dow"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+
+    <div class="week">
+      <div class="cell sun out"><span class="num">26</span></div>
+      <div class="cell out"><span class="num">27</span></div>
+      <div class="cell out"><span class="num">28</span></div>
+      <div class="cell out"><span class="num">29</span></div>
+      <div class="cell out"><span class="num">30</span></div>
+      <div class="cell out"><span class="num">31</span></div>
+      <div class="cell"><span class="num">1</span></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">2</span></div>
+      <div class="cell"><span class="num">3</span><div class="avs"><img src="assets/av-Mualani.webp"></div></div>
+      <div class="cell"><span class="num">4</span></div>
+      <div class="cell"><span class="num">5</span></div>
+      <div class="cell"><span class="num">6</span><div class="hint">×2</div><div class="avs"><img src="assets/av-Qingque.webp"><img src="assets/av-Lucy.webp"></div></div>
+      <div class="cell"><span class="num">7</span></div>
+      <div class="cell"><span class="num">8</span><div class="hint">×2</div><div class="avs"><img src="assets/av-Iansan.webp"><img src="assets/av-Jiaoqiu.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">9</span></div>
+      <div class="cell"><span class="num">10</span><div class="avs"><img src="assets/av-Amber.webp"></div></div>
+      <div class="cell"><span class="num">11</span><div class="avs"><img src="assets/av-Mika.webp"></div></div>
+      <div class="cell"><span class="num">12</span><div class="avs"><img src="assets/av-Silver-Wolf.webp"></div></div>
+      <div class="cell"><span class="num">13</span><div class="avs"><img src="assets/av-Pan-Yinhu.webp"></div></div>
+      <div class="cell"><span class="num">14</span><div class="avs"><img src="assets/av-Serval.webp"></div></div>
+      <div class="cell"><span class="num">15</span><div class="hint">×2</div><div class="avs"><img src="assets/av-Yukong.webp"><img src="assets/av-Soldier-11.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">16</span><div class="avs"><img src="assets/av-Navia.webp"></div></div>
+      <div class="cell"><span class="num">17</span><div class="hint">×2</div><div class="avs"><img src="assets/av-Chiori.webp"><img src="assets/av-Piper.webp"></div></div>
+      <div class="cell"><span class="num">18</span><div class="hint">×5</div><div class="avs"><img src="assets/av-Bronya.webp"><img src="assets/av-Bronya-Zaychik.svg"><span class="more">+3</span></div></div>
+      <div class="cell"><span class="num">19</span></div>
+      <div class="cell"><span class="num">20</span><div class="avs"><img src="assets/av-Faruzan.webp"></div></div>
+      <div class="cell"><span class="num">21</span></div>
+      <div class="cell hot"><span class="num">22</span><div class="hint">今天</div><div class="avs"><img src="assets/av-Arlecchino.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">23</span></div>
+      <div class="cell"><span class="num">24</span><div class="hint">×2</div><div class="avs"><img src="assets/av-Lingsha.webp"><img src="assets/av-Evelyn.webp"></div></div>
+      <div class="cell"><span class="num">25</span><div class="avs"><img src="assets/av-Kafka.webp"></div></div>
+      <div class="cell"><span class="num">26</span><div class="avs"><img src="assets/av-Ningguang.webp"></div></div>
+      <div class="cell"><span class="num">27</span></div>
+      <div class="cell"><span class="num">28</span><div class="avs"><img src="assets/av-Mavuika.webp"></div></div>
+      <div class="cell"><span class="num">29</span><div class="avs"><img src="assets/av-Topaz.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">30</span><div class="avs"><img src="assets/av-Alice-Thymefield.webp"></div></div>
+      <div class="cell"><span class="num">31</span><div class="avs"><img src="assets/av-Mona.webp"></div></div>
+      <div class="cell out"><span class="num">1</span></div>
+      <div class="cell out"><span class="num">2</span></div>
+      <div class="cell out"><span class="num">3</span></div>
+      <div class="cell out"><span class="num">4</span></div>
+      <div class="cell out sun"><span class="num">5</span></div>
+    </div>
+  </div>
+
+  <!-- issue bar -->
+  <div class="issuebar">
+    <div class="l">本期共 <b>30</b> 场纪念日 · 封面人物 <b>阿蕾奇诺</b></div>
+    <div class="r">米哈游角色生日与实装纪念 · GENSHIN / HSR / ZZZ / HONKAI 3</div>
+  </div>
+
+  <div class="noise"></div>
+</div>
+</body>
+</html>

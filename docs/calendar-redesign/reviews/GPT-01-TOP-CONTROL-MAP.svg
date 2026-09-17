@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="760" viewBox="0 0 1600 760">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#f0c98a"/></marker>
+    <style>.t{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#f6f1e9}.s{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#b9bbca;font-size:14px}.h{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#fff8eb;font-size:17px;font-weight:650}.box{fill:none;stroke:#f0c98a;stroke-width:2.5;stroke-dasharray:8 6}.ar{fill:none;stroke:#f0c98a;stroke-width:2.5;marker-end:url(#a)}.tag{fill:#151526;fill-opacity:.95;stroke:#f0c98a;stroke-width:1.2}</style>
+  </defs>
+  <rect width="1600" height="760" fill="#0b0d18"/>
+  <text x="40" y="42" class="t" font-size="26" font-weight="650">GPT-01 顶部信息与控件层定义</text>
+  <text x="40" y="70" class="s">底图：01-neutral-month-GPT · 重点：顶部是信息带，不是 segmented control 面板</text>
+  <rect x="40" y="100" width="1440" height="310" fill="#111426"/>
+  <svg x="40" y="100" width="1440" height="310" viewBox="0 0 1440 310" preserveAspectRatio="none"><image x="0" y="0" width="1440" height="900" xlink:href="../candidates/candidate-GPT-01/concept-v3-GPT/01-neutral-month-GPT.png"/></svg>
+  <rect x="40" y="100" width="1440" height="112" class="box"/>
+  <rect x="95" y="120" width="320" height="80" class="box"/>
+  <rect x="570" y="120" width="360" height="75" class="box"/>
+  <rect x="1180" y="120" width="260" height="80" class="box"/>
+  <rect x="1255" y="180" width="90" height="40" class="box"/>
+  <rect x="650" y="245" width="700" height="110" class="box"/>
+  <g>
+    <rect x="40" y="455" width="430" height="78" class="tag"/><text x="60" y="485" class="h">T1 品牌锁定区</text><text x="60" y="511" class="s">中文产品名称 + 简短副标题；不虚构页面</text><path d="M255 455L255 200" class="ar"/>
+    <rect x="500" y="455" width="430" height="78" class="tag"/><text x="520" y="485" class="h">T2 中央裸文字导航</text><text x="520" y="511" class="s">无轮廓、无背景、低对比；只放真实范围</text><path d="M715 455L750 190" class="ar"/>
+    <rect x="960" y="455" width="430" height="78" class="tag"/><text x="980" y="485" class="h">T3 顶部状态摘要</text><text x="980" y="511" class="s">月份/事件数量/当前上下文，弱于主内容</text><path d="M1175 455L1280 190" class="ar"/>
+    <rect x="40" y="555" width="430" height="78" class="tag"/><text x="60" y="585" class="h">T4 今天入口</text><text x="60" y="611" class="s">单一明确动作；浅色胶囊而非彩色 segmented</text><path d="M255 555L1300 205" class="ar"/>
+    <rect x="500" y="555" width="430" height="78" class="tag"/><text x="520" y="585" class="h">T5 日历核心操作</text><text x="520" y="611" class="s">月份切换、视图、事件语义按频率分层</text><path d="M715 555L810 300" class="ar"/>
+    <rect x="960" y="555" width="430" height="78" class="tag"/><text x="980" y="585" class="h">T6 筛选状态摘要</text><text x="980" y="611" class="s">筛选面板关闭后仍能看见当前上下文</text><path d="M1175 555L800 330" class="ar"/>
+  </g>
+  <text x="40" y="700" class="t" font-size="20" font-weight="650">明确排除</text>
+  <text x="40" y="730" class="s">顶部不放 profile 测试切换器，不把游戏/地区/角色/密度/Hero 混成同一级导航；低频功能进入统一展开面板。</text>
+</svg>

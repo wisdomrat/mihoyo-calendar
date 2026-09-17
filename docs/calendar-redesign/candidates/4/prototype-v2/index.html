@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>角色纪日簿 · 候选 4</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="neutral" data-density="card" data-view="month" data-motion="on">
+    <div class="workspace" id="workspace">
+      <aside class="month-spine" aria-label="月份导航">
+        <div class="spine-brand" aria-hidden="true">纪<br />日<br />簿</div>
+        <button class="spine-button" id="prevPeriod" type="button" aria-label="上一个月" title="上一个月">↑</button>
+        <div class="spine-date">
+          <strong id="spineMonth">08</strong>
+          <span id="spineYear">2026</span>
+          <i id="spineMonthEn">AUG</i>
+        </div>
+        <button class="spine-button" id="nextPeriod" type="button" aria-label="下一个月" title="下一个月">↓</button>
+        <button class="spine-today" id="todayButton" type="button">今天</button>
+        <div class="spine-index" aria-hidden="true">
+          <span></span><span></span><span class="active"></span><span></span><span></span>
+        </div>
+      </aside>
+
+      <main class="folio">
+        <section class="context-stage" id="contextStage" aria-live="polite">
+          <div class="chapter-pattern" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="stage-copy">
+            <p class="folio-kicker">CHARACTER ALMANAC / 角色纪日簿</p>
+            <h1 id="stageTitle">八月，翻到有名字的日子</h1>
+            <p class="stage-subtitle" id="stageSubtitle">生日与首次实装纪念，落在同一张时间长卷上。</p>
+            <div class="context-switcher" aria-label="上下文样本">
+              <button class="context-chip active" type="button" data-context="neutral">
+                <span class="swatch neutral-swatch"></span>中性
+              </button>
+              <button class="context-chip" type="button" data-context="mondstadt">
+                <span class="swatch mondstadt-swatch"></span>蒙德
+              </button>
+              <button class="context-chip" type="button" data-context="liyue">
+                <span class="swatch liyue-swatch"></span>璃月
+              </button>
+              <button class="context-chip" type="button" data-context="sumeru">
+                <span class="swatch sumeru-swatch"></span>须弥
+              </button>
+              <button class="context-chip" type="button" data-context="victoria">
+                <span class="swatch victoria-swatch"></span>维多利亚
+              </button>
+              <button class="context-chip" type="button" data-context="hsr">
+                <span class="swatch hsr-swatch"></span>星铁
+              </button>
+            </div>
+          </div>
+
+          <div class="context-mark" aria-hidden="true">
+            <span class="mark-code" id="markCode">AUG / 08</span>
+            <span class="mark-name" id="markName">NEUTRAL INDEX</span>
+          </div>
+
+          <div class="portrait-plate" id="portraitPlate">
+            <div class="portrait-frame">
+              <img id="contextPortrait" alt="" />
+              <div class="image-fallback" id="portraitFallback"><span>08</span></div>
+            </div>
+            <div class="affiliation-stamp" id="affiliationStamp">
+              <small id="affiliationEn">ALL WORLDS</small>
+              <strong id="affiliationName">四个世界</strong>
+              <span id="affiliationTagline">角色日期索引</span>
+            </div>
+          </div>
+
+          <div class="stage-ledger">
+            <button id="dateModeButton" class="mode-stamp" type="button">
+              <span>日期语义</span><strong id="dateModeLabel">生日</strong>
+            </button>
+            <div class="ledger-stat"><span>本月可见</span><strong id="visibleCount">0</strong></div>
+            <button id="openSelectedDetail" class="stage-action" type="button" hidden>查看角色 →</button>
+          </div>
+        </section>
+
+        <section class="calendar-field" aria-label="角色日期">
+          <div class="weekday-row" id="weekdayRow" role="row"></div>
+          <div class="calendar-grid" id="calendarGrid" role="grid" aria-label="月历"></div>
+          <div class="week-ribbon" id="weekRibbon" role="grid" aria-label="周历" hidden></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <span class="empty-glyph" aria-hidden="true">∅</span>
+            <strong>没有选择游戏</strong>
+            <p>恢复全部游戏即可继续查看日期。</p>
+            <button type="button" id="restoreGames">恢复全部游戏</button>
+          </div>
+        </section>
+
+        <nav class="command-dock" aria-label="日历命令">
+          <button class="dock-command" id="openSearch" type="button" aria-label="搜索角色" title="搜索角色">
+            <span class="dock-icon">⌕</span><span>搜索</span>
+          </button>
+          <button class="dock-command" id="openFilters" type="button" aria-label="筛选范围" title="筛选范围">
+            <span class="dock-icon filter-icon">≡</span><span>范围 <b id="filterCount">0</b></span>
+          </button>
+          <button class="dock-command" id="viewButton" type="button" aria-label="切换月周视图" title="切换月周视图">
+            <span class="dock-icon">▦</span><span id="viewLabel">月视图</span>
+          </button>
+          <button class="dock-command" id="densityButton" type="button" aria-label="切换显示密度" title="切换显示密度">
+            <span class="dock-icon">▤</span><span id="densityLabel">卡片</span>
+          </button>
+          <button class="dock-command" id="openTools" type="button" aria-label="数据与显示" title="数据与显示">
+            <span class="dock-icon">•••</span><span>更多</span>
+          </button>
+        </nav>
+      </main>
+    </div>
+
+    <section class="bottom-sheet filter-sheet" id="filterSheet" aria-labelledby="filterTitle" aria-hidden="true">
+      <header class="sheet-header">
+        <div><p>SCOPE FOLD / 01</p><h2 id="filterTitle">限定这次浏览范围</h2></div>
+        <button class="icon-button close-sheet" type="button" aria-label="关闭筛选">×</button>
+      </header>
+      <div class="sheet-scroll">
+        <div class="filter-step">
+          <span class="step-number">01</span>
+          <div class="step-content">
+            <h3>先选择世界</h3>
+            <div class="game-options" id="gameOptions">
+              <label><input type="checkbox" value="genshin" checked /><span>原神<small>地区 / 元素 / 武器</small></span></label>
+              <label><input type="checkbox" value="hsr" checked /><span>崩坏：星穹铁道<small>属性 / 命途 / 阵营</small></span></label>
+              <label><input type="checkbox" value="zzz" checked /><span>绝区零<small>属性 / 特性 / 阵营</small></span></label>
+              <label><input type="checkbox" value="honkai3" checked /><span>崩坏3<small>属性 / 类型 / 组织</small></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="filter-step">
+          <span class="step-number">02</span>
+          <div class="step-content">
+            <h3>再收窄角色特征</h3>
+            <div class="scope-tabs" role="tablist" aria-label="游戏二级筛选">
+              <button class="active" type="button" data-filter-game="genshin">原神</button>
+              <button type="button" data-filter-game="hsr">星铁</button>
+              <button type="button" data-filter-game="zzz">绝区零</button>
+              <button type="button" data-filter-game="honkai3">崩坏3</button>
+            </div>
+            <div class="facet-lines" id="facetLines">
+              <div><strong>地区</strong><button type="button" data-facet="蒙德">蒙德</button><button type="button" data-facet="璃月">璃月</button><button type="button" data-facet="须弥">须弥</button><button type="button" data-facet="纳塔">纳塔</button></div>
+              <div><strong>元素</strong><button type="button">风</button><button type="button">岩</button><button type="button">雷</button><button type="button">草</button><button type="button">水</button><button type="button">火</button><button type="button">冰</button></div>
+              <div><strong>稀有度</strong><button type="button">5 星</button><button type="button">4 星</button><label class="toggle-line"><input id="incompleteToggle" type="checkbox" checked />包含信息不全</label></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="sheet-footer">
+        <button type="button" id="clearFilters">清除筛选</button>
+        <span id="scopeSummary">4 个游戏 · 全部角色</span>
+        <button class="primary-button" type="button" id="applyFilters">查看结果</button>
+      </footer>
+    </section>
+
+    <section class="bottom-sheet search-sheet" id="searchSheet" aria-labelledby="searchTitle" aria-hidden="true">
+      <header class="sheet-header compact-header">
+        <div><p>LOCATE / 02</p><h2 id="searchTitle">搜索并定位日期</h2></div>
+        <button class="icon-button close-sheet" type="button" aria-label="关闭搜索">×</button>
+      </header>
+      <div class="search-box">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="角色名、游戏、属性、武器或地区" autocomplete="off" />
+        <kbd>ESC</kbd>
+      </div>
+      <div class="search-results" id="searchResults" role="listbox"></div>
+    </section>
+
+    <section class="bottom-sheet tools-sheet" id="toolsSheet" aria-labelledby="toolsTitle" aria-hidden="true">
+      <header class="sheet-header">
+        <div><p>ARCHIVE / 03</p><h2 id="toolsTitle">维护与交换数据</h2></div>
+        <button class="icon-button close-sheet" type="button" aria-label="关闭更多功能">×</button>
+      </header>
+      <div class="tools-grid">
+        <button type="button" data-tool="edit"><span>＋</span><strong>添加 / 编辑角色</strong><small>表单、图片与预览</small></button>
+        <button type="button" data-tool="json"><span>{ }</span><strong>JSON 导入</strong><small>单条或数组</small></button>
+        <button type="button" data-tool="export"><span>↓</span><strong>导出</strong><small>全部 JSON / 有效 ICS</small></button>
+        <button type="button" data-tool="sync"><span>↻</span><strong>更新数据</strong><small>上次更新 08-16</small></button>
+      </div>
+      <div class="preference-line">
+        <label><input id="motionToggle" type="checkbox" checked />动态切换</label>
+        <button type="button" id="demoFallback">无图片回退</button>
+        <button type="button" id="demoFailure">导出失败状态</button>
+      </div>
+      <div class="tool-preview" id="toolPreview" hidden></div>
+    </section>
+
+    <aside class="day-thread" id="dayThread" aria-labelledby="dayThreadTitle" aria-hidden="true">
+      <header><div><span>DAY FOLD</span><h2 id="dayThreadTitle">8 月 18 日</h2></div><button class="icon-button" id="closeDayThread" type="button" aria-label="关闭当天角色">×</button></header>
+      <div id="dayThreadList"></div>
+    </aside>
+
+    <section class="detail-scene" id="detailScene" aria-labelledby="detailName" aria-hidden="true">
+      <div class="detail-art">
+        <div class="detail-motif" aria-hidden="true"><span></span><span></span><span></span></div>
+        <img id="detailPortrait" alt="" />
+        <div class="detail-fallback" id="detailFallback"><strong>?</strong><span>IMAGE UNAVAILABLE</span></div>
+        <div class="detail-affiliation"><small id="detailAffiliationEn"></small><strong id="detailAffiliation"></strong></div>
+      </div>
+      <article class="detail-record">
+        <header class="detail-header">
+          <button class="detail-back" id="closeDetail" type="button">← 返回月历</button>
+          <div>
+            <button class="quiet-button" id="artOnlyButton" type="button">仅看立绘</button>
+            <button class="icon-button" id="detailCloseIcon" type="button" aria-label="关闭详情">×</button>
+          </div>
+        </header>
+        <div class="record-title">
+          <p id="detailGame">原神</p>
+          <h2 id="detailName">安柏</h2>
+          <span id="detailNameEn">Amber</span>
+        </div>
+        <div class="record-date"><span id="detailDateLabel">年度生日</span><strong id="detailDate">08 / 10</strong><small id="detailFullDate"></small></div>
+        <dl class="record-grid">
+          <div><dt>稀有度</dt><dd id="detailRarity">4 星</dd></div>
+          <div><dt>属性</dt><dd id="detailElement">火</dd></div>
+          <div><dt>武器 / 命途</dt><dd id="detailWeapon">弓</dd></div>
+          <div><dt>地区 / 阵营</dt><dd id="detailRegion">蒙德</dd></div>
+        </dl>
+        <div class="record-actions">
+          <button type="button" id="favoriteButton">☆ 收藏</button>
+          <button type="button" id="singleIcsButton">↓ 单角色 ICS</button>
+          <button type="button" id="editButton">编辑资料</button>
+        </div>
+        <p class="record-note" id="recordNote">生日按月日每年重复。</p>
+      </article>
+      <button class="art-only-return" id="artOnlyReturn" type="button">← 返回详情</button>
+    </section>
+
+    <div class="scrim" id="scrim" hidden></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

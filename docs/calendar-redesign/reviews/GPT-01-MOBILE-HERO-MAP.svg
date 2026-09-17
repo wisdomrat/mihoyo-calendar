@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1700" height="1160" viewBox="0 0 1700 1160">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#f0c98a"/></marker>
+    <style>.t{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#f6f1e9}.s{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#b9bbca;font-size:14px}.h{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#fff8eb;font-size:17px;font-weight:650}.box{fill:none;stroke:#f0c98a;stroke-width:2.5;stroke-dasharray:8 6}.ar{fill:none;stroke:#f0c98a;stroke-width:2.5;marker-end:url(#a)}.tag{fill:#151526;fill-opacity:.95;stroke:#f0c98a;stroke-width:1.2}.warn{fill:#2b1d28;fill-opacity:.95;stroke:#ff9e8e;stroke-width:1.2}</style>
+  </defs>
+  <rect width="1700" height="1160" fill="#0b0d18"/>
+  <text x="40" y="42" class="t" font-size="26" font-weight="650">GPT-01 移动端与全屏 Hero 区域定义</text>
+  <text x="40" y="70" class="s">左：GPT-01 原始移动图 · 右：全屏 Hero 是独立场景，不是默认工作区</text>
+  <rect x="50" y="105" width="390" height="844" rx="24" fill="#111426"/>
+  <image x="50" y="105" width="390" height="844" xlink:href="../candidates/candidate-GPT-01/concept-v3-GPT/04-mobile-orbit-GPT.png"/>
+  <rect x="50" y="105" width="390" height="50" class="box"/>
+  <rect x="66" y="160" width="358" height="288" rx="24" class="box"/>
+  <rect x="66" y="470" width="358" height="265" class="box"/>
+  <rect x="66" y="740" width="358" height="104" rx="22" class="box"/>
+  <rect x="520" y="105" width="1120" height="650" fill="#111426"/>
+  <image x="520" y="105" width="1120" height="650" preserveAspectRatio="xMidYMid slice" xlink:href="../candidates/candidate-GPT-theme-profiles-01/prototype/shots/06-hero-1440x900.png"/>
+  <rect x="520" y="105" width="1120" height="650" class="warn"/>
+  <g>
+    <rect x="470" y="790" width="570" height="78" class="tag"/><text x="490" y="820" class="h">M1 移动顶部带</text><text x="490" y="846" class="s">高度有限；品牌和月份优先，筛选/更多用入口收纳</text><path d="M520 828L250 130" class="ar"/>
+    <rect x="1060" y="790" width="570" height="78" class="tag"/><text x="1080" y="820" class="h">M2 移动角色舞台</text><text x="1080" y="846" class="s">舞台 → 月历 → 下一事件；不是桌面左右栏硬压缩</text><path d="M1060 828L250 300" class="ar"/>
+    <rect x="470" y="885" width="570" height="78" class="tag"/><text x="490" y="915" class="h">M3 移动 7 列月历</text><text x="490" y="941" class="s">日期快速扫描；头像缩小但仍遵守三档密度</text><path d="M700 885L300 600" class="ar"/>
+    <rect x="1060" y="885" width="570" height="78" class="tag"/><text x="1080" y="915" class="h">M4 下一事件 / 详情入口</text><text x="1080" y="941" class="s">作为月历之后的独立信息块，不抢月历主任务</text><path d="M1060 925L330 790" class="ar"/>
+  </g>
+  <g>
+    <rect x="680" y="125" width="370" height="78" class="warn"/><text x="700" y="155" class="h">H1 全屏 Hero 场景边界</text><text x="700" y="181" class="s">点击舞台后进入；不作为默认首页</text><path d="M680 165L950 165" class="ar"/>
+    <rect x="680" y="225" width="370" height="78" class="warn"/><text x="700" y="255" class="h">H2 Hero 增强层</text><text x="700" y="281" class="s">可比工作区更强，但不改工作区 token</text><path d="M680 265L1100 220" class="ar"/>
+    <rect x="680" y="325" width="370" height="78" class="warn"/><text x="700" y="355" class="h">H3 Hero 文字可读区</text><text x="700" y="381" class="s">底部/左侧压暗承载名称和日期</text><path d="M680 365L790 600" class="ar"/>
+    <rect x="680" y="425" width="370" height="78" class="warn"/><text x="700" y="455" class="h">H4 关闭后恢复</text><text x="700" y="481" class="s">月份、筛选、角色、主题全部恢复</text><path d="M680 465L1530 700" class="ar"/>
+  </g>
+  <text x="50" y="1040" class="t" font-size="20" font-weight="650">重要边界</text>
+  <text x="50" y="1072" class="s">H 区使用候选 Hero 仅用于说明机制，不代表 GPT-01 的常规视觉母版；正式实现前仍需按 GPT-01 的光场和圆润语言复核。</text>
+</svg>

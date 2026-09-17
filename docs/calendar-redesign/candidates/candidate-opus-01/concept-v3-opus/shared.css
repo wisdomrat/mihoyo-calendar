@@ -1,0 +1,462 @@
+/* ══════════════════════════════════════════════════════════════
+   「点灯」概念视觉系统 · V3
+   一个月是一面角色肖像墙；生日让一格亮起来，筛选让一片亮起来。
+   ══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* 墨底：不是纯黑，带一点蓝，保证肖像不脏 */
+  --ink0:#06070B;
+  --ink1:#0A0C12;
+  --ink2:#0F131A;
+
+  --hi:#F4F2EE;
+  --mid:rgba(244,242,238,.58);
+  --low:rgba(244,242,238,.30);
+  --faint:rgba(244,242,238,.15);
+  --hair:rgba(244,242,238,.085);
+  --rail:rgba(244,242,238,.030);
+
+  /* 点亮色：唯一随上下文变化的颜色 */
+  --lamp:#F0B45C;          /* 中性 = 烛光琥珀 */
+  --halo:#F0B45C;
+
+  /* 作品色：只出现在格底 2px 的细线上 */
+  --g-genshin:#6FB6E6;
+  --g-hsr:#A98CFF;
+  --g-zzz:#FF7A33;
+  --g-honkai3:#5FDCC0;
+
+  --f:"Noto Sans SC","Microsoft YaHei",sans-serif;
+  --f-black:"Noto Sans SC Black","Noto Sans SC","Microsoft YaHei",sans-serif;
+  --f-med:"Noto Sans SC Medium","Noto Sans SC","Microsoft YaHei",sans-serif;
+  --f-dl:"Noto Sans SC DemiLight","Noto Sans SC","Microsoft YaHei",sans-serif;
+  --f-light:"Noto Sans SC Light","Noto Sans SC","Microsoft YaHei",sans-serif;
+  --f-num:Cambria,Georgia,serif;
+
+  --art-size:auto 160%;
+  --art-pos:52% 10%;
+}
+
+/* 选中枫丹：只换点亮色与墨底色温，其它一切不变 */
+body.lamp-fontaine{
+  --lamp:#57C6DE;
+  --ink0:#04080D;
+  --ink1:#070C13;
+  --ink2:#0B1119;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+/* 语义标签只作结构用，不带默认字形 */
+i,em,b,u,s,cite{font-style:normal;text-decoration:none}
+html,body{overflow:hidden}
+body{
+  background:var(--ink1);
+  color:var(--hi);
+  font-family:var(--f);
+  font-weight:400;
+  font-synthesis:none;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+svg{fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+h1,h2{font-weight:400}
+dl,dd,dt{margin:0}
+
+/* ─────────── 桌面骨架：封面柱 + 月场 ─────────── */
+.stage{
+  width:100%;height:100%;
+  display:grid;grid-template-columns:420px 1fr;
+  background:
+    radial-gradient(120% 78% at 8% 42%, rgba(255,255,255,.028), transparent 62%),
+    var(--ink1);
+}
+
+/* ─────────── 封面柱 ─────────── */
+.cover{
+  position:relative;overflow:hidden;
+  background:var(--ink0);
+  border-right:1px solid var(--hair);
+}
+.cover .art{
+  position:absolute;inset:0;
+  background-image:var(--art-url);
+  background-size:var(--art-size);
+  background-position:var(--art-pos);
+  background-repeat:no-repeat;
+}
+.cover .veil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to top,
+      var(--ink0) 0%,
+      rgba(6,7,11,.94) 20%,
+      rgba(6,7,11,.62) 38%,
+      rgba(6,7,11,.12) 60%,
+      rgba(6,7,11,.34) 100%);
+}
+.cover .edge{
+  position:absolute;inset:0;
+  background:linear-gradient(to right, rgba(6,7,11,.5) 0%, transparent 16%, transparent 76%, var(--ink0) 100%);
+}
+/* 地区纹样：只在封面柱底部出现，不铺满页面 */
+.cover .tex{
+  position:absolute;left:0;bottom:0;width:100%;height:62%;
+  opacity:.16;color:var(--lamp);
+  stroke-width:.9;
+}
+
+.brand{
+  position:absolute;top:30px;left:34px;right:34px;
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:10.5px;letter-spacing:.06em;color:var(--low);
+}
+.brand b{font-family:var(--f-med);font-weight:500;color:rgba(244,242,238,.5)}
+.brand span{font-family:var(--f-num);letter-spacing:.14em}
+
+.cap{position:absolute;left:34px;right:34px;bottom:34px}
+.mo{
+  font-family:var(--f-black);font-weight:900;
+  font-size:98px;line-height:.86;letter-spacing:-.035em;
+  color:var(--hi);
+}
+.mo-en{
+  margin-top:14px;
+  font-family:var(--f-dl);font-size:10px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--low);
+}
+.rule{height:1px;background:var(--hair);margin:22px 0 18px}
+
+.ctx-line{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--f-med);font-weight:500;font-size:12.5px;
+  color:var(--lamp);margin-bottom:16px;
+}
+.ctx-line em{
+  font-style:normal;font-family:var(--f-dl);font-size:9.5px;
+  letter-spacing:.28em;color:var(--low);margin-left:2px;
+}
+
+.dot{
+  width:5px;height:5px;border-radius:50%;flex:none;
+  background:var(--lamp);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--lamp) 16%, transparent),
+             0 0 14px color-mix(in srgb, var(--lamp) 70%, transparent);
+}
+.lb{
+  font-family:var(--f-dl);font-size:10px;letter-spacing:.2em;color:var(--low);
+}
+.lead{display:flex;flex-direction:column;gap:0}
+.lead .dot{position:absolute;margin-top:5px}
+.lead .lb{margin-left:15px}
+.lead h2{
+  font-family:var(--f-black);font-weight:900;
+  font-size:31px;letter-spacing:-.01em;margin-top:10px;color:var(--hi);
+}
+.rom{
+  margin-top:7px;
+  font-family:var(--f-dl);font-size:9.5px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--low);
+}
+.tags{display:flex;gap:14px;margin-top:15px}
+.tags span{
+  position:relative;font-family:var(--f-light);font-weight:300;
+  font-size:11px;color:var(--mid);
+}
+.tags span+span::before{
+  content:"";position:absolute;left:-8px;top:50%;
+  width:2px;height:2px;border-radius:50%;background:var(--faint);
+}
+
+/* ─────────── 月场 ─────────── */
+.field{
+  display:flex;flex-direction:column;
+  padding:38px 44px 38px 46px;min-width:0;
+}
+.top{display:flex;align-items:center;justify-content:space-between;height:26px}
+.games{display:flex;gap:26px}
+.games a{
+  position:relative;font-family:var(--f-light);font-weight:300;
+  font-size:13px;color:var(--low);letter-spacing:.02em;
+}
+.games a.on{font-family:var(--f-med);font-weight:500;color:var(--hi)}
+.games a.on::after{
+  content:"";position:absolute;left:0;right:0;bottom:-9px;height:2px;
+  background:var(--lamp);
+  box-shadow:0 0 12px color-mix(in srgb, var(--lamp) 65%, transparent);
+}
+.tools{display:flex;gap:20px;color:var(--low)}
+.tools .ico svg{width:15px;height:15px;display:block}
+
+/* 二级：地区/阵营 —— 只在选中作品后出现 */
+.regions{
+  display:flex;gap:20px;margin-top:24px;padding-bottom:2px;
+}
+.regions a{
+  font-family:var(--f-light);font-weight:300;font-size:11.5px;color:rgba(244,242,238,.30);
+}
+.regions a.on{
+  font-family:var(--f-med);font-weight:500;color:var(--lamp);
+}
+
+.deck{
+  display:flex;align-items:center;gap:11px;
+  margin:22px 0 20px;
+  font-family:var(--f-light);font-weight:300;font-size:11px;color:var(--low);
+}
+.deck b{font-family:var(--f-med);font-weight:500;color:var(--mid);font-size:11px}
+.deck i{width:2px;height:2px;border-radius:50%;background:var(--faint);display:block;flex:none}
+/* 作品图例：色条与格底 2px 细线一致，让颜色可被读懂 */
+.deck .lg{display:flex;align-items:center;gap:7px;color:var(--low)}
+.deck .lg s{width:9px;height:2px;background:var(--gc);display:block;flex:none;opacity:.85}
+.deck .lg[data-g="genshin"]{--gc:var(--g-genshin)}
+.deck .lg[data-g="hsr"]{--gc:var(--g-hsr)}
+.deck .lg[data-g="zzz"]{--gc:var(--g-zzz)}
+.deck .lg[data-g="honkai3"]{--gc:var(--g-honkai3)}
+.ctx .deck{margin:18px 0 16px}
+
+.week{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:8px;
+  padding-bottom:11px;margin-bottom:9px;
+  border-bottom:1px solid var(--hair);
+}
+.week span{
+  font-family:var(--f-dl);font-size:10px;letter-spacing:.16em;color:rgba(244,242,238,.28);
+  padding-left:2px;
+}
+
+/* ─────────── 肖像墙 ─────────── */
+.grid{
+  flex:1;display:grid;
+  grid-template-columns:repeat(7,1fr);
+  grid-template-rows:repeat(6,1fr);
+  gap:8px;
+}
+.c{
+  position:relative;overflow:hidden;border-radius:3px;
+  background:var(--rail);
+}
+.c .por{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 18%;
+}
+/* 三级明暗：这是整个方向的骨架。暗处必须真的暗，亮处才成立；
+   但暗处仍须认得出是谁，否则肖像墙退化成灰色噪点。 */
+.c.on  .por{filter:grayscale(.70) brightness(.40) contrast(1.04) saturate(.68)}
+.c.off .por{filter:grayscale(.98) brightness(.22) contrast(.92);opacity:.44}
+.c.lit .por{filter:saturate(1.06) contrast(1.03)}
+
+.c::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(6,7,11,.50) 0%, rgba(6,7,11,0) 32%, rgba(6,7,11,.58) 72%, rgba(6,7,11,.90) 100%),
+    radial-gradient(128% 98% at 50% 36%, transparent 58%, rgba(6,7,11,.40) 100%);
+}
+.c.quiet::before,.c.out::before{display:none}
+
+.c .n{
+  position:absolute;top:9px;left:11px;
+  font-family:var(--f-dl);font-weight:350;font-size:16px;
+  letter-spacing:.03em;color:rgba(244,242,238,.86);
+  text-shadow:0 1px 5px rgba(0,0,0,.7);
+}
+.c.quiet{background:rgba(244,242,238,.026)}
+.c.quiet .n{color:rgba(244,242,238,.32);text-shadow:none}
+.c.out{background:rgba(244,242,238,.011)}
+.c.out .n{color:rgba(244,242,238,.155);text-shadow:none}
+.c.off .n{color:rgba(244,242,238,.44)}
+
+.c .nm{
+  position:absolute;left:11px;right:10px;bottom:9px;
+  font-family:var(--f-light);font-weight:300;font-size:10.5px;
+  color:rgba(244,242,238,.60);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  text-shadow:0 1px 6px rgba(0,0,0,.9);
+}
+.c.off .nm{color:rgba(244,242,238,.22)}
+
+/* 作品色只以 2px 底线出现，横向连起来就是本月的作品分布 */
+.c .tick{
+  position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--gc);opacity:.34;
+}
+.c[data-g="genshin"]{--gc:var(--g-genshin)}
+.c[data-g="hsr"]{--gc:var(--g-hsr)}
+.c[data-g="zzz"]{--gc:var(--g-zzz)}
+.c[data-g="honkai3"]{--gc:var(--g-honkai3)}
+.c.off .tick{opacity:.16}
+
+/* 被点亮的那一格 */
+.c.lit{
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--lamp) 74%, transparent),
+    0 0 0 5px color-mix(in srgb, var(--lamp) 9%, transparent),
+    0 20px 62px -10px color-mix(in srgb, var(--lamp) 62%, transparent);
+}
+.c.lit::before{
+  background:linear-gradient(180deg, rgba(6,7,11,.5) 0%, transparent 38%, rgba(6,7,11,.72) 100%);
+}
+.c.lit .n{color:var(--hi);font-family:var(--f-med);font-weight:500}
+.c.lit .nm{
+  color:var(--hi);font-family:var(--f-med);font-weight:500;font-size:12px;
+  bottom:11px;
+}
+.c.lit .tick{opacity:1;height:2px;box-shadow:0 0 10px var(--gc)}
+
+.c .tag{
+  position:absolute;top:8px;right:8px;
+  font-family:var(--f-med);font-weight:500;
+  font-size:9px;letter-spacing:.06em;
+  padding:2.5px 5px 2px;border-radius:2px;
+  background:var(--lamp);color:#12100C;
+}
+.c .more{
+  position:absolute;top:9px;right:10px;
+  font-family:var(--f-dl);font-size:10px;text-decoration:none;
+  color:rgba(244,242,238,.62);
+  text-shadow:0 1px 4px rgba(0,0,0,.6);
+}
+.c.off .more{color:rgba(244,242,238,.26)}
+.c .fav{
+  position:absolute;right:11px;bottom:12px;
+  width:4px;height:4px;border-radius:50%;text-decoration:none;
+  background:var(--lamp);opacity:.85;
+  box-shadow:0 0 8px color-mix(in srgb, var(--lamp) 80%, transparent);
+}
+
+/* ═══════════ 角色详情 ═══════════ */
+.det{display:block;position:relative;background:var(--ink1);overflow:hidden}
+.det .halo{
+  position:absolute;right:-6%;top:-14%;width:78%;height:120%;
+  background:radial-gradient(46% 44% at 52% 46%,
+    color-mix(in srgb, var(--halo) 34%, transparent) 0%,
+    color-mix(in srgb, var(--halo) 9%, transparent) 46%,
+    transparent 72%);
+}
+.det .hero{
+  position:absolute;left:30%;right:0;top:0;bottom:0;
+  background-image:var(--art-url);
+  background-size:auto 122%;
+  background-position:40% 10%;
+  background-repeat:no-repeat;
+}
+.det .hero-veil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right, var(--ink1) 22%, rgba(10,12,18,.93) 33%, rgba(10,12,18,.50) 45%, rgba(10,12,18,.08) 60%, transparent 73%),
+    linear-gradient(to top, var(--ink1) 0%, rgba(10,12,18,.35) 12%, transparent 30%);
+}
+.dpane{
+  position:absolute;left:96px;top:0;bottom:0;width:520px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.back{
+  position:absolute;top:44px;left:0;
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--f-light);font-weight:300;font-size:12.5px;color:var(--low);
+}
+.back .ico svg{width:13px;height:13px;display:block}
+
+.dtop{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.dpane h1{
+  font-family:var(--f-black);font-weight:900;
+  font-size:70px;line-height:1;letter-spacing:-.035em;color:var(--hi);
+}
+.rom.big{margin-top:16px;font-size:11.5px;letter-spacing:.42em}
+.dpane .rule{margin:30px 0 26px;width:64px;height:1px;background:var(--lamp);opacity:.6}
+
+.stats{display:flex;gap:64px}
+.stats>div{display:flex;flex-direction:column;gap:11px}
+.num{
+  font-family:var(--f-num);font-weight:400;font-size:38px;
+  letter-spacing:.01em;color:var(--hi);line-height:1;
+}
+.meta{display:flex;flex-wrap:wrap;gap:0 44px;margin-top:38px}
+.meta>div{display:flex;flex-direction:column;gap:8px}
+.meta dt{font-family:var(--f-dl);font-size:10px;letter-spacing:.18em;color:var(--low)}
+.meta dd{font-family:var(--f-light);font-weight:300;font-size:14px;color:var(--mid)}
+
+.acts{display:flex;gap:12px;margin-top:46px}
+.acts a{
+  font-family:var(--f-light);font-weight:300;font-size:12.5px;
+  padding:11px 26px;border-radius:2px;
+  border:1px solid var(--hair);color:var(--mid);
+}
+.acts a.pri{
+  border-color:color-mix(in srgb, var(--lamp) 48%, transparent);
+  color:var(--lamp);
+}
+.kin{
+  display:flex;align-items:center;gap:18px;
+  margin-top:58px;padding-top:24px;
+  border-top:1px solid var(--hair);
+  width:340px;
+}
+.chip{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--f-light);font-weight:300;font-size:12.5px;color:var(--mid);
+}
+.chip img{
+  width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:50% 8%;
+  background:var(--ink2);
+  box-shadow:inset 0 0 0 1px var(--hair);
+}
+.chip i{font-style:normal;font-size:11px;color:var(--low);margin-left:2px}
+
+/* ═══════════ 移动端 ═══════════ */
+.w-phone{background:var(--ink1)}
+.phone{width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden}
+.sbar{
+  height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px 0 26px;position:relative;z-index:3;
+}
+.sbar b{font-family:var(--f-med);font-weight:500;font-size:13px;color:var(--hi)}
+.sico{display:flex;align-items:center;gap:6px;color:var(--hi)}
+.sico svg{height:10px;width:auto;display:block;fill:currentColor;stroke:none;opacity:.9}
+.sico svg rect{fill:currentColor}
+.sico svg rect:not(.fill){fill:currentColor}
+
+.mcover{position:relative;height:336px;flex:none;margin-top:-44px;overflow:hidden}
+.mcover .art{
+  position:absolute;inset:0;
+  background-image:var(--art-url);
+  background-size:auto 128%;background-position:52% 6%;background-repeat:no-repeat;
+}
+.mcover .veil{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,
+    var(--ink1) 0%, rgba(10,12,18,.97) 17%, rgba(10,12,18,.88) 31%,
+    rgba(10,12,18,.56) 45%, rgba(10,12,18,.10) 61%, rgba(6,7,11,.30) 84%, rgba(6,7,11,.72) 100%);
+}
+.mcover .brand{top:62px;left:22px;right:22px;font-size:9.5px}
+.mcover .brand b{color:rgba(244,242,238,.72)}
+.mcover .brand span{color:rgba(244,242,238,.5)}
+.mcover .brand,.mcover .cap{text-shadow:0 1px 10px rgba(0,0,0,.85)}
+.mcover .cap{left:22px;right:22px;bottom:20px}
+.mcover .mo{font-size:56px;letter-spacing:-.03em}
+.mcover .mo-en{margin-top:10px;font-size:8.5px;letter-spacing:.24em;color:rgba(244,242,238,.52)}
+.mcover .lead{margin-top:18px}
+.mcover .lead h2{font-size:22px;margin-top:9px}
+.mcover .tags{margin-top:11px;gap:13px}
+.mcover .tags span{font-size:10px}
+
+.mfield{flex:1;display:flex;flex-direction:column;padding:0 16px;min-height:0}
+.mhead{
+  height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;
+}
+.mhead b{font-family:var(--f-med);font-weight:500;font-size:14.5px;letter-spacing:.02em}
+.mhead .ico{color:var(--low)}
+.mhead .ico svg{width:14px;height:14px;display:block}
+.w-phone .week{gap:5px;padding-bottom:8px;margin-bottom:7px}
+.w-phone .week span{font-size:9px;letter-spacing:.1em;padding-left:1px}
+.grid.m{gap:5px}
+.grid.m .c{border-radius:2.5px}
+.grid.m .c .n{top:5px;left:6px;font-size:11px}
+.grid.m .c .tag{display:none}
+.grid.m .c.lit .n{font-size:11.5px}
+
+.tabs{
+  height:58px;flex:none;display:flex;align-items:center;justify-content:space-around;
+  padding:0 26px 8px;border-top:1px solid var(--hair);margin-top:10px;
+}
+.tabs a{font-family:var(--f-light);font-weight:300;font-size:11.5px;color:var(--faint)}
+.tabs a.on{font-family:var(--f-med);font-weight:500;color:var(--hi)}

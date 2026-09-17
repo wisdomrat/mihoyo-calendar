@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Portrait Layout Debug</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 2rem;
+      background: #0a0d12;
+      color: #e5e7eb;
+    }
+    .test-case {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #1e2636;
+      border-radius: 8px;
+    }
+    h2 { color: #38bdf8; margin-top: 0; }
+    pre { background: #0f131c; padding: 1rem; border-radius: 4px; overflow-x: auto; }
+    .warning { color: #fbbf24; }
+    .success { color: #34d399; }
+  </style>
+</head>
+<body>
+  <h1>Portrait Layout CSS Variable Debug</h1>
+  
+  <div class="test-case">
+    <h2>Test: Apply portraitLayout.style to a dialog element</h2>
+    <p>Simulating React component behavior...</p>
+    <pre id="output">Loading...</pre>
+  </div>
+
+  <script type="module">
+    // Simulate portraitLayout.ts logic
+    function imageRatio(dimensions) {
+      return `${dimensions.width} / ${dimensions.height}`;
+    }
+
+    function getPortraitModalLayout(dimensions, mode, gameId) {
+      if (!dimensions || !dimensions.width || !dimensions.height) {
+        return { className: 'portrait-layout-pending', style: {} };
+      }
+
+      const ratio = dimensions.width / dimensions.height;
+
+      // Square portrait test (2048x2048 = ratio 1.0)
+      if (ratio >= 0.9 && ratio < 1.15) {
+        if (mode === 'detail') {
+          return {
+            className: 'portrait-layout-square',
+            style: {
+              '--portrait-modal-width': 'min(440px, 94vw)',
+              '--portrait-size': 'contain',
+              '--portrait-position': 'center center',
+              '--portrait-aspect-ratio': imageRatio(dimensions),
+            },
+          };
+        }
+      }
+
+      // Vertical portrait
+      if (ratio < 0.9) {
+        const verticalPosition = gameId === 'zzz' ? 'center bottom' : 'right bottom';
+        return {
+          className: 'portrait-layout-vertical',
+          style: {
+            '--portrait-modal-width': '400px',
+            '--portrait-size': 'contain',
+            '--portrait-position': verticalPosition,
+            '--portrait-aspect-ratio': imageRatio(dimensions),
+          },
+        };
+      }
+
+      return { className: 'portrait-layout-pending', style: {} };
+    }
+
+    // Test with sample dimensions (2048x2048 square portrait)
+    const testDimensions = { width: 2048, height: 2048 };
+    const layout = getPortraitModalLayout(testDimensions, 'detail', 'genshin');
+
+    const output = document.getElementById('output');
+    output.textContent = `
+Portrait Dimensions: ${testDimensions.width}×${testDimensions.height}
+Ratio: ${(testDimensions.width / testDimensions.height).toFixed(4)}
+
+Generated Layout:
+  className: "${layout.className}"
+  
+  style object:
+${Object.entries(layout.style).map(([k, v]) => `    ${k}: "${v}"`).join('\n')}
+
+Applying to DOM element...`;
+
+    // Create a test dialog element
+    const dialog = document.createElement('dialog');
+    dialog.className = `v2-dialog v2-detail-dialog ${layout.className}`;
+    
+    // Apply style object as inline styles (React does this)
+    Object.entries(layout.style).forEach(([key, value]) => {
+      dialog.style.setProperty(key, value);
+    });
+    
+    document.body.appendChild(dialog);
+    
+    // Check computed styles
+    const computed = window.getComputedStyle(dialog);
+    
+    setTimeout(() => {
+      output.textContent += `
+
+DOM Element Created:
+  className: "${dialog.className}"
+  
+  Inline style attribute:
+    ${dialog.getAttribute('style')}
+  
+  Computed CSS variables:
+    --portrait-size: "${computed.getPropertyValue('--portrait-size').trim()}"
+    --portrait-position: "${computed.getPropertyValue('--portrait-position').trim()}"
+    --portrait-aspect-ratio: "${computed.getPropertyValue('--portrait-aspect-ratio').trim()}"
+    --portrait-modal-width: "${computed.getPropertyValue('--portrait-modal-width').trim()}"
+
+✓ CSS variables are successfully applied to the dialog element.
+✓ React should apply these the same way via the style prop.
+
+Next: Check if these variables are consumed by .v2-detail-visual img in CSS.`;
+    }, 100);
+  </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1880" height="1180" viewBox="0 0 1880 1180">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#f0c98a"/>
+    </marker>
+    <style>
+      .title { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; fill: #f4efe5; }
+      .small { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; fill: #c7c8d6; font-size: 15px; }
+      .label { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; fill: #fff8eb; font-size: 17px; font-weight: 600; }
+      .note { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; fill: #b8bacb; font-size: 13px; }
+      .box { fill: none; stroke: #f0c98a; stroke-width: 2.5; stroke-dasharray: 8 6; }
+      .layer { fill: none; stroke: #7de5cf; stroke-width: 2.5; stroke-dasharray: 8 6; }
+      .arrow { fill: none; stroke: #f0c98a; stroke-width: 2.5; marker-end: url(#arrow); }
+      .layer-arrow { fill: none; stroke: #7de5cf; stroke-width: 2.5; marker-end: url(#arrow); }
+      .tag { fill: #151526; fill-opacity: .94; stroke: #f0c98a; stroke-width: 1.2; rx: 7; }
+      .layer-tag { fill: #102b2b; fill-opacity: .95; stroke: #7de5cf; stroke-width: 1.2; rx: 7; }
+    </style>
+  </defs>
+
+  <rect width="1880" height="1180" fill="#0b0d18"/>
+  <text x="50" y="45" class="title" font-size="27" font-weight="650">GPT-01 视觉区域地图</text>
+  <text x="50" y="76" class="small">基准：02-sumeru-filter-GPT · 结构区域 = 金色标注 · 视觉图层 = 薄荷标注</text>
+
+  <rect x="40" y="100" width="1440" height="900" rx="8" fill="#111426" filter="url(#shadow)"/>
+  <image x="40" y="100" width="1440" height="900" preserveAspectRatio="none" xlink:href="../candidates/candidate-GPT-01/concept-v3-GPT/02-sumeru-filter-GPT.png"/>
+
+  <!-- Structural regions -->
+  <rect x="40" y="100" width="1440" height="112" class="box"/>
+  <rect x="112" y="246" width="470" height="690" rx="26" class="box"/>
+  <rect x="630" y="246" width="778" height="690" rx="26" class="box"/>
+  <rect x="660" y="410" width="718" height="360" class="box"/>
+  <rect x="660" y="790" width="718" height="92" class="box"/>
+  <rect x="660" y="890" width="718" height="46" class="box"/>
+  <rect x="570" y="246" width="60" height="690" class="box"/>
+  <rect x="610" y="120" width="310" height="65" class="box"/>
+
+  <!-- Visual layers -->
+  <ellipse cx="430" cy="235" rx="300" ry="190" class="layer"/>
+  <rect x="112" y="700" width="470" height="236" class="layer"/>
+  <rect x="40" y="100" width="1440" height="900" class="layer" opacity=".35"/>
+  <path d="M580 252 C620 300 620 820 580 930" class="layer"/>
+
+  <!-- Structural labels and arrows -->
+  <g>
+    <rect x="1510" y="122" width="310" height="76" class="tag"/>
+    <text x="1530" y="150" class="label">01 顶部信息带</text>
+    <text x="1530" y="176" class="note">品牌、真实导航、月份摘要、今天</text>
+    <path d="M1510 160 L1250 160" class="arrow"/>
+
+    <rect x="1510" y="220" width="310" height="76" class="tag"/>
+    <text x="1530" y="248" class="label">02 中央裸文字导航</text>
+    <text x="1530" y="274" class="note">无容器、无填充、融入背景</text>
+    <path d="M1510 258 L920 160" class="arrow"/>
+
+    <rect x="1510" y="318" width="310" height="76" class="tag"/>
+    <text x="1530" y="346" class="label">03 左侧角色舞台</text>
+    <text x="1530" y="372" class="note">主角图像、角色信息、上下文</text>
+    <path d="M1510 355 L585 420" class="arrow"/>
+
+    <rect x="1510" y="416" width="310" height="76" class="tag"/>
+    <text x="1530" y="444" class="label">04 右侧月历工作区</text>
+    <text x="1530" y="470" class="note">月标题、日期语义、真实月视图</text>
+    <path d="M1510 454 L1410 454" class="arrow"/>
+
+    <rect x="1510" y="514" width="310" height="76" class="tag"/>
+    <text x="1530" y="542" class="label">05 7 列日期网格</text>
+    <text x="1530" y="568" class="note">日期定位、事件点、头像入口</text>
+    <path d="M1510 552 L1375 605" class="arrow"/>
+
+    <rect x="1510" y="612" width="310" height="76" class="tag"/>
+    <text x="1530" y="640" class="label">06 筛选与图例区</text>
+    <text x="1530" y="666" class="note">当前上下文、事件色说明、筛选入口</text>
+    <path d="M1510 650 L1375 825" class="arrow"/>
+
+    <rect x="1510" y="710" width="310" height="76" class="tag"/>
+    <text x="1530" y="738" class="label">07 当天 / 匹配摘要</text>
+    <text x="1530" y="764" class="note">选中日期的角色和事件信息</text>
+    <path d="M1510 748 L1375 910" class="arrow"/>
+
+    <rect x="1510" y="808" width="310" height="76" class="tag"/>
+    <text x="1530" y="836" class="label">08 双栏间隙</text>
+    <text x="1530" y="862" class="note">留白、细分隔线、光场过渡</text>
+    <path d="M1510 846 L605 600" class="arrow"/>
+  </g>
+
+  <!-- Visual layer labels and arrows -->
+  <g>
+    <rect x="80" y="1030" width="330" height="82" class="layer-tag"/>
+    <text x="100" y="1060" class="label">L1 全局基础渐变</text>
+    <text x="100" y="1087" class="note">深靛 → 深青绿 → 紫色回落</text>
+    <path d="M245 1030 L245 970" class="layer-arrow"/>
+
+    <rect x="440" y="1030" width="330" height="82" class="layer-tag"/>
+    <text x="460" y="1060" class="label">L2 主题主光晕</text>
+    <text x="460" y="1087" class="note">须弥态位于左上，与角色位置呼应</text>
+    <path d="M605 1030 L435 330" class="layer-arrow"/>
+
+    <rect x="800" y="1030" width="330" height="82" class="layer-tag"/>
+    <text x="820" y="1060" class="label">L3 立绘底部压暗</text>
+    <text x="820" y="1087" class="note">上方保留图像，底部保障文字可读</text>
+    <path d="M965 1030 L450 820" class="layer-arrow"/>
+
+    <rect x="1160" y="1030" width="330" height="82" class="layer-tag"/>
+    <text x="1180" y="1060" class="label">L4 表面连续过渡</text>
+    <text x="1180" y="1087" class="note">半透明面板与页面光场保持联系</text>
+    <path d="M1325 1030 L1260 910" class="layer-arrow"/>
+
+    <rect x="1520" y="906" width="300" height="82" class="layer-tag"/>
+    <text x="1540" y="936" class="label">L5 状态强调</text>
+    <text x="1540" y="963" class="note">头像环、事件点、少量边框</text>
+    <path d="M1520 946 L1250 715" class="layer-arrow"/>
+  </g>
+
+  <!-- Number markers on canvas -->
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700" text-anchor="middle">
+    <circle cx="95" cy="115" r="17" fill="#f0c98a"/><text x="95" y="121" fill="#151526">01</text>
+    <circle cx="590" cy="160" r="17" fill="#f0c98a"/><text x="590" y="166" fill="#151526">02</text>
+    <circle cx="125" cy="260" r="17" fill="#f0c98a"/><text x="125" y="266" fill="#151526">03</text>
+    <circle cx="650" cy="260" r="17" fill="#f0c98a"/><text x="650" y="266" fill="#151526">04</text>
+    <circle cx="680" cy="425" r="17" fill="#f0c98a"/><text x="680" y="431" fill="#151526">05</text>
+    <circle cx="680" cy="805" r="17" fill="#f0c98a"/><text x="680" y="811" fill="#151526">06</text>
+    <circle cx="680" cy="905" r="17" fill="#f0c98a"/><text x="680" y="911" fill="#151526">07</text>
+    <circle cx="600" cy="500" r="17" fill="#f0c98a"/><text x="600" y="506" fill="#151526">08</text>
+  </g>
+
+  <text x="40" y="1150" class="small">说明：金色区域是“页面结构/功能区域”，薄荷区域是“视觉图层/空间关系”。后续讨论统一使用编号和名称。</text>
+</svg>

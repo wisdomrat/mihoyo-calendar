@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>candidate-01 原型 · 边光工作区</title>
+<style>
+/* ============================================================
+   candidate-01 原型样式
+   目标：验证「一台两面 · 边光」方向在 1440 / 768 / 390 / 360 的落地形态。
+   token 取值来自现有 src/styles/theme.css（neutral/genshin/zzz/hsr 四套），
+   阵营变量来自 src/data/affiliations-*.ts。
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+button, input { font-family: inherit; color: inherit; }
+
+:root {
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --radius: 16px; --radius-md: 12px; --radius-sm: 9px; --radius-xs: 6px;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px;
+  --dur: 200ms;
+  --scrim: rgba(6,7,10,.8);
+}
+
+/* ---- 主题亮度骨架（摘自 theme.css，亮度台阶 6~9 L*）---- */
+.app[data-theme='neutral'] {
+  --bg:#101115; --surface:#212429; --surface-2:#2e323a; --surface-3:#3b404a;
+  --ink:#e8e7e3; --ink-strong:#fcfbf8; --ink-soft:#bcbfc8; --ink-faint:#a9adb7;
+  --line:#333741; --line-soft:#262a32; --line-strong:#5b6070;
+  --accent:#9b9bf5; --accent-2:#9b9bf5; --accent-ink:#14142c; --star:#f0c04a;
+}
+.app[data-theme='genshin'] {
+  --bg:#14110b; --surface:#292317; --surface-2:#383221; --surface-3:#464028;
+  --ink:#f0e9d8; --ink-strong:#fdf8ec; --ink-soft:#c9bd9a; --ink-faint:#b7ab8a;
+  --line:#3c3524; --line-soft:#2c2618; --line-strong:#665c3f;
+  --accent:#5fcbb8; --accent-2:#e6bb63; --accent-ink:#07201c; --star:#e6bb63;
+}
+.app[data-theme='zzz'] {
+  --bg:#0d0d11; --surface:#232329; --surface-2:#313139; --surface-3:#3e3e49;
+  --ink:#f2f2ee; --ink-strong:#ffffff; --ink-soft:#bfc0c8; --ink-faint:#abacb6;
+  --line:#37373f; --line-soft:#2a2a30; --line-strong:#61616b;
+  --accent:#ff5a00; --accent-2:#f5e100; --accent-ink:#150e05; --star:#f5e100;
+}
+.app[data-theme='hsr'] {
+  --bg:#0c1020; --surface:#1c2340; --surface-2:#293253; --surface-3:#343d64;
+  --ink:#eaf0ff; --ink-strong:#ffffff; --ink-soft:#b0badf; --ink-faint:#a1abd4;
+  --line:#2e3760; --line-soft:#232a4a; --line-strong:#4f5a90;
+  --accent:#e9c774; --accent-2:#7cc0ff; --accent-ink:#1a1407; --star:#e9c774;
+}
+
+html { background: var(--bg, #101115); }
+body { font-family: var(--font-body); background: var(--bg, #101115); color: var(--ink, #e8e7e3); -webkit-font-smoothing: antialiased; }
+
+.app { min-height: 100vh; background: var(--bg); color: var(--ink); position: relative; isolation: isolate; }
+
+/* ---- 边光效果层：唯一允许随阵营变化的「氛围」，低对比、固定、无动画 ---- */
+.fx {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(1000px 460px at 50% -10%,
+    color-mix(in srgb, var(--affil-key, var(--accent)) 9%, transparent), transparent 68%);
+  opacity: var(--fx-strength, 0);
+}
+/* 绝区零家族：斜纹 hazard 纹理（低对比，染阵营 key 色） */
+.app[data-affil-family='zzz'] .fx::after {
+  content:''; position:absolute; inset:0;
+  background: repeating-linear-gradient(45deg,
+    color-mix(in srgb, var(--affil-key, var(--accent)) 5%, transparent) 0 14px, transparent 14px 28px);
+}
+/* 星铁家族：星点纹理 */
+.app[data-affil-family='hsr'] .fx::after {
+  content:''; position:absolute; inset:0;
+  background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size: 28px 28px; opacity:.32;
+}
+
+/* ============ L0 工作区条 ============ */
+.ws-bar {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: var(--space-5);
+  max-width: 1400px; margin: 0 auto; padding: 12px 24px; height: 56px;
+}
+.brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.brand-mark { color: var(--accent); font-size: 18px; }
+.brand h1 { font-size: 16px; font-weight: 700; line-height: 1.15; color: var(--ink-strong); white-space: nowrap; }
+.brand p { font-size: 11px; color: var(--ink-faint); white-space: nowrap; }
+.search { flex: 1; display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 12px; height: 36px; min-width: 0; }
+.search .ico { color: var(--ink-faint); font-size: 13px; }
+.search input { flex: 1; background: transparent; border: none; outline: none; font-size: 13px; color: var(--ink); min-width: 0; }
+.search input::placeholder { color: var(--ink-faint); }
+.fav-btn, .more-btn {
+  height: 36px; padding: 0 14px; border-radius: var(--radius-sm);
+  background: transparent; border: 1px solid var(--line); color: var(--ink-soft);
+  font-size: 13px; cursor: pointer; white-space: nowrap;
+}
+.fav-btn .star { color: var(--star); }
+.add-btn {
+  height: 36px; padding: 0 16px; border-radius: var(--radius-sm); border: none;
+  background: var(--ink-strong); color: var(--bg); font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+
+/* ============ 主体：侧栏 + 日历舞台 ============ */
+.ws-body {
+  position: relative; z-index: 1;
+  display: flex; align-items: flex-start; gap: 20px;
+  max-width: 1400px; margin: 0 auto; padding: 8px 24px 40px;
+}
+
+/* ---- 筛选侧栏 ---- */
+.sidebar {
+  flex: 0 0 272px; width: 272px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: var(--space-4); position: sticky; top: 16px;
+  max-height: calc(100vh - 32px); overflow: auto;
+}
+.side-head { display: flex; align-items: center; gap: 8px; margin-bottom: var(--space-4); }
+.side-head h2 { font-size: 15px; color: var(--ink-strong); }
+.badge { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.game-row {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid transparent;
+  background: transparent; cursor: pointer; text-align: left; margin-bottom: 2px;
+  border-left: 2px solid transparent;
+}
+.game-row .ind { width: 4px; height: 22px; border-radius: 2px; flex: 0 0 auto; }
+.game-row.off .ind { background: transparent !important; box-shadow: inset 0 0 0 1px var(--line-strong); }
+.game-row .gname { font-size: 13px; color: var(--ink); display: block; line-height: 1.2; }
+.game-row.off .gname { color: var(--ink-faint); }
+.game-row .gsub { font-size: 11px; color: var(--ink-faint); display: block; }
+.game-row.selected { background: var(--surface-2); }
+.game-row.current { border-left-color: var(--affil-key, var(--accent)); border-color: var(--line); border-left-width: 2px; }
+.side-check { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-soft); margin: 12px 2px; }
+.side-check input { accent-color: var(--accent); }
+.side-sep { border: none; border-top: 1px solid var(--line-soft); margin: 12px 0; }
+.panel-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--ink-strong); margin-bottom: 4px; }
+.panel-title .ind { width: 4px; height: 14px; border-radius: 2px; }
+.panel-note { font-size: 11px; color: var(--ink-faint); line-height: 1.5; margin: 4px 0 8px; }
+.fgroup { margin-top: 12px; }
+.fgroup-label { font-size: 11px; letter-spacing: .08em; color: var(--ink-faint); display: block; margin-bottom: 6px; }
+.ftags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ftag {
+  font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer;
+  background: var(--surface-2); color: var(--ink-soft); border: 1px solid transparent;
+}
+.ftag.on { background: color-mix(in srgb, var(--affil-key, var(--accent)) 22%, var(--surface-2)); color: var(--ink-strong); border-color: color-mix(in srgb, var(--affil-key, var(--accent)) 55%, transparent); }
+.side-clear { margin-top: 16px; width: 100%; background: none; border: none; color: var(--ink-faint); font-size: 12px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- 日历容器（舞台） ---- */
+.main { flex: 1; min-width: 0; }
+.cal {
+  position: relative; background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden;
+}
+/* 顶部 2px 边光色条：主题 accent 混入归属 key/accent —— 边光系统的主展示面 */
+.cal::before {
+  content:''; position:absolute; left:0; right:0; top:0; height:2px; z-index:3;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--affil-key, var(--accent)) 45%, var(--accent)),
+    color-mix(in srgb, var(--affil-accent, var(--accent-2)) 45%, var(--accent-2)));
+}
+.cal-toolbar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 14px 20px 12px; border-bottom: 1px solid var(--line-soft);
+}
+.nav-group { display: flex; align-items: center; gap: 4px; }
+.icon-btn, .today-btn {
+  height: 32px; border-radius: var(--radius-xs); border: 1px solid var(--line);
+  background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 13px; padding: 0 10px;
+}
+.icon-btn { width: 32px; padding: 0; }
+.cal-title { font-size: 18px; font-weight: 700; color: var(--ink-strong); letter-spacing: -.02em; display: flex; align-items: center; gap: 6px; padding: 0 4px; }
+.cal-title .caret { font-size: 10px; color: var(--ink-faint); }
+.toolbar-spacer { flex: 1; }
+.seg { display: inline-flex; background: var(--bg); border-radius: var(--radius-sm); padding: 3px; gap: 2px; }
+.seg button {
+  border: none; background: transparent; color: var(--ink-faint);
+  font-size: 12px; padding: 5px 12px; border-radius: var(--radius-xs); cursor: pointer; white-space: nowrap;
+}
+.seg button.on { background: var(--ink-strong); color: var(--bg); font-weight: 600; }
+
+/* ---- 月视图网格 ---- */
+.weekdays { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 8px; padding: 10px 20px 4px; }
+.weekdays span { text-align: center; font-size: 11px; letter-spacing: .08em; color: var(--ink-faint); font-weight: 700; padding: 4px 0; }
+.grid { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 8px; padding: 4px 20px 20px; }
+.cell {
+  aspect-ratio: 1.32; border-radius: var(--radius-md); padding: 8px; min-height: 76px;
+  display: flex; flex-direction: column; min-width: 0; border: 1px solid transparent;
+}
+.cell.has { background: var(--surface-2); cursor: pointer; }
+.cell.other { opacity: .45; }
+.cell.other.has { opacity: .6; background: color-mix(in srgb, var(--surface-2) 70%, var(--surface)); }
+.cell.today { background: color-mix(in srgb, var(--accent) 15%, var(--surface-2)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 62%, var(--affil-key, var(--accent))); }
+.dnum { font-size: 13px; font-weight: 600; color: var(--ink-soft); font-feature-settings: 'tnum'; margin-bottom: 4px; line-height: 1; }
+.cell.has .dnum { color: var(--ink-strong); }
+.cell.other .dnum { color: var(--ink-faint); }
+.cell.today .dnum {
+  background: var(--accent); color: var(--accent-ink); border-radius: 999px;
+  width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center;
+}
+.avs { display: flex; flex-wrap: wrap; gap: 4px; align-content: flex-start; flex: 1; min-width: 0; overflow: hidden; }
+.av { width: 30px; height: 30px; border-radius: 999px; overflow: hidden; flex: 0 0 auto; box-shadow: 0 0 0 2px var(--gc, var(--line-strong)); background: var(--surface-3); display: inline-flex; align-items: center; justify-content: center; }
+.av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.av .init { font-size: 12px; color: var(--ink-strong); }
+.more-chip {
+  width: 30px; height: 30px; border-radius: 999px; flex: 0 0 auto;
+  background: var(--surface-3); color: var(--ink-strong); border: 1px solid var(--line-strong);
+  font-size: 11px; font-weight: 700; cursor: pointer;
+}
+
+/* ---- 周视图 ---- */
+.week-head { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 8px; padding: 10px 20px 4px; }
+.week-head .wd { text-align: center; font-size: 11px; color: var(--ink-faint); letter-spacing: .08em; }
+.week-head .wd b { display: block; font-size: 15px; color: var(--ink-strong); letter-spacing: 0; margin-top: 2px; }
+.week-head .wd.today b { color: var(--accent); }
+.week-grid { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 8px; padding: 4px 20px 20px; min-height: 420px; }
+.wcell { background: var(--surface-2); border-radius: var(--radius-md); padding: 8px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.wcell.empty { background: transparent; border: 1px dashed var(--line-soft); align-items: center; justify-content: center; }
+.wcell.empty span { font-size: 11px; color: var(--ink-faint); writing-mode: horizontal-tb; text-align: center; }
+.wchar { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: var(--radius-xs); background: var(--surface); border-left: 2px solid var(--gc, var(--line-strong)); min-width: 0; }
+.wchar .av { width: 24px; height: 24px; }
+.wchar .wname { font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.wchar .wgame { font-size: 11px; color: var(--ink-faint); display: block; }
+
+/* ---- 详情弹窗（桌面形态） ---- */
+.overlay { position: fixed; inset: 0; z-index: 10; background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: 24px; }
+.dialog {
+  position: relative; width: min(560px, 94vw); max-height: 88vh; overflow: auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.dialog.with-portrait { width: min(760px, 94vw); min-height: 460px; background-color: var(--surface); }
+/* 立绘放大并向左钉住裁切：人物（splash 水平中线附近）落到右半非文本区，
+   左半信息列由 pscrim 实心段保护——与生产 portraitLayout.ts 的分区思路一致 */
+.dialog .pbg { position: absolute; inset: 0; background-image: var(--p); background-size: auto 140%; background-position: left center; background-repeat: no-repeat; }
+.dialog .pscrim { position: absolute; inset: 0; background: linear-gradient(90deg, var(--surface) 46%, color-mix(in srgb, var(--surface) 55%, transparent) 66%, transparent); }
+.dlg-body { position: relative; padding: 28px; }
+.dlg-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 32px; height: 32px; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 72%, transparent); color: var(--ink-strong); cursor: pointer; font-size: 14px; }
+.dlg-art { position: absolute; top: 14px; right: 54px; z-index: 2; height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 72%, transparent); color: var(--ink-soft); cursor: pointer; font-size: 12px; }
+.dlg-name { font-size: 26px; font-weight: 700; color: var(--ink-strong); letter-spacing: -.02em; }
+.dlg-name-en { display: block; font-size: 13px; color: var(--ink-soft); font-weight: 400; margin-top: 2px; }
+.dlg-badge { display: inline-block; margin-top: 10px; font-size: 12px; padding: 3px 10px; border-radius: 999px; color: var(--accent-ink); font-weight: 600; }
+.dlg-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px 20px; margin-top: 20px; max-width: 320px; }
+.dlg-item .k { font-size: 11px; letter-spacing: .08em; color: var(--ink-faint); display: block; }
+.dlg-item .v { font-size: 14px; color: var(--ink); margin-top: 2px; display: block; }
+.dlg-actions { display: flex; gap: 10px; margin-top: 26px; }
+.btn-fav { height: 38px; padding: 0 18px; border-radius: var(--radius-sm); border: none; background: var(--ink-strong); color: var(--bg); font-size: 13px; font-weight: 600; cursor: pointer; }
+.btn-ghost { height: 38px; padding: 0 16px; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font-size: 13px; cursor: pointer; }
+.btn-text { height: 38px; padding: 0 12px; border: none; background: none; color: var(--ink-soft); font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- 原型注记（非产品 UI，仅向评审说明状态） ---- */
+.proto-note { position: fixed; right: 8px; bottom: 6px; z-index: 99; font-size: 10px; color: color-mix(in srgb, var(--ink-faint) 70%, transparent); font-family: ui-monospace, Consolas, monospace; pointer-events: none; }
+
+/* ============================================================
+   ≤1024px 触控形态：侧栏移除、工具条两行、搜索降级
+   ============================================================ */
+@media (max-width: 1024px) {
+  .sidebar { display: none; }
+  .ws-body { padding: 4px 12px 32px; }
+  .ws-bar { flex-wrap: wrap; height: auto; padding: 10px 12px; gap: 10px; }
+  .search { order: 3; flex-basis: 100%; }
+  .brand p { display: none; }
+  .fav-btn { padding: 0 10px; }
+  .cal-toolbar { padding: 10px 12px; gap: 8px; }
+  .cal-title { font-size: 16px; }
+  .weekdays, .grid { padding-left: 8px; padding-right: 8px; gap: 4px; }
+  .week-head, .week-grid { padding-left: 8px; padding-right: 8px; gap: 4px; }
+  .cell { padding: 4px; min-height: 56px; border-radius: var(--radius-xs); }
+  .dnum { font-size: 12px; }
+  .av { width: 24px; height: 24px; }
+  .more-chip { width: 24px; height: 24px; font-size: 10px; }
+}
+
+/* 手机周视图：7 列改纵向日清单（390 下 7 列条目不可读） */
+@media (max-width: 1024px) {
+  .week-head { display: none; }
+  .week-grid { display: flex; flex-direction: column; min-height: 0; }
+  .wcell { flex-direction: column; }
+  .wcell::before { content: attr(data-label); font-size: 12px; color: var(--ink-faint); }
+  .wcell.today-w { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 62%, var(--affil-key, var(--accent))); }
+}
+
+/* ============================================================
+   ≤480px 窄手机：搜索收为图标、格子极限压缩
+   ============================================================ */
+@media (max-width: 480px) {
+  .ws-bar { height: 52px; flex-wrap: nowrap; padding: 8px 6px; gap: 6px; }
+  .brand h1 { font-size: 14px; }
+  .search { flex: 1; order: 0; padding: 0 8px; height: 36px; }
+  .search input { font-size: 12px; }
+  .fav-btn { padding: 0 8px; font-size: 12px; }
+  .fav-btn .fav-text { display: none; }
+  .add-btn { padding: 0 10px; }
+  .ws-body { padding: 2px 6px 24px; }
+  .cal-toolbar { gap: 6px; padding: 8px 8px; }
+  .icon-btn, .today-btn { height: 32px; font-size: 12px; }
+  .cal-title { font-size: 15px; padding: 0 2px; }
+  .seg button { padding: 5px 8px; font-size: 11px; }
+  .weekdays { gap: 2px; padding: 8px 6px 2px; }
+  .weekdays span { font-size: 10px; }
+  .grid { gap: 2px; padding: 2px 6px 12px; }
+  .cell { min-height: 48px; padding: 3px; }
+  .dnum { font-size: 11px; margin-bottom: 2px; }
+  .cell.today .dnum { width: 18px; height: 18px; font-size: 10px; }
+  .av { width: 18px; height: 18px; }
+  .avs { gap: 2px; }
+  .more-chip { width: 18px; height: 18px; font-size: 9px; }
+  .dialog { width: 100vw; max-height: 92vh; border-radius: var(--radius) var(--radius) 0 0; align-self: flex-end; }
+  .overlay { align-items: flex-end; padding: 0; }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app" data-theme="neutral">
+  <div class="fx" aria-hidden="true"></div>
+
+  <!-- L0 工作区条 -->
+  <header class="ws-bar">
+    <div class="brand">
+      <span class="brand-mark">◆</span>
+      <div><h1>米哈游角色生日日历</h1><p>追踪生日与实装纪念日</p></div>
+    </div>
+    <div class="search"><span class="ico">🔍</span><input type="search" placeholder="搜索角色、游戏、生日…" aria-label="搜索角色" /></div>
+    <button class="fav-btn" aria-pressed="false"><span class="star">★</span> <span class="fav-text">收藏 12</span></button>
+    <button class="add-btn">＋ 添加</button>
+  </header>
+
+  <div class="ws-body">
+    <!-- 筛选侧栏（桌面） -->
+    <aside class="sidebar" aria-label="筛选栏" id="sidebar"></aside>
+
+    <!-- 日历舞台 -->
+    <main class="main">
+      <section class="cal" aria-label="日历">
+        <div class="cal-toolbar" id="toolbar"></div>
+        <div id="viewRoot"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 弹窗与注记必须在 .app 内：token（含 data-theme 覆盖）定义在 .app 上，
+       挂在外面的节点拿不到 --surface/--line，弹窗会透明。 -->
+  <div id="modalRoot"></div>
+  <div class="proto-note" id="protoNote"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+/* ============================================================
+   原型渲染：全部数据来自 data.js（src/data/characters.json 真实样本）
+   state 参数：neutral | liyue | hares | hsr
+   view 参数：month | week      modal 参数：ganyu | anby
+   ============================================================ */
+const GAMES = {
+  genshin: { name: '原神', short: '原神', color: '#4a90e2', dateLabel: '角色生日' },
+  hsr:     { name: '崩坏：星穹铁道', short: '星穹铁道', color: '#9d90ff', dateLabel: '角色实装日' },
+  zzz:     { name: '绝区零', short: '绝区零', color: '#ff6b6b', dateLabel: '角色生日' },
+  honkai3: { name: '崩坏3', short: '崩坏3', color: '#ff8cc8', dateLabel: '角色生日' },
+};
+const AFFILS = {
+  liyue:  { theme: 'genshin', family: 'genshin', key: '#d4a553', accent: '#c8704a', deep: '#3d3027', label: '原神 · 璃月' },
+  hares:  { theme: 'zzz',     family: 'zzz',     key: '#8dff3d', accent: '#ffeb3b', deep: '#0d1a0f', label: '绝区零 · 狡兔屋' },
+  hsr:    { theme: 'hsr',     family: 'hsr',     key: '#4a5fd9', accent: '#8ab4f8', deep: '#0c1020', label: '星穹铁道 · 游戏级 fallback' },
+};
+const params = new URLSearchParams(location.search);
+const STATE = params.get('state') || 'neutral';
+const VIEW = params.get('week') === '1' || params.get('view') === 'week' ? 'week' : 'month';
+const MODAL = params.get('modal') || '';
+
+const app = document.getElementById('app');
+if (STATE !== 'neutral') {
+  const a = AFFILS[STATE];
+  app.dataset.theme = a.theme;
+  app.dataset.affilFamily = a.family;
+  app.style.setProperty('--affil-key', a.key);
+  app.style.setProperty('--affil-accent', a.accent);
+  app.style.setProperty('--affil-deep', a.deep);
+  app.style.setProperty('--fx-strength', '1');
+} else {
+  app.style.setProperty('--fx-strength', '0');
+}
+
+/* ---- 侧栏 ---- */
+function renderSidebar() {
+  const sb = document.getElementById('sidebar');
+  const activeGame = STATE === 'hares' ? 'zzz' : 'genshin';
+  const selected = ['genshin', 'hsr', 'zzz', 'honkai3'];
+  if (STATE === 'hares') selected.splice(selected.indexOf('genshin'), 1); // 演示：原神未选时聚焦绝区零
+  const LABELS = {
+    genshin: { elements: '元素', weapons: '武器', regions: '地区' },
+    zzz: { elements: '属性', weapons: '特性', regions: '阵营' },
+  }[activeGame];
+
+  const options = { elements: new Set(), rarities: new Set(), weapons: new Set(), regions: new Set() };
+  for (const c of [...window.GRID_CHARACTERS, ...window.MODAL_CHARACTERS]) {
+    if (c.game !== activeGame) continue;
+    if (c.element) options.elements.add(c.element);
+    if (c.rarity) options.rarities.add(c.rarity);
+    if (c.weapon) options.weapons.add(c.weapon);
+    if (c.region) options.regions.add(c.region);
+  }
+
+  const gameRows = Object.entries(GAMES).map(([id, g]) => {
+    const isSel = selected.includes(id);
+    const isCur = id === activeGame;
+    return `<button class="game-row ${isSel ? 'selected' : 'off'} ${isCur ? 'current' : ''}" aria-pressed="${isSel}">
+      <span class="ind" style="background:${g.color}"></span>
+      <span><span class="gname">${g.name}</span><span class="gsub">${g.dateLabel}</span></span>
+    </button>`;
+  }).join('');
+
+  const chipGroup = (label, values, render) => values.length === 0 ? '' :
+    `<div class="fgroup"><span class="fgroup-label">${label}</span><div class="ftags">${
+      values.map((v, i) => `<button class="ftag ${i === 0 ? 'on' : ''}">${render ? render(v) : v}</button>`).join('')
+    }</div></div>`;
+
+  sb.innerHTML = `
+    <div class="side-head"><h2>筛选</h2><span class="badge">3</span></div>
+    ${gameRows}
+    <label class="side-check"><input type="checkbox" checked /> 显示信息不全的角色</label>
+    <hr class="side-sep" />
+    <div class="panel-title"><span class="ind" style="background:${GAMES[activeGame].color}"></span>${GAMES[activeGame].name}${GAMES[activeGame].dateLabel}</div>
+    ${activeGame === 'zzz' ? '' : '<p class="panel-note">地区边光随选中角色的归属变化（当前为演示状态）。</p>'}
+    ${chipGroup(LABELS.elements, [...options.elements])}
+    ${chipGroup('稀有度', [...options.rarities].sort(), r => '★'.repeat(r))}
+    ${chipGroup(LABELS.weapons, [...options.weapons])}
+    ${chipGroup(LABELS.regions, [...options.regions])}
+    <button class="side-clear">清除筛选</button>`;
+}
+
+/* ---- 工具条 ---- */
+function renderToolbar() {
+  const seg = (items, activeIdx, label) =>
+    `<div class="seg" role="group" aria-label="${label}">${items.map((t, i) =>
+      `<button class="${i === activeIdx ? 'on' : ''}">${t}</button>`).join('')}</div>`;
+  document.getElementById('toolbar').innerHTML = `
+    <div class="nav-group">
+      <button class="icon-btn" aria-label="上一${VIEW === 'month' ? '月' : '周'}">‹</button>
+      <button class="today-btn">今天</button>
+      <button class="icon-btn" aria-label="下一${VIEW === 'month' ? '月' : '周'}">›</button>
+    </div>
+    <div class="cal-title">2026年8月 <span class="caret">▾</span></div>
+    <div class="toolbar-spacer"></div>
+    ${seg(['生日', '实装'], 0, '日期语义')}
+    ${seg(['头像', '卡片', '紧凑'], 0, '显示模式')}
+    ${seg(['月', '周'], VIEW === 'month' ? 0 : 1, '视图')}
+    <button class="icon-btn" aria-label="设置与数据" title="设置与数据">⋯</button>`;
+}
+
+/* ---- 月视图 ---- */
+const pad = n => String(n).padStart(2, '0');
+function charsOn(mmdd) {
+  return window.GRID_CHARACTERS.filter(c => /^\d{2}-\d{2}$/.test(c.birthday) && c.birthday === mmdd);
+}
+function avatarHtml(c, size) {
+  const gc = GAMES[c.game].color;
+  return c.avatar
+    ? `<span class="av" style="--gc:${gc}"><img src="${c.avatar}" alt="${c.name}" loading="lazy" referrerpolicy="no-referrer"
+        onerror="this.outerHTML='<span class=init>${c.name[0]}</span>'" /></span>`
+    : `<span class="av" style="--gc:${gc}"><span class="init">${c.name[0]}</span></span>`;
+}
+function renderMonth() {
+  const wd = ['日', '一', '二', '三', '四', '五', '六'];
+  const start = new Date(2026, 6, 26); // 2026-08 网格起点（周日开始）
+  const cells = [];
+  const cap = innerWidth <= 480 ? 4 : innerWidth <= 1024 ? 6 : 8;
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(2026, 6, 26 + i);
+    const isCurMonth = d.getMonth() === 7;
+    const isToday = d.getMonth() === 7 && d.getDate() === 17;
+    const list = charsOn(`${pad(d.getMonth() + 1)}-${pad(d.getDate())}`);
+    const has = list.length > 0;
+    const overflow = has && list.length > cap;
+    const visible = overflow ? list.slice(0, cap - 1) : list;
+    cells.push(`<div class="cell ${has ? 'has' : ''} ${isCurMonth ? '' : 'other'} ${isToday ? 'today' : ''}"
+        ${has ? 'role=button tabindex=0' : ''} aria-label="${d.getMonth() + 1}月${d.getDate()}日${has ? '，' + list.length + '个角色' : ''}">
+      <span class="dnum">${d.getDate()}</span>
+      ${has ? `<div class="avs">${visible.map(c => avatarHtml(c)).join('')}${
+        overflow ? `<button class="more-chip" aria-label="查看全部 ${list.length} 个角色">+${list.length - visible.length}</button>` : ''
+      }</div>` : ''}
+    </div>`);
+  }
+  document.getElementById('viewRoot').innerHTML = `
+    <div class="weekdays">${wd.map(w => `<span>${w}</span>`).join('')}</div>
+    <div class="grid">${cells.join('')}</div>`;
+}
+
+/* ---- 周视图（2026-08-16 ~ 08-22，含 5 人密集日 08-18） ---- */
+function renderWeek() {
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(2026, 7, 16 + i);
+    const list = charsOn(`${pad(d.getMonth() + 1)}-${pad(d.getDate())}`);
+    const isToday = d.getDate() === 17;
+    days.push({ d, list, isToday });
+  }
+  const head = days.map(({ d, isToday }) =>
+    `<div class="wd ${isToday ? 'today' : ''}">周${'日一二三四五六'[d.getDay()]}<b>${d.getMonth() + 1}/${d.getDate()}</b></div>`).join('');
+  const body = days.map(({ d, list, isToday }) => list.length === 0
+    ? `<div class="wcell empty" data-label="${d.getMonth() + 1}月${d.getDate()}日"><span>无角色生日</span></div>`
+    : `<div class="wcell ${isToday ? 'today-w' : ''}" data-label="${d.getMonth() + 1}月${d.getDate()}日">${
+        list.map(c => `<div class="wchar" style="--gc:${GAMES[c.game].color}">${avatarHtml(c)}
+          <span style="min-width:0"><span class="wname">${c.name}</span><span class="wgame">${GAMES[c.game].short}${c.rarity ? ' · ' + '★'.repeat(c.rarity) : ''}</span></span>
+        </div>`).join('')}</div>`).join('');
+  document.getElementById('viewRoot').innerHTML = `
+    <div class="week-head">${head}</div><div class="week-grid">${body}</div>`;
+}
+
+/* ---- 详情弹窗（演示状态 ?modal=ganyu|anby） ---- */
+function renderModal() {
+  const who = { ganyu: '甘雨', anby: '安比' }[MODAL];
+  if (!who) return;
+  const c = window.MODAL_CHARACTERS.find(x => x.name === who);
+  if (!c) return;
+  const g = GAMES[c.game];
+  // 立绘是 CSS 背景图，截图脚本需要可轮询的加载句柄
+  const bgImg = new Image();
+  bgImg.src = c.portrait;
+  window.__bgImg = bgImg;
+  document.getElementById('modalRoot').innerHTML = `
+    <div class="overlay" role="presentation">
+      <div class="dialog with-portrait" role="dialog" aria-label="${c.name} 详情" style="--p:url('${c.portrait}')">
+        <div class="pbg" aria-hidden="true"></div>
+        <div class="pscrim" aria-hidden="true"></div>
+        <button class="dlg-art" aria-pressed="false">仅看立绘</button>
+        <button class="dlg-close" aria-label="关闭详情">×</button>
+        <div class="dlg-body">
+          <h2 class="dlg-name">${c.name}<span class="dlg-name-en">${c.nameEn}</span></h2>
+          <span class="dlg-badge" style="background:${g.color}">${g.name}</span>
+          <div class="dlg-grid">
+            <div class="dlg-item"><span class="k">生日</span><span class="v">${parseInt(c.birthday.slice(0, 2))}月${parseInt(c.birthday.slice(3))}日</span></div>
+            ${c.rarity ? `<div class="dlg-item"><span class="k">稀有度</span><span class="v">${'★'.repeat(c.rarity)}</span></div>` : ''}
+            ${c.element ? `<div class="dlg-item"><span class="k">元素</span><span class="v">${c.element}</span></div>` : ''}
+            ${c.weapon ? `<div class="dlg-item"><span class="k">武器</span><span class="v">${c.weapon}</span></div>` : ''}
+            ${c.region ? `<div class="dlg-item"><span class="k">地区 / 阵营</span><span class="v">${c.region}</span></div>` : ''}
+          </div>
+          <div class="dlg-actions">
+            <button class="btn-fav">☆ 收藏</button>
+            <button class="btn-ghost">日历 ICS</button>
+            <button class="btn-text">编辑</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+renderSidebar();
+renderToolbar();
+VIEW === 'month' ? renderMonth() : renderWeek();
+renderModal();
+document.getElementById('protoNote').textContent =
+  `candidate-01 原型 · state=${STATE} · view=${VIEW}${MODAL ? ' · modal=' + MODAL : ''} · 数据=characters.json 真实样本`;
+</script>
+</body>
+</html>

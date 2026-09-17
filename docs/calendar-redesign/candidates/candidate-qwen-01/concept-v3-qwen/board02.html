@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>board02</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .band-bg { position:absolute; inset:0; background:
+      linear-gradient(115deg, rgba(44,96,105,.14) 0%, rgba(44,96,105,.05) 38%, transparent 62%),
+      radial-gradient(520px 300px at 84% 82%, rgba(44,96,105,.12), transparent 70%);
+  }
+  .giant-num { color: rgba(44,96,105,.10); }
+  /* region index chips */
+  .chips { display:flex; gap:8px; align-items:center; }
+  .chip { font-size:10.5px; letter-spacing:.14em; color:var(--ink-45); border:1px solid var(--hair); padding:4px 11px; }
+  .chip.on { color:var(--cream); background:#2c6069; border-color:#2c6069; font-weight:600; }
+  /* focused / dimmed cells */
+  .cell.fon { box-shadow: inset 0 -2.5px 0 #2c6069; }
+  .avs.dim { filter: grayscale(1); opacity: .25; }
+  .cell.fon .avs { filter:none; opacity:1; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="band-bg"></div>
+
+  <!-- masthead -->
+  <div class="masthead">
+    <div class="logo">
+      <div class="logo-seal">志</div>
+      <div class="logo-word">角色志<small>CHARACTER CHRONICLE</small></div>
+    </div>
+    <div class="mast-nav">
+      <span class="on">月刊</span><span>专题</span><span>图鉴</span><span>档案</span>
+    </div>
+    <div class="mast-right">2026 · 八月刊<br>VOL.08</div>
+  </div>
+
+  <!-- cover band -->
+  <div class="band">
+    <div class="giant-num" style="left:120px; top:66px;">08</div>
+
+    <div class="band-meta">
+      <div class="vol" style="color:#2c6069;">枫丹专栏 · FONDAINE</div>
+      <div class="date">八月刊，<br>枫丹专页。</div>
+      <div class="loc">原神 · 枫丹 · 水之国</div>
+      <div class="rule" style="background:#2c6069;"></div>
+      <div class="loc" style="margin-top:14px;">本月 2 位枫丹角色登场，8 月 22 日登上封面。</div>
+    </div>
+
+    <div class="cover">
+      <div class="cover-frame" style="background:#12222a;"><img src="assets/pt-Arlecchino.webp" alt="阿蕾奇诺"></div>
+      <div class="cover-caption">
+        <div class="k">封面人物 · 8.22 生日快乐</div>
+        <div class="n">阿蕾奇诺</div>
+        <div class="s">枫丹 · 火 · 「父亲」</div>
+        <div class="game-tag" style="border-color:rgba(244,234,214,.85);">原神 · GENSHIN IMPACT</div>
+      </div>
+    </div>
+
+    <div class="rail">
+      <div class="rail-label" style="color:#2c6069;">枫丹专栏 <em>FONDAINE</em></div>
+      <div class="rail-item">
+        <div class="d" style="color:#2c6069;">16</div>
+        <div style="flex:1"><div class="nm">娜维娅</div><div class="mt">枫丹 · 岩 · 刺玫会</div></div>
+        <div class="gdot" style="background:#2c6069"></div>
+      </div>
+      <div class="rail-item">
+        <div class="d" style="color:var(--crimson);">22</div>
+        <div style="flex:1"><div class="nm">阿蕾奇诺</div><div class="mt">枫丹 · 火 · 封面人物</div></div>
+        <div class="gdot" style="background:var(--crimson)"></div>
+      </div>
+      <div class="rail-item">
+        <div class="d">22</div>
+        <div style="flex:1"><div class="nm" style="color:var(--ink-45);">下期预告 · 艾梅莉埃</div><div class="mt">枫丹 · 草 · 09.22</div></div>
+        <div class="gdot" style="background:#2c6069; opacity:.5"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- calendar -->
+  <div class="cal">
+    <div class="cal-head">
+      <div class="t">八月目录 <em>原神 · 枫丹 2 / 30</em></div>
+      <div class="chips">
+        <div class="chip">全部</div><div class="chip">蒙德</div><div class="chip">璃月</div>
+        <div class="chip">稻妻</div><div class="chip">须弥</div><div class="chip on">枫丹</div>
+        <div class="chip">纳塔</div><div class="chip">至冬</div><div class="chip">游戏</div>
+      </div>
+    </div>
+    <div class="dow"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+
+    <div class="week">
+      <div class="cell sun out"><span class="num">26</span></div>
+      <div class="cell out"><span class="num">27</span></div>
+      <div class="cell out"><span class="num">28</span></div>
+      <div class="cell out"><span class="num">29</span></div>
+      <div class="cell out"><span class="num">30</span></div>
+      <div class="cell out"><span class="num">31</span></div>
+      <div class="cell"><span class="num">1</span></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">2</span></div>
+      <div class="cell"><span class="num">3</span><div class="avs dim"><img src="assets/av-Mualani.webp"></div></div>
+      <div class="cell"><span class="num">4</span></div>
+      <div class="cell"><span class="num">5</span></div>
+      <div class="cell"><span class="num">6</span><div class="hint">×2</div><div class="avs dim"><img src="assets/av-Qingque.webp"><img src="assets/av-Lucy.webp"></div></div>
+      <div class="cell"><span class="num">7</span></div>
+      <div class="cell"><span class="num">8</span><div class="hint">×2</div><div class="avs dim"><img src="assets/av-Iansan.webp"><img src="assets/av-Jiaoqiu.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">9</span></div>
+      <div class="cell"><span class="num">10</span><div class="avs dim"><img src="assets/av-Amber.webp"></div></div>
+      <div class="cell"><span class="num">11</span><div class="avs dim"><img src="assets/av-Mika.webp"></div></div>
+      <div class="cell"><span class="num">12</span><div class="avs dim"><img src="assets/av-Silver-Wolf.webp"></div></div>
+      <div class="cell"><span class="num">13</span><div class="avs dim"><img src="assets/av-Pan-Yinhu.webp"></div></div>
+      <div class="cell"><span class="num">14</span><div class="avs dim"><img src="assets/av-Serval.webp"></div></div>
+      <div class="cell"><span class="num">15</span><div class="hint">×2</div><div class="avs dim"><img src="assets/av-Yukong.webp"><img src="assets/av-Soldier-11.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun fon sel"><span class="num">16</span><div class="avs"><img src="assets/av-Navia.webp"></div></div>
+      <div class="cell"><span class="num">17</span><div class="hint">×2</div><div class="avs dim"><img src="assets/av-Chiori.webp"><img src="assets/av-Piper.webp"></div></div>
+      <div class="cell"><span class="num">18</span><div class="hint">×5</div><div class="avs dim"><img src="assets/av-Bronya.webp"><img src="assets/av-Bronya-Zaychik.svg"><span class="more">+3</span></div></div>
+      <div class="cell"><span class="num">19</span></div>
+      <div class="cell"><span class="num">20</span><div class="avs dim"><img src="assets/av-Faruzan.webp"></div></div>
+      <div class="cell"><span class="num">21</span></div>
+      <div class="cell hot"><span class="num">22</span><div class="hint">今天</div><div class="avs"><img src="assets/av-Arlecchino.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">23</span></div>
+      <div class="cell"><span class="num">24</span><div class="hint">×2</div><div class="avs dim"><img src="assets/av-Lingsha.webp"><img src="assets/av-Evelyn.webp"></div></div>
+      <div class="cell"><span class="num">25</span><div class="avs dim"><img src="assets/av-Kafka.webp"></div></div>
+      <div class="cell"><span class="num">26</span><div class="avs dim"><img src="assets/av-Ningguang.webp"></div></div>
+      <div class="cell"><span class="num">27</span></div>
+      <div class="cell"><span class="num">28</span><div class="avs dim"><img src="assets/av-Mavuika.webp"></div></div>
+      <div class="cell"><span class="num">29</span><div class="avs dim"><img src="assets/av-Topaz.webp"></div></div>
+    </div>
+    <div class="week">
+      <div class="cell sun"><span class="num">30</span><div class="avs dim"><img src="assets/av-Alice-Thymefield.webp"></div></div>
+      <div class="cell"><span class="num">31</span><div class="avs dim"><img src="assets/av-Mona.webp"></div></div>
+      <div class="cell out"><span class="num">1</span></div>
+      <div class="cell out"><span class="num">2</span></div>
+      <div class="cell out"><span class="num">3</span></div>
+      <div class="cell out"><span class="num">4</span></div>
+      <div class="cell out sun"><span class="num">5</span></div>
+    </div>
+  </div>
+
+  <!-- issue bar -->
+  <div class="issuebar">
+    <div class="l">枫丹聚焦 · 本期 <b>2</b> 位 / 全刊 <b>30</b> 场 · <b>娜维娅</b> 8.16 · <b>阿蕾奇诺</b> 8.22</div>
+    <div class="r">枫丹 · 水之国 · THE COURT OF FONDAINE</div>
+  </div>
+
+  <div class="noise"></div>
+</div>
+</body>
+</html>

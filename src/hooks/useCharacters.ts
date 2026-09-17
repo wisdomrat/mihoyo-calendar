@@ -74,8 +74,14 @@ function normalizeFilterState(value: unknown): FilterState {
   };
 }
 
+const storage = {
+  getItem(key: string): string | null { try { return window.localStorage.getItem(key); } catch { return null; } },
+  setItem(key: string, value: string) { try { window.localStorage.setItem(key, value); } catch { /* Session state remains usable. */ } },
+  removeItem(key: string) { try { window.localStorage.removeItem(key); } catch { /* Ignore unavailable storage. */ } },
+};
+
 function readCharactersFromStorage(key: string): Character[] {
-  const stored = localStorage.getItem(key);
+  const stored = storage.getItem(key);
   if (!stored) return [];
   try {
     const parsed = JSON.parse(stored);
@@ -85,90 +91,62 @@ function readCharactersFromStorage(key: string): Character[] {
   }
 }
 
+function readInitialState() {
+  const manualCharacters = [
+    ...extractManualCharacters(readCharactersFromStorage(STORAGE_KEY)),
+    ...LEGACY_STORAGE_KEYS.flatMap(key => extractManualCharacters(readCharactersFromStorage(key))),
+  ];
+  const characters = mergeCharacterCollections(ALL_CHARACTERS.map(normalizeCharacter), manualCharacters.map(normalizeCharacter));
+  const mode = storage.getItem(DISPLAY_MODE_KEY);
+  const start = storage.getItem(WEEK_START_KEY);
+  const savedFilters = storage.getItem(FILTERS_KEY) || storage.getItem(LEGACY_FILTERS_KEY);
+  let filters = emptyFilterState();
+  let favorites: string[] = [];
+  try { if (savedFilters) filters = normalizeFilterState(JSON.parse(savedFilters)); } catch { /* Use defaults. */ }
+  try { favorites = normalizeFavoriteIds(JSON.parse(storage.getItem(FAVORITES_KEY) || '[]')); } catch { /* Use defaults. */ }
+  return {
+    characters, filters, favorites,
+    lastSync: storage.getItem(LAST_SYNC_KEY),
+    displayMode: (mode === 'card' || mode === 'compact' ? mode : 'avatar') as DisplayMode,
+    weekStart: (start === '1' ? 1 : 0) as WeekStart,
+    portrait: storage.getItem(PORTRAIT_BACKGROUND_KEY) !== 'false',
+    motion: storage.getItem(MOTION_KEY) !== 'false',
+    dateMode: (storage.getItem(DATE_MODE_KEY) === 'release' ? 'release' : 'birthday') as DateMode,
+  };
+}
+
 export function useCharacters() {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [initial] = useState(readInitialState);
+  const [characters, setCharacters] = useState<Character[]>(initial.characters);
   const [loading, setLoading] = useState(false);
   const [syncProgress, setSyncProgress] = useState('');
-  const [lastSync, setLastSync] = useState<string | null>(null);
+  const [lastSync, setLastSync] = useState<string | null>(initial.lastSync);
   const [selectedGames, setSelectedGames] = useState<string[]>(GAME_IDS);
-  const [displayMode, setDisplayMode] = useState<DisplayMode>('avatar');
-  const [weekStart, setWeekStart] = useState<WeekStart>(0);
-  const [portraitBackgroundEnabled, setPortraitBackgroundEnabled] = useState(true);
-  const [motionEnabled, setMotionEnabled] = useState(true);
-  const [dateMode, setDateMode] = useState<DateMode>('birthday');
-  const [filters, setFilters] = useState<FilterState>(() => emptyFilterState());
-  const [favoriteCharacterIds, setFavoriteCharacterIds] = useState<string[]>([]);
+  const [displayMode, setDisplayMode] = useState<DisplayMode>(initial.displayMode);
+  const [weekStart, setWeekStart] = useState<WeekStart>(initial.weekStart);
+  const [portraitBackgroundEnabled, setPortraitBackgroundEnabled] = useState(initial.portrait);
+  const [motionEnabled, setMotionEnabled] = useState(initial.motion);
+  const [dateMode, setDateMode] = useState<DateMode>(initial.dateMode);
+  const [filters, setFilters] = useState<FilterState>(initial.filters);
+  const [favoriteCharacterIds, setFavoriteCharacterIds] = useState<string[]>(initial.favorites);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   useEffect(() => {
-    const lastSyncTime = localStorage.getItem(LAST_SYNC_KEY);
-    const savedMode = localStorage.getItem(DISPLAY_MODE_KEY) as DisplayMode | null;
-    const savedWeekStart = localStorage.getItem(WEEK_START_KEY);
-    const savedFilters = localStorage.getItem(FILTERS_KEY) || localStorage.getItem(LEGACY_FILTERS_KEY);
-    const savedPortraitBackground = localStorage.getItem(PORTRAIT_BACKGROUND_KEY);
-    const savedFavorites = localStorage.getItem(FAVORITES_KEY);
-
-    if (savedMode && ['avatar', 'card', 'compact'].includes(savedMode)) {
-      setDisplayMode(savedMode);
-    }
-    if (savedWeekStart && (savedWeekStart === '0' || savedWeekStart === '1')) {
-      setWeekStart(parseInt(savedWeekStart) as WeekStart);
-    }
-    // 默认开启立绘背景；只有用户明确关过（存了 'false'）才尊重关闭
-    if (savedPortraitBackground === 'false') {
-      setPortraitBackgroundEnabled(false);
-    }
-    // 动态立绘默认开启；用户明确关过才关闭
-    if (localStorage.getItem(MOTION_KEY) === 'false') {
-      setMotionEnabled(false);
-    }
-    const savedDateMode = localStorage.getItem(DATE_MODE_KEY);
-    if (savedDateMode === 'release' || savedDateMode === 'birthday') {
-      setDateMode(savedDateMode);
-    }
-    if (savedFilters) {
-      try {
-        setFilters(normalizeFilterState(JSON.parse(savedFilters)));
-      } catch {
-        setFilters(emptyFilterState());
-      }
-    }
-    if (savedFavorites) {
-      try {
-        setFavoriteCharacterIds(normalizeFavoriteIds(JSON.parse(savedFavorites)));
-      } catch {
-        setFavoriteCharacterIds([]);
-      }
-    }
-
-    const manualCharacters = [
-      ...extractManualCharacters(readCharactersFromStorage(STORAGE_KEY)),
-      ...LEGACY_STORAGE_KEYS.flatMap(key => extractManualCharacters(readCharactersFromStorage(key))),
-    ];
-    const initialData = mergeCharacterCollections(
-      ALL_CHARACTERS.map(normalizeCharacter),
-      manualCharacters.map(normalizeCharacter),
-    );
-
-    setCharacters(initialData);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
-    for (const key of LEGACY_STORAGE_KEYS) localStorage.removeItem(key);
-
-    if (lastSyncTime) setLastSync(lastSyncTime);
+    for (const key of LEGACY_STORAGE_KEYS) storage.removeItem(key);
   }, []);
 
   useEffect(() => {
     if (characters.length > 0) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(characters));
+      storage.setItem(STORAGE_KEY, JSON.stringify(characters));
     }
   }, [characters]);
 
   useEffect(() => {
-    localStorage.setItem(FILTERS_KEY, JSON.stringify(filters));
+    storage.setItem(FILTERS_KEY, JSON.stringify(filters));
   }, [filters]);
 
   useEffect(() => {
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoriteCharacterIds));
+    storage.setItem(FAVORITES_KEY, JSON.stringify(favoriteCharacterIds));
   }, [favoriteCharacterIds]);
 
   const fetchFromWiki = useCallback(async () => {
@@ -206,7 +184,7 @@ export function useCharacters() {
 
             setCharacters(merged);
             const now = new Date().toISOString();
-            localStorage.setItem(LAST_SYNC_KEY, now);
+            storage.setItem(LAST_SYNC_KEY, now);
             setLastSync(now);
             setSyncProgress(`更新完成：共 ${merged.length} 个角色。`);
 
@@ -274,27 +252,27 @@ export function useCharacters() {
 
   const setMode = useCallback((mode: DisplayMode) => {
     setDisplayMode(mode);
-    localStorage.setItem(DISPLAY_MODE_KEY, mode);
+    storage.setItem(DISPLAY_MODE_KEY, mode);
   }, []);
 
   const setWeekStartDay = useCallback((start: WeekStart) => {
     setWeekStart(start);
-    localStorage.setItem(WEEK_START_KEY, String(start));
+    storage.setItem(WEEK_START_KEY, String(start));
   }, []);
 
   const setPortraitBackground = useCallback((enabled: boolean) => {
     setPortraitBackgroundEnabled(enabled);
-    localStorage.setItem(PORTRAIT_BACKGROUND_KEY, String(enabled));
+    storage.setItem(PORTRAIT_BACKGROUND_KEY, String(enabled));
   }, []);
 
   const setMotion = useCallback((enabled: boolean) => {
     setMotionEnabled(enabled);
-    localStorage.setItem(MOTION_KEY, String(enabled));
+    storage.setItem(MOTION_KEY, String(enabled));
   }, []);
 
   const setDateModePref = useCallback((mode: DateMode) => {
     setDateMode(mode);
-    localStorage.setItem(DATE_MODE_KEY, mode);
+    storage.setItem(DATE_MODE_KEY, mode);
   }, []);
 
   const updateFilters = useCallback((newFilters: Partial<FilterState>) => {

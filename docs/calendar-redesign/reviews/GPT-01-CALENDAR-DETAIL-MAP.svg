@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1080" viewBox="0 0 1600 1080">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#f0c98a"/></marker>
+    <style>
+      .t{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#f6f1e9}.s{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#b9bbca;font-size:14px}.h{font-family:"Segoe UI","Microsoft YaHei",sans-serif;fill:#fff8eb;font-size:17px;font-weight:650}.box{fill:none;stroke:#f0c98a;stroke-width:2.5;stroke-dasharray:8 6}.ar{fill:none;stroke:#f0c98a;stroke-width:2.5;marker-end:url(#a)}.tag{fill:#151526;fill-opacity:.95;stroke:#f0c98a;stroke-width:1.2}
+    </style>
+  </defs>
+  <rect width="1600" height="1080" fill="#0b0d18"/>
+  <text x="40" y="42" class="t" font-size="26" font-weight="650">GPT-01 右侧月历 / 状态细节定义</text>
+  <text x="40" y="70" class="s">底图：01-neutral-month-GPT · 重点是信息层级，不是把日期格做成独立卡片</text>
+  <rect x="40" y="95" width="850" height="755" rx="26" fill="#111426"/>
+  <svg x="40" y="95" width="850" height="755" viewBox="590 146 778 690" preserveAspectRatio="none"><image x="0" y="0" width="1440" height="900" xlink:href="../candidates/candidate-GPT-01/concept-v3-GPT/01-neutral-month-GPT.png"/></svg>
+  <rect x="40" y="95" width="850" height="755" rx="26" class="box"/>
+  <rect x="68" y="120" width="790" height="120" class="box"/>
+  <rect x="68" y="245" width="790" height="345" class="box"/>
+  <rect x="68" y="590" width="790" height="125" class="box"/>
+  <rect x="68" y="715" width="790" height="110" class="box"/>
+  <g>
+    <rect x="950" y="105" width="600" height="74" class="tag"/><text x="970" y="134" class="h">C1 月份标题与上下文</text><text x="970" y="160" class="s">月份是主操作对象；右上是事件统计/上下文，不是装饰文案</text><path d="M950 142L820 160" class="ar"/>
+    <rect x="950" y="195" width="600" height="74" class="tag"/><text x="970" y="224" class="h">C2 月份操作与语义控制</text><text x="970" y="250" class="s">上月/下月、今天、生日/实装、月/周可分层，不必全部常驻</text><path d="M950 232L820 220" class="ar"/>
+    <rect x="950" y="285" width="600" height="74" class="tag"/><text x="970" y="314" class="h">C3 星期标题带</text><text x="970" y="340" class="s">低对比、稳定列宽；周末可轻微强调，不换材质</text><path d="M950 322L785 290" class="ar"/>
+    <rect x="950" y="375" width="600" height="74" class="tag"/><text x="970" y="404" class="h">C4 7 列日期网格</text><text x="970" y="430" class="s">日期数字固定在格内锚点；事件内容绝对定位，不能撑高行</text><path d="M950 412L835 450" class="ar"/>
+    <rect x="950" y="465" width="600" height="74" class="tag"/><text x="970" y="494" class="h">C5 事件标记层</text><text x="970" y="520" class="s">生日/实装用小点和细环；颜色是语义，不是格子背景</text><path d="M950 502L770 530" class="ar"/>
+    <rect x="950" y="555" width="600" height="74" class="tag"/><text x="970" y="584" class="h">C6 头像密度层</text><text x="970" y="610" class="s">1 个大头像；2–3 个有限堆叠；4+ 最多头像加可点击 +N</text><path d="M950 592L725 520" class="ar"/>
+    <rect x="950" y="645" width="600" height="74" class="tag"/><text x="970" y="674" class="h">C7 今天 / 选中态</text><text x="970" y="700" class="s">用浅色药丸或局部标记浮在网格上，不整格换材质</text><path d="M950 682L660 555" class="ar"/>
+    <rect x="950" y="735" width="600" height="74" class="tag"/><text x="970" y="764" class="h">C8 图例、筛选与摘要</text><text x="970" y="790" class="s">图例解释颜色；筛选显示当前摘要；当天详情是独立信息条</text><path d="M950 772L840 775" class="ar"/>
+    <rect x="950" y="825" width="600" height="74" class="tag"/><text x="970" y="854" class="h">C0 月历表面</text><text x="970" y="880" class="s">半透明深色表面；与 L2 背景渐变和 G1 间隙连续</text><path d="M950 862L850 180" class="ar"/>
+  </g>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" text-anchor="middle">
+    <circle cx="78" cy="125" r="17" fill="#f0c98a"/><text x="78" y="131" fill="#151526">C1</text>
+    <circle cx="78" cy="220" r="17" fill="#f0c98a"/><text x="78" y="226" fill="#151526">C2</text>
+    <circle cx="78" cy="260" r="17" fill="#f0c98a"/><text x="78" y="266" fill="#151526">C3</text>
+    <circle cx="78" cy="365" r="17" fill="#f0c98a"/><text x="78" y="371" fill="#151526">C4</text>
+    <circle cx="78" cy="500" r="17" fill="#f0c98a"/><text x="78" y="506" fill="#151526">C5</text>
+    <circle cx="700" cy="500" r="17" fill="#f0c98a"/><text x="700" y="506" fill="#151526">C6</text>
+    <circle cx="660" cy="550" r="17" fill="#f0c98a"/><text x="660" y="556" fill="#151526">C7</text>
+    <circle cx="78" cy="730" r="17" fill="#f0c98a"/><text x="78" y="736" fill="#151526">C8</text>
+  </g>
+  <text x="40" y="915" class="t" font-size="20" font-weight="650">头像规则的统一术语</text>
+  <text x="40" y="948" class="s">A1 单角色：日期位置不动，头像变大；A2 2–3 角色：有限重叠；A3 4+：最多 3 个头像 + 可访问的 +N。</text>
+  <text x="40" y="978" class="s">所有头像都属于 C6 头像密度层，不改变 C4 网格几何；点击日期和点击头像是两条独立路径。</text>
+</svg>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>封面人物 · 移动端</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg0:#15131a; --bg1:#0d0c10;
+  --ivory:#f2ede4;
+  --iv2:rgba(242,237,228,.60);
+  --iv3:rgba(242,237,228,.34);
+  --hair:rgba(242,237,228,.09);
+  --gold:#c9a35f; --gold-hi:#e0be7e; --gold-dim:rgba(201,163,95,.5);
+  --serif:'Noto Serif SC','Source Han Serif SC','SimSun',serif;
+  --disp:'Bodoni Moda',Georgia,'Times New Roman',serif;
+  --sans:'Noto Sans SC','Microsoft YaHei UI','Microsoft YaHei',sans-serif;
+  --gi:#3d9b8f; --hsr:#4a5fd9; --zzz:#ff6b35; --bh3:#e87bb0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:390px;height:844px;overflow:hidden}
+body{
+  background:radial-gradient(560px 320px at 20% -6%, #1d1922 0%, transparent 62%),
+             linear-gradient(178deg,var(--bg0) 0%,var(--bg1) 94%);
+  color:var(--ivory); font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+.frame{position:relative;width:390px;height:844px;display:flex;flex-direction:column}
+
+/* top bar */
+.topbar{flex:none;height:54px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid var(--hair)}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand-cn{font-family:var(--serif);font-weight:900;font-size:17px;letter-spacing:.14em;line-height:1}
+.brand-en{font-family:var(--disp);font-size:8px;letter-spacing:.42em;color:var(--gold)}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.ic{color:var(--iv2)}
+.today-btn{border:1px solid var(--gold-dim);color:var(--gold);font-size:11px;letter-spacing:.2em;padding:5px 12px 5px 14px;border-radius:999px}
+
+/* masthead */
+.masthead{flex:none;display:flex;align-items:center;padding:14px 20px 6px}
+.bignum{font-family:var(--disp);font-size:64px;line-height:.85;color:rgba(201,163,95,.05);-webkit-text-stroke:1px rgba(201,163,95,.5);margin-right:14px}
+.mcol{display:flex;flex-direction:column;gap:4px}
+.mrow{display:flex;align-items:baseline;gap:10px}
+.month-cn{font-family:var(--serif);font-weight:900;font-size:30px;letter-spacing:.08em;line-height:1}
+.month-en{font-family:var(--disp);font-style:italic;font-size:13px;color:var(--iv2)}
+.msub{font-size:10.5px;font-weight:300;color:var(--iv3);letter-spacing:.16em}
+.msub b{color:var(--gold-hi);font-weight:500}
+.navs{margin-left:auto;display:flex;gap:8px}
+.nav{width:34px;height:34px;border-radius:50%;border:1px solid rgba(242,237,228,.22);display:flex;align-items:center;justify-content:center;color:var(--iv2);font-size:14px;font-family:var(--disp)}
+.nav.next{border-color:var(--gold-dim);color:var(--gold)}
+
+/* game chips */
+.chips{flex:none;display:flex;gap:8px;padding:10px 20px 4px;overflow:hidden}
+.chip{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:var(--iv2);letter-spacing:.06em;border:1px solid var(--hair);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.chip i{width:5px;height:5px;border-radius:50%;background:var(--c)}
+.chip.active{color:var(--ivory);border-color:rgba(201,163,95,.55)}
+
+/* calendar */
+.cal{flex:1;display:flex;flex-direction:column;padding:0 14px;min-height:0}
+.weekhead{flex:none;display:grid;grid-template-columns:repeat(7,1fr);padding:12px 0 6px}
+.wh{font-size:9.5px;letter-spacing:.22em;color:var(--iv3);text-align:center;font-weight:300}
+.grid{flex:1;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(6,1fr);min-height:0}
+.cell{position:relative;border-top:1px solid rgba(242,237,228,.07);padding:4px 3px 2px;min-height:0}
+.cell.wk .dnum{color:rgba(242,237,228,.24)}
+.dnum{font-family:var(--disp);font-size:9.5px;color:var(--iv3)}
+.cell.empty{border-top-color:rgba(242,237,228,.04)}
+.evwrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding-bottom:1px}
+.stack{display:flex;align-items:center}
+.med{position:relative;width:34px;height:34px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 4px 10px rgba(0,0,0,.5)}
+.med img{width:100%;height:100%;object-fit:cover}
+.med::after{content:"";position:absolute;inset:0;border-radius:50%;border:1.2px solid var(--ring,#888);opacity:.85}
+.stack .med{border:1.5px solid #0d0c10}
+.stack .med+.med{margin-left:-12px}
+.stack .more{margin-left:-12px;width:34px;height:34px;border-radius:50%;background:#221d27;border:1px dashed rgba(242,237,228,.26);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:10px;color:var(--iv2);z-index:2}
+.evname{font-size:8.5px;font-weight:300;color:var(--iv2);letter-spacing:.02em;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
+.solo .med{width:38px;height:38px}
+.cell.today{background:radial-gradient(80px 60px at 50% 58%, rgba(213,57,75,.17), transparent 72%)}
+.today .dnum{color:var(--gold-hi)}
+.today-flag{position:absolute;top:3px;right:4px;font-family:var(--serif);font-weight:900;font-size:8px;color:var(--gold)}
+.today .med{width:44px;height:44px}
+.today .med::before{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--gold-dim)}
+.today .med img{object-position:50% 12%;filter:brightness(1.18) saturate(1.05)}
+.today .evname{color:var(--gold-hi)}
+
+/* bottom sheet */
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:10;
+  background:#191523;border-radius:22px 22px 0 0;
+  box-shadow:0 -18px 50px rgba(0,0,0,.6);
+  border-top:1px solid rgba(242,237,228,.08);
+  padding:10px 20px 26px;}
+.grabber{width:36px;height:4px;border-radius:2px;background:rgba(242,237,228,.22);margin:0 auto 12px}
+.sh-kicker{font-family:var(--disp);font-size:9.5px;letter-spacing:.34em;color:var(--gold);margin-bottom:12px}
+.sh-row{display:flex;align-items:center;gap:14px}
+.sh-med{position:relative;width:54px;height:54px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.sh-med img{width:100%;height:100%;object-fit:cover}
+.sh-med::after{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid #86c8e8;box-shadow:0 0 14px rgba(134,200,232,.35)}
+.sh-name{font-family:var(--serif);font-weight:900;font-size:20px;letter-spacing:.06em;line-height:1}
+.sh-meta{margin-top:6px;font-size:11px;font-weight:300;color:var(--iv3);letter-spacing:.12em}
+.sh-btn{margin-left:auto;background:linear-gradient(135deg,#e0be7e,#b98f43);color:#171310;font-size:12px;letter-spacing:.18em;font-weight:500;border-radius:999px;padding:11px 18px}
+.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:4px;border-radius:2px;background:rgba(242,237,228,.28)}
+.sheet-fade{position:absolute;left:0;right:0;bottom:148px;height:70px;z-index:9;background:linear-gradient(180deg,transparent,rgba(13,12,16,.85))}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- top bar -->
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-cn">封面人物</span>
+      <span class="brand-en">COVER&nbsp;STORY</span>
+    </div>
+    <div class="top-right">
+      <svg class="ic" width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3.2 3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span class="today-btn">今天</span>
+    </div>
+  </div>
+
+  <!-- masthead -->
+  <div class="masthead">
+    <div class="bignum">08</div>
+    <div class="mcol">
+      <div class="mrow"><span class="month-cn">八月</span><span class="month-en">August</span></div>
+      <div class="msub">本期封面人物 · <b>30 位</b></div>
+    </div>
+    <div class="navs">
+      <div class="nav">&#8249;</div>
+      <div class="nav next">&#8250;</div>
+    </div>
+  </div>
+
+  <!-- game chips -->
+  <div class="chips">
+    <span class="chip" style="--c:var(--gi)">原神</span>
+    <span class="chip" style="--c:var(--hsr)">星穹铁道</span>
+    <span class="chip" style="--c:var(--zzz)">绝区零</span>
+    <span class="chip active" style="--c:var(--bh3)">全部</span>
+  </div>
+
+  <!-- calendar -->
+  <div class="cal">
+    <div class="weekhead">
+      <span class="wh">日</span><span class="wh">一</span><span class="wh">二</span><span class="wh">三</span><span class="wh">四</span><span class="wh">五</span><span class="wh">六</span>
+    </div>
+    <div class="grid">
+      <!-- r1 -->
+      <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+      <div class="cell wk"><span class="dnum">1</span></div>
+      <!-- r2 -->
+      <div class="cell wk"><span class="dnum">2</span></div>
+      <div class="cell solo"><span class="dnum">3</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#e85a3a"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Mualani.webp"></div></div><span class="evname">玛拉妮</span></div>
+      </div>
+      <div class="cell wk"><span class="dnum">4</span></div>
+      <div class="cell"><span class="dnum">5</span></div>
+      <div class="cell"><span class="dnum">6</span>
+        <div class="evwrap"><div class="stack">
+          <div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1201.webp"></div>
+          <div class="med" style="--ring:#ff5722"><img src="https://static.nanoka.cc/assets/zzz/IconRoleCircle27.webp"></div>
+        </div><span class="evname">青雀·露西</span></div>
+      </div>
+      <div class="cell wk"><span class="dnum">7</span></div>
+      <div class="cell"><span class="dnum">8</span>
+        <div class="evwrap"><div class="stack">
+          <div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1218.webp"></div>
+          <div class="med" style="--ring:#e85a3a"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Iansan.webp"></div>
+        </div><span class="evname">椒丘·伊安珊</span></div>
+      </div>
+      <!-- r3 -->
+      <div class="cell wk"><span class="dnum">9</span></div>
+      <div class="cell"><span class="dnum">10</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#5eb3d6"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Ambor.webp"></div></div><span class="evname">安柏</span></div>
+      </div>
+      <div class="cell"><span class="dnum">11</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#5eb3d6"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Mika.webp"></div></div><span class="evname">米卡</span></div>
+      </div>
+      <div class="cell"><span class="dnum">12</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1006.webp"></div></div><span class="evname">银狼</span></div>
+      </div>
+      <div class="cell"><span class="dnum">13</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#66bb6a"><img src="https://static.nanoka.cc/assets/zzz/IconRoleCircle45.webp"></div></div><span class="evname">潘引壶</span></div>
+      </div>
+      <div class="cell"><span class="dnum">14</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1103.webp"></div></div><span class="evname">希露瓦</span></div>
+      </div>
+      <div class="cell"><span class="dnum">15</span>
+        <div class="evwrap"><div class="stack">
+          <div class="med" style="--ring:#ff6b35"><img src="https://static.nanoka.cc/assets/zzz/IconRoleCircle05.webp"></div>
+          <div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1207.webp"></div>
+        </div><span class="evname">11号·驭空</span></div>
+      </div>
+      <!-- r4 -->
+      <div class="cell wk"><span class="dnum">16</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#4a8fc7"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Navia.webp"></div></div><span class="evname">娜维娅</span></div>
+      </div>
+      <div class="cell"><span class="dnum">17</span>
+        <div class="evwrap"><div class="stack">
+          <div class="med" style="--ring:#9d7dd9"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Chiori.webp"></div>
+          <div class="med" style="--ring:#ff5722"><img src="https://static.nanoka.cc/assets/zzz/IconRoleCircle28.webp"></div>
+        </div><span class="evname">千织·派派</span></div>
+      </div>
+      <div class="cell"><span class="dnum">18</span>
+        <div class="evwrap"><div class="stack">
+          <div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1101.webp"></div>
+          <div class="more">+4</div>
+        </div><span class="evname">布洛妮娅等5位</span></div>
+      </div>
+      <div class="cell wk"><span class="dnum">19</span></div>
+      <div class="cell"><span class="dnum">20</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#6fba72"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Faruzan.webp"></div></div><span class="evname">珐露珊</span></div>
+      </div>
+      <div class="cell wk"><span class="dnum">21</span></div>
+      <div class="cell solo today"><span class="dnum">22</span><span class="today-flag">今</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#86c8e8"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Arlecchino.webp"></div></div><span class="evname">阿蕾奇诺</span></div>
+      </div>
+      <!-- r5 -->
+      <div class="cell wk"><span class="dnum">23</span></div>
+      <div class="cell"><span class="dnum">24</span>
+        <div class="evwrap"><div class="stack">
+          <div class="med" style="--ring:#42a5f5"><img src="https://static.nanoka.cc/assets/zzz/IconRoleCircle37.webp"></div>
+          <div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1222.webp"></div>
+        </div><span class="evname">伊芙琳·灵砂</span></div>
+      </div>
+      <div class="cell"><span class="dnum">25</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1005.webp"></div></div><span class="evname">卡芙卡</span></div>
+      </div>
+      <div class="cell"><span class="dnum">26</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#d4a553"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Ningguang.webp"></div></div><span class="evname">凝光</span></div>
+      </div>
+      <div class="cell wk"><span class="dnum">27</span></div>
+      <div class="cell"><span class="dnum">28</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#e85a3a"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Mavuika.webp"></div></div><span class="evname">玛薇卡</span></div>
+      </div>
+      <div class="cell wk"><span class="dnum">29</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#4a5fd9"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1112.webp"></div></div><span class="evname">托帕</span></div>
+      </div>
+      <!-- r6 -->
+      <div class="cell wk"><span class="dnum">30</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#ff7043"><img src="https://static.nanoka.cc/assets/zzz/IconRoleCircle46.webp"></div></div><span class="evname">爱丽丝</span></div>
+      </div>
+      <div class="cell"><span class="dnum">31</span>
+        <div class="evwrap"><div class="stack"><div class="med" style="--ring:#5eb3d6"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Mona.webp"></div></div><span class="evname">莫娜</span></div>
+      </div>
+      <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+    </div>
+  </div>
+
+  <!-- sheet fade + sheet -->
+  <div class="sheet-fade"></div>
+  <div class="sheet">
+    <div class="grabber"></div>
+    <div class="sh-kicker">TODAY&nbsp;·&nbsp;8 月 22 日 星期六</div>
+    <div class="sh-row">
+      <div class="sh-med"><img src="https://static.nanoka.cc/assets/gi/UI_AvatarIcon_Arlecchino.webp"></div>
+      <div>
+        <div class="sh-name">阿蕾奇诺</div>
+        <div class="sh-meta">枫丹 · 火 · 长柄武器</div>
+      </div>
+      <span class="sh-btn">查看封面</span>
+    </div>
+    <div class="homebar"></div>
+  </div>
+
+</div>
+</body>
+</html>

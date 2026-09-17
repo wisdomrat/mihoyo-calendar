@@ -1,0 +1,214 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>02 桌面端上下文 + 详情</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1440px;height:900px;overflow:hidden;position:relative;
+  font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;
+  color:#f5f4ee;-webkit-font-smoothing:antialiased}
+.bg{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%;filter:blur(64px)}
+.rule{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,.08)}
+/* 顶栏 */
+.brand{position:absolute;left:72px;top:34px}
+.brand h1{font-size:20px;font-weight:600;letter-spacing:.5px}
+.brand p{font-size:12px;color:#858aa4;margin-top:7px;letter-spacing:1.4px}
+.bar{position:absolute;top:36px;height:36px;display:flex;align-items:center;gap:10px}
+.seg{display:flex;height:36px;border:1px solid rgba(255,255,255,.16);border-radius:18px;overflow:hidden}
+.seg b{display:flex;align-items:center;padding:0 15px;font-size:12.5px;font-weight:400;color:#9296b0}
+.seg b.on{background:#f1f0ea;color:#141526;font-weight:600}
+.search{display:flex;align-items:center;gap:8px;height:36px;padding:0 15px;width:180px;
+  border:1px solid rgba(255,255,255,.16);border-radius:18px;font-size:12.5px;color:#7f849e}
+.filterpill{display:flex;align-items:center;height:36px;border-radius:18px;
+  border:1px solid rgba(255,255,255,.16);overflow:hidden}
+.filterpill .sum{display:flex;align-items:center;gap:7px;padding:0 14px;font-size:12.5px;color:#b8bbcc}
+.filterpill .sum i{width:6px;height:6px;border-radius:50%;background:#766cff}
+.filterpill .act{display:flex;align-items:center;gap:7px;padding:0 14px;height:100%;
+  border-left:1px solid rgba(255,255,255,.16);font-size:12.5px;color:#f5f4ee}
+.filterpill .act.on{background:#f1f0ea;color:#141526;font-weight:600;border-left-color:transparent}
+.badge{min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#ff715b;color:#180d0c;
+  font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.icobtn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:#b8bbcc}
+/* 舞台 */
+.stage{position:absolute;left:72px;top:136px;width:470px;height:720px;border-radius:26px;
+  overflow:hidden;border:1px solid rgba(255,255,255,.18)}
+.stage img.pt{position:absolute}
+.scrim{position:absolute;inset:0}
+.stage .tag{position:absolute;left:28px;top:26px;font-size:11px;letter-spacing:2.4px;color:#e9e7f5;opacity:.9}
+.stage .fav{position:absolute;right:26px;top:24px;width:30px;height:30px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px}
+.stage .info{position:absolute;left:28px;right:28px;bottom:30px}
+.stage .big{font-size:86px;line-height:.86;letter-spacing:-4px;font-weight:300}
+.stage .sub{font-size:13px;letter-spacing:3px;color:#cfcbe4;margin-top:14px}
+.stage .who{font-size:18px;margin-top:12px}
+.stage .who span{color:#9a9db5;font-size:15px}
+.also{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:11.5px;color:#9a9db5}
+.also .av{width:28px;height:28px}
+/* 工作区 */
+.work{position:absolute;left:590px;top:136px;width:778px;height:720px;border-radius:26px;
+  background:rgba(17,20,38,.76);border:1px solid rgba(255,255,255,.14)}
+.wh{position:absolute;left:28px;top:18px}
+.wh .lbl{font-size:11px;letter-spacing:2.5px;color:#858aa4}
+.wh .mon{font-size:36px;font-weight:300;letter-spacing:-.5px;margin-top:10px}
+.wh .mon span{color:#777b9b}
+.wcount{position:absolute;right:28px;top:60px;text-align:right;display:flex;gap:10px;align-items:baseline}
+.wcount .a{font-size:11px;letter-spacing:1.8px;color:#7f849e}
+.wcount .b{font-size:12px;color:#b8bbcc}
+.nav{position:absolute;right:28px;top:18px;display:flex;align-items:center;gap:8px}
+.nav .n{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:#c9ccdd}
+.nav .today{height:32px;padding:0 16px;border-radius:16px;background:#f1f0ea;color:#141526;
+  font-size:12.5px;font-weight:600;display:flex;align-items:center}
+.wk{position:absolute;top:94px;left:28px;width:721px;display:flex}
+.wk i{width:103px;text-align:center;font-size:11px;letter-spacing:1.4px;color:#7f849e;font-style:normal}
+.grid{position:absolute;left:28px;top:116px;width:721px;height:552px}
+.gl{position:absolute;background:rgba(255,255,255,.085)}
+.cell{position:absolute;width:103px;height:92px;overflow:hidden}
+.cell .dnum{position:absolute;left:11px;top:8px;font-size:13px;color:#dedde8;letter-spacing:.3px}
+.cell.out{opacity:.32}
+.cell.out .dnum{color:#7a7e97}
+.cell.today .dnum{left:6px;top:5px;padding:3px 8px 4px;border-radius:11px;background:#f1f0ea;color:#141526;font-weight:600}
+.cell.sel{border:1.5px solid rgba(245,244,238,.85);border-radius:12px}
+.cell.sel .dnum{color:#f5f4ee;font-weight:600}
+.marks{position:absolute;right:9px;top:12px;display:flex;gap:4px}
+.mk{width:5px;height:5px;display:block}
+.mk.birthday{border-radius:50%;background:#c9ccdd}
+.mk.release{transform:rotate(45deg);background:#c9ccdd}
+.stack{position:absolute;left:50%;transform:translateX(-50%);height:48px}
+.stack.s1{top:23px;width:48px}
+.stack.s2{top:29px;height:34px}
+.stack.s3{top:34px;height:24px}
+.slot{position:absolute;top:0}
+.av{display:inline-block;border-radius:50%;overflow:hidden;position:relative;
+  box-shadow:0 0 0 2px var(--ring),0 2px 8px rgba(0,0,0,.55);
+  background:radial-gradient(125% 125% at 30% 24%,#2b2f4c,#161a2b);vertical-align:top}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+.av b{display:flex;width:100%;height:100%;align-items:center;justify-content:center;
+  font-weight:600;color:#d3d6e6;font-size:13px}
+.s1 .av b{font-size:19px}
+.s2 .av b{font-size:14px}
+.s3 .av b{font-size:10px}
+.more{position:absolute;top:2px;height:20px;min-width:30px;padding:0 6px;border-radius:10px;
+  background:rgba(245,244,238,.92);color:#141526;font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
+.cap{position:absolute;left:4px;right:4px;bottom:4px;text-align:center;font-size:10px;line-height:12px;
+  color:#a3a7bd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 底部当天入口 */
+.dock{position:absolute;left:28px;top:676px;width:721px;height:44px;border-radius:22px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;padding:0 6px 0 13px;gap:11px}
+.dock .av{width:30px;height:30px}
+.dock .t{font-size:13px}
+.dock .t span{color:#9296b0;font-size:12px}
+.dock .go{margin-left:auto;height:32px;padding:0 15px;border-radius:16px;background:#f1f0ea;color:#141526;
+  font-size:12px;font-weight:600;display:flex;align-items:center}
+.legend{display:flex;align-items:center;gap:14px;font-size:11px;color:#7f849e}
+.legend b{display:flex;align-items:center;gap:5px;font-weight:400}
+.foot{position:absolute;left:72px;bottom:16px;font-size:10px;letter-spacing:2px;color:#5f6480}
+
+.bg{background:linear-gradient(135deg,#080b17 0%,#13172b 55%,#231f36 100%)}
+/* 地区光只落在左侧舞台一侧，右侧工作区保持中性 */
+.halo{position:absolute;inset:0;background:radial-gradient(48% 62% at 20% 34%,rgba(111,186,114,.30),rgba(111,186,114,0) 72%)}
+.stage{border-color:rgba(140,214,142,.45)}
+.stage .scrim{inset:0 0 372px 0;
+  background:linear-gradient(180deg,rgba(8,18,14,.5) 0%,rgba(8,18,14,.08) 18%,rgba(8,18,14,.34) 62%,rgba(7,16,12,.93) 100%)}
+.stage .info{bottom:392px}
+.stage .big{font-size:44px;letter-spacing:-1px}
+.cell.sel{border-color:rgba(140,214,142,.9)}
+/* 展开面板：从舞台底部升起，右侧月历完全不被遮挡 */
+.panel{position:absolute;left:0;right:0;bottom:0;height:372px;padding:18px 22px 16px;
+  background:linear-gradient(180deg,rgba(10,24,19,.90) 0%,rgba(8,20,16,.96) 14%,rgba(7,18,14,.98) 100%);
+  border-top:1px solid rgba(140,214,142,.32)}
+.panel .ph{display:flex;align-items:center;margin-bottom:13px}
+.panel .ph h3{font-size:14px;font-weight:600;letter-spacing:.5px}
+.panel .ph .esc{margin-left:10px;font-size:10.5px;color:#8fb0a6;border:1px solid rgba(255,255,255,.16);
+  border-radius:9px;padding:2px 7px}
+.panel .ph .done{margin-left:auto;height:28px;padding:0 15px;border-radius:14px;background:#e6f3e7;color:#0d2118;
+  font-size:12px;font-weight:600;display:flex;align-items:center}
+.grp{margin-bottom:12px}
+.grp .gl2{font-size:10.5px;letter-spacing:2px;color:#8fb0a6;margin-bottom:7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{height:26px;padding:0 11px;border-radius:13px;border:1px solid rgba(255,255,255,.15);
+  font-size:11.5px;font-weight:400;color:#b6c8c2;display:flex;align-items:center}
+.chip.on{background:#4a90e2;border-color:#4a90e2;color:#06121f;font-weight:600}
+.chip.region.on{background:#6fba72;border-color:#6fba72;color:#08170f}
+.pfoot{display:flex;align-items:center;margin-top:1px}
+.pfoot .clr{font-size:11.5px;color:#9fb8b1;text-decoration:underline;text-underline-offset:3px}
+.pfoot .cnt{margin-left:auto;font-size:11.5px;color:#8fb0a6}
+.dock{background:rgba(111,186,114,.09);border-color:rgba(140,214,142,.26)}
+body{width:1440px;height:900px}</style></head><body>
+<div class="bg"></div><div class="halo"></div>
+<i class="blob" style="width:380px;height:380px;left:40px;top:-60px;background:#6fba72;opacity:.15"></i>
+<i class="blob" style="width:420px;height:420px;left:1080px;top:560px;background:#8b76ff;opacity:.11"></i>
+<div class="rule" style="top:108px"></div><div class="rule" style="top:872px"></div>
+
+<div class="brand"><h1>米哈游角色生日日历</h1><p>角色生日 · 首次实装纪念日</p></div>
+<div class="bar" style="right:72px">
+  <div class="search"><span>⌕</span><span>搜索角色</span></div>
+  <div class="seg"><b class="on">月</b><b>周</b></div>
+  <div class="seg"><b class="on">生日</b><b>实装</b></div>
+  <div class="filterpill">
+    <div class="sum"><i style="background:#4a90e2"></i>原神 · 119 位</div>
+    <div class="act on">筛选 / 显示<span class="badge">1</span> <span style="opacity:.55">▾</span></div>
+  </div>
+  <div class="icobtn">⋯</div>
+</div>
+
+<div class="stage">
+  <img class="pt" src="assets/nahida-genshin-p.webp" style="width:1270px;left:-396px;top:-124px">
+  <div class="scrim"></div>
+  <div class="tag" style="color:#d6f2d5">选中角色 · 地区上下文</div>
+  <div class="fav">★</div>
+  <div class="info">
+    <div class="big">须弥</div>
+    <div class="sub" style="color:#a9dba7">SUMERU · 智慧与雨林</div>
+    <div class="who">纳西妲 <span>/ 10月27日 · 生日</span></div>
+  </div>
+  <div class="panel">
+    <div class="ph"><h3>筛选 / 显示</h3><span class="esc">Esc 收起</span><span class="done">完成</span></div>
+    <div class="grp"><div class="gl2">游戏（多选）</div><div class="chips">
+      <b class="chip on">原神</b><b class="chip">星穹铁道</b><b class="chip">绝区零</b><b class="chip">崩坏3</b></div></div>
+    <div class="grp"><div class="gl2">地区 · 原神</div><div class="chips">
+      <b class="chip">蒙德</b><b class="chip">璃月</b><b class="chip">稻妻</b><b class="chip">须弥</b><b class="chip">枫丹</b><b class="chip">纳塔</b><b class="chip">至冬</b></div></div>
+    <div class="grp"><div class="gl2">元素 · 稀有度 · 武器</div><div class="chips">
+      <b class="chip">草</b><b class="chip">水</b><b class="chip">雷</b><b class="chip">风</b><b class="chip">五星</b><b class="chip">四星</b><b class="chip">法器</b><b class="chip">更多 ▾</b></div></div>
+    <div class="grp"><div class="gl2">显示</div><div class="chips">
+      <b class="chip">舒适</b><b class="chip">紧凑</b><b class="chip">周一起始</b><b class="chip">只看收藏</b><b class="chip">信息不全的角色</b></div></div>
+    <div class="pfoot"><span class="clr">清除全部筛选</span><span class="cnt">1 项生效 · 匹配 119 位</span></div>
+  </div>
+</div>
+
+<div class="work">
+  <div class="wh"><div class="lbl">月视图 · 生日 · 已筛选</div><div class="mon">10月 <span>2026</span></div></div>
+  <div class="wcount"><div class="a">原神</div><div class="b">9 天 · 9 位角色</div></div>
+  <div class="nav"><div class="n">‹</div><div class="today">今天</div><div class="n">›</div></div>
+  <div class="wk"><i>一</i><i>二</i><i>三</i><i>四</i><i>五</i><i>六</i><i>日</i></div>
+  <div class="grid"><i class="gl" style="left:0;top:0px;width:721px;height:1px"></i><i class="gl" style="left:0;top:92px;width:721px;height:1px"></i><i class="gl" style="left:0;top:184px;width:721px;height:1px"></i><i class="gl" style="left:0;top:276px;width:721px;height:1px"></i><i class="gl" style="left:0;top:368px;width:721px;height:1px"></i><i class="gl" style="left:0;top:460px;width:721px;height:1px"></i><i class="gl" style="left:0;top:552px;width:721px;height:1px"></i><i class="gl" style="left:0px;top:0;width:1px;height:552px"></i><i class="gl" style="left:103px;top:0;width:1px;height:552px"></i><i class="gl" style="left:206px;top:0;width:1px;height:552px"></i><i class="gl" style="left:309px;top:0;width:1px;height:552px"></i><i class="gl" style="left:412px;top:0;width:1px;height:552px"></i><i class="gl" style="left:515px;top:0;width:1px;height:552px"></i><i class="gl" style="left:618px;top:0;width:1px;height:552px"></i><i class="gl" style="left:721px;top:0;width:1px;height:552px"></i><div class="cell out" style="left:0px;top:0px"><span class="dnum">28</span></div><div class="cell out" style="left:103px;top:0px"><span class="dnum">29</span></div><div class="cell out" style="left:206px;top:0px"><span class="dnum">30</span></div><div class="cell" style="left:309px;top:0px"><span class="dnum">1</span></div><div class="cell" style="left:412px;top:0px"><span class="dnum">2</span></div><div class="cell" style="left:515px;top:0px"><span class="dnum">3</span></div><div class="cell" style="left:618px;top:0px"><span class="dnum">4</span></div><div class="cell" style="left:0px;top:92px"><span class="dnum">5</span></div><div class="cell" style="left:103px;top:92px"><span class="dnum">6</span></div><div class="cell" style="left:206px;top:92px"><span class="dnum">7</span></div><div class="cell" style="left:309px;top:92px"><span class="dnum">8</span></div><div class="cell" style="left:412px;top:92px"><span class="dnum">9</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/xingqiu-genshin-a.webp"></span></div>
+        <div class="cap">行秋</div></div><div class="cell" style="left:515px;top:92px"><span class="dnum">10</span></div><div class="cell" style="left:618px;top:92px"><span class="dnum">11</span></div><div class="cell" style="left:0px;top:184px"><span class="dnum">12</span></div><div class="cell" style="left:103px;top:184px"><span class="dnum">13</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/furina-genshin-a.webp"></span></div>
+        <div class="cap">芙宁娜</div></div><div class="cell" style="left:206px;top:184px"><span class="dnum">14</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/ororon-genshin-a.webp"></span></div>
+        <div class="cap">欧洛伦</div></div><div class="cell" style="left:309px;top:184px"><span class="dnum">15</span></div><div class="cell" style="left:412px;top:184px"><span class="dnum">16</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/xinyan-genshin-a.webp"></span></div>
+        <div class="cap">辛焱</div></div><div class="cell" style="left:515px;top:184px"><span class="dnum">17</span></div><div class="cell" style="left:618px;top:184px"><span class="dnum">18</span></div><div class="cell" style="left:0px;top:276px"><span class="dnum">19</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/sayu-genshin-a.webp"></span></div>
+        <div class="cap">早柚</div></div><div class="cell" style="left:103px;top:276px"><span class="dnum">20</span></div><div class="cell" style="left:206px;top:276px"><span class="dnum">21</span></div><div class="cell" style="left:309px;top:276px"><span class="dnum">22</span></div><div class="cell" style="left:412px;top:276px"><span class="dnum">23</span></div><div class="cell" style="left:515px;top:276px"><span class="dnum">24</span></div><div class="cell" style="left:618px;top:276px"><span class="dnum">25</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/eula-genshin-a.webp"></span></div>
+        <div class="cap">优菈</div></div><div class="cell" style="left:0px;top:368px"><span class="dnum">26</span></div><div class="cell sel" style="left:103px;top:368px"><span class="dnum">27</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#6fba72;width:48px;height:48px"><img src="assets/nahida-genshin-a.webp"></span></div>
+        <div class="cap" style="color:#bfe0bd">纳西妲</div></div><div class="cell" style="left:206px;top:368px"><span class="dnum">28</span></div><div class="cell" style="left:309px;top:368px"><span class="dnum">29</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/genshin-34-a.webp"></span></div>
+        <div class="cap">枫原万叶</div></div><div class="cell" style="left:412px;top:368px"><span class="dnum">30</span></div><div class="cell" style="left:515px;top:368px"><span class="dnum">31</span><span class="marks"><i class="mk birthday"></i></span>
+        <div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/genshin-35-a.webp"></span></div>
+        <div class="cap">菲林斯</div></div><div class="cell out" style="left:618px;top:368px"><span class="dnum">1</span></div><div class="cell out" style="left:0px;top:460px"><span class="dnum">2</span></div><div class="cell out" style="left:103px;top:460px"><span class="dnum">3</span></div><div class="cell out" style="left:206px;top:460px"><span class="dnum">4</span></div><div class="cell out" style="left:309px;top:460px"><span class="dnum">5</span></div><div class="cell out" style="left:412px;top:460px"><span class="dnum">6</span></div><div class="cell out" style="left:515px;top:460px"><span class="dnum">7</span></div><div class="cell out" style="left:618px;top:460px"><span class="dnum">8</span></div></div>
+  <div class="dock">
+    <span class="av" style="--ring:#6fba72"><img src="assets/nahida-genshin-a.webp"></span>
+    <div class="t">10月27日 · 纳西妲 <span>／ 草 · 法器 · 五星 · 须弥</span></div>
+    <div class="legend" style="margin-left:26px">
+      <b><i style="width:7px;height:7px;border-radius:50%;background:#4a90e2;display:block"></i>原神</b>
+      <b><i style="width:7px;height:7px;border-radius:50%;background:#6fba72;display:block"></i>须弥（选中角色的地区）</b>
+    </div>
+    <div class="go">查看角色详情 →</div>
+  </div>
+</div>
+<div class="foot">MIHOYO BIRTHDAY &amp; DEBUT CALENDAR</div></body></html>

@@ -1,0 +1,459 @@
+{
+  "phase": "after",
+  "url": "http://127.0.0.1:5173/mihoyo-calendar/?ui=v2",
+  "records": [
+    {
+      "viewport": "desktop",
+      "id": "nahida",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 360,
+        "y": 263,
+        "width": 1200,
+        "height": 554
+      },
+      "palette": {
+        "start": "#07171a",
+        "mid": "#102529",
+        "end": "#27213b",
+        "halo": "81,232,202",
+        "fill": "224,202,145",
+        "deep": "7,18,20",
+        "accent": "#a2e7d0"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "nahida",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "zhongli",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 360,
+        "y": 263,
+        "width": 1200,
+        "height": 554
+      },
+      "palette": {
+        "start": "rgb(41,39,40)",
+        "mid": "rgb(59,52,44)",
+        "end": "rgb(50,41,41)",
+        "halo": "221,191,138",
+        "fill": "213,155,132",
+        "deep": "30,31,37",
+        "accent": "rgb(225,195,186)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "zhongli",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "raiden",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 360,
+        "y": 263,
+        "width": 1200,
+        "height": 554
+      },
+      "palette": {
+        "start": "rgb(28,28,48)",
+        "mid": "rgb(42,38,66)",
+        "end": "rgb(44,36,54)",
+        "halo": "184,164,229",
+        "fill": "229,173,201",
+        "deep": "20,22,37",
+        "accent": "rgb(234,205,225)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "furina",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 360,
+        "y": 263,
+        "width": 1200,
+        "height": 554
+      },
+      "palette": {
+        "start": "rgb(23,37,54)",
+        "mid": "rgb(29,48,70)",
+        "end": "rgb(34,50,67)",
+        "halo": "127,176,217",
+        "fill": "168,215,239",
+        "deep": "20,30,45",
+        "accent": "rgb(200,229,246)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "jean",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 360,
+        "y": 263,
+        "width": 1200,
+        "height": 554
+      },
+      "palette": {
+        "start": "rgb(29,51,66)",
+        "mid": "rgb(36,65,82)",
+        "end": "rgb(36,61,70)",
+        "halo": "141,200,227",
+        "fill": "156,211,196",
+        "deep": "25,43,57",
+        "accent": "rgb(193,226,222)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "mavuika",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 360,
+        "y": 263,
+        "width": 1200,
+        "height": 554
+      },
+      "palette": {
+        "start": "rgb(37,27,33)",
+        "mid": "rgb(58,34,35)",
+        "end": "rgb(51,44,35)",
+        "halo": "235,140,121",
+        "fill": "243,213,126",
+        "deep": "25,23,31",
+        "accent": "rgb(242,227,183)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "ellen",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 462.5,
+        "y": 167,
+        "width": 995,
+        "height": 746
+      },
+      "palette": {
+        "start": "rgb(30,29,50)",
+        "mid": "rgb(46,41,70)",
+        "end": "rgb(47,43,40)",
+        "halo": "201,179,249",
+        "fill": "243,220,124",
+        "deep": "20,21,37",
+        "accent": "rgb(242,232,182)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "ellen",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "grace",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 620,
+        "y": 167,
+        "width": 680,
+        "height": 746
+      },
+      "palette": {
+        "start": "rgb(34,31,30)",
+        "mid": "rgb(58,45,31)",
+        "end": "rgb(48,48,33)",
+        "halo": "250,192,107",
+        "fill": "250,239,122",
+        "deep": "20,22,30",
+        "accent": "rgb(246,242,181)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "grace",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "nicole",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 559.5,
+        "y": 167,
+        "width": 801,
+        "height": 746
+      },
+      "palette": {
+        "start": "rgb(24,38,32)",
+        "mid": "rgb(36,61,35)",
+        "end": "rgb(45,49,33)",
+        "halo": "173,252,123",
+        "fill": "250,239,122",
+        "deep": "16,24,30",
+        "accent": "rgb(246,242,181)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "kafka",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 412,
+        "y": 167,
+        "width": 1096,
+        "height": 746
+      },
+      "palette": {
+        "start": "rgb(19,25,46)",
+        "mid": "rgb(25,33,64)",
+        "end": "rgb(31,40,61)",
+        "halo": "127,143,229",
+        "fill": "171,201,250",
+        "deep": "16,21,35",
+        "accent": "rgb(201,221,252)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "kafka",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "remielle",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 360,
+        "y": 263,
+        "width": 1200,
+        "height": 554
+      },
+      "palette": {
+        "start": "rgb(30,38,52)",
+        "mid": "rgb(37,48,64)",
+        "end": "rgb(48,48,53)",
+        "halo": "141,166,199",
+        "fill": "221,191,160",
+        "deep": "26,32,44",
+        "accent": "rgb(229,215,202)"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "remielle",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "id": "elysia",
+      "stage": {
+        "x": 85.4375,
+        "y": 149,
+        "width": 643.1875,
+        "height": 793.796875
+      },
+      "detail": {
+        "x": 514,
+        "y": 167,
+        "width": 892,
+        "height": 746
+      },
+      "palette": {
+        "start": "rgb(34,27,42)",
+        "mid": "rgb(55,37,56)",
+        "end": "rgb(48,41,54)",
+        "halo": "235,162,201",
+        "fill": "243,204,226",
+        "deep": "21,21,33",
+        "accent": "rgb(242,222,239)"
+      }
+    },
+    {
+      "viewport": "mobile",
+      "id": "zhongli",
+      "stage": {
+        "x": 16,
+        "y": 179.375,
+        "width": 358,
+        "height": 225.46875
+      },
+      "detail": {
+        "x": 11.703125,
+        "y": 122.203125,
+        "width": 366.59375,
+        "height": 599.59375
+      }
+    },
+    {
+      "viewport": "mobile",
+      "id": "zhongli",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    },
+    {
+      "viewport": "mobile",
+      "id": "ellen",
+      "stage": {
+        "x": 16,
+        "y": 179.375,
+        "width": 358,
+        "height": 225.46875
+      },
+      "detail": {
+        "x": 11.703125,
+        "y": 38.203125,
+        "width": 366.59375,
+        "height": 767.59375
+      }
+    },
+    {
+      "viewport": "mobile",
+      "id": "ellen",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "art": {
+        "loaded": true,
+        "filter": "none",
+        "opacity": "1"
+      }
+    }
+  ],
+  "errors": []
+}

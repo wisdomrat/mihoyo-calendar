@@ -1,0 +1,203 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>01 桌面端中性月视图</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1440px;height:900px;overflow:hidden;position:relative;
+  font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;
+  color:#f5f4ee;-webkit-font-smoothing:antialiased}
+.bg{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%;filter:blur(64px)}
+.rule{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,.08)}
+/* 顶栏 */
+.brand{position:absolute;left:72px;top:34px}
+.brand h1{font-size:20px;font-weight:600;letter-spacing:.5px}
+.brand p{font-size:12px;color:#858aa4;margin-top:7px;letter-spacing:1.4px}
+.bar{position:absolute;top:36px;height:36px;display:flex;align-items:center;gap:10px}
+.seg{display:flex;height:36px;border:1px solid rgba(255,255,255,.16);border-radius:18px;overflow:hidden}
+.seg b{display:flex;align-items:center;padding:0 15px;font-size:12.5px;font-weight:400;color:#9296b0}
+.seg b.on{background:#f1f0ea;color:#141526;font-weight:600}
+.search{display:flex;align-items:center;gap:8px;height:36px;padding:0 15px;width:180px;
+  border:1px solid rgba(255,255,255,.16);border-radius:18px;font-size:12.5px;color:#7f849e}
+.filterpill{display:flex;align-items:center;height:36px;border-radius:18px;
+  border:1px solid rgba(255,255,255,.16);overflow:hidden}
+.filterpill .sum{display:flex;align-items:center;gap:7px;padding:0 14px;font-size:12.5px;color:#b8bbcc}
+.filterpill .sum i{width:6px;height:6px;border-radius:50%;background:#766cff}
+.filterpill .act{display:flex;align-items:center;gap:7px;padding:0 14px;height:100%;
+  border-left:1px solid rgba(255,255,255,.16);font-size:12.5px;color:#f5f4ee}
+.filterpill .act.on{background:#f1f0ea;color:#141526;font-weight:600;border-left-color:transparent}
+.badge{min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#ff715b;color:#180d0c;
+  font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.icobtn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:#b8bbcc}
+/* 舞台 */
+.stage{position:absolute;left:72px;top:136px;width:470px;height:720px;border-radius:26px;
+  overflow:hidden;border:1px solid rgba(255,255,255,.18)}
+.stage img.pt{position:absolute}
+.scrim{position:absolute;inset:0}
+.stage .tag{position:absolute;left:28px;top:26px;font-size:11px;letter-spacing:2.4px;color:#e9e7f5;opacity:.9}
+.stage .fav{position:absolute;right:26px;top:24px;width:30px;height:30px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px}
+.stage .info{position:absolute;left:28px;right:28px;bottom:30px}
+.stage .big{font-size:86px;line-height:.86;letter-spacing:-4px;font-weight:300}
+.stage .sub{font-size:13px;letter-spacing:3px;color:#cfcbe4;margin-top:14px}
+.stage .who{font-size:18px;margin-top:12px}
+.stage .who span{color:#9a9db5;font-size:15px}
+.also{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:11.5px;color:#9a9db5}
+.also .av{width:28px;height:28px}
+/* 工作区 */
+.work{position:absolute;left:590px;top:136px;width:778px;height:720px;border-radius:26px;
+  background:rgba(17,20,38,.76);border:1px solid rgba(255,255,255,.14)}
+.wh{position:absolute;left:28px;top:18px}
+.wh .lbl{font-size:11px;letter-spacing:2.5px;color:#858aa4}
+.wh .mon{font-size:36px;font-weight:300;letter-spacing:-.5px;margin-top:10px}
+.wh .mon span{color:#777b9b}
+.wcount{position:absolute;right:28px;top:60px;text-align:right;display:flex;gap:10px;align-items:baseline}
+.wcount .a{font-size:11px;letter-spacing:1.8px;color:#7f849e}
+.wcount .b{font-size:12px;color:#b8bbcc}
+.nav{position:absolute;right:28px;top:18px;display:flex;align-items:center;gap:8px}
+.nav .n{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:#c9ccdd}
+.nav .today{height:32px;padding:0 16px;border-radius:16px;background:#f1f0ea;color:#141526;
+  font-size:12.5px;font-weight:600;display:flex;align-items:center}
+.wk{position:absolute;top:94px;left:28px;width:721px;display:flex}
+.wk i{width:103px;text-align:center;font-size:11px;letter-spacing:1.4px;color:#7f849e;font-style:normal}
+.grid{position:absolute;left:28px;top:116px;width:721px;height:552px}
+.gl{position:absolute;background:rgba(255,255,255,.085)}
+.cell{position:absolute;width:103px;height:92px;overflow:hidden}
+.cell .dnum{position:absolute;left:11px;top:8px;font-size:13px;color:#dedde8;letter-spacing:.3px}
+.cell.out{opacity:.32}
+.cell.out .dnum{color:#7a7e97}
+.cell.today .dnum{left:6px;top:5px;padding:3px 8px 4px;border-radius:11px;background:#f1f0ea;color:#141526;font-weight:600}
+.cell.sel{border:1.5px solid rgba(245,244,238,.85);border-radius:12px}
+.cell.sel .dnum{color:#f5f4ee;font-weight:600}
+.marks{position:absolute;right:9px;top:12px;display:flex;gap:4px}
+.mk{width:5px;height:5px;display:block}
+.mk.birthday{border-radius:50%;background:#c9ccdd}
+.mk.release{transform:rotate(45deg);background:#c9ccdd}
+.stack{position:absolute;left:50%;transform:translateX(-50%);height:48px}
+.stack.s1{top:23px;width:48px}
+.stack.s2{top:29px;height:34px}
+.stack.s3{top:34px;height:24px}
+.slot{position:absolute;top:0}
+.av{display:inline-block;border-radius:50%;overflow:hidden;position:relative;
+  box-shadow:0 0 0 2px var(--ring),0 2px 8px rgba(0,0,0,.55);
+  background:radial-gradient(125% 125% at 30% 24%,#2b2f4c,#161a2b);vertical-align:top}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+.av b{display:flex;width:100%;height:100%;align-items:center;justify-content:center;
+  font-weight:600;color:#d3d6e6;font-size:13px}
+.s1 .av b{font-size:19px}
+.s2 .av b{font-size:14px}
+.s3 .av b{font-size:10px}
+.more{position:absolute;top:2px;height:20px;min-width:30px;padding:0 6px;border-radius:10px;
+  background:rgba(245,244,238,.92);color:#141526;font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
+.cap{position:absolute;left:4px;right:4px;bottom:4px;text-align:center;font-size:10px;line-height:12px;
+  color:#a3a7bd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 底部当天入口 */
+.dock{position:absolute;left:28px;top:676px;width:721px;height:44px;border-radius:22px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;padding:0 6px 0 13px;gap:11px}
+.dock .av{width:30px;height:30px}
+.dock .t{font-size:13px}
+.dock .t span{color:#9296b0;font-size:12px}
+.dock .go{margin-left:auto;height:32px;padding:0 15px;border-radius:16px;background:#f1f0ea;color:#141526;
+  font-size:12px;font-weight:600;display:flex;align-items:center}
+.legend{display:flex;align-items:center;gap:14px;font-size:11px;color:#7f849e}
+.legend b{display:flex;align-items:center;gap:5px;font-weight:400}
+.foot{position:absolute;left:72px;bottom:16px;font-size:10px;letter-spacing:2px;color:#5f6480}
+
+.bg{background:linear-gradient(135deg,#080b17 0%,#13172b 55%,#24203c 100%)}
+.halo{position:absolute;inset:0;background:radial-gradient(65% 65% at 66% 28%,rgba(118,108,255,.30),rgba(118,108,255,0) 70%)}
+.stage .scrim{background:linear-gradient(180deg,rgba(9,11,21,.58) 0%,rgba(9,11,21,.10) 17%,rgba(9,11,21,.22) 56%,rgba(9,11,21,.95) 100%)}
+body{width:1440px;height:900px}</style></head><body>
+<div class="bg"></div><div class="halo"></div>
+<i class="blob" style="width:380px;height:380px;left:1040px;top:-110px;background:#8c7cff;opacity:.13"></i>
+<i class="blob" style="width:420px;height:420px;left:250px;top:610px;background:#45e7d0;opacity:.07"></i>
+<div class="rule" style="top:108px"></div><div class="rule" style="top:872px"></div>
+
+<div class="brand"><h1>米哈游角色生日日历</h1><p>角色生日 · 首次实装纪念日</p></div>
+<div class="bar" style="right:72px">
+  <div class="search"><span>⌕</span><span>搜索角色</span></div>
+  <div class="seg"><b class="on">月</b><b>周</b></div>
+  <div class="seg"><b class="on">生日</b><b>实装</b></div>
+  <div class="filterpill">
+    <div class="sum"><i style="background:#766cff"></i>全部游戏 · 288 位</div>
+    <div class="act">筛选 / 显示 <span style="opacity:.55">▾</span></div>
+  </div>
+  <div class="icobtn">⋯</div>
+</div>
+
+<div class="stage">
+  <img class="pt" src="assets/xiao-genshin-p.webp" style="width:1946px;left:-800px;top:-202px">
+  <div class="scrim"></div>
+  <div class="tag">今天 · 4 月 17 日</div>
+  <div class="fav">★</div>
+  <div class="info">
+    <div class="big">17</div>
+    <div class="sub">四月 · 星期五</div>
+    <div class="who">魈 <span>/ 璃月 · 原神</span></div>
+    <div class="also">
+      <span class="av" style="--ring:#9d90ff;width:28px;height:28px"><img src="assets/aventurine-hsr-a.webp"></span>
+      <span class="av" style="--ring:#ff6b6b;width:28px;height:28px"><img src="assets/soukaku-zzz-a.webp"></span>
+      今天共 3 位 · 点击查看当天全部
+    </div>
+  </div>
+</div>
+
+<div class="work">
+  <div class="wh"><div class="lbl">月视图 · 生日</div><div class="mon">4月 <span>2026</span></div></div>
+  <div class="wcount"><div class="a">生日 + 首次实装</div><div class="b">16 天 · 44 位角色</div></div>
+  <div class="nav"><div class="n">‹</div><div class="today">今天</div><div class="n">›</div></div>
+  <div class="wk"><i>一</i><i>二</i><i>三</i><i>四</i><i>五</i><i>六</i><i>日</i></div>
+  <div class="grid"><i class="gl" style="left:0;top:0px;width:721px;height:1px"></i><i class="gl" style="left:0;top:92px;width:721px;height:1px"></i><i class="gl" style="left:0;top:184px;width:721px;height:1px"></i><i class="gl" style="left:0;top:276px;width:721px;height:1px"></i><i class="gl" style="left:0;top:368px;width:721px;height:1px"></i><i class="gl" style="left:0;top:460px;width:721px;height:1px"></i><i class="gl" style="left:0;top:552px;width:721px;height:1px"></i><i class="gl" style="left:0px;top:0;width:1px;height:552px"></i><i class="gl" style="left:103px;top:0;width:1px;height:552px"></i><i class="gl" style="left:206px;top:0;width:1px;height:552px"></i><i class="gl" style="left:309px;top:0;width:1px;height:552px"></i><i class="gl" style="left:412px;top:0;width:1px;height:552px"></i><i class="gl" style="left:515px;top:0;width:1px;height:552px"></i><i class="gl" style="left:618px;top:0;width:1px;height:552px"></i><i class="gl" style="left:721px;top:0;width:1px;height:552px"></i><div class="cell out" style="left:0px;top:0px">
+      <span class="dnum">30</span></div><div class="cell out" style="left:103px;top:0px">
+      <span class="dnum">31</span></div><div class="cell" style="left:206px;top:0px">
+      <span class="dnum">1</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#ff6b6b;width:48px;height:48px"><img src="assets/burnice-zzz-a.webp" alt=""></span></div><div class="cap">柏妮思</div></div><div class="cell" style="left:309px;top:0px">
+      <span class="dnum">2</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/nanoka-genshin-10000116-a.webp" alt=""></span></div><div class="cap">伊涅芙</div></div><div class="cell" style="left:412px;top:0px">
+      <span class="dnum">3</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s2" style="width:58px"><span class="slot" style="left:0px"><span class="av" style="--ring:#4a90e2;width:34px;height:34px"><img src="assets/nanoka-genshin-10000129-a.webp" alt=""></span></span><span class="slot" style="left:24px"><span class="av" style="--ring:#ff8cc8;width:34px;height:34px"><b>李</b></span></span></div><div class="cap">洛恩 等2位</div></div><div class="cell" style="left:515px;top:0px">
+      <span class="dnum">4</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/genshin-4-a.webp" alt=""></span></div><div class="cap">埃洛伊</div></div><div class="cell" style="left:618px;top:0px">
+      <span class="dnum">5</span></div><div class="cell" style="left:0px;top:92px">
+      <span class="dnum">6</span></div><div class="cell" style="left:103px;top:92px">
+      <span class="dnum">7</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/dehya-genshin-a.webp" alt=""></span></div><div class="cap">迪希雅</div></div><div class="cell" style="left:206px;top:92px">
+      <span class="dnum">8</span></div><div class="cell" style="left:309px;top:92px">
+      <span class="dnum">9</span><span class="marks"><i class="mk release"></i></span><div class="stack s1"><span class="av" style="--ring:#9d90ff;width:48px;height:48px"><img src="assets/castorice-hsr-a.webp" alt=""></span></div><div class="cap">遐蝶</div></div><div class="cell" style="left:412px;top:92px">
+      <span class="dnum">10</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/charlotte-genshin-a.webp" alt=""></span></div><div class="cap">夏洛蒂</div></div><div class="cell" style="left:515px;top:92px">
+      <span class="dnum">11</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s2" style="width:58px"><span class="slot" style="left:0px"><span class="av" style="--ring:#4a90e2;width:34px;height:34px"><img src="assets/xianyun-genshin-a.webp" alt=""></span></span><span class="slot" style="left:24px"><span class="av" style="--ring:#ff6b6b;width:34px;height:34px"><img src="assets/nekomata-zzz-a.webp" alt=""></span></span></div><div class="cap">闲云 等2位</div></div><div class="cell" style="left:618px;top:92px">
+      <span class="dnum">12</span></div><div class="cell" style="left:0px;top:184px">
+      <span class="dnum">13</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s3" style="width:92px"><span class="slot" style="left:0px"><span class="av" style="--ring:#ff8cc8;width:24px;height:24px"><b>雷</b></span></span><span class="slot" style="left:17px"><span class="av" style="--ring:#ff8cc8;width:24px;height:24px"><img src="assets/herrscher-of-thunder-honkai3-a.webp" alt=""></span></span><span class="slot" style="left:34px"><span class="av" style="--ring:#ff8cc8;width:24px;height:24px"><img src="assets/herrscher-of-origin-honkai3-a.webp" alt=""></span></span><span class="more" style="left:62px">+1</span></div><div class="cap">共 4 位</div></div><div class="cell" style="left:103px;top:184px">
+      <span class="dnum">14</span></div><div class="cell" style="left:206px;top:184px">
+      <span class="dnum">15</span></div><div class="cell" style="left:309px;top:184px">
+      <span class="dnum">16</span></div><div class="cell today" style="left:412px;top:184px">
+      <span class="dnum">17</span><span class="marks"><i class="mk birthday"></i><i class="mk release"></i></span><div class="stack s2" style="width:82px"><span class="slot" style="left:0px"><span class="av" style="--ring:#4a90e2;width:34px;height:34px"><img src="assets/xiao-genshin-a.webp" alt=""></span></span><span class="slot" style="left:24px"><span class="av" style="--ring:#9d90ff;width:34px;height:34px"><img src="assets/aventurine-hsr-a.webp" alt=""></span></span><span class="slot" style="left:48px"><span class="av" style="--ring:#ff6b6b;width:34px;height:34px"><img src="assets/soukaku-zzz-a.webp" alt=""></span></span></div><div class="cap">魈 等3位</div></div><div class="cell" style="left:515px;top:184px">
+      <span class="dnum">18</span></div><div class="cell" style="left:618px;top:184px">
+      <span class="dnum">19</span></div><div class="cell" style="left:0px;top:276px">
+      <span class="dnum">20</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/yelan-genshin-a.webp" alt=""></span></div><div class="cap">夜兰</div></div><div class="cell" style="left:103px;top:276px">
+      <span class="dnum">21</span></div><div class="cell" style="left:206px;top:276px">
+      <span class="dnum">22</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/kachina-genshin-a.webp" alt=""></span></div><div class="cap">卡齐娜</div></div><div class="cell" style="left:309px;top:276px">
+      <span class="dnum">23</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#ff6b6b;width:48px;height:48px"><img src="assets/nanoka-zzz-1591-a.webp" alt=""></span></div><div class="cap">希格莉德</div></div><div class="cell" style="left:412px;top:276px">
+      <span class="dnum">24</span></div><div class="cell" style="left:515px;top:276px">
+      <span class="dnum">25</span><span class="marks"><i class="mk birthday"></i></span><div class="stack s1"><span class="av" style="--ring:#4a90e2;width:48px;height:48px"><img src="assets/baizhu-genshin-a.webp" alt=""></span></div><div class="cap">白术</div></div><div class="cell" style="left:618px;top:276px">
+      <span class="dnum">26</span><span class="marks"><i class="mk release"></i></span><div class="stack s3" style="width:92px"><span class="slot" style="left:0px"><span class="av" style="--ring:#9d90ff;width:24px;height:24px"><img src="assets/himeko-hsr-a.webp" alt=""></span></span><span class="slot" style="left:17px"><span class="av" style="--ring:#9d90ff;width:24px;height:24px"><img src="assets/dan-heng-hsr-a.webp" alt=""></span></span><span class="slot" style="left:34px"><span class="av" style="--ring:#9d90ff;width:24px;height:24px"><img src="assets/march-7th-hsr-a.webp" alt=""></span></span><span class="more" style="left:62px">+17</span></div><div class="cap">共 20 位</div></div><div class="cell" style="left:0px;top:368px">
+      <span class="dnum">27</span></div><div class="cell" style="left:103px;top:368px">
+      <span class="dnum">28</span></div><div class="cell" style="left:206px;top:368px">
+      <span class="dnum">29</span></div><div class="cell" style="left:309px;top:368px">
+      <span class="dnum">30</span><span class="marks"><i class="mk birthday"></i><i class="mk release"></i></span><div class="stack s2" style="width:82px"><span class="slot" style="left:0px"><span class="av" style="--ring:#4a90e2;width:34px;height:34px"><img src="assets/diluc-genshin-a.webp" alt=""></span></span><span class="slot" style="left:24px"><span class="av" style="--ring:#9d90ff;width:34px;height:34px"><img src="assets/anaxa-hsr-a.webp" alt=""></span></span><span class="slot" style="left:48px"><span class="av" style="--ring:#ff8cc8;width:34px;height:34px"><b>梅</b></span></span></div><div class="cap">迪卢克 等3位</div></div><div class="cell out" style="left:412px;top:368px">
+      <span class="dnum">1</span></div><div class="cell out" style="left:515px;top:368px">
+      <span class="dnum">2</span></div><div class="cell out" style="left:618px;top:368px">
+      <span class="dnum">3</span></div><div class="cell out" style="left:0px;top:460px">
+      <span class="dnum">4</span></div><div class="cell out" style="left:103px;top:460px">
+      <span class="dnum">5</span></div><div class="cell out" style="left:206px;top:460px">
+      <span class="dnum">6</span></div><div class="cell out" style="left:309px;top:460px">
+      <span class="dnum">7</span></div><div class="cell out" style="left:412px;top:460px">
+      <span class="dnum">8</span></div><div class="cell out" style="left:515px;top:460px">
+      <span class="dnum">9</span></div><div class="cell out" style="left:618px;top:460px">
+      <span class="dnum">10</span></div></div>
+  <div class="dock">
+    <span class="av" style="--ring:#4a90e2"><img src="assets/xiao-genshin-a.webp"></span>
+    <div class="t">4月17日 · 魈 <span>／ 今天 3 位角色</span></div>
+    <div class="legend" style="margin-left:28px">
+      <b><i class="mk birthday"></i>生日</b><b><i class="mk release"></i>首次实装</b><b>环色 = 所属游戏</b>
+    </div>
+    <div class="go">查看当天 →</div>
+  </div>
+</div>
+<div class="foot">MIHOYO BIRTHDAY &amp; DEBUT CALENDAR</div></body></html>

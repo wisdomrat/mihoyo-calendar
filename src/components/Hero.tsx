@@ -125,10 +125,7 @@ export function Hero({ characters, autoRotateMs = 6000, onAffiliationChange, onC
 
   // 检测立绘原始尺寸（比例 + 分辨率，后者用于限制放大倍数）
   useEffect(() => {
-    if (!imageUrl) {
-      setPortraitNatural(null);
-      return;
-    }
+    if (!imageUrl) return;
     let cancelled = false;
     const img = new Image();
     img.onload = () => {
@@ -190,9 +187,11 @@ export function Hero({ characters, autoRotateMs = 6000, onAffiliationChange, onC
 
   // 切换角色时重新触发入场动画
   useEffect(() => {
-    setIsVisible(false);
     const timer = requestAnimationFrame(() => setIsVisible(true));
-    return () => cancelAnimationFrame(timer);
+    return () => {
+      cancelAnimationFrame(timer);
+      setIsVisible(false);
+    };
   }, [character.id]);
 
   // 自动轮播

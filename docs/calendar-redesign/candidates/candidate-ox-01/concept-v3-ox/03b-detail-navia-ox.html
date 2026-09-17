@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>封面人物 · 今日寿星</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg0:#15131a; --bg1:#0d0c10;
+  --ivory:#f2ede4;
+  --iv2:rgba(242,237,228,.60);
+  --iv3:rgba(242,237,228,.34);
+  --hair:rgba(242,237,228,.09);
+  --gold:#c9a35f; --gold-hi:#e0be7e; --gold-dim:rgba(201,163,95,.5);
+  --crimson:#d5394b;
+  --hy:#4a8fc7; --hy-hi:#86c8e8;
+  --serif:'Noto Serif SC','Source Han Serif SC','SimSun',serif;
+  --disp:'Bodoni Moda',Georgia,'Times New Roman',serif;
+  --sans:'Noto Sans SC','Microsoft YaHei UI','Microsoft YaHei',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{
+  background:
+    radial-gradient(900px 600px at 82% 40%, rgba(74,143,199,.12) 0%, transparent 60%),
+    radial-gradient(1100px 520px at 18% -6%, #1d1922 0%, transparent 60%),
+    linear-gradient(178deg,var(--bg0) 0%,var(--bg1) 92%);
+  color:var(--ivory); font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+.frame{position:relative;width:1440px;height:900px}
+
+/* ---------- right : photographic stage ---------- */
+.stage{position:absolute;top:0;right:0;bottom:52px;width:58%;overflow:hidden}
+.stage img{width:100%;height:100%;object-fit:cover;object-position:center 18%;
+  filter:saturate(1.06) contrast(1.03);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%);}
+.stage::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(13,12,16,.32) 0%, transparent 22%, transparent 66%, #0d0c10 99%);}
+.stage-glow{position:absolute;right:26%;top:30%;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle, rgba(74,143,199,.22), transparent 65%);filter:blur(60px)}
+
+/* ---------- left : editorial column ---------- */
+.backlink{position:absolute;left:64px;top:34px;display:flex;align-items:center;gap:10px;color:var(--iv2);font-size:13.5px;font-weight:300;letter-spacing:.18em;z-index:5}
+.backlink .chev{font-family:var(--disp);font-size:17px}
+.vname{position:absolute;left:58px;top:128px;z-index:4;
+  writing-mode:vertical-rl;font-family:var(--serif);font-weight:900;
+  font-size:104px;letter-spacing:.10em;line-height:1.06;
+  text-shadow:0 6px 40px rgba(13,12,16,.95);}
+.todaytag{position:absolute;left:170px;top:132px;z-index:4;
+  writing-mode:vertical-rl;font-family:var(--serif);font-weight:700;font-size:15px;letter-spacing:.42em;color:var(--hy-hi)}
+.ghost{position:absolute;left:206px;top:236px;z-index:1;
+  font-family:var(--disp);font-style:italic;font-weight:600;font-size:96px;line-height:.9;
+  color:rgba(242,237,228,.055);white-space:nowrap;pointer-events:none}
+
+.kicker{position:absolute;left:212px;top:158px;z-index:4;display:flex;align-items:center;gap:14px;
+  font-family:var(--disp);font-size:11.5px;letter-spacing:.4em;color:var(--gold)}
+.kicker .rule{width:56px;height:1px;background:var(--gold-dim)}
+
+.credits{position:absolute;left:212px;top:214px;width:392px;z-index:4}
+.credit{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--hair);padding:15px 2px 14px}
+.credit:first-child{border-top:none;padding-top:2px}
+.cl{font-size:10.5px;letter-spacing:.32em;color:var(--iv3);font-weight:300}
+.cv{font-family:var(--serif);font-weight:700;font-size:17.5px;letter-spacing:.06em;display:flex;align-items:center;gap:10px}
+.cv i.dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.elem{border:1px solid rgba(74,143,199,.6);color:#9cc9ec;border-radius:4px;padding:2px 9px;font-size:14px;font-weight:600;letter-spacing:.2em}
+.stars{font-family:var(--disp);font-size:15px;letter-spacing:.28em;color:var(--gold-hi)}
+.cv .sub{font-size:12px;color:var(--gold-hi);font-family:var(--sans);font-weight:300;letter-spacing:.14em}
+
+.ctarow{position:absolute;left:212px;top:592px;z-index:4;display:flex;gap:14px}
+.btn{height:46px;display:inline-flex;align-items:center;padding:0 26px;border-radius:2px;font-size:13.5px;letter-spacing:.3em;font-weight:500}
+.btn.primary{background:linear-gradient(135deg,#e0be7e,#b98f43);color:#171310;box-shadow:0 10px 28px rgba(201,163,95,.22)}
+.btn.ghosty{border:1px solid rgba(242,237,228,.30);color:var(--iv2);font-weight:300}
+
+/* ---------- bottom strip ---------- */
+.botstrip{position:absolute;left:0;right:0;bottom:0;height:52px;z-index:6;
+  display:flex;align-items:center;gap:22px;padding:0 48px;
+  border-top:1px solid var(--hair);
+  background:linear-gradient(0deg, rgba(13,12,16,.88), rgba(13,12,16,.55));
+}
+.nl{font-family:var(--disp);font-size:10.5px;letter-spacing:.38em;color:var(--gold)}
+.nextch{display:flex;align-items:center;gap:9px}
+.nextch .nm{width:32px;height:32px;border-radius:50%;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.5);position:relative}
+.nextch .nm img{width:100%;height:100%;object-fit:cover}
+.nextch .nm::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--rc,#888);opacity:.85}
+.nextch span.tx{font-size:11.5px;font-weight:300;color:var(--iv2);letter-spacing:.08em}
+.nextch span.dt{font-family:var(--disp);font-size:10.5px;color:var(--iv3);letter-spacing:.14em}
+.spacer{flex:1}
+.pg{font-size:11px;font-weight:300;color:var(--iv3);letter-spacing:.22em}
+
+/* corner brand */
+.cornerbrand{position:absolute;right:44px;top:36px;z-index:6;text-align:right}
+.cornerbrand .cn{font-family:var(--serif);font-weight:900;font-size:15px;letter-spacing:.2em;color:var(--iv2);text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.cornerbrand .en{font-family:var(--disp);font-size:9.5px;letter-spacing:.44em;color:var(--gold);margin-top:3px;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <!-- photographic stage -->
+  <div class="stage-glow"></div>
+  <div class="stage"><img src="https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_Navia.webp"></div>
+
+  <!-- back -->
+  <div class="backlink"><span class="chev">&#8249;</span><span>返回月刊</span></div>
+
+  <!-- corner brand -->
+  <div class="cornerbrand">
+    <div class="cn">封面人物</div>
+    <div class="en">COVER&nbsp;STORY</div>
+  </div>
+
+  <!-- vertical name -->
+  <div class="vname">娜维娅</div>
+  <div class="todaytag">刺玫会 · 会长</div>
+
+  <!-- ghost latin -->
+  <div class="ghost">Navia</div>
+
+  <!-- credits -->
+  <div class="kicker"><span class="rule"></span><span>COVER&nbsp;STORY&nbsp;·&nbsp;№&nbsp;08·16</span></div>
+  <div class="credits">
+    <div class="credit"><span class="cl">所属 AFFILIATION</span><span class="cv"><i class="dot" style="background:#86c8e8"></i>枫丹 · FONTAINE</span></div>
+    <div class="credit"><span class="cl">神之眼 VISION</span><span class="cv"><span class="elem">岩</span></span></div>
+    <div class="credit"><span class="cl">武器 WEAPON</span><span class="cv">双手剑</span></div>
+    <div class="credit"><span class="cl">稀有度 RARITY</span><span class="cv stars">★★★★★</span></div>
+    <div class="credit"><span class="cl">生日 BIRTHDAY</span><span class="cv">8 月 16 日<span class="sub">· 已过 6 天</span></span></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="ctarow">
+    <span class="btn primary">生 日 提 醒</span>
+    <span class="btn ghosty">收 藏 人 物</span>
+  </div>
+
+  <!-- bottom strip -->
+  <div class="botstrip">
+    <span class="nl">NEXT&nbsp;ISSUE&nbsp;·&nbsp;下期预告</span>
+    <div class="nextch" style="--rc:#42a5f5"><div class="nm"><img src="https://static.nanoka.cc/assets/zzz/IconRoleCircle37.webp"></div><span class="tx">伊芙琳</span><span class="dt">8·24</span></div>
+    <div class="nextch" style="--rc:#4a5fd9"><div class="nm"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1222.webp"></div><span class="tx">灵砂</span><span class="dt">8·24</span></div>
+    <div class="nextch" style="--rc:#4a5fd9"><div class="nm"><img src="https://static.nanoka.cc/assets/hsr/avatarshopicon/1005.webp"></div><span class="tx">卡芙卡</span><span class="dt">8·25</span></div>
+    <span class="spacer"></span>
+    <span class="pg">八月号 · 封面 16 / 31</span>
+  </div>
+
+</div>
+</body>
+</html>

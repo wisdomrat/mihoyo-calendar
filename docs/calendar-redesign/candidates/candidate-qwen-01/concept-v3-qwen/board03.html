@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>board03</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .screen { background:#14110d; color:#f4ead6; }
+  .masthead { border-bottom-color: rgba(244,234,214,.14); }
+  .logo-word { color:#f4ead6; }
+  .logo-word small { color: rgba(244,234,214,.45); }
+  .mast-nav { color: rgba(244,234,214,.55); }
+  .mast-nav span.on { color:#f4ead6; }
+  .mast-right { color: rgba(244,234,214,.4); }
+
+  .stage { position:absolute; top:92px; left:0; right:0; bottom:0; overflow:hidden;
+    background:
+      radial-gradient(680px 560px at 24% 62%, rgba(124,24,39,.30), transparent 66%),
+      radial-gradient(460px 380px at 78% 18%, rgba(185,138,68,.10), transparent 70%),
+      #14110d; }
+  .giant-22 { position:absolute; left:250px; top:-30px; font-family:var(--f-display); font-style:italic;
+    font-weight:700; font-size:560px; line-height:.9; color:rgba(160,33,53,.16); transform:rotate(-6deg); }
+
+  .portrait { position:absolute; left:0; top:190px; width:478px; height:710px; z-index:3; }
+  .portrait img { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .portrait::before { content:""; position:absolute; inset:12px -12px -12px 0; border:1px solid rgba(244,234,214,.16); z-index:-1; }
+  .portrait .cap-side { position:absolute; left:16px; bottom:18px; writing-mode:vertical-rl; letter-spacing:.4em;
+    font-size:10px; color:rgba(244,234,214,.55); }
+
+  .copy { position:absolute; left:560px; top:150px; right:72px; z-index:4; }
+  .kicker { display:flex; justify-content:space-between; align-items:center; }
+  .kicker .k1 { font-size:12px; letter-spacing:.34em; color:#c46a5e; font-weight:600; }
+  .kicker .k2 { font-size:10.5px; letter-spacing:.22em; color:rgba(244,234,214,.4); }
+  .charname { margin-top:22px; display:flex; align-items:flex-end; gap:18px; }
+  .charname .zh { font-family:var(--f-display); font-size:88px; line-height:1; font-weight:700; letter-spacing:.04em; }
+  .charname .en { font-family:var(--f-display); font-style:italic; font-size:17px; color:rgba(244,234,214,.5); padding-bottom:14px; letter-spacing:.08em; }
+  .tagline { margin-top:16px; font-family:var(--f-display); font-size:21px; font-style:italic; color:rgba(244,234,214,.78); letter-spacing:.04em; }
+  .hr { margin:30px 0 26px; height:1px; background:rgba(244,234,214,.16); position:relative; }
+  .hr::before { content:""; position:absolute; left:0; top:-3px; width:46px; height:7px; background:#7c1827; }
+
+  .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:22px 32px; max-width:640px; }
+  .fact .l { font-size:10px; letter-spacing:.3em; color:rgba(244,234,214,.42); margin-bottom:8px; }
+  .fact .v { font-family:var(--f-display); font-size:22px; font-weight:600; }
+  .fact .v small { font-family:var(--f-sans); font-size:12px; color:rgba(244,234,214,.55); margin-left:8px; font-weight:400; }
+
+  .same { margin-top:34px; display:flex; align-items:center; gap:14px; }
+  .same .l { font-size:10.5px; letter-spacing:.26em; color:rgba(244,234,214,.42); }
+  .same .who { display:flex; align-items:center; gap:9px; border:1px solid rgba(244,234,214,.18); padding:6px 16px 6px 7px; }
+  .same .who img { width:34px; height:34px; border-radius:50%; object-fit:cover; }
+  .same .who span { font-size:13px; letter-spacing:.06em; }
+  .same .who em { font-style:normal; font-size:10px; color:rgba(244,234,214,.5); margin-left:2px; }
+
+  .actions { position:absolute; left:560px; bottom:58px; display:flex; gap:14px; z-index:5; }
+  .abtn { padding:13px 30px; font-size:13px; letter-spacing:.2em; cursor:pointer; }
+  .abtn.pri { background:#7c1827; color:#f4ead6; border:1px solid #7c1827; font-weight:600; }
+  .abtn.gho { background:transparent; color:rgba(244,234,214,.8); border:1px solid rgba(244,234,214,.28); }
+  .pageno { position:absolute; right:72px; bottom:60px; font-family:var(--f-display); font-style:italic; font-size:13px; color:rgba(244,234,214,.35); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="masthead">
+    <div class="logo">
+      <div class="logo-seal">志</div>
+      <div class="logo-word">角色志<small>CHARACTER CHRONICLE</small></div>
+    </div>
+    <div class="mast-nav">
+      <span class="on">月刊</span><span>专题</span><span>图鉴</span><span>档案</span>
+    </div>
+    <div class="mast-right">2026 · 八月刊 · 特辑页</div>
+  </div>
+
+  <div class="stage">
+    <div class="giant-22">22</div>
+
+    <div class="portrait">
+      <img src="assets/pt-Arlecchino.webp" alt="阿蕾奇诺立绘">
+      <div class="cap-side">封面人物 · 枫丹 · 八月刊</div>
+    </div>
+
+    <div class="copy">
+      <div class="kicker">
+        <div class="k1">本期特辑 · 生日纪念</div>
+        <div class="k2">2026.08.22 · 星期六 · 今天</div>
+      </div>
+      <div class="charname">
+        <div class="zh">阿蕾奇诺</div>
+        <div class="en">Arlecchino</div>
+      </div>
+      <div class="tagline">「『父亲』的温柔，在枫丹的幕后静静燃烧。」</div>
+      <div class="hr"></div>
+      <div class="facts">
+        <div class="fact"><div class="l">生日</div><div class="v">8.22</div></div>
+        <div class="fact"><div class="l">实装日期</div><div class="v">2024.04.23</div></div>
+        <div class="fact"><div class="l">所属</div><div class="v">枫丹<small>原神</small></div></div>
+        <div class="fact"><div class="l">元素</div><div class="v">火</div></div>
+        <div class="fact"><div class="l">武器</div><div class="v">长柄武器</div></div>
+        <div class="fact"><div class="l">稀有度</div><div class="v">★★★★★</div></div>
+      </div>
+      <div class="same">
+        <div class="l">同栏目 · 八月</div>
+        <div class="who"><img src="assets/av-Kafka.webp"><span>卡芙卡<em>8.25</em></span></div>
+        <div class="who"><img src="assets/av-Mavuika.webp"><span>玛薇卡<em>8.28</em></span></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="abtn pri">加入我的纪念册</div>
+      <div class="abtn gho">查看全部生日</div>
+    </div>
+    <div class="pageno">P.08 — 22</div>
+  </div>
+
+  <div class="noise"></div>
+</div>
+</body>
+</html>

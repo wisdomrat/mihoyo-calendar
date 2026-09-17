@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface PortraitDimensions {
   width: number;
   height: number;
@@ -7,7 +9,7 @@ export type PortraitDisplayMode = 'detail' | 'artwork';
 
 export interface PortraitModalLayout {
   className: string;
-  style: Record<string, string>;
+  style: React.CSSProperties;
 }
 
 function isValidDimensions(dimensions: PortraitDimensions | null | undefined): dimensions is PortraitDimensions {
@@ -29,11 +31,15 @@ function getArtworkOnlyLayout(dimensions: PortraitDimensions, className: string)
   // Width caps are viewport-driven so desktop scales up while mobile keeps
   // hitting the vw term first (unchanged behaviour on small screens). The vh
   // term stops very tall images from overflowing the viewport height.
-  const modalWidth = ratio >= 1.15
+  const modalWidth = ratio >= 1.5
     ? 'min(1400px, 96vw, 160vh)'
-    : ratio >= 0.9
+    : ratio >= 1.15
       ? 'min(1000px, 94vw, 92vh)'
-      : 'min(720px, 94vw, 92vh)';
+      : ratio >= 0.9
+        ? 'min(800px, 94vw, 92vh)'
+        : ratio >= 0.5
+          ? 'min(720px, 94vw, 92vh)'
+          : 'min(520px, 90vw, 88vh)';
 
   return {
     className,
@@ -42,7 +48,7 @@ function getArtworkOnlyLayout(dimensions: PortraitDimensions, className: string)
       '--portrait-size': 'contain',
       '--portrait-position': 'center center',
       '--portrait-aspect-ratio': imageRatio(dimensions),
-    },
+    } as React.CSSProperties,
   };
 }
 
@@ -57,37 +63,41 @@ export function getPortraitModalLayout(
 
   const ratio = dimensions.width / dimensions.height;
 
+  // Ultra-wide landscape (Genshin 2.000)
+  if (ratio >= 1.5) {
+    if (mode === 'artwork') {
+      return getArtworkOnlyLayout(dimensions, 'portrait-layout-ultra-wide');
+    }
+
+    return {
+      className: 'portrait-layout-ultra-wide',
+      style: {
+        '--portrait-modal-width': 'min(560px, 94vw)',
+        '--portrait-size': 'contain',
+        '--portrait-position': 'center center',
+        '--portrait-aspect-ratio': imageRatio(dimensions),
+      } as React.CSSProperties,
+    };
+  }
+
+  // Standard landscape (1.15-1.5)
   if (ratio >= 1.15) {
     if (mode === 'artwork') {
-      if (gameId === 'genshin') {
-        // 移动端：4/5 竖框 + auto 96% 按高度撑满，扁图放大（左右略裁）——
-        // 这是用户确认的移动端效果。桌面端由 CSS media query 覆盖为
-        // contain + 真实比例，完整不裁（见 portraitLayout 的 genshin-artwork 规则）。
-        return {
-          className: 'portrait-layout-landscape portrait-layout-genshin-artwork',
-          style: {
-            '--portrait-modal-width': 'min(620px, 94vw)',
-            '--portrait-size': 'auto 96%',
-            '--portrait-position': 'center center',
-            '--portrait-aspect-ratio': '4 / 5',
-            '--portrait-aspect-ratio-desktop': imageRatio(dimensions),
-          },
-        };
-      }
-
       return getArtworkOnlyLayout(dimensions, 'portrait-layout-landscape');
     }
 
     return {
       className: 'portrait-layout-landscape',
       style: {
-        '--portrait-modal-width': 'min(440px, 94vw)',
-        '--portrait-size': 'cover',
+        '--portrait-modal-width': 'min(480px, 94vw)',
+        '--portrait-size': 'contain',
         '--portrait-position': 'center center',
-      },
+        '--portrait-aspect-ratio': imageRatio(dimensions),
+      } as React.CSSProperties,
     };
   }
 
+  // Square (0.9-1.15)
   if (ratio >= 0.9) {
     if (mode === 'artwork') {
       return getArtworkOnlyLayout(dimensions, 'portrait-layout-square');
@@ -97,27 +107,44 @@ export function getPortraitModalLayout(
       className: 'portrait-layout-square',
       style: {
         '--portrait-modal-width': 'min(440px, 94vw)',
-        '--portrait-size': 'cover',
+        '--portrait-size': 'contain',
         '--portrait-position': 'center center',
-      },
+        '--portrait-aspect-ratio': imageRatio(dimensions),
+      } as React.CSSProperties,
     };
   }
 
-  if (mode === 'artwork') {
-    return getArtworkOnlyLayout(dimensions, 'portrait-layout-vertical');
+  // Standard portrait (0.5-0.9)
+  if (ratio >= 0.5) {
+    if (mode === 'artwork') {
+      return getArtworkOnlyLayout(dimensions, 'portrait-layout-vertical');
+    }
+
+    const verticalPosition = gameId === 'zzz' ? 'center bottom' : 'right bottom';
+
+    return {
+      className: 'portrait-layout-vertical',
+      style: {
+        '--portrait-modal-width': 'min(400px, 94vw)',
+        '--portrait-size': 'contain',
+        '--portrait-position': verticalPosition,
+        '--portrait-aspect-ratio': imageRatio(dimensions),
+      } as React.CSSProperties,
+    };
   }
 
-  // ZZZ vertical portraits often have weapons/gear extending to one side, so a
-  // hard right-bottom pin reads as off-centre once the modal clips that edge.
-  // Centre them horizontally instead; other games keep the right-bottom lean.
-  const verticalPosition = gameId === 'zzz' ? 'center bottom' : 'right bottom';
+  // Narrow portrait (<0.5, ZZZ extreme)
+  if (mode === 'artwork') {
+    return getArtworkOnlyLayout(dimensions, 'portrait-layout-narrow');
+  }
 
   return {
-    className: 'portrait-layout-vertical',
+    className: 'portrait-layout-narrow',
     style: {
-      '--portrait-modal-width': '400px',
-      '--portrait-size': 'auto 94%',
-      '--portrait-position': verticalPosition,
-    },
+      '--portrait-modal-width': 'min(360px, 90vw)',
+      '--portrait-size': 'contain',
+      '--portrait-position': 'center bottom',
+      '--portrait-aspect-ratio': imageRatio(dimensions),
+    } as React.CSSProperties,
   };
 }

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>board04</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .screen { width: 390px; height: 844px; }
+  .masthead { height: 52px; padding: 0 18px; }
+  .logo-seal { width: 26px; height: 26px; font-size: 13px; }
+  .logo-word { font-size: 15px; letter-spacing: .16em; }
+  .logo-word small { font-size: 8px; letter-spacing: .26em; margin-top: 2px; }
+  .mast-nav { display: none; }
+  .mast-right { font-size: 9px; letter-spacing: .14em; line-height: 1.7; }
+
+  .coverm { position: absolute; top: 52px; left: 0; right: 0; height: 408px; overflow: hidden; }
+  .coverm .bg { position:absolute; inset:0; background:#241417; }
+  .coverm img.main { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .coverm::after { content:""; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(20,10,12,.18) 0%, rgba(20,10,12,0) 34%, rgba(20,10,12,.78) 100%); }
+  .coverm .gn { position:absolute; top:-38px; left:-16px; font-family:var(--f-display); font-style:italic;
+    font-weight:700; font-size:190px; color:rgba(244,234,214,.12); transform:rotate(-7deg); z-index:1; }
+  .coverm .cap { position:absolute; left:18px; right:18px; bottom:20px; z-index:3; color:#f4ead6; }
+  .coverm .cap .k { font-size:9.5px; letter-spacing:.3em; opacity:.8; }
+  .coverm .cap .n { font-family:var(--f-display); font-size:42px; font-weight:700; margin-top:8px; line-height:1.05; }
+  .coverm .cap .s { font-size:11px; letter-spacing:.1em; opacity:.78; margin-top:8px; }
+  .coverm .cap .tag { display:inline-block; margin-top:10px; font-size:9px; letter-spacing:.24em;
+    border:1px solid rgba(244,234,214,.55); padding:3px 9px 2px; }
+
+  .strip { position:absolute; top:460px; left:0; right:0; bottom:64px; background:var(--paper); z-index:4; }
+  .strip-head { display:flex; justify-content:space-between; align-items:baseline; padding:16px 18px 10px; }
+  .strip-head .t { font-family:var(--f-display); font-size:16px; font-weight:700; }
+  .strip-head .t em { font-style:normal; font-family:var(--f-sans); font-size:10px; color:var(--ink-45); margin-left:8px; font-weight:400; }
+  .strip-head .more { font-size:9.5px; letter-spacing:.18em; color:var(--crimson); font-weight:600; }
+
+  .mrow { display:flex; align-items:center; gap:12px; padding:10px 18px; border-top:1px solid var(--hair); }
+  .mrow .d { font-family:var(--f-display); font-size:22px; font-weight:600; width:34px; flex:none; }
+  .mrow .d.hot { color:var(--crimson); }
+  .mrow .avs { display:flex; flex:none; }
+  .mrow .avs img { width:34px; height:34px; border-radius:50%; object-fit:cover; border:2px solid var(--paper); margin-left:-9px; }
+  .mrow .avs img:first-child { margin-left:0; }
+  .mrow .nm { font-family:var(--f-display); font-size:15.5px; font-weight:600; flex:1; }
+  .mrow .nm small { display:block; font-family:var(--f-sans); font-size:9px; letter-spacing:.1em; color:var(--ink-45); margin-top:3px; font-weight:400; }
+  .mrow .gdot { margin-left:auto; }
+
+  .tabbar { position:absolute; left:0; right:0; bottom:0; height:64px; background:#14110d; z-index:5;
+    display:flex; align-items:center; justify-content:space-around; }
+  .tabbar .tb { font-size:10px; letter-spacing:.24em; color:rgba(244,234,214,.5); display:flex; flex-direction:column; align-items:center; gap:5px; }
+  .tabbar .tb .ic { width:22px; height:22px; border:1px solid rgba(244,234,214,.4); border-radius:3px; display:flex; align-items:center; justify-content:center; font-family:var(--f-display); font-size:11px; }
+  .tabbar .tb.on { color:#f4ead6; }
+  .tabbar .tb.on .ic { border-color:transparent; background:#7c1827; color:#f4ead6; }
+  .tabbar .add { width:38px; height:38px; border-radius:50%; background:#7c1827; color:#f4ead6;
+    display:flex; align-items:center; justify-content:center; font-size:20px; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="masthead">
+    <div class="logo">
+      <div class="logo-seal">志</div>
+      <div class="logo-word">角色志<small>CHARACTER CHRONICLE</small></div>
+    </div>
+    <div class="mast-right">2026 · 八月刊</div>
+  </div>
+
+  <div class="coverm">
+    <div class="bg"></div>
+    <img class="main" src="assets/pt-Arlecchino.webp" alt="阿蕾奇诺">
+    <div class="gn">08</div>
+    <div class="cap">
+      <div class="k">封面人物 · 8.22 生日快乐</div>
+      <div class="n">阿蕾奇诺</div>
+      <div class="s">枫丹 · 火 · 「父亲」</div>
+      <div class="tag">原神 · GENSHIN IMPACT</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-head">
+      <div class="t">本月栏目<em>30 场纪念</em></div>
+      <div class="more">目录 →</div>
+    </div>
+    <div class="mrow">
+      <div class="d">24</div>
+      <div class="avs"><img src="assets/av-Lingsha.webp"><img src="assets/av-Evelyn.webp"></div>
+      <div class="nm">灵砂 / 伊芙琳<small>星穹铁道 · 绝区零 · 双场同庆</small></div>
+      <div class="gdot" style="background:var(--c-hsr)"></div>
+    </div>
+    <div class="mrow">
+      <div class="d">25</div>
+      <div class="avs"><img src="assets/av-Kafka.webp"></div>
+      <div class="nm">卡芙卡<small>星穹铁道 · 雷</small></div>
+      <div class="gdot" style="background:var(--c-hsr)"></div>
+    </div>
+    <div class="mrow">
+      <div class="d">26</div>
+      <div class="avs"><img src="assets/av-Ningguang.webp"></div>
+      <div class="nm">凝光<small>原神 · 璃月 · 岩</small></div>
+      <div class="gdot" style="background:var(--c-genshin)"></div>
+    </div>
+    <div class="mrow">
+      <div class="d">28</div>
+      <div class="avs"><img src="assets/av-Mavuika.webp"></div>
+      <div class="nm">玛薇卡<small>原神 · 纳塔 · 火</small></div>
+      <div class="gdot" style="background:var(--c-genshin)"></div>
+    </div>
+    <div class="mrow" style="opacity:.55;">
+      <div class="d">29</div>
+      <div class="avs"><img src="assets/av-Topaz.webp"></div>
+      <div class="nm">托帕 & 账账<small>星穹铁道 · 火</small></div>
+      <div class="gdot" style="background:var(--c-hsr)"></div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="tb on"><div class="ic">刊</div>月刊</div>
+    <div class="tb"><div class="ic">题</div>专题</div>
+    <div class="add">＋</div>
+    <div class="tb"><div class="ic">鉴</div>图鉴</div>
+    <div class="tb"><div class="ic">藏</div>我的</div>
+  </div>
+
+  <div class="noise"></div>
+</div>
+</body>
+</html>

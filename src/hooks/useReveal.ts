@@ -11,24 +11,17 @@ import { useEffect, useRef, useState } from 'react';
  */
 export function useReveal<T extends HTMLElement>(rootMargin = '-10% 0px') {
   const ref = useRef<T>(null);
-  const [revealed, setRevealed] = useState(false);
+  const [revealed, setRevealed] = useState(() => typeof IntersectionObserver === 'undefined');
 
   useEffect(() => {
     if (revealed) return;
     const el = ref.current;
     if (!el) return;
 
-    // 老内核 / 测试环境没有 IntersectionObserver 时直接显示，绝不把内容藏死
-    if (typeof IntersectionObserver === 'undefined') {
-      setRevealed(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       entries => {
         if (entries.some(entry => entry.isIntersecting)) {
           setRevealed(true);
-          observer.disconnect();
         }
       },
       { rootMargin },
