@@ -1,6 +1,6 @@
 export type UiVersion = 'v1' | 'v2';
 
-/** Only an explicit URL opt-in enables V2; no storage or business state is read. */
+/** V2 is the default UI; `?ui=v1` is the explicit URL opt-out. No storage or business state is read. */
 export function resolveUiVersion(search: string): UiVersion {
-  return new URLSearchParams(search).get('ui') === 'v2' ? 'v2' : 'v1';
+  return new URLSearchParams(search).get('ui') === 'v1' ? 'v1' : 'v2';
 }
